@@ -1,2 +1,2 @@
 # dotfiles
-My linux installations dotfiles
+My linux AwesomeWM dotfiles
