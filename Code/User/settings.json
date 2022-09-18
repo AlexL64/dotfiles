@@ -1,5 +1,5 @@
 {
-    "workbench.colorTheme": "SynthWave '84",
+    "workbench.colorTheme": "Dracula",
     "workbench.colorCustomizations": {},
     "terminal.integrated.defaultProfile.linux": "fish",
     "editor.largeFileOptimizations": false,
