@@ -11,7 +11,7 @@ local themes_path = gfs.get_themes_dir()
 
 local theme = {}
 
-theme.font          = "sans 8"
+theme.font          = "Hack Nerd Font"
 
 theme.bg_normal     = "#222222"
 theme.bg_focus      = "#535d6c"
@@ -25,7 +25,7 @@ theme.fg_urgent     = "#ffffff"
 theme.fg_minimize   = "#ffffff"
 
 theme.gap_single_client = true
-theme.useless_gap   = dpi(10)
+theme.useless_gap   = dpi(6)
 theme.border_width  = dpi(2)
 theme.border_normal = "#700070"
 theme.border_focus  = "#cc0099"

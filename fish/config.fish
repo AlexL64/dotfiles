@@ -12,3 +12,4 @@ starship init fish | source
 # My aliases
 
 alias bw_search='bw list items --pretty --search'
+alias wifi='sudo nmtui'
