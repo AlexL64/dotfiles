@@ -10,7 +10,7 @@ beautiful.init(gears.filesystem.get_configuration_dir() .. "theme/theme.lua")
 require "main.error_handling"
 require "main.titlebar"
 require "main.autostart"
-require "main.bindings.bindings"
+require "main.bindings"
 require 'main.layout'
 require 'main.wallpaper'
 require 'main.bar'
