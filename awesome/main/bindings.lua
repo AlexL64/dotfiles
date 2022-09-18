@@ -132,7 +132,7 @@ globalkeys = gears.table.join(
     awful.key({            }, "XF86AudioPrev" , function () awful.spawn("playerctl previous") end,
               {description = "Prev Track", group = "awesome"}),
     -- Lock
-    awful.key({ modkey, "Control" }, "l", function () awful.spawn.with_shell("sh " .. gears.filesystem.get_configuration_dir() .. "scripts/lockscreen.sh") end,
+    awful.key({ modkey, "Control" }, "q", function () awful.spawn.with_shell("sh " .. gears.filesystem.get_configuration_dir() .. "scripts/lockscreen.sh") end,
               {description = "Prev Track", group = "awesome"})
 )
 
