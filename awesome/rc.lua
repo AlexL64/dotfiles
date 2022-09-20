@@ -3,7 +3,8 @@ pcall(require, "luarocks.loader")
 local gears = require("gears")
 local awful = require("awful")
 local beautiful = require("beautiful")
-local apps = require "main.apps"
+local apps = require ("main.apps")
+local xrandr = require("lib.xrandr")
 
 beautiful.init(gears.filesystem.get_configuration_dir() .. "theme/theme.lua")
 

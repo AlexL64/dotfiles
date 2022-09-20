@@ -3,6 +3,7 @@ local gears = require "gears"
 local hotkeys_popup = require("awful.hotkeys_popup")
 local menubar = require("menubar")
 local screenshot = require("widgets.screenshot")
+local xrandr = require("lib.xrandr")
 
 local apps = require "main.apps"
 
@@ -146,7 +147,9 @@ globalkeys = gears.table.join(
         --   {description = "Take a screenshot of delay", group = "screenshot"})
     -- Rofi
     awful.key({ modkey }, "p" , function () awful.spawn("sh /home/alex/.config/rofi/launchers/type-3/launcher.sh") end,
-              {description = "Rofi",  group = "awesome"})
+              {description = "Rofi",  group = "awesome"}),
+    awful.key({modkey}, "²", function() xrandr.xrandr() end,
+              {description = "Multi monitor",  group = "awesome"})
 )
 
 clientkeys = gears.table.join(
