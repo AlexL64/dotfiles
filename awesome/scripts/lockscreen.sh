@@ -1,13 +1,10 @@
-#!/usr/bin/env bash
-
-scrot /tmp/background.png
-convert /tmp/screenshot.png -blur 0x5 /tmp/screenshotblur.png
+#!/bin/bash
 
 P=0
 
 i3lock \
     --color=282828 \
-    --image="/usr/share/backgrounds/backgroundlock.jpg" \
+    --image="/usr/share/backgrounds/sunsetblur.png" \
     --inside-color=282828FF \
     --insidever-color=282828FF \
     --insidewrong-color=282828FF \
@@ -18,8 +15,8 @@ i3lock \
     --line-color=EBDBB2FF \
     --keyhl-color=EBDBB2FF \
     --bshl-color=FB4934FF \
-    --ring-width=4 \
-    --radius=32 \
+    --ring-width=16 \
+    --radius=64 \
     --ind-pos="x+w/2:y+h/2-$P" \
     --time-color=A89984FF \
     --time-pos='ix-180:iy+12' \
@@ -51,4 +48,5 @@ i3lock \
     --pass-media-keys \
     --pass-screen-keys \
     --indicator \
-    --clock
+    --clock \
+    --scale 2560x1440

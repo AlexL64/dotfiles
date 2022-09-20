@@ -2,6 +2,7 @@ local awful = require "awful"
 local gears = require "gears"
 local hotkeys_popup = require("awful.hotkeys_popup")
 local menubar = require("menubar")
+local screenshot = require("widgets.screenshot")
 
 local apps = require "main.apps"
 
@@ -133,7 +134,16 @@ globalkeys = gears.table.join(
               {description = "Prev Track", group = "awesome"}),
     -- Lock
     awful.key({ modkey, "Control" }, "q", function () awful.spawn.with_shell("sh " .. gears.filesystem.get_configuration_dir() .. "scripts/lockscreen.sh") end,
-              {description = "Prev Track", group = "awesome"})
+              {description = "Prev Track", group = "awesome"}),
+    -- Screenshot
+    awful.key({ }, "Print", scrot_full,
+          {description = "Take a screenshot of entire screen", group = "screenshot"}),
+        awful.key({ modkey, }, "Print", scrot_selection,
+          {description = "Take a screenshot of selection", group = "screenshot"}),
+        awful.key({ "Shift" }, "Print", scrot_window,
+          {description = "Take a screenshot of focused window", group = "screenshot"}),
+        awful.key({ "Ctrl" }, "Print", scrot_delay,
+          {description = "Take a screenshot of delay", group = "screenshot"})
 )
 
 clientkeys = gears.table.join(
