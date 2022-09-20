@@ -16,18 +16,18 @@ function scrot_window()
     scrot("scrot -u " .. screenshot .. " -e 'xclip -selection c -t image/png < $f'", scrot_callback, "Take a screenshot of focused window")    
 end
 
-function scrot_delay()
-    items={}
-    for key, value in ipairs(timers)  do
-        items[#items+1]={tostring(value) , "scrot -d ".. value.." " .. screenshot .. " -e 'xclip -selection c -t image/png < $f'", "Take a screenshot of delay" }
-    end
-    awful.menu.new(
-    {
-        items = items
-    }
-    ):show({keygrabber= true})
-    scrot_callback("Take a screenshot of delay")
-end
+-- function scrot_delay()
+--     items={}
+--     for key, value in ipairs(timers)  do
+--         items[#items+1]={tostring(value) , "scrot -u " .. screenshot .. " -d ".. value .." -e 'xclip -selection c -t image/png < $f'", "Take a screenshot of delay" }
+--     end
+--     awful.menu.new(
+--     {
+--         items = items
+--     }
+--     ):show({keygrabber= true})
+--     scrot_callback("Take a screenshot with delay")
+-- end
 
 function scrot(cmd , callback, args)
     awful.util.spawn_with_shell(cmd)

@@ -141,9 +141,9 @@ globalkeys = gears.table.join(
         awful.key({ modkey, }, "Print", scrot_selection,
           {description = "Take a screenshot of selection", group = "screenshot"}),
         awful.key({ "Shift" }, "Print", scrot_window,
-          {description = "Take a screenshot of focused window", group = "screenshot"}),
-        awful.key({ "Ctrl" }, "Print", scrot_delay,
-          {description = "Take a screenshot of delay", group = "screenshot"})
+          {description = "Take a screenshot of focused window", group = "screenshot"})
+        -- awful.key({ "Ctrl" }, "Print", scrot_delay,
+        --   {description = "Take a screenshot of delay", group = "screenshot"})
 )
 
 clientkeys = gears.table.join(
