@@ -111,8 +111,8 @@ globalkeys = gears.table.join(
               end,
               {description = "lua execute prompt", group = "awesome"}),
     -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"}),
+    -- awful.key({ modkey }, "p", function() menubar.show() end,
+    --           {description = "show the menubar", group = "launcher"}),
     -- Brightness controll
     awful.key({  },"XF86MonBrightnessUp", function() awful.spawn.with_shell("light -A 10") end,
               {description = "brightness Up", group = "awesome"}),
@@ -138,12 +138,15 @@ globalkeys = gears.table.join(
     -- Screenshot
     awful.key({ }, "Print", scrot_full,
           {description = "Take a screenshot of entire screen", group = "screenshot"}),
-        awful.key({ modkey, }, "Print", scrot_selection,
+    awful.key({ modkey, }, "Print", scrot_selection,
           {description = "Take a screenshot of selection", group = "screenshot"}),
-        awful.key({ "Shift" }, "Print", scrot_window,
-          {description = "Take a screenshot of focused window", group = "screenshot"})
+    awful.key({ "Shift" }, "Print", scrot_window,
+          {description = "Take a screenshot of focused window", group = "screenshot"}),
         -- awful.key({ "Ctrl" }, "Print", scrot_delay,
         --   {description = "Take a screenshot of delay", group = "screenshot"})
+    -- Rofi
+    awful.key({ modkey }, "p" , function () awful.spawn("sh /home/alex/.config/rofi/launchers/type-3/launcher.sh") end,
+              {description = "Rofi",  group = "awesome"})
 )
 
 clientkeys = gears.table.join(
