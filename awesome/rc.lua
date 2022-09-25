@@ -14,7 +14,8 @@ require "main.autostart"
 require "main.bindings"
 require 'main.layout'
 require 'main.wallpaper'
-require 'main.bar'
+
+require 'widgets.bar'
 
 require("awful.autofocus")
 -- Widget and layout library
@@ -68,7 +69,7 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 awful.rules.rules = {
     -- All clients will match this rule.
     { rule = { },
-      properties = { border_width = beautiful.border_width,
+      properties = { -- border_width = beautiful.border_width,
                      border_color = beautiful.border_normal,
                      focus = awful.client.focus.filter,
                      raise = true,
@@ -76,7 +77,13 @@ awful.rules.rules = {
                      buttons = clientbuttons,
                      screen = awful.screen.preferred,
                      placement = awful.placement.no_overlap+awful.placement.no_offscreen
-     }
+      },
+    },
+    { rule = { },
+      except_any = { class = { "Polybar" } },
+      properties = {
+        border_width = beautiful.border_width
+      }
     },
 
     -- Floating clients.
@@ -115,6 +122,9 @@ awful.rules.rules = {
       }, properties = { titlebars_enabled = false }
     },
 
+
+  rule = { class = "polybar" },
+  properties = { border_width = 0 },
     -- Set Firefox to always map on the tag named "2" on screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { screen = 1, tag = "2" } },

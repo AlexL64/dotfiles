@@ -5,6 +5,8 @@ local menubar = require("menubar")
 local screenshot = require("widgets.screenshot")
 local xrandr = require("lib.xrandr")
 
+local brightness_widget = require("widgets.brightness-widget.brightness")
+
 local apps = require "main.apps"
 
 
@@ -115,9 +117,9 @@ globalkeys = gears.table.join(
     -- awful.key({ modkey }, "p", function() menubar.show() end,
     --           {description = "show the menubar", group = "launcher"}),
     -- Brightness controll
-    awful.key({  },"XF86MonBrightnessUp", function() awful.spawn.with_shell("light -A 10") end,
+    awful.key({  },"XF86MonBrightnessUp", function() brightness_widget:inc() end,
               {description = "brightness Up", group = "awesome"}),
-    awful.key({  },"XF86MonBrightnessDown", function() awful.spawn.with_shell("light -U 10") end,
+    awful.key({  },"XF86MonBrightnessDown", function() brightness_widget:dec() end,
               {description = "brightness Down", group = "awesome"}),
     -- Audio control
     awful.key({            }, "XF86AudioRaiseVolume" , function () awful.spawn("pactl set-sink-volume 0 +5%") end,
@@ -148,6 +150,9 @@ globalkeys = gears.table.join(
     -- Rofi
     awful.key({ modkey }, "p" , function () awful.spawn("sh /home/alex/.config/rofi/launchers/type-3/launcher.sh") end,
               {description = "Rofi",  group = "awesome"}),
+    awful.key({modkey}, "v", function() awful.spawn.with_shell("rofi -modi 'clipboard:greenclip print' -show clipboard -run-command '{cmd}'") end,
+              {description = "Clipboard manager",  group = "awesome"}),
+    -- Multi monitor configuration
     awful.key({modkey}, "²", function() xrandr.xrandr() end,
               {description = "Multi monitor",  group = "awesome"})
 )

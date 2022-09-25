@@ -3,6 +3,15 @@ local awful = require("awful")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 
+
+
+local fs_widget = require("widgets.fs-widget")
+local cpu_widget = require("widgets.cpu-widget.cpu-widget")
+local batteryarc_widget = require("widgets.batteryarc-widget.batteryarc")
+local brightness_widget = require("widgets.brightness-widget.brightness")
+local ram_widget = require("widgets.ram-widget")
+local logout_menu_widget = require("widgets.logout-menu-widget.logout-menu")
+
 require 'main.wallpaper'
 
 -- {{{ Wibar
@@ -75,15 +84,18 @@ awful.screen.connect_for_each_screen(function(s)
     -- Create a tasklist widget
     s.mytasklist = awful.widget.tasklist {
         screen = s,
-        filter = awful.widget.tasklist.filter.currenttags,
-        buttons = tasklist_buttons
+        -- filter = awful.widget.tasklist.filter.currenttags,
+        -- buttons = tasklist_buttons,
     }
 
     -- Create the wibox
     s.mywibox = awful.wibar({
         position = "top",
-        screen = s
+        screen = s,
+        width = 2530,
+        visible = true
     })
+
 
     -- Add widgets to the wibox
     s.mywibox:setup{
@@ -92,14 +104,39 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             mylauncher,
             s.mytaglist,
-            s.mypromptbox
+            s.mypromptbox,
+            wibox.widget.systray(),
         },
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
-            wibox.widget.systray(),
-            mytextclock
+            fs_widget(),
+            cpu_widget({
+                width = 75,
+                step_width = 5,
+                step_spacing = 1,
+                color = '#FFFFFF',
+            }),
+		    ram_widget(),
+            batteryarc_widget({
+                show_current_level = true,
+                arc_thickness = 1,
+                size = 28,
+                bg_color = '#FFFFFF',
+            }),
+            brightness_widget({
+                type = 'icon_and_text',
+                program = 'light',
+                step = 5,
+                tooltip = true,
+                percentage = true, 
+            }),
+            -- mykeyboardlayout,
+            mytextclock,
+            logout_menu_widget{
+                font = 'Hack Nerd Font',
+                onlock = function() awful.spawn.with_shell("sh " .. gears.filesystem.get_configuration_dir() .. "scripts/lockscreen.sh") end
+            }
         }
     }
 end)

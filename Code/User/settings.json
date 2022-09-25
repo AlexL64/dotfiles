@@ -8,4 +8,5 @@
     "editor.fontLigatures": true,
     "security.workspace.trust.untrustedFiles": "open",
     "explorer.confirmDragAndDrop": false,
+    "explorer.confirmDelete": false,
 }
