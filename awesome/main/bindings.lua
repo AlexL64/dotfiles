@@ -148,12 +148,12 @@ globalkeys = gears.table.join(
         -- awful.key({ "Ctrl" }, "Print", scrot_delay,
         --   {description = "Take a screenshot of delay", group = "screenshot"})
     -- Rofi
-    awful.key({ modkey }, "p" , function () awful.spawn("sh /home/alex/.config/rofi/launchers/type-3/launcher.sh") end,
+    awful.key({ modkey }, "p" , function () awful.spawn("sh " .. os.getenv("HOME") .. "/.config/rofi/launcher.sh") end,
               {description = "Rofi",  group = "awesome"}),
-    awful.key({modkey}, "v", function() awful.spawn.with_shell("rofi -modi 'clipboard:greenclip print' -show clipboard -run-command '{cmd}'") end,
+    awful.key({ modkey }, "v", function() awful.spawn("sh " .. os.getenv("HOME") .. "/.config/rofi/launcher_clipboard.sh") end,
               {description = "Clipboard manager",  group = "awesome"}),
     -- Multi monitor configuration
-    awful.key({modkey}, "²", function() xrandr.xrandr() end,
+    awful.key({ modkey }, "²", function() xrandr.xrandr() end,
               {description = "Multi monitor",  group = "awesome"})
 )
 
