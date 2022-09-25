@@ -49,4 +49,4 @@ i3lock \
     --pass-screen-keys \
     --indicator \
     --clock \
-    --scale 2560x1440
+    --scale
