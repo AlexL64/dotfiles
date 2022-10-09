@@ -11,6 +11,7 @@ local batteryarc_widget = require("widgets.batteryarc-widget.batteryarc")
 local brightness_widget = require("widgets.brightness-widget.brightness")
 local ram_widget = require("widgets.ram-widget")
 local logout_menu_widget = require("widgets.logout-menu-widget.logout-menu")
+-- local cpu_info = require("widgets.cpu_info")
 
 require 'main.wallpaper'
 

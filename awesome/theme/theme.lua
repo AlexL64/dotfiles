@@ -27,8 +27,8 @@ theme.fg_minimize   = "#ffffff"
 theme.gap_single_client = true
 theme.useless_gap   = dpi(6)
 theme.border_width  = dpi(2)
-theme.border_normal = "#0e5060"
-theme.border_focus  = "#de5162"
+theme.border_normal = "#ff2250"
+theme.border_focus  = "#2dffa2"
 theme.border_marked = "#91231c"
 
 -- There are other variable sets
@@ -98,7 +98,7 @@ theme.titlebar_maximized_button_focus_inactive  = themes_path.."default/titlebar
 theme.titlebar_maximized_button_normal_active = themes_path.."default/titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_active  = themes_path.."default/titlebar/maximized_focus_active.png"
 
-theme.wallpaper = "~/Wallpapers/sunset.png"
+theme.wallpaper = "~/Desktop/nezuko_wallpaper.png"
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = themes_path.."default/layouts/fairhw.png"

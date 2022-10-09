@@ -12,6 +12,6 @@ starship init fish | source
 # My aliases
 
 alias bw_search='bw list items --pretty --search'
-alias wifi='sudo nmtui'
+alias wifi='nmtui'
 alias 'pacman_clear'='pacman -Qtdq | sudo pacman -Rns -'
 alias battery='upower -i /org/freedesktop/UPower/devices/battery_BAT0'

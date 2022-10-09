@@ -1,5 +1,5 @@
 {
-    "workbench.colorTheme": "Dracula",
+    "workbench.colorTheme": "Gruvbox Dark Hard",
     "workbench.colorCustomizations": {},
     "terminal.integrated.defaultProfile.linux": "fish",
     "editor.largeFileOptimizations": false,
@@ -9,4 +9,7 @@
     "security.workspace.trust.untrustedFiles": "open",
     "explorer.confirmDragAndDrop": false,
     "explorer.confirmDelete": false,
+    "[css]": {
+        "editor.defaultFormatter": "vscode.css-language-features"
+    },
 }
