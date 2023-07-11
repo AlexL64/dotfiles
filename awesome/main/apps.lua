@@ -1,5 +1,5 @@
 local apps = {
-	terminal = "alacritty",
+	terminal = "kitty",
 	-- launcher = "rofi -show drun",
 	browser = "brave",
 	-- picture = "feh",

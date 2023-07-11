@@ -76,3 +76,6 @@ shell:
 
 key_bindings:
   - { key: Return, mods: Super|Shift, action: SpawnNewInstance }
+
+env:
+  TERM: xterm-256color

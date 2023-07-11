@@ -12,4 +12,11 @@
     "[css]": {
         "editor.defaultFormatter": "vscode.css-language-features"
     },
+    "editor.unicodeHighlight.invisibleCharacters": false,
+    "workbench.startupEditor": "none",
+    "editor.unicodeHighlight.nonBasicASCII": false,
+    "workbench.editor.untitled.hint": "hidden",
+    "[python]": {
+        "editor.formatOnType": true
+    },
 }
