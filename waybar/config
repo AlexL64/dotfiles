@@ -1,0 +1,31 @@
+{
+    "layer": "top",
+    "position": "top",
+    "mod": "dock",
+    "height": 40,
+    "exclusive": true,
+    "passthrough": false,
+    "gtk-layer-shell": true,
+    "modules-left": [
+        "hyprland/workspaces","battery"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "battery","tray"
+    ],
+    "clock": {
+        "format": "{:%A, %d. %b  %H:%M}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+    "battery": {
+        "format": "{capacity}% {icon}",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "tray": {
+        "icon-size": 21,
+        "spacing": 10
+    }
+
+}
