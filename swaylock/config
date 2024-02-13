@@ -7,7 +7,7 @@ inside-clear-color=00000000
 inside-caps-lock-color=00000000
 inside-ver-color=00000000
 inside-wrong-color=00000000
-key-hl-color=a6e3a1
+key-hl-color=cba6f7
 layout-bg-color=00000000
 layout-border-color=00000000
 layout-text-color=cdd6f4
@@ -24,7 +24,7 @@ ring-wrong-color=eba0ac
 separator-color=00000000
 text-color=cdd6f4
 text-clear-color=f5e0dc
-text-caps-lock-color=fab387
+text-caps-lock-color=cba6f7
 text-ver-color=89b4fa
 text-wrong-color=eba0ac
 clock
