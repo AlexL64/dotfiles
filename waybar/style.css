@@ -24,7 +24,7 @@ tooltip {
 }
 
 #workspaces button {
-    color: #cdd6f4;
+    color: #cba6f7;
     padding-left: 10px;
     padding-right: 10px;
     animation: ws_normal 20s ease-in-out 1;
@@ -38,6 +38,10 @@ tooltip {
     border-radius: 12px;
     animation: ws_active 20s ease-in-out 1;
     transition: all 0.4s cubic-bezier(.55, -0.68, .48, 1.682);
+}
+
+#workspaces button.empty {
+    color: #cdd6f4;
 }
 
 #workspaces button:hover {
@@ -85,7 +89,7 @@ tooltip {
 #memory,
 #disk,
 #backlight,
-#upower{
+#upower {
     background: #313244;
     color: #cdd6f4;
     padding-left: 12px;
