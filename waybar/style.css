@@ -1,7 +1,7 @@
 * {
     border: none;
     border-radius: 0px;
-    font-family: "JetBrainsMono Nerd Font";
+    font-family: "JetBrainsMono Nerd Font, Font Awesome 6 Brands";
     font-weight: bold;
     font-size: 14px;
     min-height: 12px;
@@ -63,7 +63,7 @@ tooltip {
     padding-right: 12px;
     border-radius: 12px;
     margin-left: 10px;
-    padding-top: 5px;
+    padding-top: 2px;
 }
 
 #clock,
@@ -79,10 +79,6 @@ tooltip {
 #cpu {
     border-top-left-radius: 12px;
     border-bottom-left-radius: 12px;
-}
-
-#disk {
-    padding-top: 5px;
 }
 
 #cpu,

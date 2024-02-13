@@ -42,12 +42,13 @@
     },
     "pulseaudio": {
         "format": "{volume}% {icon}",
-        "format-bluetooth": "{volume}% {icon} ",
-        "format-muted": "🕨",
+        "format-bluetooth": "{volume}% {icon} ",
+        "format-muted": "",
         "format-icons": {
             "default": [
-                "🕩",
-                "🕪"
+                "",
+                "",
+                ""
             ]
         },
         "scroll-step": 1,
@@ -67,12 +68,12 @@
     },
     "memory": {
         "interval": 30,
-        "format": " {}%",
+        "format": " {}%",
         "max-length": 10
     },
     "disk": {
         "interval": 30,
-        "format": "🖴 {percentage_used}%",
+        "format": " {percentage_used}%",
         "path": "/"
     },
     "backlight": {
