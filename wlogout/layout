@@ -1,24 +1,24 @@
 {
     "label" : "lock",
-    "action" : "swaylock1",
+    "action" : "swaylock",
     "text" : "Lock",
     "keybind" : "l"
 }
 {
     "label" : "sleep",
-    "action" : "systemctl suspend1",
+    "action" : "systemctl suspend",
     "text" : "Sleep",
     "keybind" : "e"
 }
 {
     "label" : "reboot",
-    "action" : "systemctl reboot1",
+    "action" : "systemctl reboot",
     "text" : "Reboot",
     "keybind" : "r"
 }
 {
     "label" : "shutdown",
-    "action" : "systemctl poweroff1",
+    "action" : "systemctl poweroff",
     "text" : "Shutdown",
     "keybind" : "s"
 }
