@@ -1,0 +1,13 @@
+configuration{
+    modi: "run,drun";
+    icon-theme: "papirus";
+    show-icons: true;
+    terminal: "kitty";
+    drun-display-format: "{icon} {name}";
+    location: 0;
+    disable-history: false;
+    hide-scrollbar: true;
+    display-drun: "   Apps ";
+    display-run: "   Run ";
+    sidebar-mode: true;
+}
