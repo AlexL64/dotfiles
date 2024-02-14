@@ -54,6 +54,7 @@
             ]
         },
         "scroll-step": 1,
+        "reverse-scrolling": true,
         "on-click": "pavucontrol",
         "on-click-right": "pactl set-sink-mute 0 toggle",
         "ignored-sinks": [
@@ -71,9 +72,10 @@
                 ""
             ]
         },
-        "scroll-step": 1,
         "on-click": "pavucontrol",
         "on-click-right": "pactl set-source-mute 0 toggle",
+        "on-scroll-up": "pactl set-source-volume 0 +1%",
+        "on-scroll-down": "pactl set-source-volume 0 -1%",
         "ignored-sinks": [
             "Easy Effects Sink"
         ]
