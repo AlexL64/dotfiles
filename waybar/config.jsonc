@@ -120,7 +120,8 @@
             "󰃞",
             "󰃟",
             "󰃠"
-        ]
+        ],
+        "reverse-scrolling": true
     },
     "upower": {
         "format": "{percentage}",
