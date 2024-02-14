@@ -13,9 +13,11 @@
     "modules-left": [
         "hyprland/workspaces",
         "idle_inhibitor",
-        "pulseaudio"
+        "pulseaudio#sound",
+        "pulseaudio#mic"
     ],
     "modules-center": [
+        "mpris",
         "clock"
     ],
     "modules-right": [
@@ -40,7 +42,7 @@
             "deactivated": "󰈉"
         }
     },
-    "pulseaudio": {
+    "pulseaudio#sound": {
         "format": "{volume}% {icon}",
         "format-bluetooth": "{volume}% {icon} ",
         "format-muted": "",
@@ -53,9 +55,38 @@
         },
         "scroll-step": 1,
         "on-click": "pavucontrol",
+        "on-click-right": "pactl set-sink-mute 0 toggle",
         "ignored-sinks": [
             "Easy Effects Sink"
         ]
+    },
+    "pulseaudio#mic": {
+        "format": "{format_source}",
+        "format-source": "{volume}% 󰍬",
+        "format-source-muted": "󰍭",
+        "format-icons": {
+            "default": [
+                "",
+                "",
+                ""
+            ]
+        },
+        "scroll-step": 1,
+        "on-click": "pavucontrol",
+        "on-click-right": "pactl set-source-mute 0 toggle",
+        "ignored-sinks": [
+            "Easy Effects Sink"
+        ]
+    },
+    "mpris": {
+        "interval": 10,
+        "dynamic-len": 25,
+        "format": "{status_icon}  {dynamic}",
+        "status-icons": {
+            "playing": "",
+            "paused": "",
+            "stopped": ""
+        }
     },
     "clock": {
         "format": "{:%A, %d. %b  %H:%M}",
