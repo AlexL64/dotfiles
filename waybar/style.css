@@ -27,15 +27,13 @@ tooltip {
     color: #cba6f7;
     padding-left: 10px;
     padding-right: 10px;
+    border-radius: 12px;
     animation: ws_normal 20s ease-in-out 1;
 }
 
 #workspaces button.active {
     background: #cba6f7;
     color: #313244;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 12px;
     animation: ws_active 20s ease-in-out 1;
     transition: all 0.4s cubic-bezier(.55, -0.68, .48, 1.682);
 }
@@ -44,10 +42,16 @@ tooltip {
     color: #cdd6f4;
 }
 
+#workspaces button.urgent {
+    background-color: #f38ba8;
+    color: #313244;
+    animation: ws_active 20s ease-in-out 1;
+    transition: all 0.4s cubic-bezier(.55, -0.68, .48, 1.682);
+}
+
 #workspaces button:hover {
     background: #cba6f7;
     color: #313244;
-    border-radius: 12px;
     animation: ws_hover 20s ease-in-out 1;
     transition: all 0.3s cubic-bezier(.55, -0.68, .48, 1.682);
 }
