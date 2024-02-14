@@ -81,7 +81,7 @@
         ]
     },
     "mpris": {
-        "interval": 10,
+        "interval": 1,
         "dynamic-len": 25,
         "format": "{status_icon}  {dynamic}",
         "status-icons": {
