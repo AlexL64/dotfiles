@@ -9,5 +9,6 @@
     "security.workspace.trust.untrustedFiles": "open",
     "explorer.confirmDragAndDrop": false,
     "git.enableSmartCommit": true,
-    "explorer.confirmPasteNative": false
+    "explorer.confirmPasteNative": false,
+    "password-store": "gnome-libsecret"
 }
