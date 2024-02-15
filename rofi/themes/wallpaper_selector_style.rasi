@@ -1,0 +1,81 @@
+// Main //
+window {
+    enabled:                    true;
+    fullscreen:                 false;
+    width:                      95%;
+    transparency:               "real";
+    cursor:                     "default";
+    spacing:                    0px;
+    padding:                    0px;
+    border:                     2px;
+    border-radius:              10px;
+    border-color:               #cba6f7ff;
+    background-color:           transparent;
+}
+
+mainbox {
+    enabled:                    true;
+    children:                   [ "listview" ];
+    background-color:           #11111be6;
+}
+
+// Lists //
+listview {
+    enabled:                    true;
+    columns:                    6;
+    spacing:                    50px;
+    lines:                      1;
+    padding:                    50px 60px 50px 60px;
+    cycle:                      true;
+    dynamic:                    false;
+    scrollbar:                  false;
+    layout:                     vertical;
+    reverse:                    true;
+    fixed-height:               true;
+    fixed-columns:              true;
+    cursor:                     "default";
+    background-color:           transparent;
+    text-color:                 #cdd6f4ff;
+}
+
+// Elements //
+element {
+    enabled:                    true;
+    spacing:                    0px;
+    padding:                    -75px 0px -75px 0px;
+    padding:                    -130px 0px 0px 0px;
+    padding:                    0px;
+    orientation:                vertical;
+    border-radius:              10px;
+    cursor:                     pointer;
+    background-color:           transparent;
+    text-color:                 #cdd6f4ff;
+    border:                     2px;
+    border-color:               #595959aa;
+}
+
+element selected.normal {
+    background-color:           #cba6f7ff;
+    text-color:                 #11111bff;
+    border:                     2px;
+    border-color:               #cba6f7ff;
+}
+
+element-icon {
+    size:                       500px;
+    cursor:                     inherit;
+    border-radius:              0px;
+    background-color:           transparent;
+    text-color:                 inherit;
+    padding:                    -110px;
+}
+
+element-text {
+    enabled:                    true;
+    vertical-align:             0.5;
+    horizontal-align:           0.5;
+    cursor:                     inherit;
+    background-color:           #00000055;
+    text-color:                 inherit;
+    padding:20px;
+}
