@@ -76,6 +76,7 @@
         "on-click-right": "pactl set-source-mute 0 toggle",
         "on-scroll-up": "pactl set-source-volume 0 +1%",
         "on-scroll-down": "pactl set-source-volume 0 -1%",
+        "reverse-scrolling": true,
         "ignored-sinks": [
             "Easy Effects Sink"
         ]
