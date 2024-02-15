@@ -1,0 +1,13 @@
+{
+    "workbench.iconTheme": "catppuccin-mocha",
+    "workbench.colorTheme": "Catppuccin Mocha",
+    "terminal.integrated.defaultProfile.linux": "fish",
+    "editor.largeFileOptimizations": false,
+    "terminal.integrated.fontFamily": "Hack nerd Font",
+    "editor.fontFamily": "JetBrainsMono Nerd Font",
+    "editor.fontLigatures": true,
+    "security.workspace.trust.untrustedFiles": "open",
+    "explorer.confirmDragAndDrop": false,
+    "git.enableSmartCommit": true,
+    "explorer.confirmPasteNative": false
+}
