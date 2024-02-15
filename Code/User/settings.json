@@ -10,7 +10,7 @@
     "explorer.confirmDragAndDrop": false,
     "git.enableSmartCommit": true,
     "explorer.confirmPasteNative": false,
-    "password-store": "libsecret",
+    "password-store": "gnome",
     "git.confirmSync": false,
     "explorer.confirmDelete": false
 }
