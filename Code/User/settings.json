@@ -11,5 +11,6 @@
     "git.enableSmartCommit": true,
     "explorer.confirmPasteNative": false,
     "password-store": "gnome-libsecret",
-    "git.confirmSync": false
+    "git.confirmSync": false,
+    "explorer.confirmDelete": false
 }
