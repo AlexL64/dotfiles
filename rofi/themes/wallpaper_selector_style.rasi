@@ -24,7 +24,7 @@ listview {
     enabled:                    true;
     columns:                    6;
     spacing:                    50px;
-    lines:                      1;
+    lines:                      2;
     padding:                    50px 60px 50px 60px;
     cycle:                      true;
     dynamic:                    false;
