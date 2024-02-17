@@ -85,6 +85,11 @@
         "interval": 1,
         "dynamic-len": 50,
         "format": "{status_icon}  {dynamic}",
+        "dynamic-order": [
+            "title",
+            "artist",
+            "album"
+        ],
         "status-icons": {
             "playing": "",
             "paused": "",
