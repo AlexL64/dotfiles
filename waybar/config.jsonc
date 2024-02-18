@@ -90,6 +90,7 @@
             "artist",
             "album"
         ],
+        "title-len": 40,
         "status-icons": {
             "playing": "",
             "paused": "",
