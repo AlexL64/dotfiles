@@ -26,6 +26,7 @@
         "disk",
         "backlight",
         "upower",
+        "custom/notification",
         "tray"
     ],
     // modules //
@@ -114,7 +115,7 @@
                 "weekdays": "<span color='#f9e2af'><b>{}</b></span>",
                 "today": "<span color='#f38ba8'><b><u>{}</u></b></span>"
             }
-        },
+        }
     },
     "cpu": {
         "interval": 10,
@@ -152,6 +153,26 @@
         "hide-if-empty": true,
         "tooltip": true,
         "tooltip-spacing": 20
+    },
+    "custom/notification": {
+        "tooltip": false,
+        "format": "{icon}<span foreground='#f38ba8' font-size='xx-large' font-weight='900'><sup>{}</sup></span>",
+        "format-icons": {
+            "notification": "󰂚",
+            "none": "󰂚",
+            "dnd-notification": "󰂛",
+            "dnd-none": "󰂛",
+            "inhibited-notification": "󰂚",
+            "inhibited-none": "󰂚",
+            "dnd-inhibited-notification": "󰂛",
+            "dnd-inhibited-none": "󰂛"
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
     },
     "tray": {
         "icon-size": 21,
