@@ -21,12 +21,12 @@
         "clock"
     ],
     "modules-right": [
+        "custom/notification",
         "cpu",
         "memory",
         "disk",
         "backlight",
         "upower",
-        "custom/notification",
         "tray"
     ],
     // modules //

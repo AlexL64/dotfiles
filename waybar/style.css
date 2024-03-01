@@ -97,6 +97,7 @@ tooltip {
 #cpu {
     border-top-left-radius: 12px;
     border-bottom-left-radius: 12px;
+    margin-left: 10px;
 }
 
 #cpu,
