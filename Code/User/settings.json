@@ -12,5 +12,8 @@
     "explorer.confirmPasteNative": false,
     "git.confirmSync": false,
     "explorer.confirmDelete": false,
-    "workbench.colorCustomizations": {}
+    "workbench.colorCustomizations": {},
+    "[css]": {
+        "editor.defaultFormatter": "aeschli.vscode-css-formatter"
+    }
 }
