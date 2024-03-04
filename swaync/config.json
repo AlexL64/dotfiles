@@ -30,17 +30,13 @@
   "hide-on-action": true,
   "script-fail-notify": true,
   "widgets": [
-    "inhibitors",
+    "buttons-grid",
+    "mpris",
     "title",
     "dnd",
     "notifications"
   ],
   "widget-config": {
-    "inhibitors": {
-      "text": "Inhibitors",
-      "button-text": "Clear All",
-      "clear-all-button": true
-    },
     "title": {
       "text": "Notifications",
       "clear-all-button": true,
@@ -49,22 +45,32 @@
     "dnd": {
       "text": "Do Not Disturb"
     },
-    "label": {
-      "max-lines": 5,
-      "text": "Label Text"
-    },
     "mpris": {
       "image-size": 96,
-      "image-radius": 12
+      "image-radius": 10
     },
     "buttons-grid": {
       "actions": [
         {
-          "label": "直",
+          "label": "󰖩",
           "type": "toggle",
           "active": true,
-          "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && nmcli radio wifi on || nmcli radio wifi off'",
-          "update_command": "sh -c '[[ $(nmcli radio wifi) == \"enabled\" ]] && echo true || echo false'"
+          "command": "sh -c $HOME/.config/swaync/scripts/change_wifi_status.sh",
+          "update-command": "sh -c $HOME/.config/swaync/scripts/wifi_status.sh"
+        },
+        {
+          "label": "󰂯",
+          "type": "toggle",
+          "active": true,
+          "command": "sh -c $HOME/.config/swaync/scripts/change_bluetooth_status.sh",
+          "update-command": "sh -c $HOME/.config/swaync/scripts/bluetooth_status.sh"
+        },
+        {
+          "label": "󰌾",
+          "type": "toggle",
+          "active": true,
+          "command": "sh -c $HOME/.config/swaync/scripts/change_mullvad_status.sh",
+          "update-command": "sh -c $HOME/.config/swaync/scripts/mullvad_status.sh"
         }
       ]
     }

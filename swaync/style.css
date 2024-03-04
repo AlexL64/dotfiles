@@ -6,7 +6,7 @@
 }
 
 .floating-notifications.background .notification-row .notification-background {
-  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.8), inset 0 0 0 1px #313244;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.8), inset 0 0 0 1px #313244;
   border-radius: 10px;
   margin: 10px;
   background-color: #1e1e2e;
@@ -91,7 +91,7 @@
 }
 
 .control-center {
-  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.8), inset 0 0 0 1px #313244;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.8), inset 0 0 0 1px #313244;
   border-radius: 10px;
   margin: 10px;
   background-color: #1e1e2e;
@@ -107,17 +107,16 @@
 
 .control-center .widget-title button {
   border-radius: 7px;
-  color: #cdd6f4;
-  background-color: #313244;
+  color: #313244;
+  font-weight: 600;
+  background-color: #cba6f7;
   box-shadow: inset 0 0 0 1px #45475a;
   padding: 8px;
-  border: 2px solid #cba6f7;
 }
 
 .control-center .widget-title button:hover {
   box-shadow: inset 0 0 0 1px #45475a;
-  background-color: #585b70;
-  color: #cdd6f4;
+  background-color: #bb8af8;
 }
 
 .control-center .widget-title button:active {
@@ -249,16 +248,22 @@ trough {
   background-color: #45475a;
 }
 
+
+
+/* Do Not Disturb */
+
 .control-center-dnd {
   margin-top: 5px;
   border-radius: 8px;
   background: #313244;
-  border: 1px solid #45475a;
+  border: 1px solid #cba6f7;
   box-shadow: none;
+  color: #313244;
 }
 
 .control-center-dnd:checked {
   background: #313244;
+  color: #cba6f7;
 }
 
 .control-center-dnd slider {
@@ -274,9 +279,8 @@ trough {
 .widget-dnd>switch {
   font-size: initial;
   border-radius: 8px;
-  background: #313244;
+  background: #cba6f7;
   box-shadow: none;
-  border: 1px solid #cba6f7;
 }
 
 .widget-dnd>switch:checked {
@@ -286,5 +290,76 @@ trough {
 .widget-dnd>switch slider {
   background: #45475a;
   border-radius: 8px;
-  border: 1px solid #6c7086;
+  border: 1px solid #45475a;
+}
+
+/* Buttons menu */
+.widget-buttons-grid {
+  font-size: x-large;
+  padding: 6px;
+  margin: 12px;
+  border-radius: 6px;
+  background: #1e1e2e;
+}
+
+.widget-buttons-grid>flowbox>flowboxchild>button {
+  margin: 4px;
+  padding: 6px;
+  background: #313244;
+  border-radius: 4px;
+  color: #cdd6f4;
+  border: 1px solid transparent;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button.toggle:checked {
+  background: #cba6f7;
+  color: #1e1e2e;
+}
+
+.widget-buttons-grid>flowbox>flowboxchild>button:hover {
+  background: #cba6f7;
+  color: #1e1e2e;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button.toggle:checked:hover {
+  background: #bb8af8;
+}
+
+/* Music Player */
+
+.widget-mpris {
+  background: transparent;
+  border-radius: 16px;
+  color: #cdd6f4;
+  padding: 5px;
+  margin: 20px 5px;
+}
+
+.widget-mpris button {
+  border-radius: 5px;
+}
+
+.widget-mpris button:hover {
+  color: #cba6f7;
+}
+
+.widget-mpris-player {
+  background: #1e1e2e;
+  padding: 5px 10px;
+  margin: 10px;
+}
+
+.widget-mpris-album-art {
+  border-radius: 16px;
+  border: 1px solid #cdd6f4;
+}
+
+.widget-mpris-title {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.widget-mpris-subtitle {
+  font-weight: 500;
+  font-size: 0.8rem;
 }
