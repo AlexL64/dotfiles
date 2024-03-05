@@ -114,9 +114,23 @@ tooltip {
     background: #6c7086;
 }
 
-#tray menu *:hover {
-    background: #1e1e2e;
+#tray menu menuitem check {
+    background: #6c7086;
+    border-radius: 100%;
+    min-height: 18px;
+    min-width: 18px;
+}
+
+#tray menu menuitem check:checked {
+    background: #cba6f7;
+}
+
+#tray menu menuitem {
     border-radius: 7px;
+}
+
+#tray menu menuitem:hover {
+    background: #1e1e2e;
 }
 
 #cpu {
