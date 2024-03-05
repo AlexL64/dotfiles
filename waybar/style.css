@@ -6,6 +6,7 @@
     font-size: 14px;
     min-height: 12px;
     background: none;
+    box-shadow: unset
 }
 
 window {
@@ -106,6 +107,11 @@ tooltip {
 #tray menu {
     border-radius: 7px;
     border: 1px solid #cba6f7;
+}
+
+#tray menu separator {
+    min-height: 2px;
+    background: #6c7086;
 }
 
 #tray menu *:hover {
