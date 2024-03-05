@@ -1,5 +1,5 @@
-if [[ $(nmcli radio wifi) == "enabled" ]]; then
-    nmcli radio wifi off
-else
+if [[ $SWAYNC_TOGGLE_STATE == true ]]; then
     nmcli radio wifi on
+else
+    nmcli radio wifi off
 fi
