@@ -1,5 +1,5 @@
-if [[ $(mullvad status) != "Disconnected" ]]; then
-    mullvad disconnect
-else
+if [[ $SWAYNC_TOGGLE_STATE == true ]]; then
     mullvad connect
+else
+    mullvad disconnect
 fi
