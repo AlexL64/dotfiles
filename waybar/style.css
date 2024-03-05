@@ -8,6 +8,11 @@
     background: none;
 }
 
+window {
+    background: #313244;
+    border-radius: 7px;
+}
+
 window#waybar {
     background: none;
 }
@@ -117,7 +122,7 @@ tooltip {
     border-bottom-right-radius: 12px;
 }
 
-#custom-notification{
+#custom-notification {
     background: #313244;
     padding-left: 12px;
     padding-right: 8px;
