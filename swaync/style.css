@@ -311,7 +311,11 @@ trough {
   border: 1px solid transparent;
 }
 
-.widget-buttons-grid > flowbox > flowboxchild > button.toggle:checked {
+.widget-buttons-grid>flowbox>flowboxchild:first-child button label{
+  margin-left: -3px;
+}
+
+.widget-buttons-grid>flowbox>flowboxchild>button.toggle:checked {
   background: #cba6f7;
   color: #1e1e2e;
 }
@@ -321,7 +325,7 @@ trough {
   color: #1e1e2e;
 }
 
-.widget-buttons-grid > flowbox > flowboxchild > button.toggle:checked:hover {
+.widget-buttons-grid>flowbox>flowboxchild>button.toggle:checked:hover {
   background: #bb8af8;
 }
 
