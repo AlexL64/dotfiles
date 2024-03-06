@@ -178,7 +178,7 @@
         "max-length": 10
     },
     "tray": {
-        "icon-size": 21,
+        "icon-size": 20,
         "spacing": 5
     }
 }
