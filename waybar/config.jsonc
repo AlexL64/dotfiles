@@ -150,7 +150,8 @@
     "disk": {
         "interval": 30,
         "format": "󰋊 {percentage_used}%",
-        "path": "/"
+        "path": "/",
+        "max-length": 10
     },
     "backlight": {
         "device": "intel_backlight",
@@ -164,7 +165,8 @@
             "󰃟",
             "󰃠"
         ],
-        "reverse-scrolling": true
+        "reverse-scrolling": true,
+        "max-length": 10
     },
     "upower": {
         "format": "{percentage}",
@@ -172,7 +174,8 @@
         "icon-size": 20,
         "hide-if-empty": true,
         "tooltip": true,
-        "tooltip-spacing": 20
+        "tooltip-spacing": 20,
+        "max-length": 10
     },
     "tray": {
         "icon-size": 21,
