@@ -64,7 +64,7 @@ button:hover#shutdown {
 }
 
 #sleep {
-    background-image: image(url("$HOME/.config/wlogout/icons/logout.png"), url("/usr/share/wlogout/icons/logout.png"));
+    background-image: image(url("$HOME/.config/wlogout/icons/suspend.png"), url("/usr/share/wlogout/icons/suspend.png"));
     border-radius: 0px;
     border-right-width: 1px;
     border-left-width: 1px;
