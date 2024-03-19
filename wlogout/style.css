@@ -31,30 +31,6 @@ button:focus {
     background-size: 35%;
 }
 
-button:hover {
-    background-color: #313244;
-    background-size: 35%;
-    border-radius: 10px;
-    animation: gradient_f 20s ease-in infinite;
-    transition: all 0.3s cubic-bezier(.55,0.0,.28,1.682);
-}
-
-button:hover#lock {
-    border-radius: 10px 0px 0px 10px;
-}
-
-button:hover#sleep {
-    border-radius: 0px;
-}
-
-button:hover#reboot {
-    border-radius: 0px;
-}
-
-button:hover#shutdown {
-    border-radius: 0px 10px 10px 0px;
-}
-
 #lock {
     background-image: image(url("$HOME/.config/wlogout/icons/lock.png"), url("/usr/share/wlogout/icons/lock.png"));
     border-radius: 10px 0px 0px 10px;
