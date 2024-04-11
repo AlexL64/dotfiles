@@ -15,5 +15,10 @@
     "workbench.colorCustomizations": {},
     "[css]": {
         "editor.defaultFormatter": "aeschli.vscode-css-formatter"
-    }
+    },
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
+    },
+    "jupyter.askForKernelRestart": false
 }
