@@ -51,7 +51,7 @@
             "default": [
                 "",
                 "",
-                ""
+                " "
             ]
         },
         "scroll-step": 1,
@@ -66,13 +66,6 @@
         "format": "{format_source}",
         "format-source": "{volume}% 󰍬",
         "format-source-muted": "󰍭",
-        "format-icons": {
-            "default": [
-                "",
-                "",
-                ""
-            ]
-        },
         "on-click-right": "pavucontrol",
         "on-click": "pactl set-source-mute 0 toggle",
         "on-scroll-up": "pactl set-source-volume 0 +1%",
