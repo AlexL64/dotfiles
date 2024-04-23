@@ -41,7 +41,7 @@ tooltip {
     animation: ws_normal 20s ease-in-out 1;
 }
 
-#workspaces button.active {
+#workspaces button.visible {
     background: #cba6f7;
     color: #313244;
     animation: ws_active 20s ease-in-out 1;
