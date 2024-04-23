@@ -71,6 +71,13 @@
           "active": true,
           "command": "sh -c $HOME/.config/swaync/scripts/change_mullvad_status.sh",
           "update-command": "sh -c $HOME/.config/swaync/scripts/mullvad_status.sh"
+        },
+        {
+          "label": "󱈑",
+          "type": "toggle",
+          "active": true,
+          "command": "sh -c $HOME/.config/swaync/scripts/change_battery_saving_status.sh",
+          "update-command": "sh -c $HOME/.config/swaync/scripts/battery_saving_status.sh"
         }
       ]
     }

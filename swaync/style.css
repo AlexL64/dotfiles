@@ -322,7 +322,6 @@ trough {
 
 .widget-buttons-grid>flowbox>flowboxchild>button:hover {
   background: #45475a;
-  color: #1e1e2e;
 }
 
 .widget-buttons-grid>flowbox>flowboxchild>button.toggle:checked:hover {
