@@ -1,7 +1,9 @@
 if [[ $SWAYNC_TOGGLE_STATE == true ]]; then
-    # rfkill unblock bluetooth
-    bluetoothctl power on
+    if [[ $(bluetoothctl show | grep -oP "(?<=Powered: ).*") == "no" ]]; then
+        bluetoothctl power on
+    fi
 else
-    # rfkill block bluetooth
-    bluetoothctl power off
+    if [[ $(bluetoothctl show | grep -oP "(?<=Powered: ).*") == "yes" ]]; then
+        bluetoothctl power off
+    fi
 fi
