@@ -1,178 +1,256 @@
-{
-    "output": "eDP-1",
-    "layer": "top",
-    "position": "top",
-    "mod": "dock",
-    "height": 36,
-    "exclusive": true,
-    "passthrough": false,
-    "gtk-layer-shell": true,
-    "margin-top": 10,
-    "margin-left": 10,
-    "margin-right": 10,
-    // modules positions //
-    "modules-left": [
-        "hyprland/workspaces",
-        "idle_inhibitor",
-        "pulseaudio#sound",
-        "pulseaudio#mic"
-    ],
-    "modules-center": [
-        "mpris",
-        "clock"
-    ],
-    "modules-right": [
-        "custom/notification",
-        "cpu",
-        "memory",
-        "disk",
-        "backlight",
-        "upower",
-        "tray"
-    ],
-    // modules //
-    "hyprland/workspaces": {
-        "active-only": false,
-        "persistent-workspaces": {
-            "*": 9
-        }
-    },
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "󰈈",
-            "deactivated": "󰈉"
-        }
-    },
-    "pulseaudio#sound": {
-        "format": "{volume}% {icon}",
-        "format-bluetooth": "{volume}% {icon} ",
-        "format-muted": "",
-        "format-icons": {
-            "default": [
-                "",
-                "",
-                " "
+[
+    {
+        "output": "eDP-1",
+        "layer": "top",
+        "position": "top",
+        "mod": "dock",
+        "height": 36,
+        "exclusive": true,
+        "passthrough": false,
+        "gtk-layer-shell": true,
+        "margin-top": 10,
+        "margin-left": 10,
+        "margin-right": 10,
+        // modules positions //
+        "modules-left": [
+            "hyprland/workspaces",
+            "idle_inhibitor",
+            "pulseaudio#sound",
+            "pulseaudio#mic"
+        ],
+        "modules-center": [
+            "mpris",
+            "clock"
+        ],
+        "modules-right": [
+            "custom/notification",
+            "cpu",
+            "memory",
+            "disk",
+            "backlight",
+            "upower",
+            "tray"
+        ],
+        // modules //
+        "hyprland/workspaces": {
+            "active-only": false,
+            "persistent-workspaces": {
+                "*": 9
+            }
+        },
+        "idle_inhibitor": {
+            "format": "{icon}",
+            "format-icons": {
+                "activated": "󰈈",
+                "deactivated": "󰈉"
+            }
+        },
+        "pulseaudio#sound": {
+            "format": "{volume}% {icon}",
+            "format-bluetooth": "{volume}% {icon} ",
+            "format-muted": "",
+            "format-icons": {
+                "default": [
+                    "",
+                    "",
+                    " "
+                ]
+            },
+            "scroll-step": 1,
+            "reverse-scrolling": true,
+            "on-click-right": "pavucontrol",
+            "on-click": "pactl set-sink-mute 0 toggle",
+            "ignored-sinks": [
+                "Easy Effects Sink"
             ]
         },
-        "scroll-step": 1,
-        "reverse-scrolling": true,
-        "on-click-right": "pavucontrol",
-        "on-click": "pactl set-sink-mute 0 toggle",
-        "ignored-sinks": [
-            "Easy Effects Sink"
-        ]
-    },
-    "pulseaudio#mic": {
-        "format": "{format_source}",
-        "format-source": "{volume}% 󰍬",
-        "format-source-muted": "󰍭",
-        "on-click-right": "pavucontrol",
-        "on-click": "pactl set-source-mute 0 toggle",
-        "on-scroll-up": "pactl set-source-volume 0 +1%",
-        "on-scroll-down": "pactl set-source-volume 0 -1%",
-        "reverse-scrolling": true,
-        "ignored-sinks": [
-            "Easy Effects Sink"
-        ]
-    },
-    "mpris": {
-        "interval": 1,
-        "dynamic-len": 50,
-        "format": "{status_icon}  {dynamic}",
-        "dynamic-order": [
-            "title",
-            "artist",
-            "album"
-        ],
-        "title-len": 30,
-        "artist-len": 20,
-        "status-icons": {
-            "playing": "",
-            "paused": "",
-            "stopped": ""
-        }
-    },
-    "clock": {
-        "format": "{:%A, %d. %b  %H:%M}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "calendar": {
-            "mode": "year",
-            "mode-mon-col": 3,
-            "weeks-pos": "right",
-            "on-scroll": 1,
-            "on-click-right": "mode",
-            "format": {
-                "months": "<span color='#fab387'><b>{}</b></span>",
-                "days": "<span color='#cdd6f4'><b>{}</b></span>",
-                "weeks": "<span color='#eba0ac'><b>W{}</b></span>",
-                "weekdays": "<span color='#f9e2af'><b>{}</b></span>",
-                "today": "<span color='#f38ba8'><b><u>{}</u></b></span>"
-            }
-        }
-    },
-    "custom/notification": {
-        "tooltip": false,
-        "format": "{icon}<span foreground='#f38ba8' font-size='xx-large' font-weight='900'><sup>{}</sup></span>",
-        "format-icons": {
-            "notification": "󰂚",
-            "none": "󰂚",
-            "dnd-notification": "󰂛",
-            "dnd-none": "󰂛",
-            "inhibited-notification": "󰂚",
-            "inhibited-none": "󰂚",
-            "dnd-inhibited-notification": "󰂛",
-            "dnd-inhibited-none": "󰂛"
+        "pulseaudio#mic": {
+            "format": "{format_source}",
+            "format-source": "{volume}% 󰍬",
+            "format-source-muted": "󰍭",
+            "on-click-right": "pavucontrol",
+            "on-click": "pactl set-source-mute 0 toggle",
+            "on-scroll-up": "pactl set-source-volume 0 +1%",
+            "on-scroll-down": "pactl set-source-volume 0 -1%",
+            "reverse-scrolling": true,
+            "ignored-sinks": [
+                "Easy Effects Sink"
+            ]
         },
-        "return-type": "json",
-        "exec-if": "which swaync-client",
-        "exec": "swaync-client -swb",
-        "on-click-release": "swaync-client -t -sw",
-        "on-click-right": "swaync-client -d -sw",
-        "escape": true
+        "mpris": {
+            "interval": 1,
+            "dynamic-len": 50,
+            "format": "{status_icon}  {dynamic}",
+            "dynamic-order": [
+                "title",
+                "artist",
+                "album"
+            ],
+            "title-len": 30,
+            "artist-len": 20,
+            "status-icons": {
+                "playing": "",
+                "paused": "",
+                "stopped": ""
+            }
+        },
+        "clock": {
+            "format": "{:%A, %d. %b  %H:%M}",
+            "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+            "calendar": {
+                "mode": "year",
+                "mode-mon-col": 3,
+                "weeks-pos": "right",
+                "on-scroll": 1,
+                "on-click-right": "mode",
+                "format": {
+                    "months": "<span color='#fab387'><b>{}</b></span>",
+                    "days": "<span color='#cdd6f4'><b>{}</b></span>",
+                    "weeks": "<span color='#eba0ac'><b>W{}</b></span>",
+                    "weekdays": "<span color='#f9e2af'><b>{}</b></span>",
+                    "today": "<span color='#f38ba8'><b><u>{}</u></b></span>"
+                }
+            }
+        },
+        "custom/notification": {
+            "tooltip": false,
+            "format": "{icon}<span foreground='#f38ba8' font-size='xx-large' font-weight='900'><sup>{}</sup></span>",
+            "format-icons": {
+                "notification": "󰂚",
+                "none": "󰂚",
+                "dnd-notification": "󰂛",
+                "dnd-none": "󰂛",
+                "inhibited-notification": "󰂚",
+                "inhibited-none": "󰂚",
+                "dnd-inhibited-notification": "󰂛",
+                "dnd-inhibited-none": "󰂛"
+            },
+            "return-type": "json",
+            "exec-if": "which swaync-client",
+            "exec": "swaync-client -swb",
+            "on-click-release": "swaync-client -t -sw",
+            "on-click-right": "swaync-client -d -sw",
+            "escape": true
+        },
+        "cpu": {
+            "interval": 10,
+            "format": " {usage}%",
+            "max-length": 10
+        },
+        "memory": {
+            "interval": 30,
+            "format": " {percentage}%",
+            "max-length": 10
+        },
+        "disk": {
+            "interval": 30,
+            "format": "󰋊 {percentage_used}%",
+            "path": "/",
+            "max-length": 10
+        },
+        "backlight": {
+            "device": "intel_backlight",
+            "format": "{icon} {percent}%",
+            "format-icons": [
+                "󰃚",
+                "󰃛",
+                "󰃜",
+                "󰃝",
+                "󰃞",
+                "󰃟",
+                "󰃠"
+            ],
+            "reverse-scrolling": true,
+            "max-length": 10
+        },
+        "upower": {
+            "format": "{percentage}",
+            "format-alt": "{time}",
+            "icon-size": 20,
+            "hide-if-empty": true,
+            "tooltip": true,
+            "tooltip-spacing": 20,
+            "max-length": 10
+        },
+        "tray": {
+            "icon-size": 20,
+            "spacing": 5
+        }
     },
-    "cpu": {
-        "interval": 10,
-        "format": " {usage}%",
-        "max-length": 10
-    },
-    "memory": {
-        "interval": 30,
-        "format": " {percentage}%",
-        "max-length": 10
-    },
-    "disk": {
-        "interval": 30,
-        "format": "󰋊 {percentage_used}%",
-        "path": "/",
-        "max-length": 10
-    },
-    "backlight": {
-        "device": "intel_backlight",
-        "format": "{icon} {percent}%",
-        "format-icons": [
-            "󰃚",
-            "󰃛",
-            "󰃜",
-            "󰃝",
-            "󰃞",
-            "󰃟",
-            "󰃠"
+    {
+        "output": "!eDP-1",
+        "layer": "top",
+        "position": "top",
+        "mod": "dock",
+        "height": 36,
+        "exclusive": true,
+        "passthrough": false,
+        "gtk-layer-shell": true,
+        "margin-top": 10,
+        "margin-left": 10,
+        "margin-right": 10,
+        // modules positions //
+        "modules-left": [
+            "hyprland/workspaces"
         ],
-        "reverse-scrolling": true,
-        "max-length": 10
-    },
-    "upower": {
-        "format": "{percentage}",
-        "format-alt": "{time}",
-        "icon-size": 20,
-        "hide-if-empty": true,
-        "tooltip": true,
-        "tooltip-spacing": 20,
-        "max-length": 10
-    },
-    "tray": {
-        "icon-size": 20,
-        "spacing": 5
+        "modules-center": [
+            "clock"
+        ],
+        // modules //
+        "hyprland/workspaces": {
+            "active-only": false,
+            "persistent-workspaces": {
+                "*": 9
+            }
+        },
+        "modules-right": [
+            "cpu",
+            "memory",
+            "disk",
+            "upower"
+        ],
+        "clock": {
+            "format": "{:%A, %d. %b  %H:%M}",
+            "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+            "calendar": {
+                "mode": "year",
+                "mode-mon-col": 3,
+                "weeks-pos": "right",
+                "on-scroll": 1,
+                "on-click-right": "mode",
+                "format": {
+                    "months": "<span color='#fab387'><b>{}</b></span>",
+                    "days": "<span color='#cdd6f4'><b>{}</b></span>",
+                    "weeks": "<span color='#eba0ac'><b>W{}</b></span>",
+                    "weekdays": "<span color='#f9e2af'><b>{}</b></span>",
+                    "today": "<span color='#f38ba8'><b><u>{}</u></b></span>"
+                }
+            }
+        },
+        "cpu": {
+            "interval": 10,
+            "format": " {usage}%",
+            "max-length": 10
+        },
+        "memory": {
+            "interval": 30,
+            "format": " {percentage}%",
+            "max-length": 10
+        },
+        "disk": {
+            "interval": 30,
+            "format": "󰋊 {percentage_used}%",
+            "path": "/",
+            "max-length": 10
+        },
+        "upower": {
+            "format": "{percentage}",
+            "format-alt": "{time}",
+            "icon-size": 20,
+            "hide-if-empty": true,
+            "tooltip": true,
+            "tooltip-spacing": 20,
+            "max-length": 10
+        }
     }
-}
+]
