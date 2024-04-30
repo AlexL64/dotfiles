@@ -6,7 +6,7 @@
         "width": 60
     },
     "display": {
-        "separator": " -> "
+        "separator": "  "
     },
     "modules": [
         {
@@ -37,7 +37,7 @@
         },
         {
             "type": "kernel",
-            "key": "│ ",
+            "key": "│ ├",
             "keyColor": "yellow"
         },
         {
