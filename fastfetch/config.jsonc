@@ -6,7 +6,7 @@
         "width": 60
     },
     "display": {
-        "separator": "  "
+        "separator": " "
     },
     "modules": [
         {
@@ -32,22 +32,22 @@
         /* OS */
         {
             "type": "os",
-            "key": "󰻀 OS",
+            "key": "󰻀 OS ",
             "keyColor": "yellow"
         },
         {
             "type": "kernel",
-            "key": "│ ├",
+            "key": "│ ├ ",
             "keyColor": "yellow"
         },
         {
             "type": "uptime",
-            "key": "│ ├󱑒",
+            "key": "│ ├󱑒 ",
             "keyColor": "yellow"
         },
         {
             "type": "packages",
-            "key": "│ └󰏖",
+            "key": "│ └󰏖 ",
             "keyColor": "yellow"
         },
         {
@@ -58,43 +58,43 @@
         /* PC */
         {
             "type": "host",
-            "key": "󰌢 PC",
+            "key": "󰌢 PC ",
             "keyColor": "green"
         },
         {
             "type": "bios",
-            "key": "│ ├",
+            "key": "│ ├ ",
             "keyColor": "green"
         },
         {
             "type": "cpu",
-            "key": "│ ├󰍛",
+            "key": "│ ├󰍛 ",
             "keyColor": "green"
         },
         {
             "type": "memory",
-            "key": "│ ├",
+            "key": "│ ├ ",
             "keyColor": "green"
         },
         {
             "type": "gpu",
-            "key": "│ ├󰢮",
+            "key": "│ ├󰢮 ",
             "keyColor": "green",
             "format": "{1} {2}"
         },
         {
             "type": "disk",
-            "key": "│ ├",
+            "key": "│ ├ ",
             "keyColor": "green"
         },
         {
             "type": "display",
-            "key": "│ ├󰍹",
+            "key": "│ ├󰍹 ",
             "keyColor": "green"
         },
         {
             "type": "battery",
-            "key": "│ └󰁹",
+            "key": "│ └󰁹 ",
             "keyColor": "green"
         },
         {
@@ -105,32 +105,32 @@
         /* WM */
         {
             "type": "wm",
-            "key": " WM",
+            "key": " WM ",
             "keyColor": "blue"
         },
         {
             "type": "lm",
-            "key": "│ ├",
+            "key": "│ ├ ",
             "keyColor": "blue"
         },
         {
             "type": "theme",
-            "key": "│ ├󰉼",
+            "key": "│ ├󰉼 ",
             "keyColor": "blue"
         },
         {
             "type": "icons",
-            "key": "│ ├󰀻",
+            "key": "│ ├󰀻 ",
             "keyColor": "blue"
         },
         {
             "type": "cursor",
-            "key": "│ ├󰇀",
+            "key": "│ ├󰇀 ",
             "keyColor": "blue"
         },
         {
             "type": "font",
-            "key": "│ └",
+            "key": "│ └ ",
             "keyColor": "blue"
         },
         {
@@ -146,12 +146,12 @@
         },
         {
             "type": "shell",
-            "key": "│ ├",
+            "key": "│ ├ ",
             "keyColor": "red"
         },
         {
             "type": "terminalfont",
-            "key": "│ └",
+            "key": "│ └ ",
             "keyColor": "red"
         },
         {
