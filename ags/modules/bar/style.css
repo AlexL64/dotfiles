@@ -126,3 +126,24 @@ DATE MODULE
     padding-right: 12px;
     border-radius: 12px;
 }
+
+
+/******************************************************
+BATTERY MODULE
+******************************************************/
+
+.battery-charging, .battery-discharging {
+    background-color: #313244;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    padding-left: 14px;
+    padding-right: 14px;
+}
+
+.battery-charging {
+    color: #a6e3a1;
+}
+
+.battery-discharging {
+    color: #fab387;
+}
