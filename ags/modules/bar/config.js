@@ -3,6 +3,7 @@ import { AudioOutput } from "./modules/audio_output.js";
 import { AudioInput } from "./modules/audio_input.js";
 import { Date } from "./modules/date.js";
 import { IdleInhibitor } from "./modules/idle_inhibitor.js"
+import { Battery } from "./modules/battery.js"
 
 const date = Variable("", {
     poll: [1000, 'date +"%A, %d. %b  %H:%M"'],
@@ -22,9 +23,6 @@ function SysRessources() {
 }
 
 function Notifications() {
-}
-
-function Battery() {
 }
 
 function Network() {
@@ -65,6 +63,11 @@ function Right() {
         hpack: "end",
         spacing: 10,
         children: [
+            Widget.Box({
+                children: [
+                    Battery(),
+                ]
+            })
         ],
     })
 }
