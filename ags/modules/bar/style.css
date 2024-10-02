@@ -1,0 +1,128 @@
+/******************************************************
+GENERAL
+******************************************************/
+
+* {
+    font-family: "JetBrainsMono Nerd Font";
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 0px;
+}
+
+
+/******************************************************
+WORKSPACE MODULE
+******************************************************/
+
+.workspaces {
+    background-color: #313244;
+    border-radius: 12px;
+}
+
+.workspaces button {
+    background-color: #313244;
+    border-radius: 12px;
+}
+
+.workspaces button.active-focused {
+    background-color: #cba6f7;
+    color: #313244;
+}
+
+.workspaces button.inactive-focused {
+    background-color: #cba6f7;
+    color: #cdd6f4;
+}
+
+.workspaces button.active-unfocused {
+    background-color: #313244;
+    color: #cba6f7;
+}
+
+.workspaces button.inactive-unfocused {
+    background-color: #313244;
+    color: #cdd6f4;
+}
+
+.workspaces button.urgent {
+    background-color: #f38ba8;
+    color: #313244;
+}
+
+
+/******************************************************
+IDLE INHIBITOR MODULE
+******************************************************/
+
+.idle-inhibitor {
+    background-color: #313244;
+    border-radius: 12px;
+    padding-left: 12px;
+    padding-right: 10px;
+}
+
+.idle-inhibitor-active {
+    color: #a6e3a1;
+}
+
+.idle-inhibitor-inactive {
+    color: #f38ba8;
+}
+
+
+/******************************************************
+AUDIO MODULE
+******************************************************/
+
+
+.audio-output, .audio-output-muted, .audio-input, .audio-input-muted {
+    background-color: #313244;
+    opacity: 1;
+    border-radius: 12px;
+    font-size: 14px;
+    min-width: 0px;
+}
+
+/* Output */
+
+.audio-output, .audio-output-muted {
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.audio-output {
+    color: #89dceb;
+}
+
+.audio-output-muted {
+    color: #f38ba8;
+}
+
+/* Input */
+
+.audio-input, .audio-input-muted {
+    padding-left: 14px;
+    padding-right: 16px;
+}
+
+.audio-input {
+    color: #89dceb;
+}
+
+.audio-input-muted {
+    color: #f38ba8;
+}
+
+
+
+/******************************************************
+DATE MODULE
+******************************************************/
+
+.date {
+    background-color: #313244;
+    color: #cba6f7;
+    padding-left: 12px;
+    padding-right: 12px;
+    border-radius: 12px;
+}
