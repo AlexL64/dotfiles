@@ -1,0 +1,1 @@
+df | grep '.* /$' | awk '{print $5}'

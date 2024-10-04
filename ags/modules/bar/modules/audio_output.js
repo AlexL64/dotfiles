@@ -33,7 +33,6 @@ export function AudioOutput() {
     function isBluetooth() {
         var isBluetooth = false;
         bluetooth.connected_devices.forEach(device => {
-            console.log(device.type);
             device.type == "Headset" ? isBluetooth = true : isBluetooth = false;
         })
         return isBluetooth;

@@ -33,7 +33,13 @@ export function Battery() {
     function getIcon() {
         const icon = [100, 90, 80, 70, 60, 50, 40, 30, 10, 0].find(threshold => threshold <= battery.percent);
 
-        return battery.charging ? `${iconsCharging[icon]}` : `${iconsDischarging[icon]}`;
+        if (battery.charged) {
+            return "󰂄";
+        } else if (battery.charging) {
+            return `${iconsCharging[icon]}`;
+        } else {
+            return `${iconsDischarging[icon]}`
+        }
     }
 
     const percentage = Widget.Label({
@@ -57,14 +63,19 @@ export function Battery() {
     })
 
     return Widget.Button({
-        on_clicked: () => console.log(getIcon()),
         child: Widget.Box({
             spacing: 8,
             children: [percentage, icon],
         }),
         setup: self => {
             self.hook(battery, () => {
-                battery.charging ? self.class_name = "battery-charging" : self.class_name = "battery-discharging";
+                if (battery.charged) {
+                    self.class_name = "battery-charged";
+                } else if (battery.charging) {
+                    self.class_name = "battery-charging"
+                } else {
+                    self.class_name = "battery-discharging"
+                }
             })
         }
     })

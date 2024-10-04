@@ -114,6 +114,44 @@ AUDIO MODULE
 }
 
 
+/******************************************************
+DATE MODULE
+******************************************************/
+
+.mpris, .mpris-play-pause {
+    background-color: #313244;
+    border-radius: 12px;
+}
+
+.mpris-hidden {
+    background-color: transparent;
+}
+
+.mpris-play-pause {
+    border: 1px solid #cba6f7;
+}
+
+.mpris-text{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.mpris-title {
+    font-size: 12px;
+}
+
+.mpris-artist {
+    font-size: 11px;
+}
+
+.mpris-time{
+    padding-right: 10px;
+}
+
+.mpris-position, .mpris-separator, .mpris-length{
+    font-size: 12px;
+}
+
 
 /******************************************************
 DATE MODULE
@@ -129,15 +167,89 @@ DATE MODULE
 
 
 /******************************************************
+NOTIFICATIONS MODULE
+******************************************************/
+
+.notifications{
+    background-color: #313244;
+    border-radius: 14px;
+    padding-left: 12px;
+    padding-right: 10px;
+}
+
+.notifications-icon {
+    color: #74c7ec;
+}
+
+.notifications-number {
+    font-size:x-small;
+    font-weight: 900;
+    min-height: 0px;
+    margin-top: -10px;
+    color: #f38ba8;
+}
+
+
+/******************************************************
+CPU MODULE
+******************************************************/
+
+.cpu {
+    background-color: #313244;
+    color: #f38ba8;
+    padding-left: 12px;
+    padding-right: 20px;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+
+/******************************************************
+RAM MODULE
+******************************************************/
+
+.ram {
+    background-color: #313244;
+    color: #fab387;
+    padding-right: 18px;
+}
+
+
+/******************************************************
+STORAGE MODULE
+******************************************************/
+
+.storage {
+    background-color: #313244;
+    color: #89b4fa;
+    padding-right: 12px;
+}
+
+
+/******************************************************
+BRIGHTNESS MODULE
+******************************************************/
+
+.brightness {
+    background-color: #313244;
+    color: #f9e2af;
+    padding-right: 12px;
+}
+
+
+/******************************************************
 BATTERY MODULE
 ******************************************************/
 
-.battery-charging, .battery-discharging {
+.battery-charged, .battery-charging, .battery-discharging {
     background-color: #313244;
     border-top-right-radius: 12px;
     border-bottom-right-radius: 12px;
-    padding-left: 14px;
     padding-right: 14px;
+}
+
+.battery-charged {
+    color: #cdd6f4;
 }
 
 .battery-charging {
@@ -146,4 +258,57 @@ BATTERY MODULE
 
 .battery-discharging {
     color: #fab387;
+}
+
+
+.test {
+    background-color: #313244;
+    padding-left: 120px;
+    border-radius: 12px;
+}
+
+
+/******************************************************
+TRAY MODULE
+******************************************************/
+
+.tray {
+    background-color: #313244;
+    border-radius: 12px;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.tray-item {
+    background-color: #313244;
+    border-radius: 12px;
+}
+
+menu {
+    border-radius: 7px;
+    border: 1px solid #cba6f7;
+}
+
+separator {
+    min-height: 2px;
+    background: #6c7086;
+}
+
+check {
+    background: #6c7086;
+    border-radius: 100%;
+    min-height: 18px;
+    min-width: 18px;
+}
+
+check:checked {
+    background: #cba6f7;
+}
+
+menuitem {
+    border-radius: 7px;
+}
+
+menuitem:hover {
+    background: #1e1e2e;
 }

@@ -4,36 +4,25 @@ import { AudioInput } from "./modules/audio_input.js";
 import { Date } from "./modules/date.js";
 import { IdleInhibitor } from "./modules/idle_inhibitor.js"
 import { Battery } from "./modules/battery.js"
+import { Brightness } from "./modules/brightness.js";
+import { Cpu } from "./modules/cpu.js";
+import { Ram } from "./modules/ram.js";
+import { Storage } from "./modules/storage.js";
+import { Tray } from "./modules/tray.js";
+import { Notifications } from "./modules/notifications.js";
+import { Mpris } from "./modules/mpris.js";
 
-const date = Variable("", {
-    poll: [1000, 'date +"%A, %d. %b  %H:%M"'],
-})
+// function Media() {
+// }
 
-function Media() {
-}
+// function Notifications() {
+// }
 
-function Clock() {
-    return Widget.Label({
-        class_name: "clock",
-        label: date.bind(),
-    })
-}
+// function Network() {
+// }
 
-function SysRessources() {
-}
-
-function Notifications() {
-}
-
-function Network() {
-}
-
-function Bluetooth() {
-}
-
-
-function SysTray() {
-}
+// function Bluetooth() {
+// }
 
 
 // layout of the bar
@@ -53,6 +42,7 @@ function Center() {
     return Widget.Box({
         spacing: 10,
         children: [
+            Mpris(),
             Date(),
         ],
     })
@@ -63,11 +53,17 @@ function Right() {
         hpack: "end",
         spacing: 10,
         children: [
+            Notifications(),
             Widget.Box({
                 children: [
+                    Cpu(),
+                    Ram(),
+                    Storage(),
+                    Brightness(),
                     Battery(),
                 ]
-            })
+            }),
+            Tray(),
         ],
     })
 }
