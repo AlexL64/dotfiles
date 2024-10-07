@@ -1,9 +1,6 @@
 const mpris = await Service.import("mpris")
 const players = mpris.bind("players")
 
-const PLAY_ICON = "media-playback-start-symbolic"
-const PAUSE_ICON = "media-playback-pause-symbolic"
-
 function lengthStr(length) {
     const min = Math.floor(length / 60)
     const sec = Math.floor(length % 60)
@@ -21,7 +18,7 @@ function Player(player) {
                         self.class_name = "mpris"
                     } else {
                         self.visible = false;
-                        self.class_name = "mpris-false"
+                        self.class_name = "mpris-hidden"
                     }
                 })
             },
@@ -33,9 +30,9 @@ function Player(player) {
                     child: Widget.Icon({
                         icon: player.bind("play_back_status").transform(s => {
                             switch (s) {
-                                case "Playing": return PAUSE_ICON
+                                case "Playing": return "media-playback-pause-symbolic"
                                 case "Paused":
-                                case "Stopped": return PLAY_ICON
+                                case "Stopped": return "media-playback-start-symbolic"
                             }
                         }),
                     }),
