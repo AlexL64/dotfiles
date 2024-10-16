@@ -329,7 +329,7 @@ MEDIA WIDGET
 
 .media-small {
     padding: 10px;
-    min-width: 88px;
+    min-width: 200px;
     background-color: #313244;
     border: 2px solid #cba6f7;
     border-radius: 12px;
@@ -611,10 +611,6 @@ AUDIO WIDGET
 .audio-device-volume-bar value {
     font-size: 0px;
 }
-
-/* .audio-device-volume-bar trough {
-    min-width: 269px;
-} */
 
 .audio-device-volume-bar slider {
     background-color: #1e1e2e;
