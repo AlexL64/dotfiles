@@ -1,47 +1,6 @@
-const battery = await Service.import("battery")
+const battery = await Service.import("battery");
 
 export function Battery() {
-
-    const iconsDischarging = {
-        100: "󰁹",
-        90: "󰂂",
-        80: "󰂁",
-        70: "󰂀",
-        60: "󰁿",
-        50: "󰁾",
-        40: "󰁽",
-        30: "󰁼",
-        20: "󰁻",
-        10: "󰁺",
-        0: "󰂎",
-    }
-
-    const iconsCharging = {
-        100: "󰂅",
-        90: "󰂋",
-        80: "󰂊",
-        70: "󰢞",
-        60: "󰂉",
-        50: "󰢝",
-        40: "󰂈",
-        30: "󰂇",
-        20: "󰂆",
-        10: "󰢜",
-        0: "󰢟",
-    }
-
-    function getIcon() {
-        const icon = [100, 90, 80, 70, 60, 50, 40, 30, 10, 0].find(threshold => threshold <= battery.percent);
-
-        if (battery.charged) {
-            return "󰂄";
-        } else if (battery.charging) {
-            return `${iconsCharging[icon]}`;
-        } else {
-            return `${iconsDischarging[icon]}`
-        }
-    }
-
     const percentage = Widget.Label({
         class_name: "battery-text",
         label: "0%",
@@ -52,17 +11,16 @@ export function Battery() {
         }
     })
 
-    const icon = Widget.Label({
+    const icon = Widget.Icon({
         class_name: "battery-icon",
-        label: "󰂑",
-        setup: self => {
-            self.hook(battery, () => {
-                self.label = getIcon();
-            })
-        }
+        icon: battery.bind("icon_name"),
     })
 
     return Widget.Button({
+        onPrimaryClick: () => {
+            App.toggleWindow("power");
+            App.windows.forEach(e => !e.name?.includes("bar") && !e.name?.includes("power") ? e.hide() : null);
+        },
         child: Widget.Box({
             spacing: 8,
             children: [percentage, icon],

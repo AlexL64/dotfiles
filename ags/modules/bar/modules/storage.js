@@ -7,7 +7,7 @@ export function Storage() {
 
     Utils.interval(300000, () => {
         Utils.subprocess(
-            ['bash', '-c', '~/.config/ags/modules/bar/scripts/storageUsage.sh'],
+            ['bash', '-c', `df | grep '.* /$' | awk '{print $5}'`],
             (output) => percentage.label = output,
             (err) => console.log(err)
         )

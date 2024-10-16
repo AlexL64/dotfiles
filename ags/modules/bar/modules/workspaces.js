@@ -16,18 +16,22 @@ export function Workspaces() {
             onClicked: () => dispatch(i),
             setup: self => {
                 self.hook(hyprland, () => {
-                    if (self.attribute.id == focusedId.emitter.id) {
-                        if (activeIds.emitter.getWorkspace(self.attribute.id)?.lastwindow != "0x0") {
-                            self.class_name = "active-focused";
+                    if (!self.attribute.isUrgent) {
+                        if (self.attribute.id == focusedId.emitter.id) {
+                            if (activeIds.emitter.getWorkspace(self.attribute.id)?.lastwindow != "0x0") {
+                                self.class_name = "active-focused";
+                            } else {
+                                self.class_name = "inactive-focused";
+                            }
                         } else {
-                            self.class_name = "inactive-focused";
+                            if (activeIds.emitter.getWorkspace(self.attribute.id) != undefined) {
+                                self.class_name = "active-unfocused";
+                            } else {
+                                self.class_name = "inactive-unfocused";
+                            }
                         }
-                    } else {
-                        if (activeIds.emitter.getWorkspace(self.attribute.id) != undefined) {
-                            self.class_name = "active-unfocused";
-                        } else {
-                            self.class_name = "inactive-unfocused";
-                        }
+                    } else if (self.attribute.id == hyprland.active.workspace.id) {
+                        self.attribute.isUrgent = false;
                     }
                 })
                 self.hook(hyprland, (_, address) => {
