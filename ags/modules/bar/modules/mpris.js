@@ -37,52 +37,77 @@ function Player(player) {
                         }),
                     }),
                 }),
-                Widget.Box({
-                    vertical: true,
-                    vpack: "center",
-                    class_name: "mpris-text",
-                    children: [
-                        Widget.Label({
-                            class_name: "mpris-title",
-                            hpack: "start",
-                            label: player.bind("track_title"),
-                            truncate: "end",
-                            maxWidthChars: 25,
-                        }),
-                        Widget.Label({
-                            class_name: "mpris-artist",
-                            hpack: "start",
-                            label: player.bind("track_artists").transform(a => a.join(", ")),
-                            truncate: "end",
-                            maxWidthChars: 20,
-                        }),
-                    ]
-                }),
-                Widget.Box({
-                    class_name: "mpris-time",
-                    children: [
-                        Widget.Label({
-                            class_name: "mpris-position",
-                            setup: self => {
-                                const update = (_, time) => {
-                                    self.label = lengthStr(time || player.position)
-                                    self.visible = player.length > 0
-                                }
+                Widget.Button({
+                    className: "media-button",
+                    onClicked: () => {
+                        App.toggleWindow("media");
+                        App.windows.forEach(e => !e.name?.includes("bar") && !e.name?.includes("media") ? e.hide() : null);
+                    },
+                    child: Widget.Box({
+                        children: [
+                            Widget.Box({
+                                vertical: true,
+                                vpack: "center",
+                                class_name: "mpris-text",
+                                children: [
+                                    Widget.Label({
+                                        class_name: "mpris-title",
+                                        hpack: "start",
+                                        label: player.bind("track_title"),
+                                        truncate: "end",
+                                        maxWidthChars: 25,
+                                    }),
+                                    Widget.Label({
+                                        class_name: "mpris-artist",
+                                        hpack: "start",
+                                        label: player.bind("track_artists").transform(a => a.join(", ")),
+                                        truncate: "end",
+                                        maxWidthChars: 20,
+                                        setup: self => {
+                                            self.hook(mpris, () => {
+                                                player.track_artists == "" ? self.class_name = "mpris-artist-hidden" : self.class_name = "mpris-artist";
+                                            }, "changed")
+                                        },
+                                    }),
+                                ]
+                            }),
+                            Widget.Box({
+                                setup: self => {
+                                    self.hook(mpris, () => {
+                                        if (player.position != -1 || player.length != -1) {
+                                            self.visible = true;
+                                        } else {
+                                            self.visible = false;
+                                        }
+                                    })
+                                },
+                                class_name: "mpris-time",
+                                children: [
+                                    Widget.Label({
+                                        class_name: "mpris-position",
+                                        setup: self => {
+                                            const update = (_, time) => {
+                                                self.label = lengthStr(time || player.position)
+                                                self.visible = player.length > 0
+                                            }
 
-                                self.hook(player, update, "position")
-                                self.poll(1000, update)
-                            },
-                        }),
-                        Widget.Label({
-                            class_name: "mpris-separator",
-                            label: " / ",
-                        }),
-                        Widget.Label({
-                            class_name: "mpris-length",
-                            visible: player.bind("length").transform(l => l > 0),
-                            label: player.bind("length").transform(lengthStr),
-                        })
-                    ]
+                                            self.hook(player, update, "position")
+                                            self.poll(1000, update)
+                                        },
+                                    }),
+                                    Widget.Label({
+                                        class_name: "mpris-separator",
+                                        label: " / ",
+                                    }),
+                                    Widget.Label({
+                                        class_name: "mpris-length",
+                                        visible: player.bind("length").transform(l => l > 0),
+                                        label: player.bind("length").transform(lengthStr),
+                                    })
+                                ]
+                            }),
+                        ],
+                    })
                 }),
             ]
         })

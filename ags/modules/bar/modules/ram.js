@@ -7,7 +7,7 @@ export function Ram() {
 
     Utils.interval(30000, () => {
         Utils.subprocess(
-            ['bash', '-c', '~/.config/ags/modules/bar/scripts/ramUsage.sh'],
+            ['bash', '-c', `free -m | grep "Mem" | awk '{print ($3*100)/$2}'`],
             (output) => percentage.label = `${Math.round(parseFloat(output))}%`,
             (err) => console.log(err)
         )

@@ -7,7 +7,7 @@ export function Cpu() {
 
     Utils.interval(10000, () => {
         Utils.subprocess(
-            ['bash', '-c', '~/.config/ags/modules/bar/scripts/cpuUsage.sh'],
+            ['bash', '-c', `top -bn1 | grep "Cpu(s)" | sed "s/.*, *\\([0-9.]*\\)%* id.*/\\1/" | awk '{print 100 - $1"%"}'`],
             (output) => percentage.label = `${Math.round(parseFloat(output))}%`,
             (err) => console.log(err)
         )

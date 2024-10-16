@@ -1,9 +1,13 @@
+import { getSettings } from "../menus/audio.js";
+import Gtk from "../../../types/@girs/gtk-3.0/gtk-3.0.js";
+
+
 const audio = await Service.import("audio")
 
 export function AudioInput() {
 
     function getIcon() {
-        return audio.microphone.is_muted ? "󰍭" : "󰍬"; 
+        return audio.microphone.is_muted ? "󰍭" : "󰍬";
     }
 
     function getVolume() {
@@ -27,10 +31,14 @@ export function AudioInput() {
     })
 
     return Widget.Button({
-        on_clicked: () => Utils.exec("pactl set-source-mute 0 toggle"),
-        on_secondary_click: () =>Utils.execAsync("pavucontrol -t 4"),
-        on_scroll_up: () => Utils.exec("pactl set-source-volume 0 +1%"),
-        on_scroll_down: () => Utils.exec("pactl set-source-volume 0 -1%"),
+        onPrimaryClick: () => {
+            App.toggleWindow("audio");
+            App.windows.forEach(e => !e.name?.includes("bar") && !e.name?.includes("audio") ? e.hide() : null);
+        },
+        onSecondaryClick: () => Utils.exec("pactl set-source-mute 0 toggle"),
+        onMiddleClick: () => Utils.execAsync("pavucontrol -t 4"),
+        onScrollUp: () => Utils.exec("pactl set-source-volume 0 +1%"),
+        onScrollDown: () => Utils.exec("pactl set-source-volume 0 -1%"),
         child: Widget.Box({
             spacing: 8,
             children: [volume, icon],

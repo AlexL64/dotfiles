@@ -51,26 +51,6 @@ WORKSPACE MODULE
 
 
 /******************************************************
-IDLE INHIBITOR MODULE
-******************************************************/
-
-.idle-inhibitor {
-    background-color: #313244;
-    border-radius: 12px;
-    padding-left: 12px;
-    padding-right: 10px;
-}
-
-.idle-inhibitor-active {
-    color: #a6e3a1;
-}
-
-.idle-inhibitor-inactive {
-    color: #f38ba8;
-}
-
-
-/******************************************************
 AUDIO MODULE
 ******************************************************/
 
@@ -78,9 +58,20 @@ AUDIO MODULE
 .audio-output, .audio-output-muted, .audio-input, .audio-input-muted {
     background-color: #313244;
     opacity: 1;
-    border-radius: 12px;
     font-size: 14px;
     min-width: 0px;
+}
+
+.audio-output, .audio-output-muted {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    border-right: 1px solid #45475a;
+}
+
+.audio-input, .audio-input-muted {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border-left: 1px solid #45475a;
 }
 
 /* Output */
@@ -132,7 +123,13 @@ DATE MODULE
     border: 1px solid #cba6f7;
 }
 
-.mpris-text{
+.media-button {
+    padding: 0;
+    background-color: transparent;
+    border-radius: 12px;
+}
+
+.mpris-text {
     padding-left: 10px;
     padding-right: 10px;
 }
@@ -143,13 +140,18 @@ DATE MODULE
 
 .mpris-artist {
     font-size: 11px;
+    color: #cba6f7;
 }
 
-.mpris-time{
+.mpris-artist-hidden {
+    font-size: 0px;
+}
+
+.mpris-time {
     padding-right: 10px;
 }
 
-.mpris-position, .mpris-separator, .mpris-length{
+.mpris-position, .mpris-separator, .mpris-length {
     font-size: 12px;
 }
 
@@ -171,11 +173,11 @@ DATE MODULE
 NOTIFICATIONS MODULE
 ******************************************************/
 
-.notifications{
+.notifications {
     background-color: #313244;
     border-radius: 14px;
     padding-left: 12px;
-    padding-right: 10px;
+    padding-right: 8px;
 }
 
 .notifications-icon {
@@ -183,7 +185,7 @@ NOTIFICATIONS MODULE
 }
 
 .notifications-number {
-    font-size:x-small;
+    font-size: x-small;
     font-weight: 900;
     min-height: 0px;
     margin-top: -10px;
@@ -246,7 +248,7 @@ BATTERY MODULE
     background-color: #313244;
     border-top-right-radius: 12px;
     border-bottom-right-radius: 12px;
-    padding-right: 14px;
+    padding-right: 10px;
 }
 
 .battery-charged {
@@ -259,13 +261,6 @@ BATTERY MODULE
 
 .battery-discharging {
     color: #fab387;
-}
-
-
-.test {
-    background-color: #313244;
-    padding-left: 120px;
-    border-radius: 12px;
 }
 
 
@@ -312,4 +307,316 @@ menuitem {
 
 menuitem:hover {
     background: #1e1e2e;
+}
+
+
+/******************************************************
+MEDIA WIDGET
+******************************************************/
+
+.medias {
+    min-height: 1px;
+    min-width: 1px;
+}
+
+.media {
+    padding: 10px;
+    min-width: 350px;
+    background-color: #313244;
+    border: 2px solid #cba6f7;
+    border-radius: 12px;
+}
+
+.media-small {
+    padding: 10px;
+    min-width: 88px;
+    background-color: #313244;
+    border: 2px solid #cba6f7;
+    border-radius: 12px;
+}
+
+
+.media-image {
+    min-width: 100px;
+    min-height: 100px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 12px;
+    margin-right: 10px;
+}
+
+.media-title {
+    font-size: 14px;
+}
+
+.media-artist {
+    font-size: 13px;
+    color: #cba6f7;
+}
+
+.media-slider scale.position {
+    padding: 0;
+    margin-bottom: .3em;
+}
+
+.media-slider trough {
+    min-height: 8px;
+    border-radius: 6px;
+}
+
+.media-slider highlight {
+    background-color: #cba6f7;
+    border-radius: 6px;
+}
+
+.media-slider slider {
+    all: unset;
+}
+
+.media button, .media-small button {
+    min-height: 1em;
+    min-width: 1em;
+    padding: .3em;
+    border-radius: 6px;
+    border: 1px solid #cba6f7;
+}
+
+.media button.play-pause, .media-small button.play-pause {
+    margin: 0 .3em;
+}
+
+
+/******************************************************
+CALENDAR WIDGET
+******************************************************/
+.calendar-box {
+    background-color: #1e1e2e;
+    border: 2px solid #cba6f7;
+    padding: 10px;
+    border-radius: 12px;
+}
+
+.calendar-time, .calendar-date, .calendar-uptime {
+    background-color: #313244;
+    border-radius: 12px;
+    padding: 4px;
+    margin-bottom: 4px;
+}
+
+.calendar-time {
+    font-size: 64px;
+}
+
+.calendar-date {
+    font-size: 16px;
+}
+
+.calendar-uptime {
+    font-size: 16px;
+}
+
+.calendar-outer {
+    background-color: #313244;
+    border-radius: 12px;
+}
+
+.calendar {
+    background-color: transparent;
+    border: none;
+    padding: 5px;
+}
+
+.calendar:selected {
+    color: #cba6f7;
+}
+
+.calendar.header {
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
+}
+
+.calendar.button {
+    color: #cba6f7;
+    padding: 4px;
+    border-radius: 6px;
+}
+
+.calendar.button:hover {
+    background-color: #cba6f7;
+    color: #cdd6f4;
+}
+
+.calendar.highlight {
+    color: #f38ba8
+}
+
+.calendar:indeterminate {
+    color: #6c7086;
+}
+
+
+/******************************************************
+POWER WIDGET
+******************************************************/
+
+.power {
+    background-color: #1e1e2e;
+    border: 2px solid #cba6f7;
+    border-radius: 12px;
+    padding: 10px;
+}
+
+.power-battery {
+    background-color: #313244;
+    border-radius: 12px;
+    padding: 10px;
+}
+
+.power-idle-inhibitor,
+.power-idle-inhibitor-toggled,
+.power-battery-saving,
+.power-battery-saving-toggled {
+    border-radius: 6px;
+    border: 1px solid #cba6f7;
+}
+
+.power-idle-inhibitor-toggled,
+.power-battery-saving-toggled {
+    background-color: #cba6f7;
+}
+
+.power-idle-inhibitor-icon {
+    margin-right: 3px;
+}
+
+.power-battery-icon {
+    padding-right: 10px;
+    font-size: 26px;
+}
+
+.power-battery-text {
+    margin-bottom: 3px;
+}
+
+.power-battery-bar block {
+    border-radius: 6px;
+}
+
+.power-battery-status {
+    margin-top: 5px;
+}
+
+.power-separator {
+    border-radius: 3px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.power-profile-icon {
+    padding-right: 10px;
+    font-size: 20px;
+}
+
+.power-slider {
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+
+.power-slider value {
+    font-size: 0px;
+}
+
+.power-slider marks.top {
+    color: #a6adc8;
+}
+
+.power-slider mark indicator {
+    min-width: 1px;
+    min-height: 8px;
+    margin-bottom: 5px;
+    margin-top: 0px;
+    color: #6c7086;
+}
+
+.power-slider trough {
+    background-color: #6c7086;
+}
+
+.power-slider slider {
+    background-color: #1e1e2e;
+    border-radius: 16px;
+}
+
+
+/******************************************************
+AUDIO WIDGET
+******************************************************/
+
+.audio {
+    background-color: #313244;
+    border-radius: 12px;
+    border: 2px solid #cba6f7;
+}
+
+.audio-menu {
+    background-color: #313244;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.audio-menu-button {
+    background-color: transparent;
+}
+
+.audio-menu-button-selected {
+    color: #cba6f7;
+}
+
+.audio-settings {
+    padding: 10px;
+    background-color: #1e1e2e;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.audio-device {
+    border-radius: 12px;
+    background-color: #313244;
+    padding: 10px;
+}
+
+.audio-device-name {
+    font-size: 13px;
+}
+
+.audio-device-settings {
+    padding: 0px;
+    padding-right: 8px;
+    padding-left: 2px;
+    background-color: transparent;
+    border-radius: 6px;
+}
+
+.audio-device-toggle {
+    background-color: transparent;
+    border-radius: 6px;
+}
+
+.audio-device-volume-bar {
+    margin-left: 5px;
+    padding-right: 10px;
+}
+
+.audio-device-volume-bar value {
+    font-size: 0px;
+}
+
+/* .audio-device-volume-bar trough {
+    min-width: 269px;
+} */
+
+.audio-device-volume-bar slider {
+    background-color: #1e1e2e;
+    border-radius: 16px;
 }

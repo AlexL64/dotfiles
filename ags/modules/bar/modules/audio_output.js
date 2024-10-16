@@ -49,10 +49,14 @@ export function AudioOutput() {
     })
 
     return Widget.Button({
-        on_clicked: () => Utils.exec("pactl set-sink-mute 0 toggle"),
-        on_secondary_click: () =>Utils.execAsync("pavucontrol -t 3"),
-        on_scroll_up: () => Utils.exec("pactl set-sink-volume 0 +1%"),
-        on_scroll_down: () => Utils.exec("pactl set-sink-volume 0 -1%"),
+        onPrimaryClick: () => {
+            App.toggleWindow("audio");
+            App.windows.forEach(e => !e.name?.includes("bar") && !e.name?.includes("audio") ? e.hide() : null);
+        },
+        onSecondaryClick: () => Utils.exec("pactl set-sink-mute 0 toggle"),
+        onMiddleClick: () => Utils.execAsync("pavucontrol -t 3"),
+        onScrollUp: () => Utils.exec("pactl set-sink-volume 0 +1%"),
+        onScrollDown: () => Utils.exec("pactl set-sink-volume 0 -1%"),
         child: Widget.Box({
             spacing: 8,
             children: [volume, icon],
