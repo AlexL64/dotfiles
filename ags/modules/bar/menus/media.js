@@ -15,6 +15,7 @@ function Player(player) {
             setup: self => {
                 self.hook(player, (self) => {
                     player.position == "-1" ? self.class_name = "media-small" : self.class_name = "media";
+                    player.track_title == "" ? self.hide() : self.show();
                 })
             },
             children: [
