@@ -13,16 +13,16 @@ function Player(player) {
         return Widget.Box({
             className: "media",
             setup: self => {
-                if(player.position == "-1"){
-                    self.class_name = "media-small";
-                }
+                self.hook(player, (self) => {
+                    player.position == "-1" ? self.class_name = "media-small" : self.class_name = "media";
+                })
             },
             children: [
                 Widget.Box({
                     className: "media-image",
                     css: player.bind("cover_path").transform(p => `background-image: url('${p}');`),
                     setup: self => {
-                        if(player.cover_path == undefined){
+                        if (player.cover_path == undefined) {
                             self.class_name = "";
                         }
                     },
@@ -54,8 +54,10 @@ function Player(player) {
                             visible: player.bind("length").as(l => l > 0),
                             setup: self => {
                                 function update() {
-                                    const value = player.position / player.length
-                                    self.value = value > 0 ? value : 0
+                                    if (player.length > 0) {
+                                        const value = player.position / player.length;
+                                        self.value = value > 0 ? value : 0;
+                                    }
                                 }
                                 self.hook(player, update)
                                 self.hook(player, update, "position")
@@ -74,7 +76,7 @@ function Player(player) {
                                         self.label = lengthStr(time || player.position)
                                         self.visible = player.length > 0
                                     }
-    
+
                                     self.hook(player, update, "position")
                                     self.poll(1000, update)
                                 },
