@@ -14,6 +14,7 @@ function Player(player) {
             className: "media",
             setup: self => {
                 self.hook(player, (self) => {
+                    console.log(player);
                     player.position == "-1" ? self.class_name = "media-small" : self.class_name = "media";
                     player.track_title == "" ? self.hide() : self.show();
                 })
@@ -30,6 +31,7 @@ function Player(player) {
                 }),
                 Widget.Box({
                     vertical: true,
+                    expand: true,
                     children: [
                         Widget.Label({
                             hpack: "start",
@@ -41,6 +43,7 @@ function Player(player) {
                         }),
                         Widget.Label({
                             hpack: "start",
+                            vpack: "end",
                             className: "media-artist",
                             wrap: false,
                             truncate: "end",
@@ -84,6 +87,7 @@ function Player(player) {
                             }),
                             center_widget: Widget.Box({
                                 spacing: 8,
+                                hpack: "center",
                                 children: [
                                     Widget.Button({
                                         className: "media-prev",
