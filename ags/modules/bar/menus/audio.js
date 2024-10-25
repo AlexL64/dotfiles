@@ -1,5 +1,9 @@
-const audio = await Service.import("audio");
+import Gdk from "../../../types/@girs/gdk-3.0/gdk-3.0.js";
+import Gtk from "../../../types/@girs/gtk-3.0/gtk-3.0.js";
 
+const CheckButton = Widget.subclass(Gtk.CheckButton);
+
+const audio = await Service.import("audio");
 const output = audio.bind("speakers");
 const input = audio.bind("microphones");
 const apps = audio.bind("apps");
@@ -35,6 +39,41 @@ function audioOutputs() {
     });
 }
 
+function getProfiles(index) {
+    const pactl_profiles = Utils.exec(`bash -c 'pactl list cards | sed -n "/Card #${index}/,/Card/{/Card #${index}/!{/Card/!p}}" | sed -n "/Profiles:/,/Active Profile:/ { /Profiles:/d; p }"'`);
+    var profiles = [];
+
+    pactl_profiles.split('\n').forEach((l) => {
+        if (!l.includes("Active Profile:")) {
+
+            var description = l.replace(/\s*\([^()]*\)$/, '').trim();
+            description = description.slice(description.lastIndexOf(':') + 1).trim();
+
+            profiles.push({
+                name: l.split(":")[0].replaceAll("\t", ""),
+                description: description,
+                selected: false,
+            });
+        } else {
+            const i = profiles.findIndex(e => e.name == l.split(":")[1].trim());
+            profiles[i].selected = true;
+        }
+    });
+
+    return Widget.Menu({
+        children: profiles.map(p => Widget.MenuItem({
+            onActivate: () => {
+                console.log(`pactl set-card-profile ${index} ${p.name}`);
+                Utils.exec(`pactl set-card-profile ${index} ${p.name}`);
+            },
+            child: CheckButton({
+                active: p.selected,
+                label: p.description,
+            }),
+        })),
+    });
+}
+
 function audioOutput(output) {
     return Widget.Box({
         className: "audio-device",
@@ -51,6 +90,10 @@ function audioOutput(output) {
                 endWidget: Widget.Button({
                     className: "audio-device-settings",
                     hpack: "end",
+                    onPrimaryClick: (self, event) => {
+                        const menu = getProfiles(output.stream.card_index);
+                        menu.popup_at_widget(self, Gdk.Gravity.NORTH_EAST, Gdk.Gravity.NORTH_WEST, event);
+                    },
                     child: Widget.Label({
                         label: "",
                     })
@@ -136,6 +179,10 @@ function audioInput(input) {
                 }),
                 endWidget: Widget.Button({
                     className: "audio-device-settings",
+                    onPrimaryClick: (self, event) => {
+                        const menu = getProfiles(input.stream.card_index);
+                        menu.popup_at_widget(self, Gdk.Gravity.NORTH_EAST, Gdk.Gravity.NORTH_WEST, event);
+                    },
                     hpack: "end",
                     child: Widget.Label({
                         label: "",

@@ -14,7 +14,6 @@ function Player(player) {
             className: "media",
             setup: self => {
                 self.hook(player, (self) => {
-                    console.log(player);
                     player.position == "-1" ? self.class_name = "media-small" : self.class_name = "media";
                     player.track_title == "" ? self.hide() : self.show();
                 })
