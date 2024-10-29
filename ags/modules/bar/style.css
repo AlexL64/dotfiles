@@ -51,15 +51,26 @@ WORKSPACE MODULE
 
 
 /******************************************************
-AUDIO MODULE
+AUDIO OUTPUT INPUT MODULE
 ******************************************************/
 
 
-.audio-output, .audio-output-muted, .audio-input, .audio-input-muted {
+.audio-output-input {
     background-color: #313244;
-    opacity: 1;
     font-size: 14px;
-    min-width: 0px;
+    border-radius: 12px;
+}
+
+.audio-output, .audio-output-muted, .audio-input, .audio-input-muted {
+    background-color: transparent;
+}
+
+.audio-output, .audio-input {
+    color: #89dceb;
+}
+
+.audio-output-muted, .audio-input-muted {
+    color: #f38ba8;
 }
 
 .audio-output, .audio-output-muted {
@@ -74,36 +85,9 @@ AUDIO MODULE
     border-left: 1px solid #45475a;
 }
 
-/* Output */
-
-.audio-output, .audio-output-muted {
+.audio-output-muted, .audio-input-muted {
     padding-left: 12px;
-    padding-right: 12px;
 }
-
-.audio-output {
-    color: #89dceb;
-}
-
-.audio-output-muted {
-    color: #f38ba8;
-}
-
-/* Input */
-
-.audio-input, .audio-input-muted {
-    padding-left: 14px;
-    padding-right: 16px;
-}
-
-.audio-input {
-    color: #89dceb;
-}
-
-.audio-input-muted {
-    color: #f38ba8;
-}
-
 
 /******************************************************
 DATE MODULE

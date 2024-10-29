@@ -1,6 +1,5 @@
 import { Workspaces } from "./modules/workspaces.js";
-import { AudioOutput } from "./modules/audio_output.js";
-import { AudioInput } from "./modules/audio_input.js";
+import { AudioOutputInput } from "./modules/audio_output_input.js";
 import { Date } from "./modules/date.js";
 import { Battery } from "./modules/battery.js"
 import { Brightness } from "./modules/brightness.js";
@@ -23,8 +22,7 @@ function Left() {
             Workspaces(),
             Widget.Box({
                 children: [
-                    AudioOutput(),
-                    AudioInput(),
+                    AudioOutputInput(),
                 ]
             })
         ],
