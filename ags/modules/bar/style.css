@@ -9,6 +9,35 @@ GENERAL
     border-radius: 0px;
 }
 
+menu {
+    border-radius: 7px;
+    border: 1px solid #cba6f7;
+}
+
+separator {
+    min-height: 2px;
+    background: #6c7086;
+}
+
+check {
+    background: #6c7086;
+    border-radius: 100%;
+    min-height: 18px;
+    min-width: 18px;
+}
+
+check:checked {
+    background: #cba6f7;
+}
+
+menuitem {
+    border-radius: 7px;
+}
+
+menuitem:hover {
+    background: #1e1e2e;
+}
+
 
 /******************************************************
 WORKSPACE MODULE
@@ -262,35 +291,6 @@ TRAY MODULE
 .tray-item {
     background-color: #313244;
     border-radius: 12px;
-}
-
-menu {
-    border-radius: 7px;
-    border: 1px solid #cba6f7;
-}
-
-separator {
-    min-height: 2px;
-    background: #6c7086;
-}
-
-check {
-    background: #6c7086;
-    border-radius: 100%;
-    min-height: 18px;
-    min-width: 18px;
-}
-
-check:checked {
-    background: #cba6f7;
-}
-
-menuitem {
-    border-radius: 7px;
-}
-
-menuitem:hover {
-    background: #1e1e2e;
 }
 
 
