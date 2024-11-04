@@ -62,6 +62,7 @@ function getProfiles(index) {
 
     return Widget.Menu({
         children: profiles.map(p => Widget.MenuItem({
+            className: "audio-profile-menu-item",
             onActivate: () => {
                 console.log(`pactl set-card-profile ${index} ${p.name}`);
                 Utils.exec(`pactl set-card-profile ${index} ${p.name}`);

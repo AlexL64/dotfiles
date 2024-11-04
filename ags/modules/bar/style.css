@@ -600,3 +600,7 @@ AUDIO WIDGET
     background-color: #1e1e2e;
     border-radius: 16px;
 }
+
+.audio-profile-menu-item {
+    padding: 3px 0px 3px 0px;
+}
