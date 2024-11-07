@@ -116,10 +116,10 @@ export function Power() {
                                     widthRequest: 64,
                                     onPrimaryClick: (self) => {
                                         if (Utils.exec(`bash -c "lenopow -s | grep -oP '(?<=Battery protection: ).*'"`) == "DISABLED") {
-                                            console.log(Utils.exec("sudo lenopow -e"));
+                                            Utils.exec("sudo lenopow -e");
                                             self.class_name = "power-battery-saving-toggled";
                                         } else {
-                                            console.log(Utils.exec("sudo lenopow -d"));
+                                            Utils.exec("sudo lenopow -d");
                                             self.class_name = "power-battery-saving";
                                         }
                                     },
