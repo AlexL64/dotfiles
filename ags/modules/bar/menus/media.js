@@ -31,9 +31,6 @@ function Player(player) {
                                 self.class_name = "media-image";
                             }
                         });
-                        // if (player.cover_path == undefined) {
-                        //     self.class_name = "";
-                        // }
                     },
                 }),
                 Widget.Box({
