@@ -23,9 +23,17 @@ function Player(player) {
                     className: "media-image",
                     css: player.bind("cover_path").transform(p => `background-image: url('${p}');`),
                     setup: self => {
-                        if (player.cover_path == undefined) {
-                            self.class_name = "";
-                        }
+                        self.hook(player, (self) => {
+                            console.log("change : ", player.cover_path);
+                            if (player.cover_path == undefined) {
+                                self.class_name = "";
+                            } else {
+                                self.class_name = "media-image";
+                            }
+                        });
+                        // if (player.cover_path == undefined) {
+                        //     self.class_name = "";
+                        // }
                     },
                 }),
                 Widget.Box({
@@ -38,6 +46,7 @@ function Player(player) {
                             wrap: true,
                             lines: 2,
                             truncate: "end",
+                            xalign: 0,
                             label: player.bind("track_title"),
                         }),
                         Widget.Label({
