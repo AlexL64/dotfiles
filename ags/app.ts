@@ -18,7 +18,11 @@ App.start({
 })
 
 App.connect("window-toggled", (_, window) => {
-    if (window.visible) {
+    if (window.name.includes("bar") && !window.visible) {
+        App.get_windows().forEach((w) => {
+            w.hide()
+        })
+    } else if (window.visible) {
         App.get_windows().forEach((w) => {
             if (!w.name.includes("bar") && !(w.name == window.name)) {
                 w.visible ? w.hide() : null;
