@@ -1,0 +1,214 @@
+import Battery from "gi://AstalBattery";
+import PowerProfiles from "gi://AstalPowerProfiles";
+import DevicesBatteryService from "../../../services/devicesBattery"
+import { bind, exec, execAsync } from "astal";
+import { App, Astal, Gtk } from "astal/gtk3";
+
+export default function Power() {
+
+    const battery = Battery.get_default();
+    const powerProfiles = PowerProfiles.get_default();
+
+    return <window
+        name={"power"}
+        marginTop={10}
+        marginRight={10}
+        anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT}
+        exclusivity={Astal.Exclusivity.NORMAL}
+        application={App}
+        visible={false}>
+        <box className={'power'} vertical spacing={10}>
+            <box className={"battery"} vertical>
+                <box className={"controls"} spacing={10}>
+                    <button
+                        className={"idle"}
+                        label={"󰒲"}
+                        onClick={(self) => {
+                            const status = exec(
+                                [
+                                    "sh",
+                                    "-c",
+                                    "pgrep hypridle > /dev/null 2>&1 && echo 'true' || echo 'false'"]
+                            ) == "true";
+
+                            if (status) {
+                                execAsync("bash -c 'killall hypridle'");
+                                self.label = "󰒳";
+                            } else {
+                                execAsync("bash -c 'hypridle&'");
+                                self.label = "󰒲";
+                            }
+
+                            self.toggleClassName("toggled", status);
+                        }}
+                        setup={(self) => {
+                            const status = exec(
+                                [
+                                    "sh",
+                                    "-c",
+                                    "pgrep hypridle > /dev/null 2>&1 && echo 'true' || echo 'false'"]
+                            ) == "true";
+
+                            !status ? self.label = "󰒳" : self.label = "󰒲";
+                            self.toggleClassName("toggled", !status);
+                        }} />
+                    <button
+                        className={"saving"}
+                        label={"󱈑"}
+                        onClick={(self) => {
+                            const status = exec(["bash", "-c", "lenopow -s | grep -oP '(?<=Battery protection: ).*'"])
+
+                            status == "DISABLED" ? exec("sudo lenopow -e") : exec("sudo lenopow -d");
+                            self.toggleClassName("toggled", status == "DISABLED")
+                        }}
+                        setup={(self) => {
+                            const status = exec(["bash", "-c", "lenopow -s | grep -oP '(?<=Battery protection: ).*'"])
+
+                            self.toggleClassName("toggled", status != "DISABLED")
+                        }} />
+                </box>
+                <box className={"separator"} />
+                <box>
+                    <icon icon={bind(battery, "iconName")} className={"icon"} />
+                    <box vertical>
+                        <box homogeneous className={"top"}>
+                            <label label={"Battery"} halign={Gtk.Align.START} />
+                            <label
+                                halign={Gtk.Align.END}
+                                label={bind(battery, "state").as((s) => {
+                                    switch (s) {
+                                        case 1:
+                                            return "Chaging";
+                                        case 2:
+                                            return "Dischaging";
+                                        case 3:
+                                            return "Empty";
+                                        case 4:
+                                            return "Charged";
+                                        default:
+                                            return "Unknown";
+                                    }
+                                })}
+                            />
+                        </box>
+                        <levelbar
+                            className={"bar"}
+                            mode={Gtk.LevelBarMode.CONTINUOUS}
+                            widthRequest={300}
+                            heightRequest={6}
+                            value={bind(battery, "percentage")}
+                        />
+                        <box homogeneous className={"bottom"}>
+                            <label
+                                halign={Gtk.Align.START}
+                                setup={(self) => {
+                                    self.hook(bind(battery, "timeToEmpty"), (_, time) => {
+                                        self.label = formatTime(time);
+                                    })
+
+                                    self.hook(bind(battery, "timeToFull"), (_, time) => {
+                                        self.label = formatTime(time);
+                                    })
+                                }}
+                            />
+                            <label
+                                halign={Gtk.Align.END}
+                                label={bind(battery, "percentage").as((p) => `${p * 100}%`)}
+                            />
+                        </box>
+                    </box>
+                </box>
+                <box className={"separator"} />
+                <box className={"profile"}>
+                    <label label={""} className={"icon"} />
+                    <slider
+                        className={"selector"}
+                        expand
+                        valuePos={3}
+                        drawValue
+                        min={0.1}
+                        max={0.3}
+                        value={bind(powerProfiles, "activeProfile").as((p) => {
+                            switch (p) {
+                                case "power-saver":
+                                    return 0.1;
+                                case "balanced":
+                                    return 0.2;
+                                case "performance":
+                                    return 0.3;
+                                default:
+                                    return 0.1
+                            }
+                        })}
+                        setup={(self) => {
+                            self.add_mark(0.1, Gtk.PositionType.TOP, 'Power saver')
+                            self.add_mark(0.2, Gtk.PositionType.TOP, 'Balanced')
+                            self.add_mark(0.3, Gtk.PositionType.TOP, 'Performance')
+                        }}
+                        onDragged={(self) => {
+                            switch (self.value) {
+                                case 0.1:
+                                    powerProfiles.activeProfile = "power-saver";
+                                    break;
+                                case 0.2:
+                                    powerProfiles.activeProfile = "balanced";
+                                    break;
+                                case 0.3:
+                                    powerProfiles.activeProfile = "performance";
+                                    break;
+                            }
+                        }}
+                    />
+                </box>
+            </box>
+            <box className={"devices"} vertical spacing={10}>
+                {
+                    bind(DevicesBatteryService, "devices").as((devices) => devices.map((device) => {
+                        return <box className={"device"}>
+                            <icon className={"icon"} icon={device.icon} />
+                            <box vertical expand>
+                                <box homogeneous className={"top"}>
+                                    <label
+                                        label={device.model}
+                                        halign={Gtk.Align.START}
+                                        maxWidthChars={20}
+                                        truncate />
+                                    <label
+                                        label={device.state.charAt(0).toUpperCase() + device.state.slice(1)}
+                                        halign={Gtk.Align.END} />
+                                </box>
+                                <levelbar
+                                    className={"bar"}
+                                    mode={Gtk.LevelBarMode.CONTINUOUS}
+                                    widthRequest={300}
+                                    heightRequest={6}
+                                    value={device.percentage}
+                                />
+                                <centerbox className={"bottom"}>
+                                    <label label={`${device.percentage * 100}%`} halign={Gtk.Align.END} />
+                                </centerbox>
+                            </box>
+                        </box>
+                    }))
+                }
+            </box>
+        </box>
+    </window >
+}
+
+function formatTime(seconds: number): string {
+
+    if (seconds == 0) {
+        return "";
+    } else {
+        const totalMinutes = Math.floor(seconds / 60);
+        if (totalMinutes < 60) {
+            return `${totalMinutes}min`;
+        } else {
+            const hours = Math.floor(totalMinutes / 60);
+            const remainingMinutes = totalMinutes % 60;
+            return `${hours}h${remainingMinutes.toString().padStart(2, '0')}`;
+        }
+    }
+
+}
