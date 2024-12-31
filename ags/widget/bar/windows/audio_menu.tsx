@@ -1,10 +1,6 @@
-import { bind, exec, GObject, Variable } from "astal";
-import { App, Astal, astalify, ConstructProps, Gdk, Gtk } from "astal/gtk3";
+import { bind, exec, Variable } from "astal";
+import { App, Astal, astalify, Gdk, Gtk } from "astal/gtk3";
 import Wp from "gi://AstalWp";
-
-/* 
-Make settings work
-*/
 
 //@ts-ignore
 const audio = Wp.get_default().audio;
