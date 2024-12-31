@@ -278,12 +278,21 @@ menuitem:hover {
             }
 
             .settings {
-                padding: 0px;
-                min-width: 24px;
-                border-radius: 6px;
+                button {
+                    padding: 0px;
 
-                label {
-                    margin-left: -3px;
+                    &.default{
+                        border-radius: 12px;
+                    }
+
+                    &.profiles {
+                        min-width: 24px;
+                        border-radius: 6px;
+
+                        label {
+                            margin-left: -3px;
+                        }
+                    }
                 }
             }
 

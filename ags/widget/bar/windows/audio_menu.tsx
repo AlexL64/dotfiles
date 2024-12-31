@@ -1,5 +1,5 @@
-import { bind, exec, Variable } from "astal";
-import { App, Astal, astalify, Gdk, Gtk } from "astal/gtk3";
+import { bind, exec, GObject, Variable } from "astal";
+import { App, Astal, astalify, ConstructProps, Gdk, Gtk } from "astal/gtk3";
 import Wp from "gi://AstalWp";
 
 //@ts-ignore
@@ -7,7 +7,17 @@ const audio = Wp.get_default().audio;
 
 const GtkMenu = astalify(Gtk.Menu)
 const GtkMenuItem = astalify(Gtk.MenuItem)
-const GtkCheckButton = astalify(Gtk.CheckButton)
+
+class GtkCheckButton extends astalify(Gtk.CheckButton) {
+    static { GObject.registerClass(this) }
+
+    constructor(props: ConstructProps<
+        GtkCheckButton,
+        Gtk.CheckButton.ConstructorProps
+    >) {
+        super(props as any)
+    }
+}
 
 export default function AudioMenu() {
 
@@ -106,15 +116,29 @@ function OutputDevicesContent() {
                             hexpand
                             xalign={0}
                         />
-                        <button
-                            className={"settings"}
-                            label={""}
-                            onClick={(self) => {
-                                const menu = profilesMenu(speaker.id, "sinks");
-                                // @ts-ignore
-                                menu.popup_at_widget(self, Gdk.Gravity.NORTH_EAST, Gdk.Gravity.NORTH_WEST, null);
-                            }}
-                        />
+                        <box className={"settings"} spacing={10}>
+                            <button
+                                className={"default"}
+                                onClick={() => {
+                                    speaker.isDefault = true;
+                                }}
+                                setup={(self) => {
+                                    self.hook(bind(speaker, "isDefault"), () => {
+                                        self.className = "default";
+                                    })
+                                }}>
+                                <GtkCheckButton active={bind(speaker, "isDefault")} />
+                            </button>
+                            <button
+                                className={"profiles"}
+                                label={""}
+                                onClick={(self) => {
+                                    const menu = profilesMenu(speaker.id, "sinks");
+                                    // @ts-ignore
+                                    menu.popup_at_widget(self, Gdk.Gravity.NORTH_EAST, Gdk.Gravity.NORTH_WEST, null);
+                                }}
+                            />
+                        </box>
                     </box>
                     <box>
                         <button
@@ -168,15 +192,29 @@ function InputDevicesContent() {
                             hexpand
                             xalign={0}
                         />
-                        <button
-                            className={"settings"}
-                            label={""}
-                            onClick={(self) => {
-                                const menu = profilesMenu(mic.id, "sources");
-                                // @ts-ignore
-                                menu.popup_at_widget(self, Gdk.Gravity.NORTH_EAST, Gdk.Gravity.NORTH_WEST, null);
-                            }}
-                        />
+                        <box className={"settings"} spacing={10}>
+                            <button
+                                className={"default"}
+                                onClick={() => {
+                                    mic.isDefault = true;
+                                }}
+                                setup={(self) => {
+                                    self.hook(bind(mic, "isDefault"), () => {
+                                        self.className = "default";
+                                    })
+                                }}>
+                                <GtkCheckButton active={bind(mic, "isDefault")} />
+                            </button>
+                            <button
+                                className={"profiles"}
+                                label={""}
+                                onClick={(self) => {
+                                    const menu = profilesMenu(mic.id, "sinks");
+                                    // @ts-ignore
+                                    menu.popup_at_widget(self, Gdk.Gravity.NORTH_EAST, Gdk.Gravity.NORTH_WEST, null);
+                                }}
+                            />
+                        </box>
                     </box>
                     <box>
                         <button
