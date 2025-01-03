@@ -11,9 +11,7 @@ export default function Privacy() {
             visible={false}
             setup={(self) => {
                 self.hook(bind(audio, "recorders"), (_) => { self.visible = IsVisible() })
-                self.hook(bind(audio, "streams"), (_) => { self.visible = IsVisible() })
                 self.hook(bind(video, "recorders"), (_) => { self.visible = IsVisible() })
-                self.hook(bind(video, "streams"), (_) => { self.visible = IsVisible() })
             }}>
             <label
                 className={"audio-recorders"}
@@ -26,32 +24,12 @@ export default function Privacy() {
                 }}
             />
             <label
-                className={"audio-streams"}
-                label={""}
-                visible={bind(audio, "streams").as((s) => s.length > 0)}
-                hasTooltip
-                onQueryTooltip={(self, x, y, kbtt, tooltip) => {
-                    tooltip.set_custom(TooltipText(audio.streams));
-                    return true;
-                }}
-            />
-            <label
                 className={"video-recorders"}
-                label={""}
+                label={""}
                 visible={bind(video, "recorders").as((r) => r.length > 0)}
                 hasTooltip
                 onQueryTooltip={(self, x, y, kbtt, tooltip) => {
                     tooltip.set_custom(TooltipText(video.recorders));
-                    return true;
-                }}
-            />
-            <label
-                className={"audio-streams"}
-                label={""}
-                visible={bind(video, "streams").as((s) => s.length > 0)}
-                hasTooltip
-                onQueryTooltip={(self, x, y, kbtt, tooltip) => {
-                    tooltip.set_custom(TooltipText(video.streams));
                     return true;
                 }}
             />
@@ -75,11 +53,9 @@ function TooltipText(endpoints: Wp.Endpoint[]) {
 function IsVisible() {
 
     const audioRecorders = audio.recorders.length > 0;
-    const audioStreams = audio.streams.length > 0;
     const videoRecorders = video.recorders.length > 0;
-    const videoStreams = video.streams.length > 0;
 
-    if (audioRecorders || audioStreams || videoRecorders || videoStreams) {
+    if (audioRecorders || videoRecorders) {
         return true
     }
 
