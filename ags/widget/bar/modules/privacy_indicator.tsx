@@ -5,7 +5,16 @@ const { audio, video } = Wp.get_default()!;
 
 export default function Privacy() {
     return (
-        <box className={"privacy"} spacing={10}>
+        <box
+            className={"privacy"}
+            spacing={10}
+            visible={false}
+            setup={(self) => {
+                self.hook(bind(audio, "recorders"), (_) => { self.visible = IsVisible() })
+                self.hook(bind(audio, "streams"), (_) => { self.visible = IsVisible() })
+                self.hook(bind(video, "recorders"), (_) => { self.visible = IsVisible() })
+                self.hook(bind(video, "streams"), (_) => { self.visible = IsVisible() })
+            }}>
             <label
                 className={"audio-recorders"}
                 label={""}
@@ -61,4 +70,18 @@ function TooltipText(endpoints: Wp.Endpoint[]) {
             })
         }
     </box>
+}
+
+function IsVisible() {
+
+    const audioRecorders = audio.recorders.length > 0;
+    const audioStreams = audio.streams.length > 0;
+    const videoRecorders = video.recorders.length > 0;
+    const videoStreams = video.streams.length > 0;
+
+    if (audioRecorders || audioStreams || videoRecorders || videoStreams) {
+        return true
+    }
+
+    return false;
 }
