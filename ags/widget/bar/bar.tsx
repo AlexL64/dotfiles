@@ -6,6 +6,7 @@ import Date from "./modules/date";
 import Mpris from "./modules/mpris";
 import SysInfos from "./modules/sysinfos";
 import Notifications from "./modules/notificatiosn";
+import Privacy from "./modules/privacy_indicator";
 
 export default function Bar(gdkmonitor: Gdk.Monitor, monitor = 0) {
     return <window
@@ -25,6 +26,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor, monitor = 0) {
                     [
                         Workspaces(),
                         Audio(),
+                        Privacy(),
                     ]
                 }
             />

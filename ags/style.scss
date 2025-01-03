@@ -101,6 +101,29 @@ menuitem:hover {
     }
 }
 
+.privacy {
+    color: #f38ba8;
+    border-radius: 12px;
+    background-color: #313244;
+    padding: 0px 10px;
+
+    .audio-recorders {
+        min-width: 9px;
+    }
+
+    .audio-streams {
+        min-width: 12px;
+    }
+
+    .video-recorders {
+        min-width: 15px;
+    }
+
+    .video-streams {
+        min-width: 17px;
+    }
+}
+
 .mpris {
     border-radius: 12px;
     background-color: #313244;
@@ -281,7 +304,7 @@ menuitem:hover {
                 button {
                     padding: 0px;
 
-                    &.default{
+                    &.default {
                         border-radius: 12px;
                     }
 
