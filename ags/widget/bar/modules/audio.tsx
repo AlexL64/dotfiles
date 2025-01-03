@@ -61,8 +61,7 @@ export default function Audio() {
                 self.hook(speakerMuted, (_, mute) => {
                     self.toggleClassName("muted", mute);
                 })
-            }}
-        >
+            }}>
             <box spacing={5}>
                 <label
                     label={speakerVolume}
@@ -110,8 +109,7 @@ export default function Audio() {
                 self.hook(micMuted, (_, mute) => {
                     self.toggleClassName("muted", mute);
                 })
-            }}
-        >
+            }}>
             <box spacing={5}>
                 <label
                     label={micVolume}
