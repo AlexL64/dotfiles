@@ -3,7 +3,7 @@ import { exec, monitorFile } from "../../../../../usr/share/astal/gjs";
 
 @register()
 class BrightnessService extends GObject.Object {
-    @property(Number) declare screen_value: number;
+    @property(Number) declare screenValue: number;
 
     @signal(Number) declare screen_changed: (n: number) => void;
     @signal(Number) declare changed: (n: number) => void;
@@ -23,10 +23,10 @@ class BrightnessService extends GObject.Object {
     #onChange() {
         const newValue = Number(exec('brightnessctl get')) / this.#max;
 
-        if (newValue !== this.screen_value) {
-            this.screen_value = newValue;
-            this.emit('changed', this.screen_value);
-            this.emit('screen_changed', this.screen_value);
+        if (newValue !== this.screenValue) {
+            this.screenValue = newValue;
+            this.emit('changed', this.screenValue);
+            this.emit('screen_changed', this.screenValue);
         }
     }
 }

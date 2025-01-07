@@ -43,8 +43,8 @@ export default function SysInfos() {
         ]
     );
 
-    const brightness = bind(BrightnessService, "screen_value").as((b) => `${Math.round(b * 100)}%`);
-    const brightness_icon = bind(BrightnessService, "screen_value").as((b) => {
+    const brightness = bind(BrightnessService, "screenValue").as((b) => `${Math.round(b * 100)}%`);
+    const brightness_icon = bind(BrightnessService, "screenValue").as((b) => {
         const icons = {
             84: "󰃠",
             70: "󰃟",

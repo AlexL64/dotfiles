@@ -5,6 +5,7 @@ import Media from "./widget/bar/windows/media"
 import Calendar from "./widget/bar/windows/calendar"
 import Power from "./widget/bar/windows/power"
 import AudioMenu from "./widget/bar/windows/audio_menu"
+import Toast from "./widget/toast"
 
 App.start({
     css: style,
@@ -14,19 +15,33 @@ App.start({
         Media();
         Calendar();
         Power();
+        Toast();
     },
 })
 
 App.connect("window-toggled", (_, window) => {
-    if (window.name.includes("bar") && !window.visible) {
-        App.get_windows().forEach((w) => {
-            w.hide()
-        })
+    const blacklist = ["bar", "toast"];
+    const exceptions = ["toast"];
+
+    if (blacklist.some(e => window.name.includes(e)) && !window.visible) {
+        window.hide();
+
+        if (window.name.includes("bar")) {
+            App.get_windows().forEach((w) => {
+                if (!exceptions.some(e => w.name.includes(e)) && w.name !== window.name) {
+                    w.visible ? w.hide() : null;
+                }
+            });
+        }
     } else if (window.visible) {
         App.get_windows().forEach((w) => {
-            if (!w.name.includes("bar") && !(w.name == window.name)) {
+            if (exceptions.some(e => window.name.includes(e))) {
+                return;
+            }
+
+            if (!blacklist.some(e => w.name.includes(e)) && w.name !== window.name) {
                 w.visible ? w.hide() : null;
             }
-        })
+        });
     }
-})
+});

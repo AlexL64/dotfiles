@@ -20,5 +20,6 @@
         "default": "right",
         "jupyter-notebook": "left"
     },
-    "jupyter.askForKernelRestart": false
+    "jupyter.askForKernelRestart": false,
+    "diffEditor.maxComputationTime": 0
 }
