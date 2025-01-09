@@ -630,3 +630,51 @@ menuitem:hover {
     min-height: 24px;
     margin: 1px;
 }
+
+.clipboard {
+    background-color: #1e1e2e;
+    border: 2px solid #cba6f7;
+    border-radius: 12px;
+    min-height: 400px;
+    min-width: 700px;
+    padding: 10px;
+    margin: 1px;
+
+    .controls {
+        .search {
+            background-color: #313244;
+            border-radius: 6px;
+        }
+
+        button {
+            background-color: #cba6f7;
+            border-radius: 6px;
+        }
+    }
+
+    .empty {
+        font-size: 24px;
+    }
+
+    .entries {
+        padding: 10px;
+
+        .line {
+            box {
+                padding: 8px 0px;
+
+                .trash {
+                    background-color: #f38ba8;
+                    border-radius: 6px;
+                    padding: 0px;
+                    min-height: 24px;
+                    min-width: 24px;
+                }
+            }
+
+            &.selected {
+                color: #f38ba8;
+            }
+        }
+    }
+}

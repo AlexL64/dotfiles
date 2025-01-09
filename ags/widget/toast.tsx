@@ -1,4 +1,4 @@
-import { bind, GLib } from "astal";
+import { bind } from "astal";
 import { App, Astal } from "astal/gtk3";
 import Wp from "gi://AstalWp";
 import BrightnessService from "./../services/brightness";
@@ -20,6 +20,7 @@ export default function Toast() {
         anchor={Astal.WindowAnchor.BOTTOM}
         marginBottom={300}
         exclusivity={Astal.Exclusivity.NORMAL}
+        layer={Astal.Layer.OVERLAY}
         application={App}
         visible={false}>
         <box className={'toast'} expand>

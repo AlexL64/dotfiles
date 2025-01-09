@@ -6,16 +6,26 @@ import Calendar from "./widget/bar/windows/calendar"
 import Power from "./widget/bar/windows/power"
 import AudioMenu from "./widget/bar/windows/audio_menu"
 import Toast from "./widget/toast"
+import Clipboard from "./widget/clipboard"
 
 App.start({
     css: style,
     main() {
+
+        // Bar
         App.get_monitors().map(Bar);
+
+        // Bar Menus
         AudioMenu();
         Media();
         Calendar();
         Power();
+
+        // Toast
         Toast();
+
+        // Menus
+        Clipboard();
     },
 })
 
