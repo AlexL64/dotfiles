@@ -18,7 +18,7 @@ export default function Toast() {
         name={"toast"}
         clickThrough
         anchor={Astal.WindowAnchor.BOTTOM}
-        marginBottom={300}
+        marginBottom={200}
         exclusivity={Astal.Exclusivity.NORMAL}
         layer={Astal.Layer.OVERLAY}
         application={App}
