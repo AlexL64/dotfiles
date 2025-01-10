@@ -30,8 +30,8 @@ App.start({
 })
 
 App.connect("window-toggled", (_, window) => {
-    const blacklist = ["bar", "toast"];
-    const exceptions = ["toast"];
+    const blacklist = ["bar", "toast", "clipboard"];
+    const exceptions = ["toast", "clipboard"];
 
     if (blacklist.some(e => window.name.includes(e)) && !window.visible) {
         window.hide();
