@@ -24,33 +24,17 @@ export default function Power() {
                         className={"idle"}
                         label={"󰒲"}
                         onClick={(self) => {
-                            const status = exec(
-                                [
-                                    "sh",
-                                    "-c",
-                                    "pgrep hypridle > /dev/null 2>&1 && echo 'true' || echo 'false'"]
-                            ) == "true";
+                            App.toggle_window("idle");
+                            const visible = App.get_window("idle")?.visible;
 
-                            if (status) {
-                                execAsync("bash -c 'killall hypridle'");
-                                self.label = "󰒳";
-                            } else {
-                                execAsync("bash -c 'hypridle&'");
-                                self.label = "󰒲";
-                            }
-
-                            self.toggleClassName("toggled", status);
+                            visible ? self.label = "󰒳" : self.label = "󰒲";
+                            self.toggleClassName("toggled", visible);
                         }}
                         setup={(self) => {
-                            const status = exec(
-                                [
-                                    "sh",
-                                    "-c",
-                                    "pgrep hypridle > /dev/null 2>&1 && echo 'true' || echo 'false'"]
-                            ) == "true";
+                            const visible = App.get_window("idle")?.visible;
 
-                            !status ? self.label = "󰒳" : self.label = "󰒲";
-                            self.toggleClassName("toggled", !status);
+                            visible ? self.label = "󰒳" : self.label = "󰒲";
+                            self.toggleClassName("toggled", visible);
                         }} />
                     <button
                         className={"saving"}

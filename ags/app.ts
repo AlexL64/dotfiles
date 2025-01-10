@@ -7,10 +7,14 @@ import Power from "./widget/bar/windows/power"
 import AudioMenu from "./widget/bar/windows/audio_menu"
 import Toast from "./widget/toast"
 import Clipboard from "./widget/clipboard"
+import Idle from "./widget/idle"
 
 App.start({
     css: style,
     main() {
+
+        // Idle
+        Idle();
 
         // Bar
         App.get_monitors().map(Bar);
@@ -26,12 +30,13 @@ App.start({
 
         // Menus
         Clipboard();
+
     },
 })
 
 App.connect("window-toggled", (_, window) => {
-    const blacklist = ["bar", "toast", "clipboard"];
-    const exceptions = ["toast", "clipboard"];
+    const blacklist = ["bar", "toast", "clipboard", "idle"];
+    const exceptions = ["toast", "clipboard", "idle"];
 
     if (blacklist.some(e => window.name.includes(e)) && !window.visible) {
         window.hide();
