@@ -19,7 +19,6 @@ export default function Clipboard() {
 
     return <window
         name={"clipboard"}
-        clickThrough
         exclusivity={Astal.Exclusivity.NORMAL}
         layer={Astal.Layer.OVERLAY}
         keymode={Astal.Keymode.EXCLUSIVE}
@@ -72,9 +71,7 @@ export default function Clipboard() {
                 <entry
                     className={"search"}
                     hexpand
-                    onKeyReleaseEvent={(self) => {
-                        searchValue.set(self.text);
-                    }}
+                    onChanged={(self) => searchValue.set(self.text)}
                     setup={(self) => {
                         self.hook(searchValueReset, (_, reset) => {
                             if (reset) {
@@ -118,7 +115,7 @@ function list(value: string) {
 
         nbEntries.set(entries.length);
 
-        itemsOnLastPage.set((entries.length % itemsPerPage) || 8);
+        itemsOnLastPage.set((entries.length % itemsPerPage) || itemsPerPage);
         nbPages.set(Math.ceil(entries.length / itemsPerPage));
         selectedPage.set(0);
         selectedLine.set(0);

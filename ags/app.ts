@@ -8,6 +8,7 @@ import AudioMenu from "./widget/bar/windows/audio_menu"
 import Toast from "./widget/toast"
 import Clipboard from "./widget/clipboard"
 import Idle from "./widget/idle"
+import AppLauncher from "./widget/app_launcher"
 
 App.start({
     css: style,
@@ -30,13 +31,14 @@ App.start({
 
         // Menus
         Clipboard();
+        AppLauncher();
 
     },
 })
 
 App.connect("window-toggled", (_, window) => {
-    const blacklist = ["bar", "toast", "clipboard", "idle"];
-    const exceptions = ["toast", "clipboard", "idle"];
+    const blacklist = ["bar", "toast", "clipboard", "idle", "app_launcher"];
+    const exceptions = ["toast", "clipboard", "idle", "app_launcher"];
 
     if (blacklist.some(e => window.name.includes(e)) && !window.visible) {
         window.hide();

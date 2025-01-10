@@ -678,3 +678,43 @@ menuitem:hover {
         }
     }
 }
+
+.app_launcher {
+    background-color: #1e1e2e;
+    border: 2px solid #cba6f7;
+    border-radius: 12px;
+    padding: 10px;
+    min-width: 500px;
+    min-height: 623px;
+
+    .search {
+        background-color: #313244;
+        border-radius: 6px;
+    }
+
+    .apps {
+        .app {
+            background-color: #313244;
+            padding: 5px;
+            border-radius: 6px;
+
+            &.toggled {
+                padding: 3px;
+                border: 2px solid #f38ba8;
+            }
+
+            .icon {
+                font-size: 54px;
+            }
+
+            .infos {
+                margin-left: 10px;
+
+                .description {
+                    font-size: 12px;
+                    color: #6c7086;
+                }
+            }
+        }
+    }
+}
