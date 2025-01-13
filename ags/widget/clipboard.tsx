@@ -60,6 +60,8 @@ export default function Clipboard() {
                     break;
                 case Gdk.KEY_Escape:
                     searchValueReset.set(true);
+                    selectedId.set(0);
+                    selectedPage.set(0);
                     self.hide();
                     break;
                 case Gdk.KEY_Delete:

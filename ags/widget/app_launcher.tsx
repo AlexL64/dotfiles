@@ -60,6 +60,8 @@ export default function AppLauncher() {
                     break;
                 case Gdk.KEY_Escape:
                     textReset.set(true);
+                    selectedId.set(0);
+                    selectedPage.set(0);
                     self.hide();
                     break;
             }
