@@ -59,6 +59,7 @@ export default function Clipboard() {
                     searchValueReset.set(true);
                     break;
                 case Gdk.KEY_Escape:
+                    searchValueReset.set(true);
                     self.hide();
                     break;
                 case Gdk.KEY_Delete:

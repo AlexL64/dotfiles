@@ -59,6 +59,7 @@ export default function AppLauncher() {
                     textReset.set(true);
                     break;
                 case Gdk.KEY_Escape:
+                    textReset.set(true);
                     self.hide();
                     break;
             }
