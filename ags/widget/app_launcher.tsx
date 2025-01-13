@@ -68,8 +68,13 @@ export default function AppLauncher() {
                 className={"search"}
                 onChanged={(self) => {
                     text.set(self.text);
+
                     selectedId.set(0);
                     selectedPage.set(0);
+
+                    if (!self.isFocus) {
+                        self.isFocus = true;
+                    }
                 }}
                 setup={(self) => {
                     self.hook(textReset, (_, reset) => {
