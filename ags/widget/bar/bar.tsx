@@ -7,6 +7,7 @@ import Mpris from "./modules/mpris";
 import SysInfos from "./modules/sysinfos";
 import Notifications from "./modules/notificatiosn";
 import Privacy from "./modules/privacy_indicator";
+import SystemPanel from "./modules/system_panel";
 
 export default function Bar(gdkmonitor: Gdk.Monitor, monitor = 0) {
     return <window
@@ -46,6 +47,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor, monitor = 0) {
                     [
                         Notifications(),
                         SysInfos(),
+                        // SystemPanel(),
                         Tray(),
                     ]
                 } />

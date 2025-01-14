@@ -243,6 +243,32 @@ menuitem:hover {
 
 }
 
+.system_panel {
+    color: #cba6f7;
+    border-radius: 12px;
+    background-color: #313244;
+
+    .network {
+        padding: 0px;
+        min-width: 36px;
+        border-radius: 12px 0px 0px 12px;
+        border-right: 1px solid #45475a;
+    }
+
+    .bluetooth {
+        padding: 0px 11px;
+        border-left: 1px solid #45475a;
+        border-right: 1px solid #45475a;
+    }
+
+    .tray_button {
+        padding: 0px;
+        padding-right: 4px;
+        border-radius: 0px 12px 12px 0px;
+        border-left: 1px solid #45475a;
+    }
+}
+
 .audioMenu {
     background-color: #313244;
     border: 2px solid #cba6f7;
