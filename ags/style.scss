@@ -225,47 +225,31 @@ menuitem:hover {
     }
 }
 
-.tray {
-    background-color: #313244;
-    border-radius: 12px;
-    padding: 0px 12px;
-
-    menuitem {
-        padding: 0px;
-        margin: 0px;
-
-        .icon {
-            padding: 0;
-            font-size: 15px;
-        }
-    }
-
-
-}
-
 .system_panel {
     color: #cba6f7;
     border-radius: 12px;
     background-color: #313244;
 
-    .network {
-        padding: 0px;
-        min-width: 36px;
-        border-radius: 12px 0px 0px 12px;
-        border-right: 1px solid #45475a;
-    }
+    button {
+        &.network {
+            padding: 0px;
+            min-width: 36px;
+            border-radius: 12px 0px 0px 12px;
+            border-right: 1px solid #45475a;
+        }
 
-    .bluetooth {
-        padding: 0px 11px;
-        border-left: 1px solid #45475a;
-        border-right: 1px solid #45475a;
-    }
+        &.bluetooth {
+            padding: 0px 11px;
+            border-left: 1px solid #45475a;
+            border-right: 1px solid #45475a;
+        }
 
-    .tray_button {
-        padding: 0px;
-        padding-right: 4px;
-        border-radius: 0px 12px 12px 0px;
-        border-left: 1px solid #45475a;
+        &.tray {
+            padding: 0px;
+            padding-right: 4px;
+            border-radius: 0px 12px 12px 0px;
+            border-left: 1px solid #45475a;
+        }
     }
 }
 
@@ -740,6 +724,122 @@ menuitem:hover {
                     font-size: 12px;
                     color: #6c7086;
                 }
+            }
+        }
+    }
+}
+
+box.tray {
+    background-color: #313244;
+    border: 2px solid #cba6f7;
+    border-radius: 12px;
+    padding: 8px;
+
+    .item {
+        border-radius: 8px;
+        padding: 4px 8px;
+
+        icon {
+            font-size: 16px;
+        }
+    }
+}
+
+box.bluetooth {
+    background-color: #1e1e2e;
+    border: 2px solid #cba6f7;
+    border-radius: 12px;
+    padding: 10px;
+    min-width: 400px;
+
+    .controls {
+        background-color: #313244;
+        border-radius: 12px;
+        padding: 10px;
+
+        .search {
+            border-radius: 6px;
+            background-color: #45475a;
+            min-width: 36px;
+            padding: 0px;
+
+            &.discover {
+                label {
+                    margin-right: 4px;
+                }
+            }
+        }
+
+        switch {
+            border-radius: 16px;
+            background-color: #9399b2;
+
+            slider {
+                border-radius: 12px;
+                background-color: #e8ebf6;
+            }
+
+            &.activated {
+                background-color: #cba6f7;
+            }
+        }
+    }
+
+    .devices {
+
+        .device {
+            background-color: #313244;
+            border-radius: 12px;
+            padding: 10px;
+
+            .icon {
+                font-size: 32px;
+            }
+
+            .infos {
+                .address {
+                    color: #a6adc8;
+                    font-size: 12px;
+                }
+            }
+
+            .status {
+                label {
+                    border-radius: 3px;
+                    font-size: 12px;
+
+                    &.trust {
+                        padding: 0px 6px 0px 4px;
+                        background-color: #a6e3a1;
+                    }
+
+                    &.block {
+                        padding: 0px 7px 0px 3px;
+                        background-color: #f38ba8;
+                    }
+                }
+            }
+
+            .connect {
+                background-color: #89b4fa;
+                border-radius: 6px;
+                min-width: 100px;
+                padding: 0px;
+
+                &.connected {
+                    background-color: #f38ba8;
+                }
+            }
+
+            .pair {
+                background-color: #89b4fa;
+                border-radius: 6px;
+            }
+
+            .options {
+                background-color: #45475a;
+                border-radius: 6px;
+                padding: 0px 4px 0px 1px;
             }
         }
     }

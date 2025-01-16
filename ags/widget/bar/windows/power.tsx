@@ -1,7 +1,7 @@
 import Battery from "gi://AstalBattery";
 import PowerProfiles from "gi://AstalPowerProfiles";
 import DevicesBatteryService from "../../../services/devicesBattery"
-import { bind, exec, execAsync } from "astal";
+import { bind, exec } from "astal";
 import { App, Astal, Gtk } from "astal/gtk3";
 
 export default function Power() {

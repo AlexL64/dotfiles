@@ -1,5 +1,5 @@
 import { bind } from "astal";
-import { Astal } from "astal/gtk3";
+import { App, Astal } from "astal/gtk3";
 import Bluetooth from "gi://AstalBluetooth";
 import Network from "gi://AstalNetwork";
 
@@ -36,12 +36,19 @@ export default function SystemPanel() {
                 })
             }
         </button>
-        <button className={"bluetooth"}>
+        <button
+            className={"bluetooth"}
+            onClicked={() => {
+                App.toggle_window("bleutooth");
+            }}>
             <icon icon={bind(bluetooth, "isPowered").as((powered) => powered ? "bluetooth-active" : "bluetooth-disabled")} />
         </button>
         <button
-            className={"tray_button"}
+            className={"tray"}
             label={""}
+            onClicked={() => {
+                App.toggle_window("tray");
+            }}
         />
     </box>
 }

@@ -1,16 +1,6 @@
-import { bind, GObject, Variable } from "astal";
-import { App, Astal, astalify, type ConstructProps, Gtk } from "astal/gtk3";
-
-class GtkCalendar extends astalify(Gtk.Calendar) {
-    static { GObject.registerClass(this) }
-
-    constructor(props: ConstructProps<
-        GtkCalendar,
-        Gtk.Calendar.ConstructorProps
-    >) {
-        super(props as any)
-    }
-}
+import { bind, Variable } from "astal";
+import { App, Astal } from "astal/gtk3";
+import { GtkCalendar } from "../../../my_types";
 
 export default function Calendar() {
 

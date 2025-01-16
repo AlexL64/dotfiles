@@ -1,11 +1,10 @@
 import { App, Astal, Gtk, Gdk } from "astal/gtk3";
 import Workspaces from "./modules/workspaces";
 import Audio from "./modules/audio";
-import Tray from "./modules/tray";
 import Date from "./modules/date";
 import Mpris from "./modules/mpris";
 import SysInfos from "./modules/sysinfos";
-import Notifications from "./modules/notificatiosn";
+import Notifications from "./modules/notifications";
 import Privacy from "./modules/privacy_indicator";
 import SystemPanel from "./modules/system_panel";
 
@@ -47,8 +46,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor, monitor = 0) {
                     [
                         Notifications(),
                         SysInfos(),
-                        // SystemPanel(),
-                        Tray(),
+                        SystemPanel(),
                     ]
                 } />
         </centerbox>

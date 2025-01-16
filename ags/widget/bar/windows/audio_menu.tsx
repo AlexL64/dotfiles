@@ -1,23 +1,10 @@
-import { bind, exec, GObject, Variable } from "astal";
-import { App, Astal, astalify, ConstructProps, Gdk, Gtk } from "astal/gtk3";
+import { bind, exec, Variable } from "astal";
+import { App, Astal, Gdk } from "astal/gtk3";
+import { GtkMenu, GtkMenuItem, GtkCheckButton } from "../../../my_types";
 import Wp from "gi://AstalWp";
 
 //@ts-ignore
 const audio = Wp.get_default().audio;
-
-const GtkMenu = astalify(Gtk.Menu)
-const GtkMenuItem = astalify(Gtk.MenuItem)
-
-class GtkCheckButton extends astalify(Gtk.CheckButton) {
-    static { GObject.registerClass(this) }
-
-    constructor(props: ConstructProps<
-        GtkCheckButton,
-        Gtk.CheckButton.ConstructorProps
-    >) {
-        super(props as any)
-    }
-}
 
 export default function AudioMenu() {
 
@@ -380,7 +367,6 @@ function profilesMenu(index: number, type: string) {
     return <GtkMenu>
         {
             profilesList.map((p) => <GtkMenuItem
-                //@ts-ignore
                 onActivate={() => {
                     exec(`pactl set-card-profile ${cardSerial} ${p.name}`);
                 }}>
