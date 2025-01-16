@@ -169,7 +169,7 @@ export default function Power() {
                                     value={device.percentage}
                                 />
                                 <centerbox className={"bottom"}>
-                                    <label label={`${device.percentage * 100}%`} halign={Gtk.Align.END} />
+                                    <label label={`${Math.round(device.percentage * 100)}%`} halign={Gtk.Align.END} />
                                 </centerbox>
                             </box>
                         </box>
