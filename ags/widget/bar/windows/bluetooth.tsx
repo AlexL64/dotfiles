@@ -127,7 +127,7 @@ export default function Bluetooth() {
                                             onClick={(self) => {
                                                 const menu = optionsMenu(device);
                                                 // @ts-ignore
-                                                menu.popup_at_widget(self, Gdk.Gravity.NORTH_EAST, Gdk.Gravity.NORTH_WEST, null);
+                                                menu.popup_at_widget(self, Gdk.Gravity.SOUTH_EAST, Gdk.Gravity.NORTH_EAST, null);
                                             }} />
                                     </box>
                                 </box>
