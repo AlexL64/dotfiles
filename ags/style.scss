@@ -785,6 +785,24 @@ box.bluetooth {
         }
     }
 
+    scrollbar {
+        margin-left: 6px;
+
+        contents {
+            trough {
+                background-color: #6c7086;
+                border-radius: 3px;
+
+                slider {
+                    background-color: #cba6f7;
+                    border-radius: 3px;
+                    min-width: 3px;
+                    min-height: 0px;
+                }
+            }
+        }
+    }
+
     .devices {
 
         .device {

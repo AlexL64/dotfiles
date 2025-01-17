@@ -59,12 +59,24 @@ export default function Bluetooth() {
                     }}
                 />
             </box>
-            <scrollable vscroll={Gtk.PolicyType.AUTOMATIC} minContentHeight={300}>
+            <scrollable
+                overlayScrolling={false}
+                vscrollbarPolicy={Gtk.PolicyType.AUTOMATIC}
+                minContentHeight={bind(bluetooth, "devices").as((d) => {
+                    const length = d.filter(e => e.name !== null || true).length;
+
+                    if (length < 4) {
+                        return (length * 57) + ((length - 1) * 10);
+                    } else {
+                        return 300;
+                    }
+
+                })}>
                 <box className={"devices"} vertical spacing={10}>
                     {
                         bind(bluetooth, "devices").as((devices) => devices.map((device) => {
 
-                            if (device.name != null) {
+                            if (device.name !== null || true) {
 
                                 return <box className={"device"} spacing={10} expand={false}>
                                     <icon className={"icon"} icon={bind(device, "icon").as((i) => i != null ? i : "bluetooth")} />
