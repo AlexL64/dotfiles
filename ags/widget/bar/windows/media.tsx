@@ -39,7 +39,7 @@ function Player(player: any) {
 
     return <box
         className={"card"}
-        visible={bind(player, "busName").as((n) => n.includes("playerctld") ? false : true)}
+        visible={bind(player, "busName").as((n) => !n.includes("playerctld"))}
         spacing={10}>
         <box
             className={"image"}
@@ -62,7 +62,7 @@ function Player(player: any) {
             />
             <box vertical valign={Gtk.Align.END} expand>
                 <label
-                    label={bind(player, "artist")}
+                    label={bind(player, "artist").as((a) => a != null ? a : "")}
                     className={"artist"}
                     truncate
                     wrap={false}
