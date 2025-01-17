@@ -172,16 +172,36 @@ export default function AppLauncher() {
 function search(text: string) {
     var result: Apps.Application[] = [];
 
-    apps.fuzzy_query(null).forEach((app) => {
-        if (app.name.toLowerCase().includes(text.toLowerCase()) ||
-            app.entry.toLowerCase().includes(text.toLowerCase()) ||
-            (app.description != undefined && app.description.toLowerCase().includes(text.toLowerCase())) ||
-            app.keywords.some(keyword => keyword.toLowerCase().includes(text.toLowerCase())) ||
-            app.categories.some(categorie => categorie.toLowerCase().includes(text.toLowerCase()))
-        ) {
-            result.push(app);
-        }
-    })
+    let list = apps.fuzzy_query(null);
 
-    return result;
+    if (text != "") {
+        list.forEach((app) => {
+            if (app.name.toLowerCase().includes(text.toLowerCase()) ||
+                app.entry.toLowerCase().includes(text.toLowerCase()) ||
+                app.keywords.some(keyword => keyword.toLowerCase().includes(text.toLowerCase()))
+            ) {
+                result.push(app);
+            }
+        })
+
+        list.forEach((app) => {
+            if (app.description != undefined && app.description.toLowerCase().includes(text.toLowerCase())) {
+                if (!result.includes(app)) {
+                    result.push(app);
+                }
+            }
+        })
+
+        list.forEach((app) => {
+            if (app.categories.some(categorie => categorie.toLowerCase().includes(text.toLowerCase()))) {
+                if (!result.includes(app)) {
+                    result.push(app);
+                }
+            }
+        })
+
+        return result;
+    } else {
+        return list;
+    }
 }
