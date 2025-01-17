@@ -145,7 +145,10 @@ export default function Power() {
                     />
                 </box>
             </box>
-            <box className={"devices"} vertical spacing={10}>
+            <box
+                className={"devices"}
+                vertical spacing={10}
+                visible={bind(DevicesBatteryService, "devices").as((d) => d.length > 0)}>
                 {
                     bind(DevicesBatteryService, "devices").as((devices) => devices.map((device) => {
                         return <box className={"device"}>
