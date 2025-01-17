@@ -83,7 +83,7 @@ function Player(player: any) {
                         label={bind(player, "position").as((p) => formatTime(Math.trunc(p)))}
                         halign={Gtk.Align.START}
                         hexpand
-                        visible={bind(player, "position").as((p) => p == 0 ? false : true)}
+                        visible={bind(player, "position").as((p) => !(p == 0))}
                     />
                     <box className={"controls"} expand halign={Gtk.Align.CENTER} spacing={3}>
                         <button onClicked={() => player.previous()} visible={bind(player, "canGoPrevious")}>
@@ -101,7 +101,7 @@ function Player(player: any) {
                         label={bind(player, "length").as((l) => formatTime(Math.trunc(l)))}
                         halign={Gtk.Align.END}
                         hexpand
-                        visible={bind(player, "length").as((l) => l == -1 ? false : true)}
+                        visible={bind(player, "length").as((l) => !(l == -1))}
                     />
                 </box>
             </box>
