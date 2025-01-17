@@ -153,6 +153,9 @@ function OutputDevicesContent() {
                             className={"bar"}
                             value={bind(speaker, "volume")}
                             hexpand
+                            onScrollEvent={(self) => {
+                                speaker.volume = self.value;
+                            }}
                             onDragged={(self) => {
                                 speaker.volume = self.value;
                             }}
@@ -227,6 +230,9 @@ function InputDevicesContent() {
                             className={"bar"}
                             value={bind(mic, "volume")}
                             hexpand
+                            onScrollEvent={(self) => {
+                                mic.volume = self.value;
+                            }}
                             onDragged={(self) => {
                                 mic.volume = self.value;
                             }}
@@ -282,6 +288,9 @@ function ApplicationsContent() {
                                 className={"bar"}
                                 value={bind(stream, "volume")}
                                 hexpand
+                                onScrollEvent={(self) => {
+                                    stream.volume = self.value;
+                                }}
                                 onDragged={(self) => {
                                     stream.volume = self.value;
                                 }}
