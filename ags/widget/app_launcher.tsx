@@ -172,13 +172,14 @@ export default function AppLauncher() {
 function search(text: string) {
     var result: Apps.Application[] = [];
 
-    apps.fuzzy_query(null).forEach((a) => {
-        if (a.name.toLocaleLowerCase().includes(text.toLocaleLowerCase())) {
-            result.push(a);
-        } else if (a.description != undefined) {
-            if (a.description.toLocaleLowerCase().includes(text.toLocaleLowerCase())) {
-                result.push(a);
-            }
+    apps.fuzzy_query(null).forEach((app) => {
+        if (app.name.toLowerCase().includes(text.toLowerCase()) ||
+            app.entry.toLowerCase().includes(text.toLowerCase()) ||
+            (app.description != undefined && app.description.toLowerCase().includes(text.toLowerCase())) ||
+            app.keywords.some(keyword => keyword.toLowerCase().includes(text.toLowerCase())) ||
+            app.categories.some(categorie => categorie.toLowerCase().includes(text.toLowerCase()))
+        ) {
+            result.push(app);
         }
     })
 

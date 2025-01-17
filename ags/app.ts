@@ -1,16 +1,16 @@
-import { App } from "astal/gtk3"
-import style from "./style.scss"
-import Bar from "./widget/bar/bar"
-import Media from "./widget/bar/windows/media"
-import Calendar from "./widget/bar/windows/calendar"
-import Power from "./widget/bar/windows/power"
-import AudioMenu from "./widget/bar/windows/audio_menu"
-import Toast from "./widget/toast"
-import Clipboard from "./widget/clipboard"
-import Idle from "./widget/idle"
-import AppLauncher from "./widget/app_launcher"
-import Tray from "./widget/bar/windows/tray"
-import Bluetooth from "./widget/bar/windows/bluetooth"
+import { App } from "astal/gtk3";
+import style from "./style.scss";
+import Bar from "./widget/bar/bar";
+import Media from "./widget/bar/windows/media";
+import Calendar from "./widget/bar/windows/calendar";
+import Power from "./widget/bar/windows/power";
+import AudioMenu from "./widget/bar/windows/audio_menu";
+import Toast from "./widget/toast";
+import Clipboard from "./widget/clipboard";
+import Idle from "./widget/idle";
+import AppLauncher from "./widget/app_launcher";
+import Tray from "./widget/bar/windows/tray";
+import Bluetooth from "./widget/bar/windows/bluetooth";
 
 App.start({
     css: style,
