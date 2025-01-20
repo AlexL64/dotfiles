@@ -19,15 +19,16 @@ export default function SystemPanel() {
                             return <icon icon={"network-wired-symbolic"} />
                         case 2:
                             return <icon icon={bind(network.wifi, "strength").as((s) => {
+
                                 const strengthIcons = {
-                                    90: "network-wireless-20",
-                                    80: "network-wireless-40",
-                                    70: "network-wireless-60",
-                                    67: "network-wireless-80",
-                                    30: "network-wireless-100",
+                                    100: "network-wireless-100",
+                                    80: "network-wireless-80",
+                                    60: "network-wireless-60",
+                                    40: "network-wireless-40",
+                                    20: "network-wireless-20",
                                 }
 
-                                const strengthIcon = [30, 67, 70, 80, 90].find(threshold => threshold >= s);
+                                const strengthIcon = [20, 40, 60, 80, 100].find(threshold => threshold >= s);
 
                                 // @ts-ignore
                                 return strengthIcons[strengthIcon];
