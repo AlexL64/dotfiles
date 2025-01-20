@@ -9,7 +9,7 @@ const network = Network.get_default();
 export default function SystemPanel() {
 
     return <box className={"system_panel"}>
-        <button className={"network"} >
+        <button className={"network"}>
             {
                 bind(network, "primary").as((type) => {
                     switch (type) {

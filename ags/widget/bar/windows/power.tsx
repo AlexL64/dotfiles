@@ -1,12 +1,12 @@
 import Battery from "gi://AstalBattery";
 import PowerProfiles from "gi://AstalPowerProfiles";
-import DevicesBatteryService from "../../../services/devicesBattery"
 import { bind, exec } from "astal";
 import { App, Astal, Gtk } from "astal/gtk3";
 
 export default function Power() {
 
     const battery = Battery.get_default();
+    const upower = new Battery.UPower;
     const powerProfiles = PowerProfiles.get_default();
 
     return <window
@@ -148,20 +148,37 @@ export default function Power() {
             <box
                 className={"devices"}
                 vertical spacing={10}
-                visible={bind(DevicesBatteryService, "devices").as((d) => d.length > 0)}>
+                visible={bind(upower, "devices").as((d) => Object.values(d).filter(d => d.deviceType >= 3).length > 0)}>
                 {
-                    bind(DevicesBatteryService, "devices").as((devices) => devices.map((device) => {
-                        return <box className={"device"}>
-                            <icon className={"icon"} icon={device.icon} />
+                    bind(upower, "devices").as((devices) => devices.map((device) => {
+                        return <box className={"device"} visible={bind(device, "deviceType").as((t) => t >= 3)}>
+                            <icon className={"icon"} icon={bind(device, "iconName")} />
                             <box vertical expand>
                                 <box homogeneous className={"top"}>
                                     <label
-                                        label={device.model}
+                                        label={bind(device, "model")}
                                         halign={Gtk.Align.START}
                                         maxWidthChars={20}
                                         truncate />
                                     <label
-                                        label={device.state.charAt(0).toUpperCase() + device.state.slice(1)}
+                                        label={bind(device, "state").as((s) => {
+                                            switch (s) {
+                                                case 0:
+                                                    return "Unknown";
+                                                case 1:
+                                                    return "Charging";
+                                                case 2:
+                                                    return "Discharging";
+                                                case 3:
+                                                    return "Empty";
+                                                case 4:
+                                                    return "Charged";
+                                                case 5:
+                                                    return "Pending Charge";
+                                                case 6:
+                                                    return "Pending Discharge";
+                                            }
+                                        })}
                                         halign={Gtk.Align.END} />
                                 </box>
                                 <levelbar
@@ -172,7 +189,7 @@ export default function Power() {
                                     value={device.percentage}
                                 />
                                 <centerbox className={"bottom"}>
-                                    <label label={`${Math.round(device.percentage * 100)}%`} halign={Gtk.Align.END} />
+                                    <label label={`${device.percentage * 100}%`} halign={Gtk.Align.END} />
                                 </centerbox>
                             </box>
                         </box>
