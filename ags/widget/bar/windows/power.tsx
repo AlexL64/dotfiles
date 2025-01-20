@@ -186,10 +186,10 @@ export default function Power() {
                                     mode={Gtk.LevelBarMode.CONTINUOUS}
                                     widthRequest={300}
                                     heightRequest={6}
-                                    value={device.percentage}
+                                    value={bind(device, "percentage")}
                                 />
                                 <centerbox className={"bottom"}>
-                                    <label label={`${device.percentage * 100}%`} halign={Gtk.Align.END} />
+                                    <label label={bind(device, "percentage").as((p) => `${p * 100}%`)} halign={Gtk.Align.END} />
                                 </centerbox>
                             </box>
                         </box>
