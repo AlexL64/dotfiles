@@ -152,7 +152,7 @@ export default function Power() {
                 {
                     bind(upower, "devices").as((devices) => devices.map((device) => {
                         return <box className={"device"} visible={bind(device, "deviceType").as((t) => t >= 3)}>
-                            <icon className={"icon"} icon={bind(device, "iconName")} />
+                            <icon className={"icon"} icon={bind(device, "batteryIconName")} />
                             <box vertical expand>
                                 <box homogeneous className={"top"}>
                                     <label
