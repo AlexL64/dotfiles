@@ -62,6 +62,7 @@ export default function Bluetooth() {
             <scrollable
                 overlayScrolling={false}
                 vscrollbarPolicy={Gtk.PolicyType.AUTOMATIC}
+                visible={bind(bluetooth, "devices").as((d) => Object.values(d).filter(d => d.name !== null).length > 0)}
                 minContentHeight={bind(bluetooth, "devices").as((d) => {
                     const length = d.filter(e => e.name !== null).length;
 
@@ -75,8 +76,7 @@ export default function Bluetooth() {
                 <box
                     className={"devices"}
                     vertical
-                    spacing={10}
-                    visible={bind(bluetooth, "devices").as((d) => Object.values(d).filter(d => d.name !== null).length > 0)}>
+                    spacing={10}>
                     {
                         bind(bluetooth, "devices").as((devices) => {
 
@@ -149,7 +149,7 @@ export default function Bluetooth() {
                     }
                 </box>
             </scrollable>
-        </box>
+        </box >
     </window >
 }
 
