@@ -72,7 +72,11 @@ export default function Bluetooth() {
                     }
 
                 })}>
-                <box className={"devices"} vertical spacing={10}>
+                <box
+                    className={"devices"}
+                    vertical
+                    spacing={10}
+                    visible={bind(bluetooth, "devices").as((d) => Object.values(d).filter(d => d.name !== null).length > 0)}>
                     {
                         bind(bluetooth, "devices").as((devices) => devices.map((device) => {
 
