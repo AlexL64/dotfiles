@@ -65,7 +65,7 @@ export default function Bluetooth() {
                 minContentHeight={bind(bluetooth, "devices").as((d) => {
                     const length = d.filter(e => e.name !== null).length;
 
-                    if (length < 4) {
+                    if (length < 5) {
                         return (length * 57) + ((length - 1) * 10);
                     } else {
                         return 300;
@@ -78,9 +78,18 @@ export default function Bluetooth() {
                     spacing={10}
                     visible={bind(bluetooth, "devices").as((d) => Object.values(d).filter(d => d.name !== null).length > 0)}>
                     {
-                        bind(bluetooth, "devices").as((devices) => devices.map((device) => {
+                        bind(bluetooth, "devices").as((devices) => {
 
-                            if (device.name !== null) {
+                            const sortedDevices = devices
+                                .filter(device => device.name !== null)
+                                .sort((a, b) => {
+                                    if (a.paired !== b.paired) {
+                                        return Number(b.paired) - Number(a.paired);
+                                    }
+                                    return a.name!.localeCompare(b.name!);
+                                });
+
+                            return sortedDevices.map((device) => {
 
                                 return <box className={"device"} spacing={10} expand={false}>
                                     <icon className={"icon"} icon={bind(device, "icon").as((i) => i != null ? i : "bluetooth")} />
@@ -135,10 +144,8 @@ export default function Bluetooth() {
                                             }} />
                                     </box>
                                 </box>
-                            } else {
-                                return <box visible={false} />;
-                            }
-                        }))
+                            })
+                        })
                     }
                 </box>
             </scrollable>
