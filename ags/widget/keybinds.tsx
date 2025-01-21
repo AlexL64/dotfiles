@@ -57,6 +57,7 @@ export default function Keybinds() {
                     expand
                     columnSpacing={30}
                     rowSpacing={20}
+                    columnHomogeneous
                     setup={(self) => {
 
                         let i = 0;
