@@ -22,7 +22,7 @@ export default function Keybinds() {
         name={"keybinds"}
         exclusivity={Astal.Exclusivity.NORMAL}
         layer={Astal.Layer.OVERLAY}
-        keymode={Astal.Keymode.ON_DEMAND}
+        keymode={Astal.Keymode.EXCLUSIVE}
         application={App}
         visible={false}
         onKeyPressEvent={(self, event: Gdk.Event) => {
