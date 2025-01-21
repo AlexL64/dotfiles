@@ -20,7 +20,7 @@ export default function Calendar() {
         <box className={'calendar-box'} vertical spacing={6}>
             <label className={"time"} label={bind(time)} />
             <label className={"date"} label={bind(date)} />
-            <label className={"uptime"} label={bind(uptime).as((u) => `Uptime: ${formatTime(Number(u))}`)} />
+            <label className={"uptime"} label={bind(uptime).as((u) => `Uptime: ${u}`)} />
             <GtkCalendar
                 className={"calendar"}
                 expand
@@ -31,14 +31,4 @@ export default function Calendar() {
             />
         </box>
     </window>
-}
-
-function formatTime(minutes: number) {
-    if (minutes < 60) {
-        return `${minutes}min`;
-    } else {
-        const hours = Math.floor(minutes / 60);
-        const remainingMinutes = minutes % 60;
-        return `${hours}h${remainingMinutes.toString().padStart(2, '0')}`;
-    }
 }
