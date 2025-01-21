@@ -53,7 +53,7 @@ function Player(player: any) {
         />
         <box vertical>
             <label
-                label={bind(player, "title")}
+                label={bind(player, "title").as((t) => t != null ? t : "")}
                 className={"title"}
                 wrap
                 lines={2}
