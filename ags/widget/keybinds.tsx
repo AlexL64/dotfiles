@@ -8,11 +8,21 @@ export default function Keybinds() {
     const search = Variable("");
     const searchValueReset = Variable(false);
 
+    const binds = getKeybinds();
+
+    let nbBinds = 0;
+
+    Object.keys(binds).forEach(key => {
+        nbBinds += binds[key].length + 1;
+    });
+
+    const nbLines = Math.ceil(nbBinds / Math.min(Math.ceil(Math.sqrt(nbBinds)), 4));
+
     return <window
         name={"keybinds"}
         exclusivity={Astal.Exclusivity.NORMAL}
         layer={Astal.Layer.OVERLAY}
-        keymode={Astal.Keymode.EXCLUSIVE}
+        keymode={Astal.Keymode.ON_DEMAND}
         application={App}
         visible={false}
         onKeyPressEvent={(self, event: Gdk.Event) => {
@@ -34,78 +44,77 @@ export default function Keybinds() {
                             searchValueReset.set(false);
                         }
                     })
-                }} />
-            <GtkGrid
+                }}
+            />
+            <scrollable
                 className={"list"}
-                expand
-                columnSpacing={30}
-                rowSpacing={20}
-                setup={(self) => {
-                    const binds = getKeybinds();
+                minContentHeight={Math.min(nbLines * 40 - 20, 800)}
+                overlayScrolling={false}
+                hscroll={Gtk.PolicyType.NEVER}
+                vscroll={Gtk.PolicyType.AUTOMATIC}>
+                <GtkGrid
+                    className={"grid"}
+                    expand
+                    columnSpacing={30}
+                    rowSpacing={20}
+                    setup={(self) => {
 
-                    let nbBinds = 0;
+                        let i = 0;
+                        let j = 0;
 
-                    Object.keys(binds).forEach(key => {
-                        nbBinds += binds[key].length + 1;
-                    });
-
-                    const nbLines = Math.ceil(nbBinds / Math.min(Math.ceil(Math.sqrt(nbBinds)), 4));
-
-                    let i = 0;
-                    let j = 0;
-
-                    Object.keys(binds).forEach(categorie => {
-
-                        if (j + 1 >= nbLines) {
-                            j = 0;
-                            i++;
-                        }
-
-                        self.attach(<box className={"categorie"}>
-                            <label label={categorie} />
-                        </box>, i, j, 1, 1);
-
-                        j++;
-
-                        binds[categorie].forEach(line => {
-                            self.attach(<box className={"keybind"}>
-                                <label
-                                    className={"bind"}
-                                    label={line.bind}
-                                    xalign={Gtk.Align.FILL}
-                                    setup={(self) => {
-                                        self.hook(search, (_, s) => {
-                                            self.toggleClassName(
-                                                "highlight",
-                                                (s != "" && line.bind.toLowerCase().includes(s.toLowerCase()))
-                                            );
-                                        })
-                                    }}
-                                />
-                                <label label={": "} />
-                                <label
-                                    label={line.description}
-                                    xalign={Gtk.Align.FILL}
-                                    setup={(self) => {
-                                        self.hook(search, (_, s) => {
-                                            self.toggleClassName(
-                                                "highlight",
-                                                (s != "" && line.description.toLowerCase().includes(s.toLowerCase()))
-                                            );
-                                        })
-                                    }}
-                                />
-                            </box>, i, j, 1, 1);
+                        Object.keys(binds).forEach(categorie => {
 
                             if (j + 1 >= nbLines) {
                                 j = 0;
                                 i++;
-                            } else {
-                                j++;
                             }
+
+                            self.attach(<box className={"categorie"}>
+                                <label label={categorie} />
+                            </box>, i, j, 1, 1);
+
+                            j++;
+
+                            binds[categorie].forEach(line => {
+                                self.attach(<box className={"keybind"}>
+                                    <label
+                                        className={"bind"}
+                                        label={line.bind}
+                                        xalign={Gtk.Align.FILL}
+                                        setup={(self) => {
+                                            self.hook(search, (_, s) => {
+                                                self.toggleClassName(
+                                                    "highlight",
+                                                    (s != "" && line.bind.toLowerCase().includes(s.toLowerCase()))
+                                                );
+                                            })
+                                        }}
+                                    />
+                                    <label label={": "} />
+                                    <label
+                                        label={line.description}
+                                        xalign={Gtk.Align.FILL}
+                                        setup={(self) => {
+                                            self.hook(search, (_, s) => {
+                                                self.toggleClassName(
+                                                    "highlight",
+                                                    (s != "" && line.description.toLowerCase().includes(s.toLowerCase()))
+                                                );
+                                            })
+                                        }}
+                                    />
+                                </box>, i, j, 1, 1);
+
+                                if (j + 1 >= nbLines) {
+                                    j = 0;
+                                    i++;
+                                } else {
+                                    j++;
+                                }
+                            });
                         });
-                    });
-                }} />
+                    }} />
+            </scrollable>
         </box>
     </window >
 

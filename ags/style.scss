@@ -877,20 +877,40 @@ box.bluetooth {
     .list {
         padding: 10px;
 
-        .categorie {
-            color: #f38ba8;
+        scrollbar {
+            margin-left: 6px;
+
+            contents {
+                trough {
+                    background-color: #6c7086;
+                    border-radius: 3px;
+
+                    slider {
+                        background-color: #cba6f7;
+                        border-radius: 3px;
+                        min-width: 3px;
+                        min-height: 0px;
+                    }
+                }
+            }
         }
 
-        .keybind {
-            .highlight {
-                background-color: #89b4fa;
+        .grid {
+            .categorie {
+                color: #f38ba8;
             }
 
-            .bind {
-                color: #cba6f7;
+            .keybind {
+                .highlight {
+                    background-color: #89b4fa;
+                }
 
-                &.highlight {
-                    background-color: #f9e2af;
+                .bind {
+                    color: #cba6f7;
+
+                    &.highlight {
+                        background-color: #f9e2af;
+                    }
                 }
             }
         }
