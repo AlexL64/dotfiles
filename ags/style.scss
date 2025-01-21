@@ -862,3 +862,37 @@ box.bluetooth {
         }
     }
 }
+
+.keybinds {
+    background-color: #1e1e2e;
+    border: 2px solid #cba6f7;
+    border-radius: 12px;
+    padding: 10px;
+
+    .search {
+        background-color: #313244;
+        border-radius: 6px;
+    }
+
+    .list {
+        padding: 10px;
+
+        .categorie {
+            color: #f38ba8;
+        }
+
+        .keybind {
+            .highlight {
+                background-color: #89b4fa;
+            }
+
+            .bind {
+                color: #cba6f7;
+
+                &.highlight {
+                    background-color: #a6e3a1;
+                }
+            }
+        }
+    }
+}

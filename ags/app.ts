@@ -11,6 +11,7 @@ import Idle from "./widget/idle";
 import AppLauncher from "./widget/app_launcher";
 import Tray from "./widget/bar/windows/tray";
 import Bluetooth from "./widget/bar/windows/bluetooth";
+import Keybinds from "./widget/keybinds";
 
 App.start({
     css: style,
@@ -36,6 +37,7 @@ App.start({
         // Menus
         Clipboard();
         AppLauncher();
+        Keybinds();
 
     },
 })

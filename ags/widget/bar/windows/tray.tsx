@@ -1,5 +1,5 @@
-import { bind, Gio, GObject, Variable } from "astal";
-import { App, Astal, astalify, ConstructProps, Gdk, Gtk } from "astal/gtk3";
+import { bind, Gio, Variable } from "astal";
+import { App, Astal, Gdk, Gtk } from "astal/gtk3";
 import { GtkGrid } from "../../../my_types";
 import AstalTray from "gi://AstalTray";
 
