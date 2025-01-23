@@ -7,7 +7,6 @@ export default function Privacy() {
     return (
         <box
             className={"privacy"}
-            spacing={10}
             visible={false}
             setup={(self) => {
                 self.hook(bind(audio, "recorders"), (_) => { self.visible = IsVisible() })
@@ -23,6 +22,7 @@ export default function Privacy() {
                     return true;
                 }}
             />
+            <box className={"separator"} />
             <label
                 className={"video-recorders"}
                 label={""}

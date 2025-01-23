@@ -37,6 +37,7 @@ export default function SystemPanel() {
                 })
             }
         </button>
+        <box className={"separator"} />
         <button
             className={"bluetooth"}
             onClicked={() => {
@@ -44,6 +45,7 @@ export default function SystemPanel() {
             }}>
             <icon icon={bind(bluetooth, "isPowered").as((powered) => powered ? "bluetooth-active" : "bluetooth-disabled")} />
         </button>
+        <box className={"separator"} />
         <button
             className={"tray"}
             label={""}
@@ -51,6 +53,7 @@ export default function SystemPanel() {
                 App.toggle_window("tray");
             }}
         />
+        <box className={"separator"} />
         <button
             className={"power"}
             label={""}

@@ -67,30 +67,29 @@ export default function SysInfos() {
     const battery_state = bind(battery, "state");
 
     return <box className={"sysinfos"}>
-        <box className={"cpu"}>
+        <button className={"cpu"}>
             <box spacing={8}>
                 <label label={bind(cpu)} />
                 <label label={""} />
             </box>
-        </box>
-        <box className={"memory"}>
+        </button>
+        <button className={"memory"}>
             <box spacing={8}>
                 <label label={bind(memory)} />
                 <label label={""} />
             </box>
-        </box>
-        <box className={"storage"}>
+        </button>
+        <button className={"storage"}>
             <box spacing={8}>
                 <label label={bind(storage)} />
                 <label label={"󰋊"} />
             </box>
-        </box>
+        </button>
         <button
             className={"brightness"}
             onScroll={(self, event) => {
                 event.delta_y > 0 ? exec("brightnessctl s 1%-") : exec("brightnessctl s +1%")
-            }}
-        >
+            }}>
             <box spacing={8}>
                 <label label={brightness} />
                 <label label={brightness_icon} />

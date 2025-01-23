@@ -85,6 +85,7 @@ export default function Audio() {
                 />
             </box>
         </button>
+        <box className={"separator"} />
         <button
             className={"input"}
             onClick={(self, event) => {

@@ -43,227 +43,218 @@ menuitem:hover {
     background: #1e1e2e;
 }
 
-.workspaces {
-    border-radius: 12px;
-    background-color: #313244;
+.bar {
 
-    .workspace {
-        padding: 0px;
-        min-width: 36px;
+    .separator {
+        min-width: 2px;
+        margin: 8px 0px;
+        background-color: #45475a;
+    }
+
+    .workspaces {
         border-radius: 12px;
         background-color: #313244;
-        color: #cdd6f4;
 
-        &.active {
-            color: #cba6f7;
-        }
-
-        &.urgent {
-            background-color: #f38ba8;
-            color: #313244;
-        }
-
-        &.focused {
-            background-color: #cba6f7;
-
-            &.active {
-                color: #313244;
-            }
-        }
-    }
-}
-
-.audio {
-    border-radius: 12px;
-    background-color: transparent;
-    background-color: #313244;
-
-    .output {
-        border-top-left-radius: 12px;
-        border-bottom-left-radius: 12px;
-        border-right: 1px solid #45475a;
-    }
-
-    .input {
-        border-top-right-radius: 12px;
-        border-bottom-right-radius: 12px;
-        border-left: 1px solid #45475a;
-    }
-
-    .output,
-    .input {
-        color: #89dceb;
-        padding-left: 12px;
-
-        &.muted {
-            color: #f38ba8;
-        }
-    }
-}
-
-.privacy {
-    color: #f38ba8;
-    border-radius: 12px;
-    background-color: #313244;
-    padding: 0px 10px;
-
-    .audio-recorders {
-        min-width: 9px;
-    }
-
-    .video-recorders {
-        min-width: 20px;
-    }
-}
-
-.mpris {
-    border-radius: 12px;
-    background-color: #313244;
-
-    .play_pause {
-        background-color: transparent;
-        border-radius: 12px;
-        border: 1px solid #cba6f7;
-        padding: 0px 9px 0px 9px;
-    }
-
-    .infos {
-        background-color: transparent;
-        border-radius: 12px;
-        padding: 0px 10px;
-
-        .text {
-
-            .title {
-                font-size: 12px;
-            }
-
-            .artist {
-                font-size: 11px;
-                color: #cba6f7;
-            }
-        }
-
-        .time {
-            padding-left: 10px;
-
-            * {
-                font-size: 12px;
-            }
-        }
-    }
-}
-
-.date {
-    color: #cba6f7;
-    border-radius: 12px;
-    background-color: #313244;
-}
-
-.notifications {
-    background-color: #313244;
-    border-radius: 12px;
-    padding-left: 12px;
-    padding-right: 8px;
-
-    .icon {
-        color: #74c7ec;
-    }
-
-    .number {
-        color: #f38ba8;
-        font-size: x-small;
-        font-weight: 900;
-        min-height: 0px;
-        margin-top: -10px;
-    }
-}
-
-.sysinfos {
-    background-color: #313244;
-    border-radius: 12px;
-    padding: 0px 0px 0px 12px;
-
-    .cpu {
-        color: #f38ba8;
-        padding-right: 20px;
-    }
-
-    .memory {
-        color: #fab387;
-        padding-right: 18px;
-    }
-
-    .storage {
-        color: #89b4fa;
-        padding-right: 12px;
-    }
-
-    .brightness {
-        color: #f9e2af;
-        padding-right: 12px;
-        background-color: transparent;
-    }
-
-    .battery {
-        color: #cdd6f4;
-        padding-right: 12px;
-        border-radius: 0px 12px 12px 0px;
-        background-color: transparent;
-
-        &.charging {
-            color: #a6e3a1;
-        }
-
-        &.discharging {
-            color: #fab387;
-        }
-
-        &.charged {
-            color: #cdd6f4
-        }
-    }
-}
-
-.system_panel {
-    color: #cba6f7;
-    border-radius: 12px;
-    background-color: #313244;
-
-    button {
-        min-width: 0px;
-
-        &.network {
+        .workspace {
             padding: 0px;
             min-width: 36px;
-            border-radius: 12px 0px 0px 12px;
-            border-right: 1px solid #45475a;
-        }
+            border-radius: 12px;
+            background-color: #313244;
+            color: #cdd6f4;
 
-        &.bluetooth {
-            padding: 0px 11px;
-            border-left: 1px solid #45475a;
-            border-right: 1px solid #45475a;
-        }
+            &.active {
+                color: #cba6f7;
+            }
 
-        &.tray {
-            padding: 0px;
-            padding-left: 12px;
-            padding-right: 16px;
-            border-left: 1px solid #45475a;
-            border-right: 1px solid #45475a;
-        }
+            &.urgent {
+                background-color: #f38ba8;
+                color: #313244;
+            }
 
-        &.power {
-            padding: 0px;
-            padding-left: 12px;
-            padding-right: 16px;
-            color: #f38ba8;
-            border-radius: 0px 12px 12px 0px;
-            border-left: 1px solid #45475a;
+            &.focused {
+                background-color: #cba6f7;
+
+                &.active {
+                    color: #313244;
+                }
+            }
         }
     }
+
+    .audio {
+        border-radius: 12px;
+        background-color: #313244;
+
+        button {
+            color: #89dceb;
+            border-radius: 12px;
+
+            &.muted {
+                color: #f38ba8;
+
+                &.input label {
+                    margin-left: 3px;
+                }
+            }
+        }
+    }
+
+    .privacy {
+        color: #f38ba8;
+        border-radius: 12px;
+        background-color: #313244;
+
+        .audio-recorders {
+            padding: 0px 14px;
+            margin: 0px;
+        }
+
+        .video-recorders {
+            padding: 0px 18px 0px 10px;
+        }
+    }
+
+    .mpris {
+        border-radius: 12px;
+        background-color: #313244;
+
+        .play_pause {
+            background-color: transparent;
+            border-radius: 12px;
+            border: 1px solid #cba6f7;
+            padding: 0px 9px 0px 9px;
+        }
+
+        .infos {
+            background-color: transparent;
+            border-radius: 12px;
+            padding: 0px 10px;
+
+            .text {
+
+                .title {
+                    font-size: 12px;
+                }
+
+                .artist {
+                    font-size: 11px;
+                    color: #cba6f7;
+                }
+            }
+
+            .time {
+                padding-left: 10px;
+
+                * {
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+
+    .date {
+        color: #cba6f7;
+        border-radius: 12px;
+        background-color: #313244;
+    }
+
+    .notifications {
+        background-color: #313244;
+        border-radius: 12px;
+        padding-left: 12px;
+        padding-right: 8px;
+
+        .icon {
+            color: #74c7ec;
+        }
+
+        .number {
+            color: #f38ba8;
+            font-size: x-small;
+            font-weight: 900;
+            min-height: 0px;
+            margin-top: -10px;
+        }
+    }
+
+    .sysinfos {
+        background-color: #313244;
+        border-radius: 12px;
+
+        button{
+            border-radius: 12px;
+
+            &.cpu {
+                color: #f38ba8;
+            }
+    
+            &.memory {
+                color: #fab387;
+            }
+    
+            &.storage {
+                color: #89b4fa;
+            }
+    
+            &.brightness {
+                color: #f9e2af;
+            }
+    
+            &.battery {
+                color: #cdd6f4;
+    
+                &.charging {
+                    color: #a6e3a1;
+                }
+    
+                &.discharging {
+                    color: #fab387;
+                }
+    
+                &.charged {
+                    color: #cdd6f4
+                }
+            }
+        }
+        
+    }
+
+    .system_panel {
+        color: #cba6f7;
+        border-radius: 12px;
+        background-color: #313244;
+
+        button {
+            min-width: 0px;
+            border-radius: 12px;
+
+            &.network {
+                padding: 0px;
+                min-width: 36px;
+            }
+
+            &.bluetooth {
+                padding: 0px 11px;
+            }
+
+            &.tray {
+                padding: 0px;
+                padding-left: 12px;
+                padding-right: 16px;
+            }
+
+            &.power {
+                padding: 0px;
+                padding-left: 12px;
+                padding-right: 16px;
+                color: #f38ba8;
+            }
+        }
+    }
+
 }
+
+
 
 .audioMenu {
     background-color: #313244;
