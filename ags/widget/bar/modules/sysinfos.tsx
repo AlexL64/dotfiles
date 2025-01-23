@@ -99,7 +99,7 @@ export default function SysInfos() {
         <button
             className={"battery"}
             onClicked={() => {
-                App.toggle_window("power");
+                App.toggle_window("battery");
             }}
             setup={(self) => {
                 switch (battery.state) {

@@ -231,6 +231,8 @@ menuitem:hover {
     background-color: #313244;
 
     button {
+        min-width: 0px;
+
         &.network {
             padding: 0px;
             min-width: 36px;
@@ -246,7 +248,17 @@ menuitem:hover {
 
         &.tray {
             padding: 0px;
-            padding-right: 4px;
+            padding-left: 12px;
+            padding-right: 16px;
+            border-left: 1px solid #45475a;
+            border-right: 1px solid #45475a;
+        }
+
+        &.power {
+            padding: 0px;
+            padding-left: 12px;
+            padding-right: 16px;
+            color: #f38ba8;
             border-radius: 0px 12px 12px 0px;
             border-left: 1px solid #45475a;
         }
@@ -511,7 +523,7 @@ menuitem:hover {
     }
 }
 
-.power {
+box.battery {
     background-color: #1e1e2e;
     border: 2px solid #cba6f7;
     border-radius: 12px;
@@ -570,7 +582,7 @@ menuitem:hover {
         margin-top: 3px;
     }
 
-    .battery {
+    .main_battery {
         background-color: #313244;
         border-radius: 12px;
         padding: 10px;
@@ -912,6 +924,38 @@ box.bluetooth {
                         background-color: #f9e2af;
                     }
                 }
+            }
+        }
+    }
+}
+
+box.power {
+    background-color: #313244;
+    border: 2px solid #cba6f7;
+    border-radius: 12px;
+
+    button {
+        padding: 6px 20px;
+
+        label {
+            &.lock {
+                color: #89b4fa;
+            }
+
+            &.sleep {
+                color: #cba6f7;
+            }
+
+            &.logout {
+                color: #fab387;
+            }
+
+            &.reboot {
+                color: #a6e3a1;
+            }
+
+            &.shutdown {
+                color: #f38ba8;
             }
         }
     }

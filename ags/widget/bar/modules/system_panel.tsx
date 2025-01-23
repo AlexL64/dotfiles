@@ -51,5 +51,12 @@ export default function SystemPanel() {
                 App.toggle_window("tray");
             }}
         />
+        <button
+            className={"power"}
+            label={""}
+            onClicked={() => {
+                App.toggle_window("power");
+            }}
+        />
     </box>
 }

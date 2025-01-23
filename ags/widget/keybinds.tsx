@@ -118,7 +118,6 @@ export default function Keybinds() {
             </scrollable>
         </box>
     </window >
-
 }
 
 function getKeybinds(): { [category: string]: { bind: string, description: string, }[] } {
