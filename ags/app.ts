@@ -14,6 +14,7 @@ import Bluetooth from "./widget/bar/windows/bluetooth";
 import Keybinds from "./widget/keybinds";
 import Power from "./widget/bar/windows/power";
 import Storage from "./widget/bar/windows/storage";
+import Memory from "./widget/bar/windows/memory";
 
 App.start({
     css: style,
@@ -29,6 +30,7 @@ App.start({
         AudioMenu();
         Media();
         Calendar();
+        Memory();
         Storage();
         Battery();
         Bluetooth();

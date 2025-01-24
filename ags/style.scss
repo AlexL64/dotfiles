@@ -1042,3 +1042,31 @@ box.storage {
         }
     }
 }
+
+
+box.memory{
+    background-color: #1e1e2e;
+    border: 2px solid #cba6f7;
+    border-radius: 12px;
+    padding: 10px;
+    min-height: 500px;
+    min-width: 400px;
+    
+    scrollbar {
+        margin-left: 6px;
+
+        contents {
+            trough {
+                background-color: #6c7086;
+                border-radius: 3px;
+
+                slider {
+                    background-color: #cba6f7;
+                    border-radius: 3px;
+                    min-width: 3px;
+                    min-height: 0px;
+                }
+            }
+        }
+    }
+}
