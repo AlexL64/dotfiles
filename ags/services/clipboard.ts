@@ -1,5 +1,5 @@
 import GObject, { register, property, signal } from "astal/gobject"
-import { exec, subprocess } from "../../../../../usr/share/astal/gjs";
+import { exec, subprocess } from "astal";
 
 @register()
 class ClipboardService extends GObject.Object {

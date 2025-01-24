@@ -181,42 +181,42 @@ menuitem:hover {
         background-color: #313244;
         border-radius: 12px;
 
-        button{
+        button {
             border-radius: 12px;
 
             &.cpu {
                 color: #f38ba8;
             }
-    
+
             &.memory {
                 color: #fab387;
             }
-    
+
             &.storage {
                 color: #89b4fa;
             }
-    
+
             &.brightness {
                 color: #f9e2af;
             }
-    
+
             &.battery {
                 color: #cdd6f4;
-    
+
                 &.charging {
                     color: #a6e3a1;
                 }
-    
+
                 &.discharging {
                     color: #fab387;
                 }
-    
+
                 &.charged {
                     color: #cdd6f4
                 }
             }
         }
-        
+
     }
 
     .system_panel {
@@ -947,6 +947,97 @@ box.power {
 
             &.shutdown {
                 color: #f38ba8;
+            }
+        }
+    }
+}
+
+box.storage {
+    background-color: #313244;
+    border: 2px solid #cba6f7;
+    border-radius: 12px;
+    padding: 10px;
+    min-width: 450px;
+    min-height: 318px;
+
+    scrollbar {
+        margin-left: 6px;
+
+        contents {
+            trough {
+                background-color: #6c7086;
+                border-radius: 3px;
+
+                slider {
+                    background-color: #cba6f7;
+                    border-radius: 3px;
+                    min-width: 3px;
+                    min-height: 0px;
+                }
+            }
+        }
+    }
+
+    .device {
+        background-color: #45475a;
+        border-radius: 12px;
+        padding: 10px;
+
+        .overview {
+            margin-bottom: 10px;
+
+            .icon {
+                font-size: 32px;
+                margin-right: 10px;
+            }
+
+            .model {
+                color: #89b4fa;
+            }
+
+            .path {
+                color: #a6e3a1;
+            }
+
+            .size {
+                color: #f38ba8;
+                margin-right: 6px;
+            }
+        }
+
+        .separator {
+            min-height: 2px;
+            background-color: #585b70;
+            margin: 5px 0px;
+        }
+
+        .partitions {
+            background-color: #313244;
+            border-radius: 12px;
+            padding: 10px;
+
+            label {
+                font-size: 13px;
+
+                &.label {
+                    color: #89b4fa;
+                }
+
+                &.mount {
+                    color: #cba6f7;
+                }
+
+                &.fstype {
+                    color: #fab387;
+                }
+
+                &.path {
+                    color: #a6e3a1;
+                }
+
+                &.size {
+                    color: #f38ba8;
+                }
             }
         }
     }

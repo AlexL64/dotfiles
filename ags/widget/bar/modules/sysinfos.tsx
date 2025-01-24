@@ -79,7 +79,11 @@ export default function SysInfos() {
                 <label label={""} />
             </box>
         </button>
-        <button className={"storage"}>
+        <button
+            className={"storage"}
+            onClicked={() => {
+                App.toggle_window("storage");
+            }}>
             <box spacing={8}>
                 <label label={bind(storage)} />
                 <label label={"󰋊"} />

@@ -1,5 +1,5 @@
 import GObject, { register, property, signal } from "astal/gobject"
-import { exec, monitorFile } from "../../../../../usr/share/astal/gjs";
+import { exec, monitorFile } from "astal";
 
 @register()
 class BrightnessService extends GObject.Object {
