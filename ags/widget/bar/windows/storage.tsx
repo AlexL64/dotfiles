@@ -10,7 +10,7 @@ export default function Storage() {
         anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT}
         exclusivity={Astal.Exclusivity.NORMAL}
         application={App}
-        visible={true}>
+        visible={false}>
         {
             bind(SotrafeService, "devices").as((devices) => {
 
