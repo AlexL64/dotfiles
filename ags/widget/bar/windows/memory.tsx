@@ -3,7 +3,7 @@ import { App, Astal, Gtk } from "astal/gtk3";
 
 const visible = Variable(false);
 
-const memory = new Variable<string>("").poll(
+const memory = Variable<string>("").poll(
     3000,
     (): string | Promise<string> => {
         if (visible.get()) {
