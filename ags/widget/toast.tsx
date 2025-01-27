@@ -1,7 +1,7 @@
 import { bind } from "astal";
 import { App, Astal } from "astal/gtk3";
 import Wp from "gi://AstalWp";
-import BrightnessService from "./../services/brightness";
+import Brightness from "./../services/brightness";
 
 // @ts-ignore
 const audio = Wp.get_default().audio;
@@ -13,6 +13,8 @@ let toastTimeout: ReturnType<typeof setTimeout> | null = null;
 let isToastVisible = false;
 
 export default function Toast() {
+
+    const brightness = Brightness.get_default();
 
     return <window
         name={"toast"}
@@ -47,7 +49,7 @@ export default function Toast() {
                         showToast();
                     })
 
-                    self.hook(bind(BrightnessService, "screenValue"), (_, v) => {
+                    self.hook(bind(brightness, "screen"), (_, v) => {
                         self.label = `${Math.round(v * 100)} % ${getBrightnessIcon(v)}`;
                         showToast();
                     })

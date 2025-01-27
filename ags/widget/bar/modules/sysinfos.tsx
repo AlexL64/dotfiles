@@ -1,5 +1,5 @@
 import { bind, exec, Variable } from "astal";
-import BrightnessService from "./../../../services/brightness"
+import Brightness from "./../../../services/brightness"
 import Battery from "gi://AstalBattery";
 import { App } from "astal/gtk3";
 
@@ -43,23 +43,7 @@ export default function SysInfos() {
         ]
     );
 
-    const brightness = bind(BrightnessService, "screenValue").as((b) => `${Math.round(b * 100)}%`);
-    const brightness_icon = bind(BrightnessService, "screenValue").as((b) => {
-        const icons = {
-            84: "󰃠",
-            70: "󰃟",
-            56: "󰃞",
-            42: "󰃝",
-            28: "󰃜",
-            14: "󰃛",
-            0: "󰃚"
-        }
-
-        const icon = [84, 70, 56, 42, 28, 14, 0].find(threshold => threshold <= b * 100);
-
-        // @ts-ignore
-        return `${icons[icon]}`;
-    });
+    const brightness = Brightness.get_default();
 
     const battery = Battery.get_default();
     const battery_percentage = bind(battery, "percentage").as((b) => `${(b * 100)}%`);
@@ -96,11 +80,26 @@ export default function SysInfos() {
         <button
             className={"brightness"}
             onScroll={(self, event) => {
-                event.delta_y > 0 ? exec("brightnessctl s 1%-") : exec("brightnessctl s +1%")
+                event.delta_y > 0 ? brightness.screen -= 0.01 : brightness.screen += 0.01;
             }}>
             <box spacing={8}>
-                <label label={brightness} />
-                <label label={brightness_icon} />
+                <label label={bind(brightness, "screen").as((b) => `${Math.round(b * 100)}%`)} />
+                <label label={bind(brightness, "screen").as((b) => {
+                    const icons = {
+                        84: "󰃠",
+                        70: "󰃟",
+                        56: "󰃞",
+                        42: "󰃝",
+                        28: "󰃜",
+                        14: "󰃛",
+                        0: "󰃚"
+                    }
+
+                    const icon = [84, 70, 56, 42, 28, 14, 0].find(threshold => threshold <= b * 100);
+
+                    // @ts-ignore
+                    return `${icons[icon]}`;
+                })} />
             </box>
         </button>
         <button

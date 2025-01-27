@@ -1,4 +1,4 @@
-import { bind, Binding, execAsync, Variable } from "astal";
+import { bind, execAsync, Variable } from "astal";
 import { App, Astal, Gdk, Gtk } from "astal/gtk3";
 import ClipboardService from "./../services/clipboard"
 
@@ -14,6 +14,8 @@ const nbPages = Variable(0);
 const selectedPage = Variable(0);
 const selectedLine = Variable(0);
 const selectedId = Variable(0);
+
+const clipboard = ClipboardService.get_default();
 
 export default function Clipboard() {
 
@@ -110,7 +112,7 @@ export default function Clipboard() {
 }
 
 function list(value: string) {
-    return bind(ClipboardService, "entries").as((entries) => {
+    return bind(clipboard, "entries").as((entries) => {
 
         if (value != "") {
             entries = search(entries, value);

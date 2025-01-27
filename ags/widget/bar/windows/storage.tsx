@@ -1,8 +1,10 @@
 import { bind } from "astal";
 import { App, Astal, Gtk } from "astal/gtk3";
-import SotrafeService from "../../../services/storage";
+import StorageSerice from "../../../services/storage";
 
 export default function Storage() {
+
+    const storage = StorageSerice.get_default();
     return <window
         name={"storage"}
         marginTop={10}
@@ -12,7 +14,7 @@ export default function Storage() {
         application={App}
         visible={false}>
         {
-            bind(SotrafeService, "devices").as((devices) => {
+            bind(storage, "devices").as((devices) => {
 
                 return <box className={"storage"}>
                     <scrollable overlayScrolling={false} vscrollbarPolicy={Gtk.PolicyType.AUTOMATIC}>

@@ -1,12 +1,18 @@
 import GObject, { register, property, signal } from "astal/gobject"
 import { exec, subprocess } from "astal";
 
-@register()
-class ClipboardService extends GObject.Object {
-    @property(Object) declare entries: { id: number, text: string }[];
+@register({ GTypeName: "Clipboard" })
+export default class Clipboard extends GObject.Object {
+    static instance: Clipboard;
+    static get_default() {
+        if (!this.instance)
+            this.instance = new Clipboard();
 
-    @signal(Number) declare entries_changed: (n: number) => void;
-    @signal(Number) declare changed: (n: number) => void;
+        return this.instance;
+    }
+
+    @property(Object)
+    entries: { id: number; text: string; }[] = [];
 
     constructor() {
         super();
@@ -41,12 +47,6 @@ class ClipboardService extends GObject.Object {
         }
 
         this.entries = entries;
-        this.emit('changed', this.entries);
-        this.emit('entries_changed', this.entries);
+        this.notify("entries");
     }
 }
-
-
-
-const service = new ClipboardService;
-export default service;

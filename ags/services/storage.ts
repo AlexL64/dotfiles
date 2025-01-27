@@ -1,12 +1,18 @@
 import GObject, { register, property, signal } from "astal/gobject"
 import { exec, subprocess } from "astal";
 
-@register()
-class StorageService extends GObject.Object {
-    @property(Object) declare devices: any;
+@register({ GTypeName: "Storage" })
+export default class Storage extends GObject.Object {
+    static instance: Storage;
+    static get_default() {
+        if (!this.instance)
+            this.instance = new Storage();
 
-    @signal(Number) declare devices_changed: (n: number) => void;
-    @signal(Number) declare changed: (n: number) => void;
+        return this.instance;
+    }
+
+    @property(Object)
+    devices: any;
 
     constructor() {
         super();
@@ -33,12 +39,6 @@ class StorageService extends GObject.Object {
         ])
 
         this.devices = JSON.parse(devices).blockdevices;
-        this.emit('changed', this.devices);
-        this.emit('devices_changed', this.devices);
+        this.notify("devices");
     }
 }
-
-
-
-const service = new StorageService;
-export default service;
