@@ -32,7 +32,7 @@ export default function Power() {
                 <label className={"reboot"} label={"  Reboot"} xalign={Gtk.Align.FILL} />
             </button>
             <button onClick={() => {
-                exec("systemctl shutdown");
+                exec("shutdown now");
             }}>
                 <label className={"shutdown"} label={"  Shutdown"} xalign={Gtk.Align.FILL} />
             </button>
