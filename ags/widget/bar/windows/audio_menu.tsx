@@ -1,4 +1,4 @@
-import { bind, exec, Variable } from "astal";
+import { bind, exec, timeout, Variable } from "astal";
 import { App, Astal, Gdk } from "astal/gtk3";
 import { GtkMenu, GtkMenuItem, GtkCheckButton } from "../../../my_types";
 import Wp from "gi://AstalWp";
@@ -154,7 +154,9 @@ function OutputDevicesContent() {
                             value={bind(speaker, "volume")}
                             hexpand
                             onScrollEvent={(self) => {
-                                speaker.volume = self.value;
+                                timeout(0, () => {
+                                    self.value = speaker.volume;
+                                })
                             }}
                             onDragged={(self) => {
                                 speaker.volume = self.value;
@@ -231,7 +233,9 @@ function InputDevicesContent() {
                             value={bind(mic, "volume")}
                             hexpand
                             onScrollEvent={(self) => {
-                                mic.volume = self.value;
+                                timeout(0, () => {
+                                    self.value = mic.volume;
+                                })
                             }}
                             onDragged={(self) => {
                                 mic.volume = self.value;
@@ -289,7 +293,9 @@ function ApplicationsContent() {
                                 value={bind(stream, "volume")}
                                 hexpand
                                 onScrollEvent={(self) => {
-                                    stream.volume = self.value;
+                                    timeout(0, () => {
+                                        self.value = stream.volume;
+                                    })
                                 }}
                                 onDragged={(self) => {
                                     stream.volume = self.value;
