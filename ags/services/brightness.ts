@@ -1,10 +1,10 @@
-import GObject, { register, property } from "astal/gobject"
-import { monitorFile, readFileAsync } from "astal/file"
-import { exec, execAsync } from "astal/process"
+import GObject, { register, property } from "astal/gobject";
+import { monitorFile, readFileAsync } from "astal/file";
+import { exec, execAsync } from "astal/process";
 
-const get = (args: string) => Number(exec(`brightnessctl ${args}`))
-const screen = exec(`bash -c "ls -w1 /sys/class/backlight | head -1"`)
-const kbd = exec(`bash -c "ls -w1 /sys/class/leds | head -1"`)
+const get = (args: string) => Number(exec(`brightnessctl ${args}`));
+const screen = exec(`bash -c "ls -w1 /sys/class/backlight | head -1"`);
+const kbd = "platform::kbd_backlight";
 
 @register({ GTypeName: "Brightness" })
 export default class Brightness extends GObject.Object {
@@ -44,7 +44,7 @@ export default class Brightness extends GObject.Object {
         if (percent > 1)
             percent = 1;
 
-        execAsync(`brightnessctl set ${Math.floor(percent * 100)}% -q`).then(() => {
+        execAsync(`brightnessctl set ${Math.ceil(percent * 100)}% -q`).then(() => {
             this.#screen = percent;
             this.notify("screen");
         })

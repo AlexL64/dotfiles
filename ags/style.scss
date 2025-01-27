@@ -1044,14 +1044,14 @@ box.storage {
 }
 
 
-box.memory{
+box.memory {
     background-color: #1e1e2e;
     border: 2px solid #cba6f7;
     border-radius: 12px;
     padding: 10px;
     min-height: 500px;
     min-width: 400px;
-    
+
     scrollbar {
         margin-left: 6px;
 
@@ -1066,6 +1066,96 @@ box.memory{
                     min-width: 3px;
                     min-height: 0px;
                 }
+            }
+        }
+    }
+}
+
+box.brightness {
+    background-color: #1e1e2e;
+    border: 2px solid #cba6f7;
+    border-radius: 12px;
+    padding: 10px;
+
+    .screen {
+        background-color: #313244;
+        border-radius: 12px;
+        padding: 10px;
+
+        .icon {
+            font-size: 32px;
+            padding-right: 20px;
+        }
+
+        .slider {
+            margin-top: 10px;
+
+            scale {
+                .position {
+                    padding: 0;
+                    margin-bottom: .3em;
+                }
+            }
+
+            trough {
+                min-height: 8px;
+                border-radius: 6px;
+                background-color: #585b70;
+            }
+
+            highlight {
+                background-color: #cba6f7;
+                border-radius: 6px;
+            }
+
+            slider {
+                all: unset;
+            }
+        }
+    }
+
+    .keyboard {
+        background-color: #313244;
+        border-radius: 12px;
+        padding: 10px;
+
+        .selector {
+            margin: 0px 10px 3px 10px;
+
+            value {
+                font-size: 0px;
+            }
+
+            marks {
+                color: #a6adc8;
+
+                mark {
+                    indicator {
+                        min-width: 1px;
+                        min-height: 8px;
+                        margin-bottom: 5px;
+                        margin-top: 0px;
+                        color: #6c7086;
+                    }
+                }
+            }
+
+            trough {
+                background-color: #45475a;
+                border-radius: 1px;
+
+                highlight {
+                    min-height: 2px;
+                    margin: 0px;
+                    border-radius: 1px;
+                    background-color: #cba6f7;
+                }
+
+                slider {
+                    background-color: #1e1e2e;
+                    border-radius: 16px;
+                }
+
             }
         }
     }

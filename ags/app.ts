@@ -15,6 +15,7 @@ import Keybinds from "./widget/keybinds";
 import Power from "./widget/bar/windows/power";
 import Storage from "./widget/bar/windows/storage";
 import Memory from "./widget/bar/windows/memory";
+import Brightness from "./widget/bar/windows/brightness";
 
 App.start({
     css: style,
@@ -32,6 +33,7 @@ App.start({
         Calendar();
         Memory();
         Storage();
+        Brightness();
         Battery();
         Bluetooth();
         Tray();

@@ -79,11 +79,14 @@ export default function SysInfos() {
         </button>
         <button
             className={"brightness"}
+            onClicked={() => {
+                App.toggle_window("brightness");
+            }}
             onScroll={(self, event) => {
                 event.delta_y > 0 ? brightness.screen -= 0.01 : brightness.screen += 0.01;
             }}>
             <box spacing={8}>
-                <label label={bind(brightness, "screen").as((b) => `${Math.round(b * 100)}%`)} />
+                <label label={bind(brightness, "screen").as((b) => `${Math.ceil(b * 100)}%`)} />
                 <label label={bind(brightness, "screen").as((b) => {
                     const icons = {
                         84: "󰃠",
