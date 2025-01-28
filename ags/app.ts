@@ -16,6 +16,7 @@ import Power from "./widget/bar/windows/power";
 import Storage from "./widget/bar/windows/storage";
 import Memory from "./widget/bar/windows/memory";
 import Brightness from "./widget/bar/windows/brightness";
+import PowerSelector from "./widget/power_selector";
 
 App.start({
     css: style,
@@ -46,6 +47,7 @@ App.start({
         Clipboard();
         AppLauncher();
         Keybinds();
+        PowerSelector();
     },
 })
 

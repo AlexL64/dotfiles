@@ -15,7 +15,7 @@ export default function Bluetooth() {
         anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT}
         exclusivity={Astal.Exclusivity.NORMAL}
         application={App}
-        visible={true}>
+        visible={false}>
         <box className={"bluetooth"} vertical spacing={10}>
             <box className={"controls"} spacing={10}>
                 <label
