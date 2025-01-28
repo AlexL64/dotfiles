@@ -26,6 +26,15 @@ export default function AppLauncher() {
         keymode={Astal.Keymode.EXCLUSIVE}
         application={App}
         visible={false}
+        setup={(self) => {
+            self.hook(bind(self, "visible"), (_, v) => {
+                if (!v) {
+                    textReset.set(true);
+                    selectedId.set(0);
+                    selectedPage.set(0);
+                }
+            })
+        }}
         onKeyPressEvent={(self, event: Gdk.Event) => {
             switch (event.get_keyval()[1]) {
                 case Gdk.KEY_Up:
@@ -56,12 +65,8 @@ export default function AppLauncher() {
                 case Gdk.KEY_Return:
                     self.hide();
                     selectedApp.get().launch();
-                    textReset.set(true);
                     break;
                 case Gdk.KEY_Escape:
-                    textReset.set(true);
-                    selectedId.set(0);
-                    selectedPage.set(0);
                     self.hide();
                     break;
             }

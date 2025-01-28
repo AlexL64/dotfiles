@@ -26,6 +26,15 @@ export default function Clipboard() {
         keymode={Astal.Keymode.EXCLUSIVE}
         application={App}
         visible={false}
+        setup={(self) => {
+            self.hook(bind(self, "visible"), (_, v) => {
+                if (!v) {
+                    selectedLine.set(0);
+                    selectedPage.set(0);
+                    searchValueReset.set(true);
+                }
+            })
+        }}
         onKeyPressEvent={(self, event: Gdk.Event) => {
             switch (event.get_keyval()[1]) {
                 case Gdk.KEY_Up:
@@ -56,14 +65,8 @@ export default function Clipboard() {
                 case Gdk.KEY_Return:
                     self.hide();
                     execAsync(["bash", "-c", `cliphist list | grep ${selectedId.get()} | cliphist decode | wl-copy`]);
-                    selectedLine.set(0);
-                    selectedPage.set(0);
-                    searchValueReset.set(true);
                     break;
                 case Gdk.KEY_Escape:
-                    searchValueReset.set(true);
-                    selectedId.set(0);
-                    selectedPage.set(0);
                     self.hide();
                     break;
                 case Gdk.KEY_Delete:
