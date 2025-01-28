@@ -55,3 +55,14 @@ export class GtkGrid extends astalify(Gtk.Grid) {
         super(props as any)
     }
 }
+
+export class GtkSpinner extends astalify(Gtk.Spinner) {
+    static { GObject.registerClass(this) }
+
+    constructor(props: ConstructProps<
+        GtkSpinner,
+        Gtk.Spinner.ConstructorProps
+    >) {
+        super(props as any)
+    }
+}

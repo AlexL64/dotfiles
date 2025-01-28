@@ -1,6 +1,6 @@
 import { bind } from "astal";
 import { App, Astal, Gtk, Gdk } from "astal/gtk3";
-import { GtkMenu, GtkMenuItem } from "../../../my_types";
+import { GtkMenu, GtkMenuItem, GtkSpinner } from "../../../my_types";
 import AstalBluetooth from "gi://AstalBluetooth";
 
 const bluetooth = AstalBluetooth.get_default();
@@ -15,7 +15,7 @@ export default function Bluetooth() {
         anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT}
         exclusivity={Astal.Exclusivity.NORMAL}
         application={App}
-        visible={false}>
+        visible={true}>
         <box className={"bluetooth"} vertical spacing={10}>
             <box className={"controls"} spacing={10}>
                 <label
@@ -105,7 +105,6 @@ export default function Bluetooth() {
                                         <button
                                             className={"connect"}
                                             visible={bind(device, "paired")}
-                                            label={bind(device, "connected").as((c) => c ? "Disconnect" : "Connect")}
                                             setup={(self) => {
                                                 self.toggleClassName("connected", device.connected);
 
@@ -120,7 +119,17 @@ export default function Bluetooth() {
                                                     device.connect_device(() => null);
                                                 }
                                             }}
-                                        />
+                                        >
+                                            {
+                                                bind(device, "connecting").as((connecting) => {
+                                                    if (connecting) {
+                                                        return <GtkSpinner setup={(self) => self.start()} />
+                                                    } else {
+                                                        return <label label={bind(device, "connected").as((c) => c ? "Disconnect" : "Connect")} />
+                                                    }
+                                                })
+                                            }
+                                        </button>
                                         <button
                                             className={"pair"}
                                             visible={bind(device, "paired").as((p) => !p)}
