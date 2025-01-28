@@ -63,8 +63,8 @@ export default function Clipboard() {
                     }
                     break;
                 case Gdk.KEY_Return:
-                    self.hide();
                     execAsync(["bash", "-c", `cliphist list | grep ${selectedId.get()} | cliphist decode | wl-copy`]);
+                    self.hide();
                     break;
                 case Gdk.KEY_Escape:
                     self.hide();

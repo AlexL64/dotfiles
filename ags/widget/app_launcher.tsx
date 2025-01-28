@@ -63,8 +63,8 @@ export default function AppLauncher() {
                     }
                     break;
                 case Gdk.KEY_Return:
-                    self.hide();
                     selectedApp.get().launch();
+                    self.hide();
                     break;
                 case Gdk.KEY_Escape:
                     self.hide();
