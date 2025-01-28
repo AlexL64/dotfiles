@@ -9,7 +9,7 @@ export default function PowerSelector() {
         name={"power_selector"}
         exclusivity={Astal.Exclusivity.NORMAL}
         layer={Astal.Layer.OVERLAY}
-        keymode={Astal.Keymode.EXCLUSIVE}
+        keymode={Astal.Keymode.ON_DEMAND}
         application={App}
         visible={false}
         setup={(self) => {
