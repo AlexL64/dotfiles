@@ -97,7 +97,7 @@ export default function Battery() {
                             />
                             <label
                                 halign={Gtk.Align.END}
-                                label={bind(battery, "percentage").as((p) => `${p * 100}%`)}
+                                label={bind(battery, "percentage").as((p) => `${Math.round(p * 100)}%`)}
                             />
                         </box>
                     </box>

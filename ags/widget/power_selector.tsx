@@ -36,7 +36,6 @@ export default function PowerSelector() {
                     }
                     break;
                 case Gdk.KEY_Return:
-                    self.hide();
                     switch (selected.get()) {
                         case 0:
                             execAsync("hyprlock");
@@ -54,6 +53,7 @@ export default function PowerSelector() {
                             execAsync("shutdown now");
                             break;
                     }
+                    self.hide();
                 case Gdk.KEY_Escape:
                     self.hide();
             }

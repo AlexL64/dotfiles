@@ -46,7 +46,7 @@ export default function SysInfos() {
     const brightness = Brightness.get_default();
 
     const battery = Battery.get_default();
-    const battery_percentage = bind(battery, "percentage").as((b) => `${(b * 100)}%`);
+    const battery_percentage = bind(battery, "percentage").as((b) => `${Math.round(b * 100)}%`);
     const battery_icon = bind(battery, "icon_name");
     const battery_state = bind(battery, "state");
 
