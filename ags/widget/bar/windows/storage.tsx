@@ -14,6 +14,7 @@ type Partition = {
 export default function Storage() {
 
     const storage = StorageSerice.get_default();
+    
     return <window
         name={"storage"}
         marginTop={10}
