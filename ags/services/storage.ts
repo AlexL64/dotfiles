@@ -1,5 +1,28 @@
-import GObject, { register, property, signal } from "astal/gobject"
+import GObject, { register, property } from "astal/gobject"
 import { exec, subprocess } from "astal";
+
+type Devices = {
+    tran: string;
+    model: string;
+    path: string;
+    size: number;
+    children: {
+        partlabel: string;
+        mountpoints: string[];
+        path: string;
+        fstype: string;
+        fsavail: number;
+        size: number;
+        children: {
+            partlabel: string;
+            mountpoints: string[];
+            path: string;
+            fstype: string;
+            fsavail: number;
+            size: number;
+        }[]
+    }[]
+}[];
 
 @register({ GTypeName: "Storage" })
 export default class Storage extends GObject.Object {
@@ -12,7 +35,7 @@ export default class Storage extends GObject.Object {
     }
 
     @property(Object)
-    devices: any;
+    devices: Devices = [];
 
     constructor() {
         super();
