@@ -13,7 +13,7 @@ export default function Brightness() {
         anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT}
         exclusivity={Astal.Exclusivity.NORMAL}
         application={App}
-        visible={true}>
+        visible={false}>
         <box className={"brightness"} vertical spacing={10}>
             <box className={"screen"}>
                 <label className={"icon"} label={bind(brightness, "screen").as((b) => {
