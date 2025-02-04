@@ -703,7 +703,7 @@ box.battery {
     border-radius: 12px;
     padding: 10px;
     min-width: 500px;
-    min-height: 623px;
+    min-height: 627px;
 
     .search {
         background-color: #313244;
@@ -733,6 +733,14 @@ box.battery {
                     color: #6c7086;
                 }
             }
+        }
+    }
+
+    .pages{
+        button{
+            padding: 0px 3px;
+            background-color: #45475a;
+            border-radius: 3px;
         }
     }
 }

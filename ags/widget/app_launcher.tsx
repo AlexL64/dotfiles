@@ -23,7 +23,7 @@ export default function AppLauncher() {
         name={"app_launcher"}
         exclusivity={Astal.Exclusivity.NORMAL}
         layer={Astal.Layer.OVERLAY}
-        keymode={Astal.Keymode.EXCLUSIVE}
+        keymode={Astal.Keymode.ON_DEMAND}
         application={App}
         visible={false}
         setup={(self) => {
@@ -121,8 +121,17 @@ export default function AppLauncher() {
                                 const id = i;
                                 i++;
 
-                                return <eventbox
-                                    onClick={() => selectedId.set(id)}>
+                                let lastClick = 0;
+
+                                return <eventbox onClick={(self, event) => {
+                                    if (event.time - lastClick < 100) {
+                                        app.launch();
+                                        App.get_window("app_launcher")?.hide();
+                                    } else {
+                                        selectedId.set(id);
+                                    }
+                                    lastClick = event.time;
+                                }}>
                                     <box
                                         className={"app"}
                                         expand={false}
@@ -161,13 +170,40 @@ export default function AppLauncher() {
                 })
             }
             <box
-                spacing={3}
+                className={"pages"}
+                spacing={10}
                 halign={Gtk.Align.END}
                 valign={Gtk.Align.END}
                 visible={bind(nbItems).as((e) => e == 0 ? false : true)}>
-                <label label={bind(selectedPage).as((p) => `${p + 1}`)} />
-                <label label={"/"} />
-                <label label={bind(nbPages).as((p) => `${p}`)} />
+                <button
+                    label={""}
+                    canFocus={false}
+                    onClick={() => {
+                        selectedId.set(0);
+                        if (selectedPage.get() == 0) {
+                            selectedPage.set(nbPages.get() - 1);
+                        } else {
+                            selectedPage.set(selectedPage.get() - 1);
+                        }
+                    }}
+                />
+                <button
+                    label={""}
+                    canFocus={false}
+                    onClick={() => {
+                        selectedId.set(0);
+                        if (selectedPage.get() == nbPages.get() - 1) {
+                            selectedPage.set(0);
+                        } else {
+                            selectedPage.set(selectedPage.get() + 1);
+                        }
+                    }}
+                />
+                <box spacing={3}>
+                    <label label={bind(selectedPage).as((p) => `${p + 1}`)} />
+                    <label label={"/"} />
+                    <label label={bind(nbPages).as((p) => `${p}`)} />
+                </box>
             </box>
         </box>
 
