@@ -1201,65 +1201,74 @@ box.brightness {
     padding: 10px;
 
     eventbox {
+        background-color: #313244;
+        border-radius: 12px;
+
         box {
-            background-color: #313244;
-            border-radius: 12px;
-            padding: 10px;
             min-width: 160px;
             min-height: 160px;
+            padding: 10px;
+        }
+
+        .icon {
+            font-size: 64px;
+        }
+
+        .label {
+            font-size: 20px;
+        }
+
+        &.selected {
+            background-color: #45475a;
+            border: 2px solid #cba6f7;
+            padding: 8px;
+        }
+
+        &.lock {
+            color: #89b4fa;
 
             .icon {
-                font-size: 64px;
+                margin-left: -12px;
             }
+        }
 
-            .label {
-                font-size: 20px;
+        &.sleep {
+            color: #cba6f7;
+
+            .icon {
+                margin-left: -19px;
             }
+        }
+
+        &.logout {
+            color: #fab387;
+
+            .icon {
+                margin-left: -16px;
+            }
+        }
+
+        &.reboot {
+            color: #a6e3a1;
+
+            .icon {
+                margin-left: -19px;
+            }
+        }
+
+        &.shutdown {
+            color: #f38ba8;
+
+            .icon {
+                margin-left: -19px;
+            }
+        }
+
+        &:hover {
+            background-color: #45475a;
 
             &.selected {
-                background-color: #45475a;
-                border: 2px solid #cba6f7;
-                padding: 8px;
-            }
-
-            &.lock {
-                color: #89b4fa;
-
-                .icon {
-                    margin-left: -12px;
-                }
-            }
-
-            &.sleep {
-                color: #cba6f7;
-
-                .icon {
-                    margin-left: -19px;
-                }
-            }
-
-            &.logout {
-                color: #fab387;
-
-                .icon {
-                    margin-left: -16px;
-                }
-            }
-
-            &.reboot {
-                color: #a6e3a1;
-
-                .icon {
-                    margin-left: -19px;
-                }
-            }
-
-            &.shutdown {
-                color: #f38ba8;
-
-                .icon {
-                    margin-left: -19px;
-                }
+                background-color: #313244;
             }
         }
     }

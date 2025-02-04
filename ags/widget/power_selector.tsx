@@ -59,87 +59,104 @@ export default function PowerSelector() {
             }
         }}>
         <box className={"power_selector"} spacing={10}>
-            <eventbox>
-                <box
-                    vertical
-                    className={"lock"}
-                    setup={(self) => {
-                        const id = 0;
+            <eventbox
+                className={"lock"}
+                onClickRelease={() => {
+                    selected.set(0);
+                    execAsync("hyprlock");
+                    App.get_window("power_selector")?.hide();
+                }}
+                setup={(self) => {
+                    const id = 0;
 
-                        self.toggleClassName("selected", selected.get() == id);
+                    self.toggleClassName("selected", selected.get() == id);
 
-                        self.hook(selected, (_, s) => {
-                            self.toggleClassName("selected", s == id);
-                        })
-                    }}>
+                    self.hook(selected, (_, s) => {
+                        self.toggleClassName("selected", s == id);
+                    })
+                }}>
+                <box vertical>
                     <label className={"icon"} label={""} expand />
                     <label className={"label"} label={"Lock"} expand />
                 </box>
             </eventbox>
-            <eventbox>
-                <box
-                    vertical
-                    className={"sleep"}
-                    setup={(self) => {
-                        const id = 1;
+            <eventbox
+                className={"sleep"}
+                onClickRelease={() => {
+                    selected.set(1);
+                    execAsync("systemctl suspend");
+                    App.get_window("power_selector")?.hide();
+                }}
+                setup={(self) => {
+                    const id = 1;
 
-                        self.toggleClassName("selected", selected.get() == id);
+                    self.toggleClassName("selected", selected.get() == id);
 
-                        self.hook(selected, (_, s) => {
-                            self.toggleClassName("selected", s == id);
-                        })
-                    }}>
+                    self.hook(selected, (_, s) => {
+                        self.toggleClassName("selected", s == id);
+                    })
+                }}>
+                <box vertical>
                     <label className={"icon"} label={""} expand />
                     <label className={"label"} label={"Sleep"} expand />
                 </box>
             </eventbox>
-            <eventbox>
-                <box
-                    vertical
-                    className={"logout"}
-                    setup={(self) => {
-                        const id = 2;
+            <eventbox
+                className={"logout"}
+                onClickRelease={() => {
+                    selected.set(2);
+                    execAsync("hyprctl dispatch exit");
+                }}
+                setup={(self) => {
+                    const id = 2;
 
-                        self.toggleClassName("selected", selected.get() == id);
+                    self.toggleClassName("selected", selected.get() == id);
 
-                        self.hook(selected, (_, s) => {
-                            self.toggleClassName("selected", s == id);
-                        })
-                    }}>
+                    self.hook(selected, (_, s) => {
+                        self.toggleClassName("selected", s == id);
+                    })
+                }}>
+                <box vertical>
                     <label className={"icon"} label={""} expand />
                     <label className={"label"} label={"Logout"} expand />
                 </box>
             </eventbox>
-            <eventbox>
-                <box
-                    vertical
-                    className={"reboot"}
-                    setup={(self) => {
-                        const id = 3;
+            <eventbox
+                className={"reboot"}
+                onClickRelease={() => {
+                    selected.set(3);
+                    execAsync("reboot");
+                }}
+                setup={(self) => {
+                    const id = 3;
 
-                        self.toggleClassName("selected", selected.get() == id);
+                    self.toggleClassName("selected", selected.get() == id);
 
-                        self.hook(selected, (_, s) => {
-                            self.toggleClassName("selected", s == id);
-                        })
-                    }}>
+                    self.hook(selected, (_, s) => {
+                        self.toggleClassName("selected", s == id);
+                    })
+                }}>
+                <box vertical>
                     <label className={"icon"} label={""} expand />
                     <label className={"label"} label={"Reboot"} expand />
                 </box>
             </eventbox>
-            <eventbox>
-                <box
-                    vertical
-                    className={"shutdown"}
-                    setup={(self) => {
-                        const id = 4;
+            <eventbox
+                className={"shutdown"}
+                onClickRelease={() => {
+                    selected.set(4);
+                    execAsync("shutdown now");
+                }}
+                setup={(self) => {
+                    const id = 4;
 
-                        self.toggleClassName("selected", selected.get() == id);
+                    self.toggleClassName("selected", selected.get() == id);
 
-                        self.hook(selected, (_, s) => {
-                            self.toggleClassName("selected", s == id);
-                        })
-                    }}>
+                    self.hook(selected, (_, s) => {
+                        self.toggleClassName("selected", s == id);
+                    })
+                }}>
+                <box vertical>
                     <label className={"icon"} label={""} expand />
                     <label className={"label"} label={"Shutdown"} expand />
                 </box>
