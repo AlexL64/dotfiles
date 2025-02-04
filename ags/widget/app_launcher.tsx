@@ -23,7 +23,7 @@ export default function AppLauncher() {
         name={"app_launcher"}
         exclusivity={Astal.Exclusivity.NORMAL}
         layer={Astal.Layer.OVERLAY}
-        keymode={Astal.Keymode.ON_DEMAND}
+        keymode={Astal.Keymode.EXCLUSIVE}
         application={App}
         visible={false}
         setup={(self) => {
