@@ -1090,26 +1090,40 @@ box.brightness {
         .slider {
             margin-top: 10px;
 
-            scale {
-                .position {
-                    padding: 0;
-                    margin-bottom: .3em;
+            value {
+                font-size: 0px;
+            }
+
+            marks {
+                color: #a6adc8;
+
+                mark {
+                    indicator {
+                        min-width: 1px;
+                        min-height: 8px;
+                        margin-bottom: 5px;
+                        margin-top: 0px;
+                        color: #6c7086;
+                    }
                 }
             }
 
             trough {
-                min-height: 8px;
-                border-radius: 6px;
-                background-color: #585b70;
-            }
+                background-color: #45475a;
+                border-radius: 1px;
 
-            highlight {
-                background-color: #cba6f7;
-                border-radius: 6px;
-            }
+                highlight {
+                    min-height: 2px;
+                    margin: 0px;
+                    border-radius: 1px;
+                    background-color: #cba6f7;
+                }
 
-            slider {
-                all: unset;
+                slider {
+                    background-color: #1e1e2e;
+                    border-radius: 16px;
+                }
+
             }
         }
     }
