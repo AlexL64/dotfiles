@@ -385,9 +385,13 @@ menuitem:hover {
 }
 
 .media {
+    background-color: #1e1e2e;
+    border: 2px solid #cba6f7;
+    border-radius: 12px;
+    padding: 10px;
+
     .card {
         background-color: #313244;
-        border: 2px solid #cba6f7;
         border-radius: 12px;
         padding: 10px;
         min-width: 350px;

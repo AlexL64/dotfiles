@@ -8,13 +8,13 @@ export default function Media() {
 
     return <window
         name={"media"}
-        className={'media'}
         marginTop={10}
         anchor={Astal.WindowAnchor.TOP}
         exclusivity={Astal.Exclusivity.NORMAL}
         application={App}
         visible={false}>
         <box
+            className={'media'}
             children={bind(players, "players").as(p => {
                 if (p.length > 1) {
                     return p.map(Player);
@@ -22,6 +22,7 @@ export default function Media() {
                 return;
             })}
             spacing={10}
+            vertical
         />
     </window>
 }
