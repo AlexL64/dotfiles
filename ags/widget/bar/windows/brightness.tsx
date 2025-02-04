@@ -13,7 +13,7 @@ export default function Brightness() {
         anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT}
         exclusivity={Astal.Exclusivity.NORMAL}
         application={App}
-        visible={false}>
+        visible={true}>
         <box className={"brightness"} vertical spacing={10}>
             <box className={"screen"}>
                 <label className={"icon"} label={bind(brightness, "screen").as((b) => {
@@ -50,6 +50,18 @@ export default function Brightness() {
                             })
                         }}
                     />
+                    <box className={"presets"} homogeneous>
+                        {
+                            Array.from({ length: 11 }, (_, i) => i).map((i) => {
+                                return <button
+                                    label={`${i * 10}`}
+                                    onClick={() => {
+                                        brightness.screen = i / 10;
+                                    }}
+                                />
+                            })
+                        }
+                    </box>
                 </box>
             </box>
             <box className={"keyboard"} vertical>

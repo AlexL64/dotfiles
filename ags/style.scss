@@ -1081,6 +1081,7 @@ box.brightness {
     border: 2px solid #cba6f7;
     border-radius: 12px;
     padding: 10px;
+    min-width: 376px;
 
     .screen {
         background-color: #313244;
@@ -1093,7 +1094,7 @@ box.brightness {
         }
 
         .slider {
-            margin-top: 10px;
+            margin: 16px 0px;
 
             value {
                 font-size: 0px;
@@ -1129,6 +1130,19 @@ box.brightness {
                     border-radius: 16px;
                 }
 
+            }
+        }
+
+        .presets {
+            button {
+                padding: 3px 0px;
+                min-width: 0px;
+                min-height: 0px;
+                border-radius: 3px;
+
+                label {
+                    font-size: 12px;
+                }
             }
         }
     }
