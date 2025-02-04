@@ -20,7 +20,7 @@ export default function SystemPanel() {
                         case 2:
                             return <icon icon={bind(network.wifi, "strength").as((s) => {
 
-                                const strengthIcons = {
+                                const icons = {
                                     100: "network-wireless-100",
                                     80: "network-wireless-80",
                                     60: "network-wireless-60",
@@ -28,10 +28,9 @@ export default function SystemPanel() {
                                     20: "network-wireless-20",
                                 }
 
-                                const strengthIcon = [20, 40, 60, 80, 100].find(threshold => threshold >= s);
+                                const icon = [20, 40, 60, 80, 100].find(threshold => threshold >= s) as keyof typeof icons;
 
-                                // @ts-ignore
-                                return strengthIcons[strengthIcon];
+                                return `${icons[icon]}`;
                             })} />
                     }
                 })

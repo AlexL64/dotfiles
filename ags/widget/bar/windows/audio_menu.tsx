@@ -3,7 +3,7 @@ import { App, Astal, Gdk } from "astal/gtk3";
 import { GtkMenu, GtkMenuItem, GtkCheckButton } from "../../../my_types";
 import Wp from "gi://AstalWp";
 
-//@ts-ignore
+// @ts-ignore
 const audio = Wp.get_default().audio;
 
 export default function AudioMenu() {
@@ -312,19 +312,20 @@ function ApplicationsContent() {
 
 
 function getVolumeIcon(endpoint: Wp.Endpoint) {
-    const icons = {
-        65: " ",
-        33: "",
-        1: "",
-        0: "",
-    }
-
     if (endpoint.mute) {
         return "";
     } else {
-        const icon = [65, 33, 1, 0].find(threshold => threshold <= endpoint.volume * 100);
-        // @ts-ignore
-        return icons[icon];
+
+        const icons = {
+            65: " ",
+            33: "",
+            1: "",
+            0: "",
+        }
+
+        const icon = [65, 33, 1, 0].find(threshold => threshold <= endpoint.volume * 100) as keyof typeof icons;
+
+        return `${icons[icon]}`;
     }
 }
 
@@ -368,8 +369,12 @@ function profilesMenu(index: number, type: string) {
 
 
     const profilesLines = profiles.split(/\r?\n/).map(line => line.trimStart());;
-    //@ts-ignore
-    const activeProfile = profilesLines.pop().replace("Active Profile: ", "");
+
+    let activeProfile = profilesLines.pop();
+    if (activeProfile != undefined) {
+        activeProfile = activeProfile.replace("Active Profile: ", "");
+    }
+
 
     const profilesList = profilesLines.map(line => {
         const [name, descriptionTemp] = line.split(": ");

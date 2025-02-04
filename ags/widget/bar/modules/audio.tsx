@@ -2,22 +2,15 @@ import WirePlumber from "gi://AstalWp";
 import { bind, exec, subprocess } from "astal";
 import { App } from "astal/gtk3";
 
-const audio = WirePlumber.get_default()?.audio;
-
-const icons = {
-    65: " ",
-    33: "",
-    1: "",
-    0: "",
-}
-
 // @ts-ignore
+const audio = WirePlumber.get_default().audio;
+
 const speakerVolume = bind(audio.default_speaker, "volume").as((s) => `${Math.round(s * 100)}%`);
-// @ts-ignore
+
 const speakerMuted = bind(audio.default_speaker, "mute");
-// @ts-ignore
+
 const micVolume = bind(audio.default_microphone, "volume").as((m) => `${Math.round(m * 100)}%`);
-// @ts-ignore
+
 const micMuted = bind(audio.default_microphone, "mute");
 
 function getIcon() {
@@ -25,11 +18,17 @@ function getIcon() {
         return "";
     } else {
 
+        const icons = {
+            65: " ",
+            33: "",
+            1: "",
+            0: "",
+        }
+
         const node_name = exec(['bash', '-c', `wpctl inspect ${audio?.default_speaker.id} | grep "node.name" | awk -F '"' '{print $2}'`]);
 
-        // @ts-ignore
-        const icon = [65, 33, 1, 0].find(threshold => threshold <= audio?.default_speaker.volume * 100);
-        // @ts-ignore
+        const icon = [65, 33, 1, 0].find(threshold => threshold <= audio?.default_speaker.volume * 100) as keyof typeof icons;
+
         return node_name.includes("bluez") ? `${icons[icon]} ` : icons[icon];
     }
 }

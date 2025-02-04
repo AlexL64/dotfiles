@@ -84,9 +84,8 @@ export default function SysInfos() {
                         0: "󰃚"
                     }
 
-                    const icon = [84, 70, 56, 42, 28, 14, 0].find(threshold => threshold <= b * 100);
+                    const icon = [84, 70, 56, 42, 28, 14, 0].find(threshold => threshold <= b * 100) as keyof typeof icons;
 
-                    // @ts-ignore
                     return `${icons[icon]}`;
                 })} />
             </box>

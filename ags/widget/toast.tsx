@@ -67,10 +67,9 @@ function getVolumeIcon(volume: number) {
         0: "",
     }
 
-    const icon = [65, 33, 1, 0].find(threshold => threshold <= volume * 100);
+    const icon = [65, 33, 1, 0].find(threshold => threshold <= volume * 100) as keyof typeof icons;
 
-    // @ts-ignore
-    return icons[icon];
+    return `${icons[icon]}`;
 }
 
 function getBrightnessIcon(value: number) {
@@ -84,9 +83,8 @@ function getBrightnessIcon(value: number) {
         0: "󰃚"
     }
 
-    const icon = [84, 70, 56, 42, 28, 14, 0].find(threshold => threshold <= value * 100);
+    const icon = [84, 70, 56, 42, 28, 14, 0].find(threshold => threshold <= value * 100) as keyof typeof icons;
 
-    // @ts-ignore
     return `${icons[icon]}`;
 }
 
