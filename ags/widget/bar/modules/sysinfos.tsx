@@ -3,17 +3,6 @@ import Brightness from "./../../../services/brightness"
 import Battery from "gi://AstalBattery";
 import { App } from "astal/gtk3";
 
-function formatTime(seconds: number): string {
-    const totalMinutes = Math.floor(seconds / 60);
-    if (totalMinutes < 60) {
-        return `${totalMinutes}min`;
-    } else {
-        const hours = Math.floor(totalMinutes / 60);
-        const remainingMinutes = totalMinutes % 60;
-        return `${hours}h${remainingMinutes.toString().padStart(2, '0')}`;
-    }
-}
-
 export default function SysInfos() {
 
     const cpu = Variable("").poll(
@@ -46,9 +35,6 @@ export default function SysInfos() {
     const brightness = Brightness.get_default();
 
     const battery = Battery.get_default();
-    const battery_percentage = bind(battery, "percentage").as((b) => `${Math.round(b * 100)}%`);
-    const battery_icon = bind(battery, "icon_name");
-    const battery_state = bind(battery, "state");
 
     return <box className={"sysinfos"}>
         <button className={"cpu"}>
@@ -125,7 +111,7 @@ export default function SysInfos() {
                         break;
                 }
 
-                self.hook(battery_state, (_, state) => {
+                self.hook(bind(battery, "state"), (_, state) => {
                     switch (state) {
                         case 1:
                             self.toggleClassName("charging", true)
@@ -169,9 +155,20 @@ export default function SysInfos() {
                     })
                 }}
             >
-                <label label={battery_percentage} />
-                <icon icon={battery_icon} />
+                <label label={bind(battery, "percentage").as((b) => `${Math.round(b * 100)}%`)} />
+                <icon icon={bind(battery, "icon_name")} />
             </box>
         </button>
     </box>
+}
+
+function formatTime(seconds: number): string {
+    const totalMinutes = Math.floor(seconds / 60);
+    if (totalMinutes < 60) {
+        return `${totalMinutes}min`;
+    } else {
+        const hours = Math.floor(totalMinutes / 60);
+        const remainingMinutes = totalMinutes % 60;
+        return `${hours}h${remainingMinutes.toString().padStart(2, '0')}`;
+    }
 }
