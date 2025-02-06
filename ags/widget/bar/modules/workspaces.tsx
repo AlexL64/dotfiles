@@ -10,6 +10,7 @@ export default function Workspaces() {
         {
             Array.from({ length: 9 }, (_, i) => i + 1).map(i => <button
                 className={"workspace"}
+                cursor={"pointer"}
                 label={i.toString()}
                 onClicked={() => {
                     hyprland.dispatch("workspace", i.toString());

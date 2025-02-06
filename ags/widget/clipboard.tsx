@@ -91,6 +91,7 @@ export default function Clipboard() {
                 />
                 <button
                     label={"Clear"}
+                    cursor={"pointer"}
                     onClick={() => execAsync(["bash", "-c", `cliphist wipe && wl-copy ""`])}
                 />
             </box>
@@ -141,6 +142,7 @@ function list(value: string) {
 
                             return <eventbox
                                 vexpand={false}
+                                cursor={"pointer"}
                                 className={"line"}
                                 setup={(self) => {
                                     if (id == selectedLine.get()) {
@@ -165,6 +167,7 @@ function list(value: string) {
                                     <label className={"text"} label={line.text} maxWidthChars={75} truncate expand halign={Gtk.Align.START} />
                                     <button
                                         className={"trash"}
+                                        cursor={"pointer"}
                                         label={""}
                                         canFocus={false}
                                         onClick={() => {

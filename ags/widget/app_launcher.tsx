@@ -123,7 +123,7 @@ export default function AppLauncher() {
 
                                 let lastClick = 0;
 
-                                return <eventbox onClick={(self, event) => {
+                                return <eventbox cursor={"pointer"} onClick={(self, event) => {
                                     if (event.time - lastClick < 100) {
                                         app.launch();
                                         App.get_window("app_launcher")?.hide();
@@ -177,6 +177,7 @@ export default function AppLauncher() {
                 visible={bind(nbItems).as((e) => e == 0 ? false : true)}>
                 <button
                     label={""}
+                    cursor={"pointer"}
                     canFocus={false}
                     onClick={() => {
                         selectedId.set(0);
@@ -189,6 +190,7 @@ export default function AppLauncher() {
                 />
                 <button
                     label={""}
+                    cursor={"pointer"}
                     canFocus={false}
                     onClick={() => {
                         selectedId.set(0);

@@ -61,6 +61,7 @@ export default function PowerSelector() {
         <box className={"power_selector"} spacing={10}>
             <eventbox
                 className={"lock"}
+                cursor={"pointer"}
                 onClickRelease={() => {
                     selected.set(0);
                     execAsync("hyprlock");
@@ -82,6 +83,7 @@ export default function PowerSelector() {
             </eventbox>
             <eventbox
                 className={"sleep"}
+                cursor={"pointer"}
                 onClickRelease={() => {
                     selected.set(1);
                     execAsync("systemctl suspend");
@@ -103,6 +105,7 @@ export default function PowerSelector() {
             </eventbox>
             <eventbox
                 className={"logout"}
+                cursor={"pointer"}
                 onClickRelease={() => {
                     selected.set(2);
                     execAsync("hyprctl dispatch exit");
@@ -123,6 +126,7 @@ export default function PowerSelector() {
             </eventbox>
             <eventbox
                 className={"reboot"}
+                cursor={"pointer"}
                 onClickRelease={() => {
                     selected.set(3);
                     execAsync("reboot");
@@ -143,6 +147,7 @@ export default function PowerSelector() {
             </eventbox>
             <eventbox
                 className={"shutdown"}
+                cursor={"pointer"}
                 onClickRelease={() => {
                     selected.set(4);
                     execAsync("shutdown now");

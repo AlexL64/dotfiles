@@ -6,6 +6,7 @@ export default function Date() {
 
     return <button
         className={"date"}
+        cursor={"pointer"}
         onClicked={() => {
             App.toggle_window("calendar");
         }}>

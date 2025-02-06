@@ -39,6 +39,7 @@ export default function SystemPanel() {
         <box className={"separator"} />
         <button
             className={"bluetooth"}
+            cursor={"pointer"}
             onClicked={() => {
                 App.toggle_window("bleutooth");
             }}>
@@ -47,6 +48,7 @@ export default function SystemPanel() {
         <box className={"separator"} />
         <button
             className={"tray"}
+            cursor={"pointer"}
             label={""}
             onClicked={() => {
                 App.toggle_window("tray");
@@ -55,6 +57,7 @@ export default function SystemPanel() {
         <box className={"separator"} />
         <button
             className={"power"}
+            cursor={"pointer"}
             label={""}
             onClicked={() => {
                 App.toggle_window("power");

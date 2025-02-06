@@ -23,6 +23,7 @@ export default function Battery() {
                     <button
                         className={"idle"}
                         label={"󰒲"}
+                        cursor={"pointer"}
                         onClick={(self) => {
                             App.toggle_window("idle");
                             const visible = App.get_window("idle")?.visible;
@@ -39,6 +40,7 @@ export default function Battery() {
                     <button
                         className={"saving"}
                         label={"󱈑"}
+                        cursor={"pointer"}
                         onClick={(self) => {
                             const status = exec(["bash", "-c", "lenopow -s | grep -oP '(?<=Battery protection: ).*'"])
 

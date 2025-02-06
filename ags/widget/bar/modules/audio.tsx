@@ -38,6 +38,7 @@ export default function Audio() {
     return <box className={"audio"}>
         <button
             className={"output"}
+            cursor={"pointer"}
             onClick={(self, event) => {
                 switch (event.button) {
                     case 1:
@@ -87,6 +88,7 @@ export default function Audio() {
         <box className={"separator"} />
         <button
             className={"input"}
+            cursor={"pointer"}
             onClick={(self, event) => {
                 switch (event.button) {
                     case 1:

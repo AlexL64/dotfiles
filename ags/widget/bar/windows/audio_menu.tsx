@@ -22,6 +22,7 @@ export default function AudioMenu() {
             <box className={"menu"} homogeneous>
                 <button
                     className={"output"}
+                    cursor={"pointer"}
                     label={"Output Devices"}
                     onClick={() => selectedMenu.set("Output Devices")}
                     setup={(self) => {
@@ -33,6 +34,7 @@ export default function AudioMenu() {
                 />
                 <button
                     className={"input"}
+                    cursor={"pointer"}
                     label={"Input Devices"}
                     onClick={() => selectedMenu.set("Input Devices")}
                     setup={(self) => {
@@ -44,6 +46,7 @@ export default function AudioMenu() {
                 />
                 <button
                     className={"application"}
+                    cursor={"pointer"}
                     label={"Applications"}
                     onClick={() => selectedMenu.set("Applications")}
                     setup={(self) => {
@@ -106,6 +109,7 @@ function OutputDevicesContent() {
                         <box className={"settings"} spacing={10}>
                             <button
                                 className={"default"}
+                                cursor={"pointer"}
                                 onClick={() => {
                                     speaker.isDefault = true;
                                 }}
@@ -118,6 +122,7 @@ function OutputDevicesContent() {
                             </button>
                             <button
                                 className={"profiles"}
+                                cursor={"pointer"}
                                 label={""}
                                 onClick={(self) => {
                                     const menu = profilesMenu(speaker.id, "sinks");

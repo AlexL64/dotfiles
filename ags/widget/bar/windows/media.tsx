@@ -71,6 +71,7 @@ function Player(player: any) {
                 />
                 <slider
                     marginBottom={0}
+                    cursor={"pointer"}
                     valign={Gtk.Align.END}
                     className={"slider"}
                     value={bind(player, "position").as((p) => p / player.length)}
@@ -87,13 +88,13 @@ function Player(player: any) {
                         visible={bind(player, "position").as((p) => !(p == 0))}
                     />
                     <box className={"controls"} expand halign={Gtk.Align.CENTER} spacing={3}>
-                        <button onClicked={() => player.previous()} visible={bind(player, "canGoPrevious")}>
+                        <button cursor={"pointer"} onClicked={() => player.previous()} visible={bind(player, "canGoPrevious")}>
                             <icon icon={"media-skip-backward-symbolic"} />
                         </button>
-                        <button onClicked={() => player.play_pause()} visible={bind(player, "canPlay")}>
+                        <button cursor={"pointer"} onClicked={() => player.play_pause()} visible={bind(player, "canPlay")}>
                             <icon icon={playback_status} />
                         </button>
-                        <button onClicked={() => player.next()} visible={bind(player, "canGoPrevious")}>
+                        <button cursor={"pointer"} onClicked={() => player.next()} visible={bind(player, "canGoPrevious")}>
                             <icon icon={"media-skip-forward-symbolic"} />
                         </button>
                     </box>

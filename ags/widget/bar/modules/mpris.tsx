@@ -25,6 +25,7 @@ export default function Mpris() {
 
     return <box
         className={"mpris"}
+        cursor={"pointer"}
         setup={(self) => {
             player.canPlay ? self.visible = true : self.visible = false;
             self.hook(can_play, (_, can) => {
@@ -33,11 +34,13 @@ export default function Mpris() {
         }}>
         <button
             className={"play_pause"}
+            cursor={"pointer"}
             onClicked={() => player.play_pause()}>
             <icon icon={playback_status} />
         </button>
         <button
             className={"infos"}
+            cursor={"pointer"}
             tooltipText={bind(player, "title")}
             onClicked={() => {
                 App.toggle_window("media");

@@ -17,6 +17,7 @@ export default function Notifications() {
 
     return <button
         className={"notifications"}
+        cursor={"pointer"}
         onClick={(self, event) => {
             switch (event.button) {
                 case 1:

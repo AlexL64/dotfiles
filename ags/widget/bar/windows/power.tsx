@@ -11,27 +11,27 @@ export default function Power() {
         application={App}
         visible={false}>
         <box className={"power"} vertical>
-            <button onClick={() => {
+            <button cursor={"pointer"} onClick={() => {
                 exec("hyprlock");
             }}>
                 <label className={"lock"} label={"  Lock"} xalign={Gtk.Align.FILL} />
             </button>
-            <button onClick={() => {
+            <button cursor={"pointer"} onClick={() => {
                 exec("systemctl suspend");
             }}>
                 <label className={"sleep"} label={"  Sleep"} xalign={Gtk.Align.FILL} />
             </button>
-            <button onClick={() => {
+            <button cursor={"pointer"} onClick={() => {
                 exec("hyprctl dispatch exit");
             }}>
                 <label className={"logout"} label={"  Logout"} xalign={Gtk.Align.FILL} />
             </button>
-            <button onClick={() => {
+            <button cursor={"pointer"} onClick={() => {
                 exec("reboot");
             }}>
                 <label className={"reboot"} label={"  Reboot"} xalign={Gtk.Align.FILL} />
             </button>
-            <button onClick={() => {
+            <button cursor={"pointer"} onClick={() => {
                 exec("shutdown now");
             }}>
                 <label className={"shutdown"} label={"  Shutdown"} xalign={Gtk.Align.FILL} />

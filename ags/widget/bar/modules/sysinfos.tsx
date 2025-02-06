@@ -47,6 +47,7 @@ export default function SysInfos() {
         </button>
         <button
             className={"memory"}
+            cursor={"pointer"}
             onClicked={() => {
                 App.toggle_window("memory");
             }}>
@@ -57,6 +58,7 @@ export default function SysInfos() {
         </button>
         <button
             className={"storage"}
+            cursor={"pointer"}
             onClicked={() => {
                 App.toggle_window("storage");
             }}>
@@ -67,6 +69,7 @@ export default function SysInfos() {
         </button>
         <button
             className={"brightness"}
+            cursor={"pointer"}
             onClicked={() => {
                 App.toggle_window("brightness");
             }}
@@ -94,6 +97,7 @@ export default function SysInfos() {
         </button>
         <button
             className={"battery"}
+            cursor={"pointer"}
             onClicked={() => {
                 App.toggle_window("battery");
             }}

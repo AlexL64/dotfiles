@@ -56,6 +56,7 @@ export default function Tray() {
                         self.attach(
                             <button
                                 className={"item"}
+                                cursor={"pointer"}
                                 tooltipMarkup={bind(item, "tooltipMarkup")}
                                 onClickRelease={(self, event) => {
                                     switch (event.button) {

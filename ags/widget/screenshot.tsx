@@ -32,6 +32,7 @@ export default function Screenshot() {
                 className={"select"}
                 label={""}
                 tooltipText={"Select"}
+                cursor={"pointer"}
                 onClick={(self, event) => {
                     App.get_window("screenshot")?.set_opacity(0);
                     switch (event.button) {
@@ -48,6 +49,7 @@ export default function Screenshot() {
                 className={"window"}
                 label={""}
                 tooltipText={"Window"}
+                cursor={"pointer"}
                 onClick={(self, event) => {
                     App.get_window("screenshot")?.set_opacity(0);
                     timeout(100);
@@ -65,6 +67,7 @@ export default function Screenshot() {
                 className={"screen"}
                 label={""}
                 tooltipText={"Screen"}
+                cursor={"pointer"}
                 onClick={(self, event) => {
                     App.get_window("screenshot")?.set_opacity(0);
                     timeout(100);

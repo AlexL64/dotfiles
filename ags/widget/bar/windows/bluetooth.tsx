@@ -44,6 +44,7 @@ export default function Bluetooth() {
                 />
                 <switch
                     active={bind(adapter, "powered")}
+                    cursor={"pointer"}
                     setup={(self) => {
                         self.toggleClassName("activated", adapter.powered);
 
@@ -104,6 +105,7 @@ export default function Bluetooth() {
                                         </box>
                                         <button
                                             className={"connect"}
+                                            cursor={"pointer"}
                                             visible={bind(device, "paired")}
                                             setup={(self) => {
                                                 self.toggleClassName("connected", device.connected);
@@ -132,6 +134,7 @@ export default function Bluetooth() {
                                         </button>
                                         <button
                                             className={"pair"}
+                                            cursor={"pointer"}
                                             visible={bind(device, "paired").as((p) => !p)}
                                             label={bind(device, "paired").as((p) => p ? "unpair" : "pair")}
                                             onClick={() => {
@@ -144,6 +147,7 @@ export default function Bluetooth() {
                                         />
                                         <button
                                             className={"options"}
+                                            cursor={"pointer"}
                                             visible={bind(device, "paired")}
                                             label={""}
                                             onClick={(self) => {
