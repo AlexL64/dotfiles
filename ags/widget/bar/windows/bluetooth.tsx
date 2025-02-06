@@ -25,6 +25,7 @@ export default function Bluetooth() {
                 />
                 <button
                     className={"search"}
+                    cursor={"pointer"}
                     label={bind(adapter, "discovering").as((d) => d ? "" : "")}
                     visible={bind(bluetooth, "isPowered")}
                     onClick={() => {
