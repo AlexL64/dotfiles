@@ -36,6 +36,8 @@ export default function SysInfos() {
 
     const battery = Battery.get_default();
 
+    const idle = App.get_window("idle");
+
     return <box className={"sysinfos"}>
         <button className={"cpu"}>
             <box spacing={8}>
@@ -155,7 +157,10 @@ export default function SysInfos() {
                 }}
             >
                 <label label={bind(battery, "percentage").as((b) => `${Math.round(b * 100)}%`)} />
-                <icon icon={bind(battery, "icon_name")} />
+                <box className={"icons"}>
+                    <icon icon={bind(battery, "icon_name")} />
+                    <label className={"idle"} label={""} visible={idle != null && bind(idle, "visible")} />
+                </box>
             </box>
         </button>
     </box>
