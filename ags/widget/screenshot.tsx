@@ -9,7 +9,7 @@ export default function Screenshot() {
         anchor={Astal.WindowAnchor.TOP}
         exclusivity={Astal.Exclusivity.IGNORE}
         layer={Astal.Layer.OVERLAY}
-        marginTop={5}
+        marginTop={6}
         application={App}
         visible={false}
         setup={(self) => {
