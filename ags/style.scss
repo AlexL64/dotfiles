@@ -742,8 +742,8 @@ box.battery {
         }
     }
 
-    .pages{
-        button{
+    .pages {
+        button {
             padding: 0px 3px;
             background-color: #45475a;
             border-radius: 3px;
@@ -1283,6 +1283,32 @@ box.brightness {
 
             &.selected {
                 background-color: #313244;
+            }
+        }
+    }
+}
+
+.screenshot {
+    background-color: #313244;
+    border: 2px solid #cba6f7;
+    border-radius: 12px;
+    margin: 1px;
+    padding: 4px;
+
+    button {
+        padding: 4px 8px;
+        background-color: #45475a;
+        border-radius: 6px;
+
+        &.window {
+            label {
+                margin-right: 4px;
+            }
+        }
+
+        &.screen {
+            label {
+                margin-right: 4px;
             }
         }
     }

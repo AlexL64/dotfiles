@@ -17,6 +17,7 @@ import Storage from "./widget/bar/windows/storage";
 import Memory from "./widget/bar/windows/memory";
 import Brightness from "./widget/bar/windows/brightness";
 import PowerSelector from "./widget/power_selector";
+import Screenshot from "./widget/screenshot";
 
 App.start({
     css: style,
@@ -48,6 +49,7 @@ App.start({
         AppLauncher();
         Keybinds();
         PowerSelector();
+        Screenshot();
     },
 })
 
