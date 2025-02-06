@@ -53,6 +53,7 @@ export default function Brightness() {
                         {
                             Array.from({ length: 11 }, (_, i) => i).map((i) => {
                                 return <button
+                                    cursor={"pointer"}
                                     label={`${i * 10}`}
                                     onClick={() => {
                                         brightness.screen = i / 10;
