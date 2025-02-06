@@ -1,5 +1,4 @@
 import { App } from "astal/gtk3";
-import style from "./style.scss";
 import Bar from "./widget/bar/bar";
 import Media from "./widget/bar/windows/media";
 import Calendar from "./widget/bar/windows/calendar";
@@ -19,8 +18,23 @@ import Brightness from "./widget/bar/windows/brightness";
 import PowerSelector from "./widget/power_selector";
 import Screenshot from "./widget/screenshot";
 
+
+import { exec, monitorFile } from "astal";
+
+const scss = "./style.scss"
+const css = "/tmp/style.css"
+
+monitorFile(
+    scss,
+    () => {
+        exec("sass ./style.scss /tmp/style.css");
+        App.reset_css();
+        App.apply_css(css);
+    }
+)
+
 App.start({
-    css: style,
+    css: css,
     main() {
 
         // Idle
