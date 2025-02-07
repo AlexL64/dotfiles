@@ -14,7 +14,7 @@ type Partition = {
 export default function Storage() {
 
     const storage = StorageSerice.get_default();
-    
+
     return <window
         name={"storage"}
         marginTop={10}
@@ -154,7 +154,10 @@ function getPartition(partition: Partition, index: number, nbIndex: number, subI
                         self.visible = true;
                     }
                 } else {
+                    console.log(index + 1, " / " + nbIndex);
                     if (index + 1 == nbIndex) {
+                        self.visible = false;
+                    } else {
                         self.visible = true;
                     }
                 }

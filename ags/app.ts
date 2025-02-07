@@ -1,4 +1,5 @@
 import { App } from "astal/gtk3";
+import { exec, monitorFile } from "astal";
 import Bar from "./widget/bar/bar";
 import Media from "./widget/bar/windows/media";
 import Calendar from "./widget/bar/windows/calendar";
@@ -17,8 +18,6 @@ import Memory from "./widget/bar/windows/memory";
 import Brightness from "./widget/bar/windows/brightness";
 import PowerSelector from "./widget/power_selector";
 import Screenshot from "./widget/screenshot";
-
-import { exec, monitorFile } from "astal";
 
 const scss = "./style.scss";
 const css = "/tmp/style.css";
