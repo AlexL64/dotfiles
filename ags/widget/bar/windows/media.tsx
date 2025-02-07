@@ -1,5 +1,5 @@
 import AstalMpris from "gi://AstalMpris";
-import { bind } from "astal";
+import { bind, Variable } from "astal";
 import { App, Astal, Gtk } from "astal/gtk3";
 
 export default function Media() {
@@ -12,7 +12,17 @@ export default function Media() {
         anchor={Astal.WindowAnchor.TOP}
         exclusivity={Astal.Exclusivity.NORMAL}
         application={App}
-        visible={false}>
+        visible={false}
+        setup={(self) => {
+            self.hook(bind(players, "players"), (_, players) => {
+                if (
+                    self.visible &&
+                    players.filter((player: AstalMpris.Player) => !player.busName.includes("playerctld")).length == 0
+                ) {
+                    self.hide();
+                }
+            })
+        }}>
         <box
             className={'media'}
             children={bind(players, "players").as(p => {
@@ -27,8 +37,10 @@ export default function Media() {
     </window>
 }
 
+function Player(player: AstalMpris.Player) {
 
-function Player(player: any) {
+
+
 
     const playback_status = bind(player, "playback_status").as((s) => {
         switch (s) {
