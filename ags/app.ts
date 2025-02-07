@@ -18,11 +18,11 @@ import Brightness from "./widget/bar/windows/brightness";
 import PowerSelector from "./widget/power_selector";
 import Screenshot from "./widget/screenshot";
 
-
 import { exec, monitorFile } from "astal";
 
-const scss = "./style.scss"
-const css = "/tmp/style.css"
+const scss = "./style.scss";
+const css = "/tmp/style.css";
+exec("sass ./style.scss /tmp/style.css");
 
 monitorFile(
     scss,
