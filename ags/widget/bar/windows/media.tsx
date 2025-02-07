@@ -39,9 +39,6 @@ export default function Media() {
 
 function Player(player: AstalMpris.Player) {
 
-
-
-
     const playback_status = bind(player, "playback_status").as((s) => {
         switch (s) {
             case 0: return "media-playback-pause-symbolic";

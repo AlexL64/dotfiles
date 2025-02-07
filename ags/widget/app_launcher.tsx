@@ -179,7 +179,7 @@ export default function AppLauncher() {
                     label={""}
                     cursor={"pointer"}
                     canFocus={false}
-                    onClick={() => {
+                    onClicked={() => {
                         selectedId.set(0);
                         if (selectedPage.get() == 0) {
                             selectedPage.set(nbPages.get() - 1);
@@ -192,7 +192,7 @@ export default function AppLauncher() {
                     label={""}
                     cursor={"pointer"}
                     canFocus={false}
-                    onClick={() => {
+                    onClicked={() => {
                         selectedId.set(0);
                         if (selectedPage.get() == nbPages.get() - 1) {
                             selectedPage.set(0);

@@ -92,6 +92,7 @@ export default function Clipboard() {
                 <button
                     label={"Clear"}
                     cursor={"pointer"}
+                    canFocus={false}
                     onClick={() => execAsync(["bash", "-c", `cliphist wipe && wl-copy ""`])}
                 />
             </box>
@@ -103,13 +104,42 @@ export default function Clipboard() {
                 }
             </box>
             <box
-                spacing={3}
+                className={"pages"}
+                spacing={10}
                 halign={Gtk.Align.END}
                 valign={Gtk.Align.END}
                 visible={bind(nbEntries).as((e) => e == 0 ? false : true)}>
-                <label label={bind(selectedPage).as((p) => `${p + 1}`)} />
-                <label label={"/"} />
-                <label label={bind(nbPages).as((p) => `${p}`)} />
+                <button
+                    label={""}
+                    cursor={"pointer"}
+                    canFocus={false}
+                    onClicked={() => {
+                        selectedLine.set(0);
+                        if (selectedPage.get() == 0) {
+                            selectedPage.set(nbPages.get() - 1);
+                        } else {
+                            selectedPage.set(selectedPage.get() - 1);
+                        }
+                    }}
+                />
+                <button
+                    label={""}
+                    cursor={"pointer"}
+                    canFocus={false}
+                    onClicked={() => {
+                        selectedLine.set(0);
+                        if (selectedPage.get() == nbPages.get() - 1) {
+                            selectedPage.set(0);
+                        } else {
+                            selectedPage.set(selectedPage.get() + 1);
+                        }
+                    }}
+                />
+                <box spacing={3}>
+                    <label label={bind(selectedPage).as((p) => `${p + 1}`)} />
+                    <label label={"/"} />
+                    <label label={bind(nbPages).as((p) => `${p}`)} />
+                </box>
             </box>
         </box>
     </window>
@@ -140,6 +170,8 @@ function list(value: string) {
                             const id = i;
                             i++;
 
+                            let lastClick = 0;
+
                             return <eventbox
                                 vexpand={false}
                                 cursor={"pointer"}
@@ -159,8 +191,14 @@ function list(value: string) {
                                         }
                                     })
                                 }}
-                                onClick={() => {
-                                    selectedLine.set(id);
+                                onClick={(self, event) => {
+                                    if (event.time - lastClick < 100) {
+                                        execAsync(["bash", "-c", `cliphist list | grep ${selectedId.get()} | cliphist decode | wl-copy`]);
+                                        App.get_window("clipboard")?.hide();
+                                    } else {
+                                        selectedLine.set(id);
+                                    }
+                                    lastClick = event.time;
                                 }}>
                                 <box spacing={20}>
                                     <label className={"id"} label={`${line.id}`} />
