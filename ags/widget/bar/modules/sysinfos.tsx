@@ -77,7 +77,7 @@ export default function SysInfos() {
                 event.delta_y > 0 ? exec(["bash", "-c", "brightnessctl set 1%-"]) : exec(["bash", "-c", "brightnessctl set +1%"]);
             }}>
             <box spacing={8}>
-                <label label={bind(brightness, "screen").as((b) => `${Math.ceil(b * 100)}%`)} />
+                <label label={bind(brightness, "screen").as((b) => `${Math.floor(b * 100)}%`)} />
                 <label label={bind(brightness, "screen").as((b) => {
                     const icons = {
                         84: "󰃠",
