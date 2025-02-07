@@ -34,7 +34,7 @@ export default function Brightness() {
                 <box vertical>
                     <box>
                         <label label={"Screeen Brightness"} xalign={Gtk.Align.FILL} hexpand />
-                        <label label={bind(brightness, "screen").as((b) => `${Math.ceil(b * 100)}%`)} />
+                        <label label={bind(brightness, "screen").as((b) => `${Math.floor(b * 100)}%`)} />
                     </box>
                     <slider
                         className={"slider"}
