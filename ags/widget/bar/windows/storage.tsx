@@ -154,7 +154,6 @@ function getPartition(partition: Partition, index: number, nbIndex: number, subI
                         self.visible = true;
                     }
                 } else {
-                    console.log(index + 1, " / " + nbIndex);
                     if (index + 1 == nbIndex) {
                         self.visible = false;
                     } else {
