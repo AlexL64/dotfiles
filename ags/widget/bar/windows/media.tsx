@@ -6,6 +6,8 @@ export default function Media() {
 
     const players = AstalMpris.get_default();
 
+    const playerctld = AstalMpris.Player.new("playerctld");
+
     return <window
         name={"media"}
         marginTop={10}
@@ -14,11 +16,8 @@ export default function Media() {
         application={App}
         visible={false}
         setup={(self) => {
-            self.hook(bind(players, "players"), (_, players) => {
-                if (
-                    self.visible &&
-                    players.filter((player: AstalMpris.Player) => !player.busName.includes("playerctld")).length == 0
-                ) {
+            self.hook(bind(playerctld, "title"), (_, title) => {
+                if (self.visible && title == "") {
                     self.hide();
                 }
             })
@@ -49,7 +48,8 @@ function Player(player: AstalMpris.Player) {
 
     return <box
         className={"card"}
-        visible={bind(player, "busName").as((n) => !n.includes("playerctld"))}
+        // visible={bind(player, "busName").as((n) => !n!n.includes("playerctld"))}
+        visible={bind(player, "title").as((t) => t != "" && !player.busName.includes("playerctld"))}
         spacing={10}>
         <box
             className={"image"}
