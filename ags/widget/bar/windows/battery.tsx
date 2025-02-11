@@ -191,7 +191,7 @@ export default function Battery() {
                                     value={bind(device, "percentage")}
                                 />
                                 <centerbox className={"bottom"}>
-                                    <label label={bind(device, "percentage").as((p) => `${p * 100}%`)} halign={Gtk.Align.END} />
+                                    <label label={bind(device, "percentage").as((p) => `${Math.round(p * 100)}%`)} halign={Gtk.Align.END} />
                                 </centerbox>
                             </box>
                         </box>
