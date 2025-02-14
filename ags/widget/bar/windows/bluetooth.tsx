@@ -153,8 +153,8 @@ export default function Bluetooth() {
                                             label={""}
                                             onClick={(self) => {
                                                 const menu = optionsMenu(device);
-                                                // @ts-ignore
-                                                menu.popup_at_widget(self, Gdk.Gravity.SOUTH_EAST, Gdk.Gravity.NORTH_EAST, null);
+                                                
+                                                (menu as any).popup_at_widget(self, Gdk.Gravity.SOUTH_EAST, Gdk.Gravity.NORTH_EAST, null);
                                             }} />
                                     </box>
                                 </box>

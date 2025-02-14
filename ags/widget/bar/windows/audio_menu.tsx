@@ -125,8 +125,8 @@ function OutputDevicesContent() {
                                 label={""}
                                 onClick={(self) => {
                                     const menu = profilesMenu(speaker.id, "sinks");
-                                    // @ts-ignore
-                                    menu.popup_at_widget(self, Gdk.Gravity.NORTH_EAST, Gdk.Gravity.NORTH_WEST, null);
+                                    
+                                    (menu as any).popup_at_widget(self, Gdk.Gravity.NORTH_EAST, Gdk.Gravity.NORTH_WEST, null);
                                 }}
                             />
                         </box>
@@ -206,8 +206,8 @@ function InputDevicesContent() {
                                 label={""}
                                 onClick={(self) => {
                                     const menu = profilesMenu(mic.id, "sinks");
-                                    // @ts-ignore
-                                    menu.popup_at_widget(self, Gdk.Gravity.NORTH_EAST, Gdk.Gravity.NORTH_WEST, null);
+
+                                    (menu as any).popup_at_widget(self, Gdk.Gravity.NORTH_EAST, Gdk.Gravity.NORTH_WEST, null);
                                 }}
                             />
                         </box>
