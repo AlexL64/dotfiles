@@ -2,8 +2,7 @@ import WirePlumber from "gi://AstalWp";
 import { bind, exec, subprocess } from "astal";
 import { App } from "astal/gtk3";
 
-// @ts-ignore
-const audio = WirePlumber.get_default().audio;
+const audio = WirePlumber.get_default()!.audio;
 
 const speakerVolume = bind(audio.default_speaker, "volume").as((s) => `${Math.round(s * 100)}%`);
 

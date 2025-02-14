@@ -3,8 +3,7 @@ import { App, Astal, Gdk } from "astal/gtk3";
 import { GtkMenu, GtkMenuItem, GtkCheckButton } from "../../../my_types";
 import Wp from "gi://AstalWp";
 
-// @ts-ignore
-const audio = Wp.get_default().audio;
+const audio = Wp.get_default()!.audio;
 
 export default function AudioMenu() {
 
