@@ -3,8 +3,7 @@ import { App, Astal } from "astal/gtk3";
 import Wp from "gi://AstalWp";
 import Brightness from "./../services/brightness";
 
-// @ts-ignore
-const audio = Wp.get_default().audio;
+const audio = Wp.get_default()!.audio;
 
 const speaker = audio.defaultSpeaker;
 const mic = audio.defaultMicrophone;
