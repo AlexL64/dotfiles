@@ -62,6 +62,7 @@ export default function Tray() {
                                     switch (event.button) {
                                         case 1:
                                             item.activate(0, 0);
+                                            App.get_window("tray")?.hide();
                                             break;
                                         case 3:
                                             menu?.popup_at_widget(self, Gdk.Gravity.SOUTH_WEST, Gdk.Gravity.NORTH_EAST, null);
