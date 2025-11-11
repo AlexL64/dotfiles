@@ -6,6 +6,7 @@ import Privacy from "./modules/PrivacyIndicator";
 import Mpris from "./modules/Mpris";
 import Date from "./modules/Date";
 import Notifications from "./modules/Notification";
+import SysInfos from "./modules/SysInfos";
 // import Date from "./modules/date";
 // import Mpris from "./modules/mpris";
 // import SysInfos from "./modules/sysinfos";
@@ -38,8 +39,8 @@ export default function Bar(gdkmonitor: Gdk.Monitor, monitor = 0) {
             </box>
             <box $type="end" spacing={10}>
                 <Notifications />
-                {/* <SysInfos />
-                <SystemPanel /> */}
+                <SysInfos />
+                {/* <SystemPanel /> */}
             </box>
         </centerbox>
     </window>

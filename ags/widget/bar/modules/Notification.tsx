@@ -1,4 +1,4 @@
-import { createBinding, createState } from "ags";
+import { createState } from "ags";
 import { Gdk, Gtk } from "ags/gtk4";
 import { execAsync, subprocess } from "ags/process";
 
@@ -19,8 +19,7 @@ export default function Notifications() {
 
     return <button
         class={"notifications"}
-        cursor={Gdk.Cursor.new_from_name("pointer", null)}
-    >
+        cursor={Gdk.Cursor.new_from_name("pointer", null)}>
         <Gtk.GestureClick
             propagationPhase={Gtk.PropagationPhase.CAPTURE}
             button={Gdk.BUTTON_PRIMARY}

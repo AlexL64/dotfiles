@@ -1,4 +1,3 @@
-import { createBinding } from "ags";
 import { Gdk } from "ags/gtk4";
 import App from "ags/gtk4/app"
 import { createPoll } from "ags/time";
