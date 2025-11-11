@@ -1,0 +1,15 @@
+*
+!ags
+!fastfetch
+!fish
+!gtk-3.0
+!hypr
+!kitty
+!qt5ct
+!qt6ct
+!swaync
+!*-flags.conf
+!LICENSE
+!README.md
+!starship.toml
+!.gitignore
