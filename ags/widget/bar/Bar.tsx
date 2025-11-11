@@ -1,9 +1,7 @@
 import App from "ags/gtk4/app"
-import Astal from "gi://Astal?version=4.0"
-import Gtk from "gi://Gtk?version=4.0"
-import Gdk from "gi://Gdk?version=4.0"
+import { Astal, Gdk } from "ags/gtk4";
 import Workspaces from "./modules/Workspaces";
-// import Audio from "./modules/audio";
+import Audio from "./modules/Audio";
 // import Date from "./modules/date";
 // import Mpris from "./modules/mpris";
 // import SysInfos from "./modules/sysinfos";
@@ -25,16 +23,16 @@ export default function Bar(gdkmonitor: Gdk.Monitor, monitor = 0) {
         application={App}
         visible>
         <centerbox>
-            <box $type="start">
+            <box $type="start" spacing={10}>
                 <Workspaces />
-                {/* <Audio />
-                <Privacy /> */}
+                <Audio />
+                {/* <Privacy /> */}
             </box>
-            <box $type="center">
+            <box $type="center" spacing={10}>
                 {/* <Mpris />
                 <Date /> */}
             </box>
-            <box $type="end">
+            <box $type="end" spacing={10}>
                 {/* <Notifications />
                 <SysInfos />
                 <SystemPanel /> */}
