@@ -1,5 +1,5 @@
 import Hyprland from "gi://AstalHyprland?version=0.1";
-import { createBinding, onCleanup } from "ags"
+import { onCleanup } from "ags"
 import Gdk from "gi://Gdk?version=4.0";
 
 export default function Workspaces() {
