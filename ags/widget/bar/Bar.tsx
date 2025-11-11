@@ -2,6 +2,7 @@ import App from "ags/gtk4/app"
 import { Astal, Gdk } from "ags/gtk4";
 import Workspaces from "./modules/Workspaces";
 import Audio from "./modules/Audio";
+import Privacy from "./modules/PrivacyIndicator";
 // import Date from "./modules/date";
 // import Mpris from "./modules/mpris";
 // import SysInfos from "./modules/sysinfos";
@@ -26,7 +27,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor, monitor = 0) {
             <box $type="start" spacing={10}>
                 <Workspaces />
                 <Audio />
-                {/* <Privacy /> */}
+                <Privacy />
             </box>
             <box $type="center" spacing={10}>
                 {/* <Mpris />
