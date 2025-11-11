@@ -1,6 +1,6 @@
 import Hyprland from "gi://AstalHyprland?version=0.1";
 import { onCleanup } from "ags"
-import { Gdk } from "ags/gtk4";
+import { Gdk, Gtk } from "ags/gtk4";
 
 export default function Workspaces() {
 
@@ -12,7 +12,6 @@ export default function Workspaces() {
                 class={"workspace"}
                 cursor={Gdk.Cursor.new_from_name("pointer", null)}
                 label={i.toString()}
-
                 onClicked={() => {
                     hyprland.dispatch("workspace", i.toString());
                 }}

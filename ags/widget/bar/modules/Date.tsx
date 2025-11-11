@@ -8,12 +8,13 @@ export default function Date() {
         return GLib.DateTime.new_now_local().format("%A, %d. %b  %H:%M")!
     })
 
-    return <button
-        class={"date"}
-        cursor={Gdk.Cursor.new_from_name("pointer", null)}
-        onClicked={() => {
-            App.toggle_window("calendar");
-        }}>
-        <label label={date} />
-    </button>
+    return <box class={"date"}>
+        <button
+            cursor={Gdk.Cursor.new_from_name("pointer", null)}
+            onClicked={() => {
+                App.toggle_window("calendar");
+            }}>
+            <label label={date} />
+        </button>
+    </box>
 }

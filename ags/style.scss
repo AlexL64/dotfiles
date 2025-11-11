@@ -43,6 +43,20 @@ menuitem:hover {
     background: #1e1e2e;
 }
 
+label {
+    margin-left: 1px;
+    margin-top: 1px;
+}
+
+button {
+    transition: background-color 0.2s ease;
+    outline: none;
+
+    label {
+        transition: transform 0.2s ease;
+    }
+}
+
 .bar {
 
     .separator {
@@ -62,13 +76,25 @@ menuitem:hover {
             background-color: #313244;
             color: #cdd6f4;
 
+            &:hover {
+                background-color: #cdd6f433;
+            }
+
             &.active {
                 color: #cba6f7;
+
+                &:hover {
+                    background-color: #cba6f733;
+                }
             }
 
             &.urgent {
                 background-color: #f38ba8;
                 color: #313244;
+
+                &:hover {
+                    background-color: #f38ba8cc;
+                }
             }
 
             &.focused {
@@ -76,6 +102,10 @@ menuitem:hover {
 
                 &.active {
                     color: #313244;
+                }
+
+                &:hover {
+                    background-color: #cba6f7cc;
                 }
             }
         }
@@ -89,8 +119,16 @@ menuitem:hover {
             color: #89dceb;
             border-radius: 12px;
 
+            &:hover {
+                background-color: #89dceb33;
+            }
+
             &.muted {
                 color: #f38ba8;
+
+                &:hover {
+                    background-color: #f38ba833;
+                }
 
                 &.input label {
                     margin-left: 3px;
@@ -123,12 +161,20 @@ menuitem:hover {
             border-radius: 12px;
             border: 1px solid #cba6f7;
             padding: 0px 9px 0px 9px;
+
+            &:hover {
+                background-color: #cba6f733;
+            }
         }
 
         .infos {
             background-color: transparent;
             border-radius: 12px;
             padding: 0px 10px;
+
+            &:hover {
+                background-color: #cba6f733;
+            }
 
             .text {
 
@@ -153,28 +199,45 @@ menuitem:hover {
     }
 
     .date {
-        color: #cba6f7;
-        border-radius: 12px;
         background-color: #313244;
+        border-radius: 12px;
+
+        button {
+            color: #cba6f7;
+            border-radius: 12px;
+
+            &:hover {
+                background-color: #cba6f733;
+            }
+        }
     }
 
     .notifications {
         background-color: #313244;
         border-radius: 12px;
-        padding-left: 12px;
-        padding-right: 8px;
 
-        .icon {
-            color: #74c7ec;
+        button {
+            border-radius: 12px;
+            padding-left: 12px;
+            padding-right: 8px;
+
+            &:hover {
+                background-color: #74c7ec33;
+            }
+
+            .icon {
+                color: #74c7ec;
+            }
+
+            .number {
+                color: #f38ba8;
+                font-size: x-small;
+                font-weight: 900;
+                min-height: 0px;
+                margin-top: -10px;
+            }
         }
 
-        .number {
-            color: #f38ba8;
-            font-size: x-small;
-            font-weight: 900;
-            min-height: 0px;
-            margin-top: -10px;
-        }
     }
 
     .sysinfos {
@@ -190,29 +253,57 @@ menuitem:hover {
 
             &.memory {
                 color: #fab387;
+
+                &:hover {
+                    background-color: #fab38733;
+                }
             }
 
             &.storage {
                 color: #89b4fa;
+
+                &:hover {
+                    background-color: #89b4fa33;
+                }
             }
 
             &.brightness {
                 color: #f9e2af;
+
+                &:hover {
+                    background-color: #f9e2af33;
+                }
             }
 
             &.battery {
                 color: #cdd6f4;
 
+                &:hover {
+                    background-color: #cdd6f433;
+                }
+
                 &.charging {
                     color: #a6e3a1;
+
+                    &:hover {
+                        background-color: #a6e3a133;
+                    }
                 }
 
                 &.discharging {
                     color: #fab387;
+
+                    &:hover {
+                        background-color: #fab38733;
+                    }
                 }
 
                 &.charged {
-                    color: #cdd6f4
+                    color: #cdd6f4;
+
+                    &:hover {
+                        background-color: #cdd6f433;
+                    }
                 }
             }
         }
@@ -241,12 +332,20 @@ menuitem:hover {
 
             &.bluetooth {
                 padding: 0px 11px;
+
+                &:hover {
+                    background-color: #cdd6f433;
+                }
             }
 
             &.tray {
                 padding: 0px;
                 padding-left: 12px;
                 padding-right: 16px;
+
+                &:hover {
+                    background-color: #cdd6f433;
+                }
             }
 
             &.power {
@@ -254,6 +353,10 @@ menuitem:hover {
                 padding-left: 12px;
                 padding-right: 16px;
                 color: #f38ba8;
+
+                &:hover {
+                    background-color: #f38ba833;
+                }
             }
         }
     }

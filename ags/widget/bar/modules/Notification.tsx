@@ -17,22 +17,23 @@ export default function Notifications() {
         },
     )
 
-    return <button
-        class={"notifications"}
-        cursor={Gdk.Cursor.new_from_name("pointer", null)}>
-        <Gtk.GestureClick
-            propagationPhase={Gtk.PropagationPhase.CAPTURE}
-            button={Gdk.BUTTON_PRIMARY}
-            onPressed={() => execAsync("swaync-client -t -sw")}
-        />
-        <Gtk.GestureClick
-            propagationPhase={Gtk.PropagationPhase.CAPTURE}
-            button={Gdk.BUTTON_SECONDARY}
-            onPressed={() => execAsync("swaync-client -d -sw")}
-        />
-        <box>
-            <label class={"icon"} label={icon} />
-            <label class={"number"} label={number} />
-        </box>
-    </button>
+    return <box class={"notifications"}>
+        <button
+            cursor={Gdk.Cursor.new_from_name("pointer", null)}>
+            <Gtk.GestureClick
+                propagationPhase={Gtk.PropagationPhase.CAPTURE}
+                button={Gdk.BUTTON_PRIMARY}
+                onPressed={() => execAsync("swaync-client -t -sw")}
+            />
+            <Gtk.GestureClick
+                propagationPhase={Gtk.PropagationPhase.CAPTURE}
+                button={Gdk.BUTTON_SECONDARY}
+                onPressed={() => execAsync("swaync-client -d -sw")}
+            />
+            <box>
+                <label class={"icon"} label={icon} />
+                <label class={"number"} label={number} />
+            </box>
+        </button>
+    </box>
 }
