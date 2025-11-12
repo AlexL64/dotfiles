@@ -52,7 +52,7 @@ export default function Mpris() {
             cursor={Gdk.Cursor.new_from_name("pointer", null)}
             tooltipText={createBinding(player, "title")}
             onClicked={() => {
-                App.toggle_window("media");
+                App.toggle_window("Media");
             }}>
             <box>
                 <box class={"text"} orientation={Gtk.Orientation.VERTICAL}>

@@ -11,6 +11,7 @@ import Screenshot from "./widget/Screenshot"
 import Keybinds from "./widget/Keybinds"
 import AudioMenu from "./widget/bar/windows/AudioMenu"
 import Calendar from "./widget/bar/windows/Calendar"
+import Media from "./widget/bar/windows/Media"
 
 monitorFile(
     "./style.scss",
@@ -34,6 +35,7 @@ App.start({
 
         // Bar Menus
         AudioMenu();
+        Media();
         Calendar();
 
         // Menus
