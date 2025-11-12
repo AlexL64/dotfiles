@@ -1,4 +1,4 @@
-import { Astal, Gdk, Gtk } from "ags/gtk4";
+import { Astal} from "ags/gtk4";
 import Brightness from "../services/Brightness";
 import Wp from "gi://AstalWp?version=0.1"
 import App from "ags/gtk4/app"

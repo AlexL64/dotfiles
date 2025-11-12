@@ -7,6 +7,7 @@ import AppLauncher from "./widget/AppLauncher"
 import Clipboard from "./widget/Clipboard"
 import Toast from "./widget/Toast"
 import PowerSelector from "./widget/PowerSelector"
+import Screenshot from "./widget/Screenshot"
 
 monitorFile(
     "./style.scss",
@@ -32,5 +33,6 @@ App.start({
         Clipboard();
         AppLauncher();
         PowerSelector();
+        Screenshot();
     },
 })
