@@ -4,6 +4,7 @@ import Bar from "./widget/bar/Bar"
 import { monitorFile } from "ags/file"
 import { exec } from "ags/process"
 import AppLauncher from "./widget/AppLauncher"
+import Clipboard from "./widget/Clipboard"
 
 monitorFile(
     "./style.scss",
@@ -23,6 +24,7 @@ App.start({
         App.get_monitors().map(Bar);
 
         // Menus
+        Clipboard();
         AppLauncher();
     },
 })
