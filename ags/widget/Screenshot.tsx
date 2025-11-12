@@ -6,7 +6,7 @@ import { timeout } from "ags/time";
 export default function Screenshot() {
 
     return <window
-        name={"screenshot"}
+        name={"Screenshot"}
         anchor={Astal.WindowAnchor.TOP}
         exclusivity={Astal.Exclusivity.IGNORE}
         layer={Astal.Layer.OVERLAY}

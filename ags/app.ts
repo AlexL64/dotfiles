@@ -8,6 +8,7 @@ import Clipboard from "./widget/Clipboard"
 import Toast from "./widget/Toast"
 import PowerSelector from "./widget/PowerSelector"
 import Screenshot from "./widget/Screenshot"
+import Keybinds from "./widget/Keybinds"
 
 monitorFile(
     "./style.scss",
@@ -32,6 +33,7 @@ App.start({
         // Menus
         Clipboard();
         AppLauncher();
+        Keybinds();
         PowerSelector();
         Screenshot();
     },
