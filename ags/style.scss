@@ -1078,6 +1078,10 @@ box.power {
     button {
         padding: 6px 20px;
 
+        &:hover {
+            background-color: #cba6f733;
+        }
+
         label {
             &.lock {
                 color: #89b4fa;

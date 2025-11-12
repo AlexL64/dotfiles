@@ -61,7 +61,7 @@ export default function SystemPanel() {
             cursor={Gdk.Cursor.new_from_name("pointer", null)}
             label={""}
             onClicked={() => {
-                App.toggle_window("power");
+                App.toggle_window("Power");
             }}
         />
     </box>
