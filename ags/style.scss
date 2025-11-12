@@ -1325,7 +1325,7 @@ box.brightness {
     border-radius: 12px;
     padding: 10px;
 
-    eventbox {
+    box {
         background-color: #313244;
         border-radius: 12px;
 
@@ -1346,7 +1346,8 @@ box.brightness {
         &.selected {
             background-color: #45475a;
             border: 2px solid #cba6f7;
-            padding: 8px;
+            margin-top: -2px;
+            margin-left: -2px;
         }
 
         &.lock {

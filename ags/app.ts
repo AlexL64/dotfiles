@@ -6,6 +6,7 @@ import { exec } from "ags/process"
 import AppLauncher from "./widget/AppLauncher"
 import Clipboard from "./widget/Clipboard"
 import Toast from "./widget/Toast"
+import PowerSelector from "./widget/PowerSelector"
 
 monitorFile(
     "./style.scss",
@@ -30,5 +31,6 @@ App.start({
         // Menus
         Clipboard();
         AppLauncher();
+        PowerSelector();
     },
 })
