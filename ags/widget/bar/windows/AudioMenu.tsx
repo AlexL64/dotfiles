@@ -12,7 +12,7 @@ export default function AudioMenu() {
     const [selectedMenu, selectedMenuSet] = createState("Output Devices");
 
     return <window
-        name={"audioMenu"}
+        name={"AudioMenu"}
         marginTop={10}
         marginLeft={344}
         anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT}
