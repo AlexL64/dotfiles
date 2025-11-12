@@ -5,6 +5,7 @@ import { monitorFile } from "ags/file"
 import { exec } from "ags/process"
 import AppLauncher from "./widget/AppLauncher"
 import Clipboard from "./widget/Clipboard"
+import Toast from "./widget/Toast"
 
 monitorFile(
     "./style.scss",
@@ -22,6 +23,9 @@ App.start({
         // Bar
         App.apply_css(style);
         App.get_monitors().map(Bar);
+
+        // Toast
+        Toast();
 
         // Menus
         Clipboard();
