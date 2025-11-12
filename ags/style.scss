@@ -796,6 +796,10 @@ box.battery {
                     padding: 0px;
                     min-height: 24px;
                     min-width: 24px;
+
+                    &:hover {
+                        background-color: #f38ba8aa;
+                    }
                 }
             }
 
@@ -810,6 +814,10 @@ box.battery {
             padding: 0px 3px;
             background-color: #45475a;
             border-radius: 3px;
+
+            &:hover {
+                background-color: #45475aaa;
+            }
         }
     }
 }
@@ -830,8 +838,13 @@ box.battery {
     .apps {
         .app {
             background-color: #313244;
+            transition: background-color 0.2s ease;
             padding: 5px;
             border-radius: 6px;
+
+            &:hover {
+                background-color: #313244aa;
+            }
 
             &.toggled {
                 padding: 3px;
@@ -858,6 +871,10 @@ box.battery {
             padding: 0px 3px;
             background-color: #45475a;
             border-radius: 3px;
+
+            &:hover {
+                background-color: #45475aaa;
+            }
         }
     }
 }
