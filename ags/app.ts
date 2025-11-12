@@ -9,6 +9,7 @@ import Toast from "./widget/Toast"
 import PowerSelector from "./widget/PowerSelector"
 import Screenshot from "./widget/Screenshot"
 import Keybinds from "./widget/Keybinds"
+import AudioMenu from "./widget/bar/windows/AudioMenu"
 
 monitorFile(
     "./style.scss",
@@ -29,6 +30,9 @@ App.start({
 
         // Toast
         Toast();
+
+        // Bar Menus
+        AudioMenu();
 
         // Menus
         Clipboard();

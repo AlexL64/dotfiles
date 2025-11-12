@@ -43,6 +43,18 @@ menuitem:hover {
     background: #1e1e2e;
 }
 
+popover contents{
+    background-color: #1e1e2e;
+    border-radius: 12px;
+    border: 1px solid #cba6f7;
+
+    box box {
+        border-radius: 12px;
+        background-color: #313244;
+        padding: 6px;
+    }
+}
+
 label {
     margin-left: 1px;
     margin-top: 1px;
