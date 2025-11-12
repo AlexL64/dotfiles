@@ -5,7 +5,7 @@
   "layer": "overlay",
   "control-center-layer": "top",
   "layer-shell": true,
-  "cssPriority": "application",
+  "cssPriority": "user",
   "control-center-margin-top": 0,
   "control-center-margin-bottom": 0,
   "control-center-margin-right": 0,
@@ -20,7 +20,7 @@
   "timeout-critical": 0,
   "fit-to-screen": true,
   "relative-timestamps": true,
-  "control-center-width": 500,
+  "control-center-width": 400,
   "control-center-height": 600,
   "notification-window-width": 500,
   "keyboard-shortcuts": true,
@@ -31,7 +31,6 @@
   "script-fail-notify": true,
   "widgets": [
     "buttons-grid",
-    "mpris",
     "title",
     "dnd",
     "notifications"
@@ -44,10 +43,6 @@
     },
     "dnd": {
       "text": "Do Not Disturb"
-    },
-    "mpris": {
-      "image-size": 96,
-      "image-radius": 10
     },
     "buttons-grid": {
       "actions": [
