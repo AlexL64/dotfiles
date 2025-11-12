@@ -2,7 +2,6 @@ import { Astal, Gdk, Gtk } from "ags/gtk4";
 import App from "ags/gtk4/app"
 import Apps from "gi://AstalApps?version=0.1"
 import { createState, For, With } from "ags";
-import { createBinding } from "ags";
 
 const apps = new Apps.Apps();
 
@@ -28,6 +27,13 @@ export default function AppLauncher() {
         keymode={Astal.Keymode.EXCLUSIVE}
         application={App}
         visible={false}
+        onNotifyVisible={(self) => {
+            if (!self.visible) {
+                textResetSet(true);
+                selectedIdSet(0);
+                selectedPageSet(0);
+            }
+        }}
         $={(self) => {
 
             const eventControllerKey = new Gtk.EventControllerKey();
@@ -66,19 +72,20 @@ export default function AppLauncher() {
                         break;
                 }
             })
-
-
-            createBinding(self, "visible").subscribe(() => {
-                if (!self.visible) {
-                    textResetSet(true);
-                    selectedIdSet(0);
-                    selectedPageSet(0);
-                }
-            })
         }}>
         <box class={"app_launcher"} orientation={Gtk.Orientation.VERTICAL} spacing={10} vexpand hexpand>
             <entry
                 class={"search"}
+                onNotifyText={(self) => {
+                    textSet(self.text);
+
+                    selectedIdSet(0);
+                    selectedPageSet(0);
+                }}
+                onActivate={(self) => {
+                    selectedApp.get().launch();
+                    App.get_window("AppLauncher")?.hide();
+                }}
                 $={(self) => {
                     textReset.subscribe(() => {
                         if (textReset.get()) {
@@ -86,18 +93,6 @@ export default function AppLauncher() {
                             textResetSet(false);
                         }
                     })
-
-                    self.connect("changed", () => {
-                        textSet(self.text);
-
-                        selectedIdSet(0);
-                        selectedPageSet(0);
-                    });
-
-                    self.connect("activate", () => {
-                        selectedApp.get().launch();
-                        App.get_window("AppLauncher")?.hide();
-                    });
                 }}
             />
             <box>
@@ -117,68 +112,75 @@ export default function AppLauncher() {
                             return searchResult.slice(p * itemsPerPage, (p * itemsPerPage) + itemsPerPage)
                         });
 
-                        return <box
-                            class={"apps"}
-                            orientation={Gtk.Orientation.VERTICAL}
-                            spacing={5}
-                            vexpand
-                            hexpand>
-                            <For each={list}>
-                                {(app) => {
-                                    const id = i;
-                                    i++;
+                        return <box>
+                            <With value={list}>
+                                {(l) => {
+                                    return <box
+                                        class={"apps"}
+                                        orientation={Gtk.Orientation.VERTICAL}
+                                        spacing={5}
+                                        vexpand
+                                        hexpand>
+                                        <For each={list}>
+                                            {(app) => {
+                                                const id = i;
+                                                i++;
 
-                                    let lastClick = 0;
+                                                let lastClick = 0;
 
-                                    return <box cursor={Gdk.Cursor.new_from_name("pointer", null)}
-                                    >
-                                        <Gtk.GestureClick
-                                            propagationPhase={Gtk.PropagationPhase.CAPTURE}
-                                            button={Gdk.BUTTON_PRIMARY}
-                                            onPressed={(event) => {
-                                                if (event.get_current_event_time() - lastClick < 200) {
-                                                    app.launch();
-                                                    App.get_window("AppLauncher")?.hide();
-                                                } else {
-                                                    selectedIdSet(id);
-                                                }
-                                                lastClick = event.get_current_event_time();
+                                                return <box cursor={Gdk.Cursor.new_from_name("pointer", null)}
+                                                >
+                                                    <Gtk.GestureClick
+                                                        propagationPhase={Gtk.PropagationPhase.CAPTURE}
+                                                        button={Gdk.BUTTON_PRIMARY}
+                                                        onPressed={(event) => {
+                                                            if (event.get_current_event_time() - lastClick < 200) {
+                                                                app.launch();
+                                                                App.get_window("AppLauncher")?.hide();
+                                                            } else {
+                                                                selectedIdSet(id);
+                                                            }
+                                                            lastClick = event.get_current_event_time();
+                                                        }}
+                                                    />
+                                                    <box
+                                                        class={"app"}
+                                                        heightRequest={64}
+                                                        hexpand
+                                                        $={(self) => {
+                                                            if (id == selectedId.get()) {
+                                                                self.add_css_class("toggled");
+                                                                selectedAppSet(app);
+                                                            }
+
+                                                            selectedId.subscribe(() => {
+                                                                id == selectedId.get() ? self.add_css_class("toggled") : self.remove_css_class("toggled");
+
+                                                                if (id == selectedId.get()) {
+                                                                    selectedAppSet(app);
+                                                                }
+                                                            })
+                                                        }}>
+                                                        <image class={"icon"} iconName={app.iconName} pixelSize={54} />
+                                                        <box class={"infos"} orientation={Gtk.Orientation.VERTICAL}>
+                                                            <label class={"name"} label={app.name.trim()} halign={Gtk.Align.START} />
+                                                            <label
+                                                                class={"description"}
+                                                                label={app.description}
+                                                                halign={Gtk.Align.START}
+                                                                valign={Gtk.Align.START}
+                                                                maxWidthChars={55}
+                                                                lines={2}
+                                                            />
+                                                        </box>
+                                                    </box>
+                                                </box>
                                             }}
-                                        />
-                                        <box
-                                            class={"app"}
-                                            heightRequest={64}
-                                            hexpand
-                                            $={(self) => {
-                                                if (id == selectedId.get()) {
-                                                    self.add_css_class("toggled");
-                                                    selectedAppSet(app);
-                                                }
-
-                                                selectedId.subscribe(() => {
-                                                    id == selectedId.get() ? self.add_css_class("toggled") : self.remove_css_class("toggled");
-
-                                                    if (id == selectedId.get()) {
-                                                        selectedAppSet(app);
-                                                    }
-                                                })
-                                            }}>
-                                            <image class={"icon"} iconName={app.iconName} pixelSize={54} />
-                                            <box class={"infos"} orientation={Gtk.Orientation.VERTICAL}>
-                                                <label class={"name"} label={app.name.trim()} halign={Gtk.Align.START} />
-                                                <label
-                                                    class={"description"}
-                                                    label={app.description}
-                                                    halign={Gtk.Align.START}
-                                                    valign={Gtk.Align.START}
-                                                    maxWidthChars={55}
-                                                    lines={2}
-                                                />
-                                            </box>
-                                        </box>
+                                        </For>
                                     </box>
                                 }}
-                            </For>
+                            </With>
+
                         </box>
                     }}
                 </With>

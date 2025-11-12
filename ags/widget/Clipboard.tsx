@@ -3,7 +3,6 @@ import { Astal, Gdk, Gtk } from "ags/gtk4";
 import ClipboardService from "../services/Clipboard";
 import { execAsync } from "ags/process";
 import { createBinding, createState, With } from "ags";
-import Pango from "gi://Pango?version=1.0";
 
 function truncateString(str: string, length: number): string {
     if (str.length > length) {
@@ -36,15 +35,14 @@ export default function Clipboard() {
         keymode={Astal.Keymode.EXCLUSIVE}
         application={App}
         visible={false}
+        onNotifyVisible={(self) => {
+            if (!self.visible) {
+                selectedLineSet(0);
+                selectedPageSet(0);
+                searchValueResetSet(true);
+            }
+        }}
         $={(self) => {
-            self.connect("notify::visible", () => {
-                if (!self.visible) {
-                    selectedLineSet(0);
-                    selectedPageSet(0);
-                    searchValueResetSet(true);
-                }
-            })
-
             const eventControllerKey = new Gtk.EventControllerKey();
 
             self.add_controller(eventControllerKey);
@@ -87,6 +85,13 @@ export default function Clipboard() {
                 <entry
                     class={"search"}
                     hexpand
+                    onNotifyText={(self) => {
+                        searchValueSet(self.text);
+                    }}
+                    onActivate={(self) => {
+                        execAsync(["bash", "-c", `cliphist list | grep ${selectedId.get()} | cliphist decode | wl-copy`]);
+                        App.get_window("Clipboard")?.hide();
+                    }}
                     $={(self) => {
                         searchValueReset.subscribe(() => {
                             if (searchValueReset.get()) {
@@ -94,15 +99,6 @@ export default function Clipboard() {
                                 searchValueResetSet(false);
                             }
                         })
-
-                        self.connect("changed", () => {
-                            searchValueSet(self.text);
-                        })
-
-                        self.connect("activate", () => {
-                            execAsync(["bash", "-c", `cliphist list | grep ${selectedId.get()} | cliphist decode | wl-copy`]);
-                            App.get_window("Clipboard")?.hide();
-                        });
                     }}
                 />
                 <button
