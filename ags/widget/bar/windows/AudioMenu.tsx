@@ -4,6 +4,7 @@ import App from "ags/gtk4/app"
 import { Astal, Gdk, Gtk } from "ags/gtk4";
 import { timeout } from "ags/time";
 import { exec } from "ags/process";
+import Pango from "gi://Pango?version=1.0";
 
 const audio = Wp.get_default()!.audio;
 
@@ -15,6 +16,7 @@ export default function AudioMenu() {
         name={"AudioMenu"}
         marginTop={10}
         marginLeft={344}
+        widthRequest={500}
         anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT}
         exclusivity={Astal.Exclusivity.NORMAL}
         application={App}
@@ -107,9 +109,11 @@ function OutputDevicesContent() {
                         <label
                             class={"description"}
                             label={createBinding(speaker, "description")}
-                            // truncate
+                            ellipsize={Pango.EllipsizeMode.END}
+                            maxWidthChars={20}
                             hexpand
                             xalign={0}
+                            tooltipText={createBinding(speaker, "description")}
                         />
                         <box class={"settings"} spacing={10}>
                             <button
@@ -192,9 +196,11 @@ function InputDevicesContent() {
                         <label
                             class={"description"}
                             label={createBinding(mic, "description")}
-                            // truncate
+                            ellipsize={Pango.EllipsizeMode.END}
+                            maxWidthChars={10}
                             hexpand
                             xalign={0}
+                            tooltipText={createBinding(mic, "description")}
                         />
                         <box class={"settings"} spacing={10}>
                             <button
@@ -277,10 +283,11 @@ function ApplicationsContent() {
                             <label
                                 class={"description"}
                                 label={createBinding(stream, "description")}
-                                // truncate
-                                lines={1}
+                                ellipsize={Pango.EllipsizeMode.END}
+                                maxWidthChars={10}
                                 hexpand
                                 xalign={0}
+                                tooltipText={createBinding(stream, "description")}
                             />
                         </box>
                         <box>
@@ -368,7 +375,7 @@ function calculateHeight() {
         nb = nbStreams;
     }
 
-    return nb > 1 ? 20 + (nb * 80) + ((nb - 1) * 10) : 100;
+    return nb > 1 ? 20 + (nb * 82) + ((nb - 1) * 10) : 100;
 }
 
 function profilesMenu(index: number, type: string) {
