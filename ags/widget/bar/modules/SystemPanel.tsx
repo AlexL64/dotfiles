@@ -9,30 +9,6 @@ const network = Network.get_default();
 
 export default function SystemPanel() {
 
-    const test = createBinding(network, "primary").as((type) => {
-        switch (type) {
-            case 0:
-                return <image iconName={"network-wired-disconnected-symbolic"} />
-            case 1:
-                return <image iconName={"network-wired-symbolic"} />
-            case 2:
-                return <image iconName={createBinding(network.wifi, "strength").as((s) => {
-
-                    const icons = {
-                        100: "network-wireless-100",
-                        80: "network-wireless-80",
-                        60: "network-wireless-60",
-                        40: "network-wireless-40",
-                        20: "network-wireless-20",
-                    }
-
-                    const icon = [20, 40, 60, 80, 100].find(threshold => threshold >= s) as keyof typeof icons;
-
-                    return `${icons[icon]}`;
-                })} />
-        }
-    })
-
     return <box class={"system_panel"}>
         <button class={"network"}>
             <With value={createBinding(network, "primary")}>

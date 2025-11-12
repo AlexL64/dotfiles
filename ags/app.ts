@@ -3,6 +3,7 @@ import style from "./style.scss"
 import Bar from "./widget/bar/Bar"
 import { monitorFile } from "ags/file"
 import { exec } from "ags/process"
+import AppLauncher from "./widget/AppLauncher"
 
 monitorFile(
     "./style.scss",
@@ -20,5 +21,8 @@ App.start({
         // Bar
         App.apply_css(style);
         App.get_monitors().map(Bar);
+
+        // Menus
+        AppLauncher();
     },
 })
