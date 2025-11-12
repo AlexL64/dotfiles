@@ -43,7 +43,7 @@ menuitem:hover {
     background: #1e1e2e;
 }
 
-popover contents{
+popover contents {
     background-color: #1e1e2e;
     border-radius: 12px;
     border: 1px solid #cba6f7;
@@ -390,6 +390,10 @@ button {
                 font-size: 14px;
             }
 
+            &:hover {
+                background-color: #cba6f733;
+            }
+
             &.toggled {
                 background-color: #45475a;
                 color: #cba6f7;
@@ -459,6 +463,15 @@ button {
                         }
                     }
                 }
+            }
+
+            .profiles {
+                label {
+                    color: #e8ebf6;
+                }
+
+
+
             }
 
             .bar {

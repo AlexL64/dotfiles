@@ -135,6 +135,7 @@ function OutputDevicesContent() {
                     <box>
                         <button
                             class={"toggle"}
+                            cursor={Gdk.Cursor.new_from_name("pointer", null)}
                             onClicked={() => {
                                 speaker.mute = !speaker.mute;
                             }}>
@@ -218,6 +219,7 @@ function InputDevicesContent() {
                     <box>
                         <button
                             class={"toggle"}
+                            cursor={Gdk.Cursor.new_from_name("pointer", null)}
                             onClicked={() => {
                                 mic.mute = !mic.mute;
                             }}>
@@ -284,6 +286,7 @@ function ApplicationsContent() {
                         <box>
                             <button
                                 class={"toggle"}
+                                cursor={Gdk.Cursor.new_from_name("pointer", null)}
                                 onClicked={() => {
                                     stream.mute = !stream.mute;
                                 }}>
