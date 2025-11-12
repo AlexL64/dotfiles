@@ -17,7 +17,7 @@ import SystemPanel from "./modules/SystemPanel";
 
 export default function Bar(gdkmonitor: Gdk.Monitor, monitor = 0) {
     return <window
-        name={`bar-${monitor}`}
+        name={`Bar-${monitor}`}
         class={'bar'}
         gdkmonitor={gdkmonitor}
         heightRequest={36}
