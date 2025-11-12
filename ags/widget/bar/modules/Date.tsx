@@ -12,7 +12,7 @@ export default function Date() {
         <button
             cursor={Gdk.Cursor.new_from_name("pointer", null)}
             onClicked={() => {
-                App.toggle_window("calendar");
+                App.toggle_window("Calendar");
             }}>
             <label label={date} />
         </button>

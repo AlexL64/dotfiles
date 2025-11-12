@@ -10,6 +10,7 @@ import PowerSelector from "./widget/PowerSelector"
 import Screenshot from "./widget/Screenshot"
 import Keybinds from "./widget/Keybinds"
 import AudioMenu from "./widget/bar/windows/AudioMenu"
+import Calendar from "./widget/bar/windows/Calendar"
 
 monitorFile(
     "./style.scss",
@@ -33,6 +34,7 @@ App.start({
 
         // Bar Menus
         AudioMenu();
+        Calendar();
 
         // Menus
         Clipboard();

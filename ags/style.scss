@@ -605,6 +605,7 @@ button {
 
         &.time {
             font-size: 64px;
+            color:#cba6f7
         }
 
         &.date {
@@ -619,38 +620,51 @@ button {
 
     .calendar {
         background-color: #313244;
-        border: none;
-        padding: 5px;
         border-radius: 12px;
 
-        &:selected {
-            color: #cba6f7;
-        }
-
-        .header {
-            border-top-right-radius: 12px;
-            border-top-left-radius: 12px;
-        }
-
-        .button {
-            color: #cba6f7;
-            padding: 4px;
-            border-radius: 6px;
-        }
-
-        .button:hover {
-            background-color: #cba6f7;
-            color: #cdd6f4;
-        }
-
-        .highlight {
-            color: #f38ba8
-        }
-
-        &:indeterminate {
-            color: #6c7086;
+        grid {
+            label.today {
+                color: #cba6f7;
+            }
         }
     }
+
+    // .calendar {
+    //     background-color: red;
+    //     background-color: #313244;
+    //     border: none;
+    //     padding: 5px;
+    //     border-radius: 12px;
+
+    //     &:selected {
+    //         color: #cba6f7;
+    //         padding: 10px;
+    //     }
+
+    //     .header {
+    //         border-top-right-radius: 12px;
+    //         border-top-left-radius: 12px;
+    //     }
+
+    //     .button {
+    //         color: #cba6f7;
+    //         padding: 4px;
+    //         border-radius: 6px;
+    //     }
+
+    //     .button:hover {
+    //         background-color: #cba6f7;
+    //         color: #cdd6f4;
+    //     }
+
+    //     .highlight {
+    //         color: #f38ba8
+    //     }
+
+    //     &:indeterminate {
+    //         color: #6c7086;
+    //     }
+    // }
 }
 
 box.battery {
