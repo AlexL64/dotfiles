@@ -1,7 +1,7 @@
 import { Astal, Gdk, Gtk } from "ags/gtk4";
 import AstalMpris from "gi://AstalMpris?version=0.1"
 import App from "ags/gtk4/app"
-import { createBinding, For, With } from "ags";
+import { createBinding, For } from "ags";
 import Pango from "gi://Pango?version=1.0";
 
 export default function Media() {
