@@ -47,6 +47,7 @@ popover contents {
     background-color: #313244;
     border-radius: 12px;
     border: 1px solid #cba6f7;
+    padding: 6px;
 
     modelbutton {
         border-radius: 8px;
@@ -1058,7 +1059,7 @@ box.bluetooth {
                         background-color: #45475a;
 
                         label {
-                            padding: 0px 15px 0px 12px;
+                            padding: 0px 15px 0px 13px;
                             margin: 0;
                         }
                     }

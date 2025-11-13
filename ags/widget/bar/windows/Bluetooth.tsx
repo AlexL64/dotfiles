@@ -2,6 +2,7 @@ import { Astal, Gdk, Gtk } from "ags/gtk4";
 import AstalBluetooth from "gi://AstalBluetooth?version=0.1";
 import App from "ags/gtk4/app";
 import { createBinding, With } from "ags";
+import GLib from "gi://GLib?version=2.0";
 
 const bluetooth = AstalBluetooth.get_default();
 const adapter = bluetooth.adapter;
@@ -171,9 +172,12 @@ export default function Bluetooth() {
                                                         }
                                                     }}
                                                 />
-                                                <menubutton class={"options"} label={""} direction={Gtk.ArrowType.NONE} cursor={Gdk.Cursor.new_from_name("pointer", null)}>
-
-                                                    <popover>
+                                                <menubutton
+                                                    class={"options"}
+                                                    label={""}
+                                                    direction={Gtk.ArrowType.NONE}
+                                                    cursor={Gdk.Cursor.new_from_name("pointer", null)}>
+                                                    <popover halign={Gtk.Align.END} >
                                                         <box orientation={Gtk.Orientation.VERTICAL} spacing={5}>
                                                             <button
                                                                 label={createBinding(device, "paired").as((d) => d ? "Remove" : "Add")}
@@ -182,7 +186,7 @@ export default function Bluetooth() {
                                                                 }} />
                                                             <button
                                                                 label={createBinding(device, "trusted").as((d) => d ? "Untrust" : "Trust")}
-                                                                onClicked={() => {
+                                                                onClicked={(self) => {
                                                                     device.set_trusted(!device.get_trusted());
                                                                 }} />
                                                             <button

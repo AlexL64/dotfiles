@@ -417,7 +417,13 @@ function profilesMenu(index: number, type: string) {
 
     return <menubutton class={"profiles"} label={""} direction={Gtk.ArrowType.NONE} cursor={Gdk.Cursor.new_from_name("pointer", null)}>
 
-        <popover>
+        <popover $={(self) => {
+            const width = self.get_first_child()?.measure(Gtk.Orientation.HORIZONTAL, 999)[0];
+
+            if (width != undefined) {
+                // self.marginStart = width;
+            }
+        }} halign={Gtk.Align.START}>
             <box orientation={Gtk.Orientation.VERTICAL} spacing={5}>
                 {profilesList.map((p) => {
                     return <box>
@@ -426,7 +432,7 @@ function profilesMenu(index: number, type: string) {
                             <Gtk.GestureClick
                                 propagationPhase={Gtk.PropagationPhase.CAPTURE}
                                 button={Gdk.BUTTON_PRIMARY}
-                                onPressed={(event) => {
+                                onPressed={() => {
                                     print(cardSerial);
                                     print(p.name);
                                     exec(`pactl set-card-profile ${cardSerial} "${p.name}"`);
