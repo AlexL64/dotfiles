@@ -30,7 +30,7 @@ export default function SysInfos() {
 
     const battery = Battery.get_default();
 
-    const idle = App.get_window("idle");
+    const idle = App.get_window("Idle");
 
     return <box class={"sysinfos"}>
         <button class={"cpu"}>
@@ -100,7 +100,7 @@ export default function SysInfos() {
             class={"battery"}
             cursor={Gdk.Cursor.new_from_name("pointer", null)}
             onClicked={() => {
-                App.toggle_window("battery");
+                App.toggle_window("Battery");
             }}
             $={(self) => {
                 switch (battery.state) {

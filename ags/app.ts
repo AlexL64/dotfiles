@@ -15,6 +15,8 @@ import Media from "./widget/bar/windows/Media"
 import Power from "./widget/bar/windows/Power"
 import Tray from "./widget/bar/windows/Tray"
 import Bluetooth from "./widget/bar/windows/Bluetooth"
+import Battery from "./widget/bar/windows/Battery"
+import Idle from "./widget/Idle"
 
 monitorFile(
     "./style.scss",
@@ -29,20 +31,25 @@ App.start({
     css: style,
     main() {
 
-        // Bar
         App.apply_css(style);
-        App.get_monitors().map(Bar);
 
-        // Toast
-        Toast();
+        // Idle
+        Idle();
+
+        // Bar
+        App.get_monitors().map(Bar);
 
         // Bar Menus
         AudioMenu();
         Media();
         Calendar();
+        Battery();
         Bluetooth();
         Tray();
         Power();
+
+        // Toast
+        Toast();
 
         // Menus
         Clipboard();

@@ -680,6 +680,10 @@ box.battery {
             &.toggled {
                 background-color: #cba6f7;
             }
+
+            &:hover{
+                background-color: #45475aaa;
+            }
         }
     }
 
@@ -721,42 +725,48 @@ box.battery {
             }
 
             .selector {
-                margin: 0px 10px 3px 10px;
-
-                value {
-                    font-size: 0px;
-                }
-
-                marks {
+                label {
                     color: #a6adc8;
+                }
 
-                    mark {
-                        indicator {
-                            min-width: 1px;
-                            min-height: 8px;
-                            margin-bottom: 5px;
-                            margin-top: 0px;
-                            color: #6c7086;
-                        }
+                .indicators {
+                    margin: 5px 5px 0px 5px;
+
+                    box {
+                        background-color: #6c7086;
+                        min-height: 8px;
+                        min-width: 2px;
+                        border-radius: 1px;
                     }
                 }
 
-                trough {
-                    background-color: #45475a;
-                    border-radius: 1px;
+                scale {
+                    margin: 5px;
+                    padding: 0px;
 
-                    highlight {
-                        min-height: 2px;
+                    value {
+                        font-size: 0px;
+                    }
+
+                    trough {
+                        background-color: #45475a;
+                        border-radius: 3px;
                         margin: 0px;
-                        border-radius: 1px;
-                        background-color: #cba6f7;
-                    }
+                        padding: 0px;
 
-                    slider {
-                        background-color: #1e1e2e;
-                        border-radius: 16px;
-                    }
+                        highlight {
+                            min-height: 3px;
+                            margin: 0px;
+                            border-radius: 3px;
+                            background-color: #cba6f7;
+                        }
 
+                        slider {
+                            background-color: #1e1e2e;
+                            border-radius: 16px;
+                        }
+
+                    }
                 }
             }
         }
