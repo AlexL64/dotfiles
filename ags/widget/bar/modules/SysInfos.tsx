@@ -65,16 +65,17 @@ export default function SysInfos() {
             class={"brightness"}
             cursor={Gdk.Cursor.new_from_name("pointer", null)}
             onClicked={() => {
-                App.toggle_window("brightness");
+                App.toggle_window("Brightness");
             }}
             $={(self) => {
-                const scroll = new Gtk.EventControllerScroll
-                scroll.flags = Gtk.EventControllerScrollFlags.BOTH_AXES | Gtk.EventControllerScrollFlags.KINETIC
+                const scroll = new Gtk.EventControllerScroll;
+                scroll.flags = Gtk.EventControllerScrollFlags.BOTH_AXES | Gtk.EventControllerScrollFlags.KINETIC;
 
-                self.add_controller(scroll)
+                self.add_controller(scroll);
 
                 scroll.connect("scroll", (_, x, y) => {
-                    y > 0 ? exec(["bash", "-c", "brightnessctl set 1%-"]) : exec(["bash", "-c", "brightnessctl set +1%"])
+                    // y > 0 ? exec(["bash", "-c", "brightnessctl --device=intel_backlight set 1%-"]) : exec(["bash", "-c", "brightnessctl --device=intel_backlight set +1%"]);
+                    y > 0 ? brightness.screen -= 0.01 : brightness.screen += 0.01;
                 })
             }}>
             <box spacing={8}>

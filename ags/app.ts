@@ -17,6 +17,7 @@ import Tray from "./widget/bar/windows/Tray"
 import Bluetooth from "./widget/bar/windows/Bluetooth"
 import Battery from "./widget/bar/windows/Battery"
 import Idle from "./widget/Idle"
+import Brightness from "./widget/bar/windows/Brightness"
 
 monitorFile(
     "./style.scss",
@@ -43,6 +44,7 @@ App.start({
         AudioMenu();
         Media();
         Calendar();
+        Brightness();
         Battery();
         Bluetooth();
         Tray();

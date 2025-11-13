@@ -1,5 +1,5 @@
 import { monitorFile, readFileAsync } from "ags/file";
-import GObject, { getter, register, setter } from "ags/gobject";
+import GObject, { getter, register, setter, signal } from "ags/gobject";
 import { exec, execAsync } from "ags/process";
 
 const get = (args: string) => Number(exec(`brightnessctl ${args}`));
@@ -40,13 +40,13 @@ export default class Brightness extends GObject.Object {
 
     @setter(Number)
     set screen(percent) {
-        if (percent < 0)
-            percent = 0;
+        if (percent < 0.05)
+            percent = 0.05;
 
         if (percent > 1)
             percent = 1;
 
-        execAsync(`brightnessctl set ${Math.floor(percent * 100)}% -q`).then(() => {
+        execAsync(`brightnessctl --device=${screen} set ${Math.floor(percent * 100)}% -q`).then(() => {
             this.#screen = percent;
             this.notify("screen");
         })
@@ -66,7 +66,7 @@ export default class Brightness extends GObject.Object {
 
         monitorFile(kbdPath, async f => {
             const v = await readFileAsync(f);
-            this.#kbd = Number(v) / this.#kbdMax;
+            this.#kbd = Number(v);
             this.notify("kbd");
         })
     }
