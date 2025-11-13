@@ -44,14 +44,22 @@ menuitem:hover {
 }
 
 popover contents {
-    background-color: #1e1e2e;
+    background-color: #313244;
     border-radius: 12px;
     border: 1px solid #cba6f7;
 
-    box box {
-        border-radius: 12px;
-        background-color: #313244;
-        padding: 6px;
+    modelbutton {
+        border-radius: 8px;
+        outline: none;
+
+        &:hover {
+            background-color: #cba6f733;
+        }
+    }
+
+    separator {
+        background-color: #6c7086;
+        border-radius: 3px;
     }
 }
 
@@ -516,6 +524,17 @@ button {
             }
         }
     }
+
+    popover contents {
+        box box {
+            border-radius: 8px;
+            outline: none;
+
+            &:hover {
+                background-color: #cba6f733;
+            }
+        }
+    }
 }
 
 .media {
@@ -606,7 +625,7 @@ button {
 
         &.time {
             font-size: 64px;
-            color:#cba6f7
+            color: #cba6f7
         }
 
         &.date {
@@ -890,10 +909,13 @@ box.tray {
 
     .item {
         border-radius: 8px;
-        padding: 4px 8px;
 
-        icon {
-            font-size: 16px;
+        image {
+            font-size: 40px;
+        }
+
+        &:hover {
+            background-color: #cba6f733;
         }
     }
 }

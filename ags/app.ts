@@ -13,6 +13,7 @@ import AudioMenu from "./widget/bar/windows/AudioMenu"
 import Calendar from "./widget/bar/windows/Calendar"
 import Media from "./widget/bar/windows/Media"
 import Power from "./widget/bar/windows/Power"
+import Tray from "./widget/bar/windows/Tray"
 
 monitorFile(
     "./style.scss",
@@ -38,6 +39,7 @@ App.start({
         AudioMenu();
         Media();
         Calendar();
+        Tray();
         Power();
 
         // Menus
