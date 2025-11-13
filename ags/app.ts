@@ -65,3 +65,30 @@ App.start({
         Screenshot();
     },
 })
+
+App.connect("window-toggled", (_, window) => {
+    const blacklist = ["Bar", "Toast", "Clipboard", "Idle", "AppLauncher", "PowerSelector"];
+    const exceptions = ["Toast", "Clipboard", "Idle", "AppLauncher", "PowerSelector"];
+
+    if (blacklist.some(e => window.name.includes(e)) && !window.visible) {
+        window.hide();
+
+        if (window.name.includes("bar")) {
+            App.get_windows().forEach((w) => {
+                if (!exceptions.some(e => w.name.includes(e)) && w.name !== window.name) {
+                    w.visible ? w.hide() : null;
+                }
+            });
+        }
+    } else if (window.visible) {
+        App.get_windows().forEach((w) => {
+            if (exceptions.some(e => window.name.includes(e))) {
+                return;
+            }
+
+            if (!blacklist.some(e => w.name.includes(e)) && w.name !== window.name) {
+                w.visible ? w.hide() : null;
+            }
+        });
+    }
+});

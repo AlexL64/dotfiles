@@ -16,7 +16,7 @@ export default function Toast() {
     const brightness = Brightness.get_default();
 
     return <window
-        name={"toast"}
+        name={"Toast"}
         anchor={Astal.WindowAnchor.BOTTOM}
         marginBottom={200}
         exclusivity={Astal.Exclusivity.NORMAL}
