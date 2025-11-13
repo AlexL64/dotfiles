@@ -54,7 +54,7 @@ export default function SysInfos() {
             class={"storage"}
             cursor={Gdk.Cursor.new_from_name("pointer", null)}
             onClicked={() => {
-                App.toggle_window("storage");
+                App.toggle_window("Storage");
             }}>
             <box spacing={8}>
                 <label label={storage} />
