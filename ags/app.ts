@@ -19,6 +19,7 @@ import Battery from "./widget/bar/windows/Battery"
 import Idle from "./widget/Idle"
 import Brightness from "./widget/bar/windows/Brightness"
 import Storage from "./widget/bar/windows/Storage"
+import Memory from "./widget/bar/windows/Memory"
 
 monitorFile(
     "./style.scss",
@@ -45,6 +46,7 @@ App.start({
         AudioMenu();
         Media();
         Calendar();
+        Memory();
         Storage();
         Brightness();
         Battery();

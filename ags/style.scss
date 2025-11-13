@@ -1267,11 +1267,13 @@ box.memory {
     border-radius: 12px;
     padding: 10px;
     min-height: 500px;
-    min-width: 400px;
+    min-width: 450px;
+
+    .process{
+        margin-right: 10px;
+    }
 
     scrollbar {
-        margin-left: 6px;
-
         trough {
             background-color: #6c7086;
             border-radius: 3px;

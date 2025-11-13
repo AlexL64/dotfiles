@@ -43,7 +43,7 @@ export default function SysInfos() {
             class={"memory"}
             cursor={Gdk.Cursor.new_from_name("pointer", null)}
             onClicked={() => {
-                App.toggle_window("memory");
+                App.toggle_window("Memory");
             }}>
             <box spacing={8}>
                 <label label={memory} />
