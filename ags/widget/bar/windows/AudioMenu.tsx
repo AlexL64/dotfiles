@@ -417,7 +417,7 @@ function profilesMenu(index: number, type: string) {
 
     return <menubutton class={"profiles"} label={""} direction={Gtk.ArrowType.NONE} cursor={Gdk.Cursor.new_from_name("pointer", null)}>
 
-        <popover css={"margin-left: 100px;"}>
+        <popover>
             <box orientation={Gtk.Orientation.VERTICAL} spacing={5}>
                 {profilesList.map((p) => {
                     return <box>
