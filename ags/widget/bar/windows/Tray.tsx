@@ -1,12 +1,11 @@
 import { Astal, Gdk, Gtk } from "ags/gtk4";
 import AstalTray from "gi://AstalTray?version=0.1";
 import App from "ags/gtk4/app";
-import { createBinding, For } from "ags";
+import { createBinding } from "ags";
 
 export default function Tray() {
 
     const tray = AstalTray.get_default();
-    const items = createBinding(tray, "items");
 
     return <window
         name={"Tray"}
