@@ -938,10 +938,18 @@ box.bluetooth {
             min-width: 36px;
             padding: 0px;
 
+            label {
+                margin-right: 3px;
+            }
+
             &.discover {
                 label {
-                    margin-right: 4px;
+                    margin-left: 4px;
                 }
+            }
+
+            &:hover {
+                background-color: #45475aaa;
             }
         }
 
@@ -963,19 +971,18 @@ box.bluetooth {
     scrollbar {
         margin-left: 6px;
 
-        contents {
-            trough {
-                background-color: #6c7086;
-                border-radius: 3px;
+        trough {
+            background-color: #6c7086;
+            border-radius: 3px;
 
-                slider {
-                    background-color: #cba6f7;
-                    border-radius: 3px;
-                    min-width: 3px;
-                    min-height: 0px;
-                }
+            slider {
+                background-color: #cba6f7;
+                border-radius: 3px;
+                min-width: 3px;
+                min-height: 0px;
             }
         }
+
     }
 
     .devices {
@@ -1002,12 +1009,12 @@ box.bluetooth {
                     font-size: 12px;
 
                     &.trust {
-                        padding: 0px 6px 0px 4px;
+                        padding: 0px 5px 0px 3px;
                         background-color: #a6e3a1;
                     }
 
                     &.block {
-                        padding: 0px 7px 0px 3px;
+                        padding: 0px 6px 0px 2px;
                         background-color: #f38ba8;
                     }
                 }
@@ -1019,20 +1026,47 @@ box.bluetooth {
                 min-width: 100px;
                 padding: 0px;
 
+                &:hover {
+                    background-color: #89b4faaa;
+                }
+
                 &.connected {
                     background-color: #f38ba8;
+
+                    &:hover {
+                        background-color: #f38ba8aa;
+                    }
                 }
             }
 
             .pair {
                 background-color: #89b4fa;
                 border-radius: 6px;
+
+                &:hover {
+                    background-color: #89b4faaa;
+                }
             }
 
             .options {
-                background-color: #45475a;
-                border-radius: 6px;
-                padding: 0px 4px 0px 1px;
+
+                button {
+                    border-radius: 6px;
+
+                    &.toggle {
+                        padding: 0px;
+                        background-color: #45475a;
+
+                        label {
+                            padding: 0px 15px 0px 12px;
+                            margin: 0;
+                        }
+                    }
+
+                    &:hover {
+                        background-color: #45475aaa;
+                    }
+                }
             }
         }
     }
@@ -1055,19 +1089,18 @@ box.bluetooth {
         scrollbar {
             margin-left: 6px;
 
-            contents {
-                trough {
-                    background-color: #6c7086;
-                    border-radius: 3px;
+            trough {
+                background-color: #6c7086;
+                border-radius: 3px;
 
-                    slider {
-                        background-color: #cba6f7;
-                        border-radius: 3px;
-                        min-width: 3px;
-                        min-height: 0px;
-                    }
+                slider {
+                    background-color: #cba6f7;
+                    border-radius: 3px;
+                    min-width: 3px;
+                    min-height: 0px;
                 }
             }
+
         }
 
         .grid {
@@ -1139,17 +1172,15 @@ box.storage {
     scrollbar {
         margin-left: 6px;
 
-        contents {
-            trough {
-                background-color: #6c7086;
-                border-radius: 3px;
+        trough {
+            background-color: #6c7086;
+            border-radius: 3px;
 
-                slider {
-                    background-color: #cba6f7;
-                    border-radius: 3px;
-                    min-width: 3px;
-                    min-height: 0px;
-                }
+            slider {
+                background-color: #cba6f7;
+                border-radius: 3px;
+                min-width: 3px;
+                min-height: 0px;
             }
         }
     }
@@ -1231,17 +1262,15 @@ box.memory {
     scrollbar {
         margin-left: 6px;
 
-        contents {
-            trough {
-                background-color: #6c7086;
-                border-radius: 3px;
+        trough {
+            background-color: #6c7086;
+            border-radius: 3px;
 
-                slider {
-                    background-color: #cba6f7;
-                    border-radius: 3px;
-                    min-width: 3px;
-                    min-height: 0px;
-                }
+            slider {
+                background-color: #cba6f7;
+                border-radius: 3px;
+                min-width: 3px;
+                min-height: 0px;
             }
         }
     }

@@ -42,7 +42,7 @@ export default function SystemPanel() {
             class={"bluetooth"}
             cursor={Gdk.Cursor.new_from_name("pointer", null)}
             onClicked={() => {
-                App.toggle_window("bleutooth");
+                App.toggle_window("Bleutooth");
             }}>
             <image iconName={createBinding(bluetooth, "isPowered").as((powered) => powered ? "bluetooth-active" : "bluetooth-disabled")} />
         </button>

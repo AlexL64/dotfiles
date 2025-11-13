@@ -14,6 +14,7 @@ import Calendar from "./widget/bar/windows/Calendar"
 import Media from "./widget/bar/windows/Media"
 import Power from "./widget/bar/windows/Power"
 import Tray from "./widget/bar/windows/Tray"
+import Bluetooth from "./widget/bar/windows/Bluetooth"
 
 monitorFile(
     "./style.scss",
@@ -39,6 +40,7 @@ App.start({
         AudioMenu();
         Media();
         Calendar();
+        Bluetooth();
         Tray();
         Power();
 
