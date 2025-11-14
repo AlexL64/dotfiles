@@ -6,6 +6,8 @@
 !gtk-4.0
 !hypr
 !kitty
+!mpv
+!mpv/**
 !qt5ct
 !qt6ct
 !swaync
