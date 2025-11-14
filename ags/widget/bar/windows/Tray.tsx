@@ -15,7 +15,7 @@ export default function Tray() {
         exclusivity={Astal.Exclusivity.NORMAL}
         application={App}
         visible={false}>
-        <box class={"tray"}>
+        <box class={"tray"} valign={Gtk.Align.START} halign={Gtk.Align.END}>
             <Gtk.Grid columnSpacing={4} rowSpacing={4} $={(self) => {
 
                 createBinding(tray, "items").subscribe(() => {
@@ -61,7 +61,7 @@ export default function Tray() {
                                     menu.set_parent(button);
                                     menu.popup();
                                 }} />
-                            <image gicon={createBinding(item, "gicon")} pixelSize={16}/>
+                            <image gicon={createBinding(item, "gicon")} pixelSize={16} />
                         </button> as Gtk.Widget;
 
 
