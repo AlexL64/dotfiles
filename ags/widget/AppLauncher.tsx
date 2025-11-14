@@ -32,7 +32,7 @@ export default function AppLauncher() {
                 textResetSet(true);
                 selectedIdSet(0);
                 selectedPageSet(0);
-
+            } else {
                 apps = new Apps.Apps();
             }
         }}
