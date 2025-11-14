@@ -2,19 +2,13 @@ import AstalMpris from "gi://AstalMpris?version=0.1";
 import { createBinding } from "gnim";
 import App from "ags/gtk4/app"
 import { Gdk, Gtk } from "ags/gtk4";
+import Pango from "gi://Pango?version=1.0";
 
 function lengthStr(length: number) {
     const min = Math.floor(length / 60)
     const sec = Math.floor(length % 60)
     const sec0 = sec < 10 ? "0" : ""
     return `${min}:${sec0}${sec}`
-}
-
-function truncateString(str: string, length: number): string {
-    if (str.length > length) {
-        return str.substring(0, length) + '…';
-    }
-    return str;
 }
 
 export default function Mpris() {
@@ -59,14 +53,18 @@ export default function Mpris() {
                         halign={Gtk.Align.START}
                         lines={createBinding(player, "artist").as((a) => a ? 1 : 2)}
                         visible={createBinding(player, "title").as((t) => t ? true : false)}
-                        label={createBinding(player, "title").as((t) => t == null ? "" : truncateString(t, 25))}
+                        label={createBinding(player, "title").as((t) => t)}
+                        ellipsize={Pango.EllipsizeMode.END}
+                        maxWidthChars={25}
                     />
                     <label
                         class={"artist"}
                         halign={Gtk.Align.START}
                         valign={Gtk.Align.CENTER}
                         visible={createBinding(player, "artist").as((a) => a ? true : false)}
-                        label={createBinding(player, "artist").as((a) => a == null ? "" : truncateString(a, 20))}
+                        label={createBinding(player, "artist").as((a) => a)}
+                        ellipsize={Pango.EllipsizeMode.END}
+                        maxWidthChars={20}
                     />
                 </box>
                 <box

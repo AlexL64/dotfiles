@@ -3,13 +3,7 @@ import { Astal, Gdk, Gtk } from "ags/gtk4";
 import ClipboardService from "../services/Clipboard";
 import { execAsync } from "ags/process";
 import { createBinding, createState, With } from "ags";
-
-function truncateString(str: string, length: number): string {
-    if (str.length > length) {
-        return str.substring(0, length) + '…';
-    }
-    return str;
-}
+import Pango from "gi://Pango?version=1.0";
 
 const [searchValue, searchValueSet] = createState("");
 const [searchValueReset, searchValueResetSet] = createState(false);
@@ -224,7 +218,13 @@ function list(value: string) {
                                                 />
                                                 <box spacing={20}>
                                                     <label class={"id"} label={`${line.id}`} />
-                                                    <label class={"text"} label={truncateString(line.text, 75)} vexpand hexpand halign={Gtk.Align.START} />
+                                                    <label
+                                                        class={"text"} label={line.text}
+                                                        vexpand
+                                                        hexpand
+                                                        halign={Gtk.Align.START}
+                                                        ellipsize={Pango.EllipsizeMode.END}
+                                                        maxWidthChars={75} />
                                                     <button
                                                         class={"trash"}
                                                         cursor={Gdk.Cursor.new_from_name("pointer", null)}
