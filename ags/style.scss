@@ -1094,6 +1094,19 @@ box.bluetooth {
         border-radius: 6px;
     }
 
+    .refresh {
+        background-color: #313244;
+        border-radius: 6px;
+
+        label {
+            margin-left: -2px;
+        }
+
+        &:hover {
+            background-color: #313244aa;
+        }
+    }
+
     .list {
         padding: 10px;
 

@@ -1,6 +1,4 @@
-// import { GtkGrid } from "../my_types";
-
-import { createState } from "ags";
+import { Accessor, createState } from "ags";
 import { Astal, Gdk, Gtk } from "ags/gtk4";
 import App from "ags/gtk4/app"
 import { exec } from "ags/process";
@@ -11,15 +9,15 @@ export default function Keybinds() {
     const [search, searchSet] = createState("");
     const [searchValueReset, searchValueResetSet] = createState(false);
 
-    const binds = getKeybinds();
+    const [binds, bindsSet] = createState(getKeybinds());
 
-    let nbBinds = 0;
+    const [nbBinds, nbBindsSet] = createState(0);
 
-    Object.keys(binds).forEach(key => {
-        nbBinds += binds[key].length + 1;
+    Object.keys(binds.get()).forEach(key => {
+        nbBindsSet(nbBinds.get() + binds.get()[key].length + 1);
     });
 
-    const nbLines = Math.ceil(nbBinds / Math.min(Math.ceil(Math.sqrt(nbBinds)), 4));
+    const [nbLines, nbLinesSet] = createState(Math.ceil(nbBinds.get() / Math.min(Math.ceil(Math.sqrt(nbBinds.get())), 4)));
 
     return <window
         name={"Keybinds"}
@@ -41,27 +39,39 @@ export default function Keybinds() {
             });
         }}>
         <box class={"keybinds"} orientation={Gtk.Orientation.VERTICAL}>
-            <entry
-                class={"search"}
-                onNotifyText={(self) => {
-                    searchSet(self.text);
-                }}
-                $={(self) => {
-                    searchValueReset.subscribe(() => {
-                        if (searchValueReset.get()) {
-                            self.text = "";
-                            searchValueResetSet(false);
-                        }
-                    })
-                }}
-            />
+            <box spacing={10}>
+                <entry
+                    class={"search"}
+                    hexpand
+                    onNotifyText={(self) => {
+                        searchSet(self.text);
+                    }}
+                    $={(self) => {
+                        searchValueReset.subscribe(() => {
+                            if (searchValueReset.get()) {
+                                self.text = "";
+                                searchValueResetSet(false);
+                            }
+                        })
+                    }}
+                />
+                <button class={"refresh"} label={""} cursor={Gdk.Cursor.new_from_name("pointer", null)} onClicked={() => {
+                    bindsSet(getKeybinds());
+
+                    nbBindsSet(0);
+                    Object.keys(binds.get()).forEach(key => {
+                        nbBindsSet(nbBinds.get() + binds.get()[key].length + 1);
+                    });
+
+                    nbLinesSet(Math.ceil(nbBinds.get() / Math.min(Math.ceil(Math.sqrt(nbBinds.get())), 4)));
+                }} />
+            </box>
             <scrolledwindow
                 class={"list"}
-                minContentHeight={Math.min(nbLines * 40 - 20, 800)}
+                minContentHeight={Math.min(nbLines.get() * 40 - 20, 800)}
                 overlayScrolling={false}
                 hscrollbarPolicy={Gtk.PolicyType.NEVER}
-                vscrollbarPolicy={Gtk.PolicyType.AUTOMATIC}
-            >
+                vscrollbarPolicy={Gtk.PolicyType.AUTOMATIC}>
                 <Gtk.Grid
                     class={"grid"}
                     hexpand
@@ -70,63 +80,70 @@ export default function Keybinds() {
                     rowSpacing={20}
                     columnHomogeneous
                     $={(self) => {
+                        addKeybinds(self, binds.get(), nbBinds.get(), nbLines.get(), search);
 
-                        let i = 0;
-                        let j = 0;
-
-                        Object.keys(binds).forEach(categorie => {
-
-                            if (j + 1 >= nbLines) {
-                                j = 0;
-                                i++;
-                            }
-
-                            self.attach(<box class={"categorie"}>
-                                <label label={categorie} />
-                            </box> as Gtk.Widget, i, j, 1, 1);
-
-                            j++;
-
-                            binds[categorie].forEach(line => {
-                                self.attach(<box class={"keybind"}>
-                                    <label
-                                        class={"bind"}
-                                        label={line.bind}
-                                        xalign={Gtk.Align.FILL}
-                                        $={(self) => {
-                                            search.subscribe(() => {
-                                                const s = search.get();
-
-                                                s != "" && line.bind.toLowerCase().includes(s.toLowerCase()) ? self.add_css_class("highlight") : self.remove_css_class("highlight");
-                                            })
-                                        }}
-                                    />
-                                    <label label={": "} />
-                                    <label
-                                        label={line.description}
-                                        xalign={Gtk.Align.FILL}
-                                        $={(self) => {
-                                            search.subscribe(() => {
-                                                const s = search.get();
-
-                                                s != "" && line.description.toLowerCase().includes(s.toLowerCase()) ? self.add_css_class("highlight") : self.remove_css_class("highlight");
-                                            })
-                                        }}
-                                    />
-                                </box> as Gtk.Widget, i, j, 1, 1);
-
-                                if (j + 1 >= nbLines) {
-                                    j = 0;
-                                    i++;
-                                } else {
-                                    j++;
-                                }
-                            });
-                        });
+                        binds.subscribe(() => {
+                            addKeybinds(self, binds.get(), nbBinds.get(), nbLines.get(), search);
+                        })
                     }} />
             </scrolledwindow>
         </box>
     </window >
+}
+
+function addKeybinds(self: Gtk.Grid, binds: { [category: string]: { bind: string, description: string }[] }, nbBinds: number, nbLines: number, search: Accessor<string>) {
+    let i = 0;
+    let j = 0;
+
+    Object.keys(binds).forEach(categorie => {
+
+        if (j + 1 >= nbLines) {
+            j = 0;
+            i++;
+        }
+
+        self.attach(<box class={"categorie"}>
+            <label label={categorie} />
+        </box> as Gtk.Widget, i, j, 1, 1);
+
+        j++;
+
+        binds[categorie].forEach(line => {
+            self.attach(<box class={"keybind"}>
+                <label
+                    class={"bind"}
+                    label={line.bind}
+                    xalign={Gtk.Align.FILL}
+                    $={(self) => {
+                        search.subscribe(() => {
+                            const s = search.get();
+
+                            s != "" && line.bind.toLowerCase().includes(s.toLowerCase()) ? self.add_css_class("highlight") : self.remove_css_class("highlight");
+                        })
+                    }}
+                />
+                <label label={": "} />
+                <label
+                    label={line.description}
+                    xalign={Gtk.Align.FILL}
+                    $={(self) => {
+                        search.subscribe(() => {
+                            const s = search.get();
+
+                            s != "" && line.description.toLowerCase().includes(s.toLowerCase()) ? self.add_css_class("highlight") : self.remove_css_class("highlight");
+                        })
+                    }}
+                />
+            </box> as Gtk.Widget, i, j, 1, 1);
+
+            if (j + 1 >= nbLines) {
+                j = 0;
+                i++;
+            } else {
+                j++;
+            }
+        });
+    });
 }
 
 function getKeybinds(): { [category: string]: { bind: string, description: string, }[] } {
