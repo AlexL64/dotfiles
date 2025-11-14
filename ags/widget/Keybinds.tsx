@@ -92,6 +92,13 @@ export default function Keybinds() {
 }
 
 function addKeybinds(self: Gtk.Grid, binds: { [category: string]: { bind: string, description: string }[] }, nbBinds: number, nbLines: number, search: Accessor<string>) {
+    let child = self.get_first_child();
+
+    while (child) {
+        self.remove(child);
+        child = self.get_first_child();
+    }
+
     let i = 0;
     let j = 0;
 
