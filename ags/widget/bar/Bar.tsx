@@ -8,12 +8,6 @@ import Date from "./modules/Date";
 import Notifications from "./modules/Notification";
 import SysInfos from "./modules/SysInfos";
 import SystemPanel from "./modules/SystemPanel";
-// import Date from "./modules/date";
-// import Mpris from "./modules/mpris";
-// import SysInfos from "./modules/sysinfos";
-// import Notifications from "./modules/notifications";
-// import Privacy from "./modules/privacy_indicator";
-// import SystemPanel from "./modules/system_panel";
 
 export default function Bar(gdkmonitor: Gdk.Monitor, monitor = 0) {
     return <window
