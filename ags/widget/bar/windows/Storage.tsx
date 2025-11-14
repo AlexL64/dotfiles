@@ -32,7 +32,6 @@ export default function Storage() {
                     const child_height = self.get_first_child()?.get_first_child()?.measure(Gtk.Orientation.VERTICAL, 999)[0];
 
                     if (child_height != undefined && child_height > 0) {
-                        print(child_height);
                         self.heightRequest = child_height;
                     }
                 })
