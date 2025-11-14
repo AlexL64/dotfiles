@@ -89,11 +89,11 @@ function getBrightnessIcon(value: number) {
 }
 
 async function showToast(): Promise<void> {
-    const toastWindow = App.get_window("toast");
+    const toastWindow = App.get_window("Toast");
 
     if (toastWindow) {
         if (!isToastVisible) {
-            App.toggle_window("toast");
+            App.toggle_window("Toast");
             isToastVisible = true;
         }
 
