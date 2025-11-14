@@ -3,7 +3,7 @@ import App from "ags/gtk4/app"
 import Apps from "gi://AstalApps?version=0.1"
 import { createState, For, With } from "ags";
 
-const apps = new Apps.Apps();
+var apps = new Apps.Apps();
 
 export default function AppLauncher() {
 
@@ -32,10 +32,11 @@ export default function AppLauncher() {
                 textResetSet(true);
                 selectedIdSet(0);
                 selectedPageSet(0);
+
+                apps = new Apps.Apps();
             }
         }}
         $={(self) => {
-
             const eventControllerKey = new Gtk.EventControllerKey();
 
             self.add_controller(eventControllerKey);
