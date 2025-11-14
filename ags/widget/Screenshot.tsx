@@ -30,53 +30,62 @@ export default function Screenshot() {
                 class={"select"}
                 label={""}
                 tooltipText={"Select"}
-                cursor={Gdk.Cursor.new_from_name("pointer", null)} />
-            <Gtk.GestureClick
-                propagationPhase={Gtk.PropagationPhase.CAPTURE}
-                button={Gdk.BUTTON_PRIMARY}
-                onPressed={(event) => {
-                    execAsync(["bash", "-c", "killall slurp & hyprshot -m region -o ~/Pictures/Screenshots/"]);
-                }} />
-            <Gtk.GestureClick
-                propagationPhase={Gtk.PropagationPhase.CAPTURE}
-                button={Gdk.BUTTON_SECONDARY}
-                onPressed={(event) => {
-                    execAsync(["bash", "-c", "killall slurp & hyprshot -z -m region -o ~/Pictures/Screenshots/"]);
-                }} />
+                cursor={Gdk.Cursor.new_from_name("pointer", null)}>
+                <Gtk.GestureClick
+                    propagationPhase={Gtk.PropagationPhase.CAPTURE}
+                    button={Gdk.BUTTON_PRIMARY}
+                    onPressed={(event) => {
+                        App.get_window("Screenshot")?.set_opacity(0);
+                        execAsync(["bash", "-c", "killall slurp & hyprshot -m region -o ~/Pictures/Screenshots/"]);
+                    }} />
+                <Gtk.GestureClick
+                    propagationPhase={Gtk.PropagationPhase.CAPTURE}
+                    button={Gdk.BUTTON_SECONDARY}
+                    onPressed={(event) => {
+                        App.get_window("Screenshot")?.set_opacity(0);
+                        execAsync(["bash", "-c", "killall slurp & hyprshot -z -m region -o ~/Pictures/Screenshots/"]);
+                    }} />
+            </button>
             <button
                 class={"window"}
                 label={""}
                 tooltipText={"Window"}
-                cursor={Gdk.Cursor.new_from_name("pointer", null)} />
-            <Gtk.GestureClick
-                propagationPhase={Gtk.PropagationPhase.CAPTURE}
-                button={Gdk.BUTTON_PRIMARY}
-                onPressed={(event) => {
-                    execAsync(["bash", "-c", "killall slurp & hyprshot -m window -o ~/Pictures/Screenshots/"]);
-                }} />
-            <Gtk.GestureClick
-                propagationPhase={Gtk.PropagationPhase.CAPTURE}
-                button={Gdk.BUTTON_SECONDARY}
-                onPressed={(event) => {
-                    execAsync(["bash", "-c", "killall slurp & hyprshot -z -m window -o ~/Pictures/Screenshots/"]);
-                }} />
+                cursor={Gdk.Cursor.new_from_name("pointer", null)}>
+                <Gtk.GestureClick
+                    propagationPhase={Gtk.PropagationPhase.CAPTURE}
+                    button={Gdk.BUTTON_PRIMARY}
+                    onPressed={(event) => {
+                        App.get_window("Screenshot")?.set_opacity(0);
+                        execAsync(["bash", "-c", "killall slurp & hyprshot -m window -o ~/Pictures/Screenshots/"]);
+                    }} />
+                <Gtk.GestureClick
+                    propagationPhase={Gtk.PropagationPhase.CAPTURE}
+                    button={Gdk.BUTTON_SECONDARY}
+                    onPressed={(event) => {
+                        App.get_window("Screenshot")?.set_opacity(0);
+                        execAsync(["bash", "-c", "killall slurp & hyprshot -z -m window -o ~/Pictures/Screenshots/"]);
+                    }} />
+            </button>
             <button
                 class={"screen"}
                 label={""}
                 tooltipText={"Screen"}
-                cursor={Gdk.Cursor.new_from_name("pointer", null)} />
-            <Gtk.GestureClick
-                propagationPhase={Gtk.PropagationPhase.CAPTURE}
-                button={Gdk.BUTTON_PRIMARY}
-                onPressed={(event) => {
-                    execAsync(["bash", "-c", "killall slurp & hyprshot -m output -o ~/Pictures/Screenshots/"]);
-                }} />
-            <Gtk.GestureClick
-                propagationPhase={Gtk.PropagationPhase.CAPTURE}
-                button={Gdk.BUTTON_SECONDARY}
-                onPressed={(event) => {
-                    execAsync(["bash", "-c", "killall slurp & hyprshot -z -m output -o ~/Pictures/Screenshots/"]);
-                }} />
+                cursor={Gdk.Cursor.new_from_name("pointer", null)} >
+                <Gtk.GestureClick
+                    propagationPhase={Gtk.PropagationPhase.CAPTURE}
+                    button={Gdk.BUTTON_PRIMARY}
+                    onPressed={(event) => {
+                        App.get_window("Screenshot")?.set_opacity(0);
+                        execAsync(["bash", "-c", "killall slurp & hyprshot -m output -o ~/Pictures/Screenshots/"]);
+                    }} />
+                <Gtk.GestureClick
+                    propagationPhase={Gtk.PropagationPhase.CAPTURE}
+                    button={Gdk.BUTTON_SECONDARY}
+                    onPressed={(event) => {
+                        App.get_window("Screenshot")?.set_opacity(0);
+                        execAsync(["bash", "-c", "killall slurp & hyprshot -z -m output -o ~/Pictures/Screenshots/"]);
+                    }} />
+            </button>
         </box>
     </window>
 }
