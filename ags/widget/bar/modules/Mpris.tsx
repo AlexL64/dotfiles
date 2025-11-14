@@ -11,17 +11,15 @@ function lengthStr(length: number) {
 }
 
 function truncateString(str: string, length: number): string {
-  if (str.length > length) {
-    return str.substring(0, length) + '…';
-  }
-  return str;
+    if (str.length > length) {
+        return str.substring(0, length) + '…';
+    }
+    return str;
 }
 
 export default function Mpris() {
 
     const player = AstalMpris.Player.new("playerctld");
-
-    const can_play = createBinding(player, "canPlay");
 
     const playback_status = createBinding(player, "playback_status").as((s) => {
         switch (s) {
@@ -37,7 +35,7 @@ export default function Mpris() {
         $={(self) => {
             player.canPlay ? self.visible = true : self.visible = false;
 
-            can_play.subscribe(() => {
+            player.connect("notify", () => {
                 player.canPlay ? self.visible = true : self.visible = false;
             })
         }}>
