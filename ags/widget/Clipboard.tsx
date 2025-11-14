@@ -114,6 +114,8 @@ export default function Clipboard() {
                 spacing={10}
                 halign={Gtk.Align.END}
                 valign={Gtk.Align.END}
+                hexpand
+                vexpand
                 visible={nbEntries.as((e) => e == 0 ? false : true)}>
                 <button
                     label={""}
