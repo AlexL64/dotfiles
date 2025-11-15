@@ -21,5 +21,6 @@
         "jupyter-notebook": "left"
     },
     "jupyter.askForKernelRestart": false,
-    "diffEditor.maxComputationTime": 0
+    "diffEditor.maxComputationTime": 0,
+    "git.openRepositoryInParentFolders": "never"
 }
