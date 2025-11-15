@@ -2,6 +2,7 @@ import { Astal, Gdk, Gtk } from "ags/gtk4";
 import App from "ags/gtk4/app"
 import Apps from "gi://AstalApps?version=0.1"
 import { createState, For, With } from "ags";
+import Pango from "gi://Pango?version=1.0";
 
 var apps = new Apps.Apps();
 
@@ -171,6 +172,7 @@ export default function AppLauncher() {
                                                                 halign={Gtk.Align.START}
                                                                 valign={Gtk.Align.START}
                                                                 maxWidthChars={55}
+                                                                ellipsize={Pango.EllipsizeMode.END}
                                                                 lines={2}
                                                             />
                                                         </box>
