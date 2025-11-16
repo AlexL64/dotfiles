@@ -399,7 +399,7 @@ function profilesMenu(index: number, type: string) {
     ])
 
 
-    const profilesLines = profiles.split(/\r?\n/).map(line => line.trimStart());;
+    const profilesLines = profiles.split(/\r?\n/).map(line => line.trimStart());
 
     let activeProfile = profilesLines.pop();
     if (activeProfile != undefined) {
@@ -430,7 +430,7 @@ function profilesMenu(index: number, type: string) {
                                     exec(`pactl set-card-profile ${cardSerial} "${p.name}"`);
                                 }} />
                         </Gtk.CheckButton>
-                        <label label={p.name} />
+                        <label label={p.description} />
                     </box>
                 })}
             </box>
