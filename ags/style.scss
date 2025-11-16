@@ -671,6 +671,10 @@ box.battery {
             padding: 6px 16px;
             background-color: #45475a;
 
+            &:hover {
+                background-color: #45475aaa;
+            }
+
             &.idle {
                 label {
                     margin-right: 3px;
@@ -679,10 +683,11 @@ box.battery {
 
             &.toggled {
                 background-color: #cba6f7;
-            }
 
-            &:hover{
-                background-color: #45475aaa;
+                &:hover {
+                    background-color: #cba6f7aa;
+                    border: 1px solid transparent;
+                }
             }
         }
     }
@@ -1282,7 +1287,7 @@ box.memory {
     min-height: 500px;
     min-width: 450px;
 
-    .process{
+    .process {
         margin-right: 10px;
     }
 
