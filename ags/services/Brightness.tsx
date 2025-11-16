@@ -40,8 +40,8 @@ export default class Brightness extends GObject.Object {
 
     @setter(Number)
     set screen(percent) {
-        if (percent < 0.05)
-            percent = 0.05;
+        if (percent < 0)
+            percent = 0;
 
         if (percent > 1)
             percent = 1;
