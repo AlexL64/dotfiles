@@ -165,7 +165,12 @@ export default function AppLauncher() {
                                                         }}>
                                                         <image class={"icon"} iconName={app.iconName} pixelSize={54} />
                                                         <box class={"infos"} orientation={Gtk.Orientation.VERTICAL}>
-                                                            <label class={"name"} label={app.name.trim()} halign={Gtk.Align.START} />
+                                                            <label
+                                                                class={"name"}
+                                                                label={app.name.trim()}
+                                                                halign={Gtk.Align.START}
+                                                                maxWidthChars={45}
+                                                                ellipsize={Pango.EllipsizeMode.END} />
                                                             <label
                                                                 class={"description"}
                                                                 label={app.description}
