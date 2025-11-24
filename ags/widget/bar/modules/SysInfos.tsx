@@ -104,13 +104,10 @@ export default function SysInfos() {
             $={(self) => {
                 switch (battery.state) {
                     case 1:
-                        self.add_css_class("charging")
+                        self.add_css_class("charging");
                         break;
                     case 2:
-                        self.add_css_class("discharging")
-                        break;
-                    case 4:
-                        self.add_css_class("charged")
+                        self.add_css_class("discharging");
                         break;
                     default:
                         break;
@@ -119,21 +116,16 @@ export default function SysInfos() {
                 createBinding(battery, "state").subscribe(() => {
                     switch (battery.state) {
                         case 1:
-                            self.add_css_class("charging")
-                            self.remove_css_class("discharging")
-                            self.remove_css_class("charged")
+                            self.add_css_class("charging");
+                            self.remove_css_class("discharging");
                             break;
                         case 2:
-                            self.remove_css_class("charging")
-                            self.add_css_class("discharging")
-                            self.remove_css_class("charged")
-                            break;
-                        case 4:
-                            self.remove_css_class("charging")
-                            self.remove_css_class("discharging")
-                            self.add_css_class("charged")
+                            self.remove_css_class("charging");
+                            self.add_css_class("discharging");
                             break;
                         default:
+                            self.remove_css_class("charging");
+                            self.remove_css_class("discharging");
                             break;
                     }
                 })
