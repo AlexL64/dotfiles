@@ -1,7 +1,4 @@
-// import GObject, { register, property, signal } from "astal/gobject"
-// import { exec, subprocess } from "astal";
-
-import GObject, { getter, property, register, setter } from "ags/gobject";
+import GObject, { property, register } from "ags/gobject";
 import { exec, subprocess } from "ags/process";
 
 @register({ GTypeName: "Clipboard" })
@@ -16,8 +13,6 @@ export default class Clipboard extends GObject.Object {
 
     @property(Array)
     entries: { id: number; text: string; }[] = [];
-
-    private _entries: { id: number; text: string; }[] = [];
 
     constructor() {
         super();
