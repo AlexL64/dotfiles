@@ -4,7 +4,6 @@ import Battery from "gi://AstalBattery?version=0.1"
 import App from "ags/gtk4/app"
 import { Gdk, Gtk } from "ags/gtk4";
 import { createPoll } from "ags/time";
-import { exec } from "ags/process";
 
 export default function SysInfos() {
 
@@ -74,7 +73,6 @@ export default function SysInfos() {
                 self.add_controller(scroll);
 
                 scroll.connect("scroll", (_, x, y) => {
-                    // y > 0 ? exec(["bash", "-c", "brightnessctl --device=intel_backlight set 1%-"]) : exec(["bash", "-c", "brightnessctl --device=intel_backlight set +1%"]);
                     y > 0 ? brightness.screen -= 0.01 : brightness.screen += 0.01;
                 })
             }}>
