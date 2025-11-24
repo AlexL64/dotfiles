@@ -3,6 +3,7 @@ import AstalBluetooth from "gi://AstalBluetooth?version=0.1";
 import App from "ags/gtk4/app";
 import { createBinding, With } from "ags";
 import GLib from "gi://GLib?version=2.0";
+import { exec } from "ags/process";
 
 const bluetooth = AstalBluetooth.get_default();
 const adapter = bluetooth.adapter;
@@ -70,7 +71,8 @@ export default function Bluetooth() {
                     onNotifyActive={(self) => {
                         if (self.active != adapter.powered) {
                             self.active ? self.add_css_class("activated") : self.remove_css_class("activated");
-                            adapter.set_powered(self.active);
+
+                            self.active ? exec(["bash", "-c", `rfkill unblock bluetooth`]) : exec(["bash", "-c", `rfkill block bluetooth`]);
                         }
                     }}
                 />
