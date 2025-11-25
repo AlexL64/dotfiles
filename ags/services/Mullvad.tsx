@@ -46,7 +46,6 @@ export default class Mullvad extends GObject.Object {
             (output) => {
 
                 if(output.includes("state:")){
-                    // print(output);
                     this.#onChange();
                 }
             },
