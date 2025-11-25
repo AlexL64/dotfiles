@@ -3,13 +3,11 @@ import { exec, subprocess } from "ags/process";
 
 type Status = {
     state: string;
-    details: {
-        location: {
-            ipv4: string | null,
-            country: string | null,
-            city: string | null,
-            hostname: string | null,
-        };
+    infos: {
+        ipv4: string | undefined,
+        country: string | undefined,
+        city: string | undefined,
+        hostname: string | undefined,
     };
 };
 
@@ -26,13 +24,11 @@ export default class Mullvad extends GObject.Object {
     @property(Object)
     status: Status = {
         state: "disconnected",
-        details: {
-            location: {
-                ipv4: null,
-                country: null,
-                city: null,
-                hostname: null
-            }
+        infos: {
+            ipv4: undefined,
+            country: undefined,
+            city: undefined,
+            hostname: undefined
         }
     };
 
@@ -45,7 +41,7 @@ export default class Mullvad extends GObject.Object {
             ['journalctl', '-u', 'mullvad-daemon', '-f', '--merge'],
             (output) => {
 
-                if(output.includes("state:")){
+                if (output.includes("state:")) {
                     this.#onChange();
                 }
             },
@@ -54,7 +50,18 @@ export default class Mullvad extends GObject.Object {
     }
 
     async #onChange() {
-        var status = JSON.parse(exec(["bash", "-c", `mullvad status --json`])) as Status;
+        var status = JSON.parse(exec(["bash", "-c", `mullvad status --json`]));
+
+        status.infos = status.details.location;
+
+        if (status.infos == null) {
+            status.infos = {
+                ipv4: undefined,
+                country: undefined,
+                city: undefined,
+                hostname: undefined
+            }
+        }
 
         this.status = status;
         this.notify("status");

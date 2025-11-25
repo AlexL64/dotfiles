@@ -78,6 +78,20 @@ button {
     }
 }
 
+switch {
+    border-radius: 16px;
+    background-color: #9399b2;
+
+    slider {
+        border-radius: 12px;
+        background-color: #e8ebf6;
+    }
+
+    &.activated {
+        background-color: #cba6f7;
+    }
+}
+
 .bar {
 
     .separator {
@@ -343,7 +357,7 @@ button {
                 min-width: 36px;
 
                 image {
-                    margin-left: 12px;
+                    margin-left: 10px;
                 }
 
                 label {
@@ -364,6 +378,10 @@ button {
                     &.other {
                         color: orange;
                     }
+                }
+
+                &:hover {
+                    background-color: #cdd6f433;
                 }
             }
 
@@ -984,20 +1002,6 @@ box.bluetooth {
                 background-color: #45475aaa;
             }
         }
-
-        switch {
-            border-radius: 16px;
-            background-color: #9399b2;
-
-            slider {
-                border-radius: 12px;
-                background-color: #e8ebf6;
-            }
-
-            &.activated {
-                background-color: #cba6f7;
-            }
-        }
     }
 
     scrollbar {
@@ -1099,6 +1103,53 @@ box.bluetooth {
                         background-color: #45475aaa;
                     }
                 }
+            }
+        }
+    }
+}
+
+box.network {
+    background-color: #1e1e2e;
+    border: 2px solid #cba6f7;
+    border-radius: 12px;
+    padding: 10px;
+    min-width: 350px;
+
+    .mullvad {
+        background-color: #313244;
+        border-radius: 12px;
+        padding: 10px;
+
+        .status{
+            .connected {
+                color: #a6e3a1;
+            }
+
+            .disconnected {
+                color: #f38ba8;
+            }
+
+            .other {
+                color: #fab387;
+            }
+        }
+
+        .separator {
+            background-color: #45475a;
+            min-height: 2px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border-radius: 2px;
+        }
+
+        .infos {
+
+            .label {
+                color: #cba6f7;
+            }
+
+            .info {
+                color: #bac2de;
             }
         }
     }

@@ -15,7 +15,12 @@ export default function SystemPanel() {
     const status = createBinding(mullvad, "status");
 
     return <box class={"system_panel"}>
-        <button class={"network"}>
+        <button
+            class={"network"}
+            cursor={Gdk.Cursor.new_from_name("pointer", null)}
+            onClicked={() => {
+                App.toggle_window("Network");
+            }}>
             <box>
                 <With value={createBinding(network, "primary")}>
                     {(type) => {

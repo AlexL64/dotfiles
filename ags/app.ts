@@ -20,6 +20,7 @@ import Idle from "./widget/Idle"
 import Brightness from "./widget/bar/windows/Brightness"
 import Storage from "./widget/bar/windows/Storage"
 import Memory from "./widget/bar/windows/Memory"
+import Network from "./widget/bar/windows/Network"
 
 monitorFile(
     "./style.scss",
@@ -50,6 +51,7 @@ App.start({
         Storage();
         Brightness();
         Battery();
+        Network();
         Bluetooth();
         Tray();
         Power();
