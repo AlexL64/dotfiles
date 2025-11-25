@@ -341,6 +341,30 @@ button {
             &.network {
                 padding: 0px;
                 min-width: 36px;
+
+                image {
+                    margin-left: 12px;
+                }
+
+                label {
+                    font-size: 10px;
+                    color: red;
+                    color: green;
+                    margin-top: 6px;
+                    margin-left: -6px;
+
+                    &.connected {
+                        color: #a6e3a1;
+                    }
+
+                    &.disconnected {
+                        color: #f38ba8;
+                    }
+
+                    &.other {
+                        color: orange;
+                    }
+                }
             }
 
             &.bluetooth {
