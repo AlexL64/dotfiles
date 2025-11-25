@@ -2,7 +2,6 @@ import { Astal, Gdk, Gtk } from "ags/gtk4";
 import AstalBluetooth from "gi://AstalBluetooth?version=0.1";
 import App from "ags/gtk4/app";
 import { createBinding, With } from "ags";
-import GLib from "gi://GLib?version=2.0";
 import { exec } from "ags/process";
 
 const bluetooth = AstalBluetooth.get_default();
