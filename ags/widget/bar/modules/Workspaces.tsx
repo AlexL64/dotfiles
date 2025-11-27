@@ -22,11 +22,13 @@ export default function Workspaces(monitor: number) {
                     hyprland.get_workspace_by_name(i.toString())?.get_clients() != undefined ? self.add_css_class("active") : self.remove_css_class("active");
 
                     const focusedWorkspace = hyprland.connect("notify::focused-workspace", (hyprland) => {
-                        if (i == hyprland.focusedWorkspace.id) {
-                            self.remove_css_class("urgent");
-                            self.add_css_class("focused");
-                        } else {
-                            self.remove_css_class("focused");
+                        if (hyprland.focusedWorkspace != null) {
+                            if (i == hyprland.focusedWorkspace.id) {
+                                self.remove_css_class("urgent");
+                                self.add_css_class("focused");
+                            } else {
+                                self.remove_css_class("focused");
+                            }
                         }
                     })
 
