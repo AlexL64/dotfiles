@@ -1120,7 +1120,7 @@ box.network {
         border-radius: 12px;
         padding: 10px;
 
-        .status{
+        .status {
             .connected {
                 color: #a6e3a1;
             }
@@ -1595,6 +1595,96 @@ box.brightness {
 
         &:hover {
             background-color: #45475acc;
+        }
+    }
+}
+
+.monitors {
+    background-color: #1e1e2e;
+    border: 2px solid #cba6f7;
+    border-radius: 12px;
+    padding: 10px;
+
+    .monitor {
+        background-color: #313244;
+        border-radius: 12px;
+        padding: 10px;
+        min-width: 420px;
+
+        .name {
+            font-size: 18px;
+            color: #cba6f7;
+        }
+
+        .separator {
+            background-color: #45475a;
+            min-height: 2px;
+            border-radius: 2px;
+            margin-bottom: 10px;
+        }
+
+        togglebutton {
+            background-color: red;
+            min-height: 10px;
+            min-width: 10px;
+        }
+
+        menubutton {
+            button.toggle {
+                background-color: #1e1e2e;
+                border-radius: 6px;
+                color: #cdd6f4;
+
+                &:active {
+                    background-color: #313244;
+                }
+            }
+
+            popover {
+                button {
+                    border-radius: 6px;
+
+                    &:hover {
+                        background-color: #1e1e2e;
+                    }
+                }
+            }
+        }
+
+        entry {
+            background-color: #1e1e2e;
+            border-radius: 6px;
+
+            &.invalid {
+                color: #f38ba8;
+            }
+        }
+
+        scrollbar {
+            margin-left: 6px;
+
+            trough {
+                background-color: #6c7086;
+                border-radius: 3px;
+
+                slider {
+                    background-color: #cba6f7;
+                    border-radius: 3px;
+                    min-width: 3px;
+                    min-height: 0px;
+                }
+            }
+
+        }
+
+        .save {
+            background-color: #1e1e2e;
+            border-radius: 6px;
+
+            &:hover {
+                background-color: #cba6f7;
+                color: #1e1e2e;
+            }
         }
     }
 }

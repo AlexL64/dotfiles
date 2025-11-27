@@ -2,13 +2,15 @@ import Hyprland from "gi://AstalHyprland?version=0.1";
 import { onCleanup } from "ags"
 import { Gdk, Gtk } from "ags/gtk4";
 
-export default function Workspaces() {
+export default function Workspaces(monitor: number) {
 
     const hyprland = Hyprland.get_default();
 
+    const startNumber = monitor * 9 + 1;
+
     return <box class={"workspaces"}>
         {
-            Array.from({ length: 9 }, (_, i) => i + 1).map(i => <button
+            Array.from({ length: 9 }, (_, i) => i + startNumber).map(i => <button
                 class={"workspace"}
                 cursor={Gdk.Cursor.new_from_name("pointer", null)}
                 label={i.toString()}
