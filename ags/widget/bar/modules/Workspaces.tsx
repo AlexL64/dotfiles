@@ -1,6 +1,6 @@
 import Hyprland from "gi://AstalHyprland?version=0.1";
 import { onCleanup } from "ags"
-import { Gdk, Gtk } from "ags/gtk4";
+import { Gdk } from "ags/gtk4";
 
 export default function Workspaces(monitor: number) {
 
