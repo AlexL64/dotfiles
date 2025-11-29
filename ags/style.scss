@@ -1688,3 +1688,19 @@ box.brightness {
         }
     }
 }
+
+.wallpapers {
+    background-color: #1e1e2e;
+    border: 2px solid #cba6f7;
+    border-radius: 12px;
+    padding: 10px;
+
+    picture {
+        border-radius: 10px;
+        border: 2px solid #313244;
+
+        &.selected {
+            border: 2px solid #f38ba8
+        }
+    }
+}

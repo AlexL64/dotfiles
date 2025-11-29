@@ -23,6 +23,7 @@ import Storage from "./widget/bar/windows/Storage";
 import Memory from "./widget/bar/windows/Memory";
 import Network from "./widget/bar/windows/Network";
 import Monitors from "./widget/Monitor";
+import Wallpapers from "./widget/Wallpapers";
 
 monitorFile(
     "./style.scss",
@@ -68,6 +69,7 @@ App.start({
         PowerSelector();
         Screenshot();
         Monitors();
+        Wallpapers();
     },
 })
 
