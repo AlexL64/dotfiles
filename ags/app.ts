@@ -74,7 +74,7 @@ App.start({
 })
 
 App.connect("window-toggled", (_, window) => {
-    const exceptions = ["Bar", "Toast", "Clipboard", "Idle", "AppLauncher", "PowerSelector", "Monitors"];
+    const exceptions = ["Bar", "Toast", "Clipboard", "Idle", "AppLauncher", "PowerSelector", "Monitors", "Wallpapers"];
 
     if (exceptions.some(e => window.name.includes(e)) && !window.visible) {
         window.hide();
