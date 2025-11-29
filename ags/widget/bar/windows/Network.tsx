@@ -53,7 +53,17 @@ export default function Network() {
                             })
                         }}
                         onNotifyActive={(self) => {
-                            self.active ? exec(["bash", "-c", `mullvad connect`]) : exec(["bash", "-c", `mullvad disconnect`]);
+                            if (self.active && (mullvad.status.state == "connected" || mullvad.status.state == "connecting")) {
+                                return;
+                            }
+
+                            if (!self.active && (mullvad.status.state == "disconnected" || mullvad.status.state == "discconnecting")) {
+                                return;
+                            }
+                            
+                            if (mullvad.status.state != "error") {
+                                self.active ? exec(["bash", "-c", `mullvad connect`]) : exec(["bash", "-c", `mullvad disconnect`]);
+                            }
                         }}
                     />
                 </centerbox>
