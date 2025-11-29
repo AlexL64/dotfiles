@@ -26,6 +26,18 @@ export default function Keybinds() {
         keymode={Astal.Keymode.EXCLUSIVE}
         application={App}
         visible={false}
+        onNotifyVisible={(self) => {
+            if (self.visible) {
+                bindsSet(getKeybinds());
+
+                nbBindsSet(0);
+                Object.keys(binds.get()).forEach(key => {
+                    nbBindsSet(nbBinds.get() + binds.get()[key].length + 1);
+                });
+
+                nbLinesSet(Math.ceil(nbBinds.get() / Math.min(Math.ceil(Math.sqrt(nbBinds.get())), 4)));
+            }
+        }}
         $={(self) => {
             const eventControllerKey = new Gtk.EventControllerKey();
 
@@ -39,33 +51,21 @@ export default function Keybinds() {
             });
         }}>
         <box class={"keybinds"} orientation={Gtk.Orientation.VERTICAL}>
-            <box spacing={10}>
-                <entry
-                    class={"search"}
-                    hexpand
-                    onNotifyText={(self) => {
-                        searchSet(self.text);
-                    }}
-                    $={(self) => {
-                        searchValueReset.subscribe(() => {
-                            if (searchValueReset.get()) {
-                                self.text = "";
-                                searchValueResetSet(false);
-                            }
-                        })
-                    }}
-                />
-                <button class={"refresh"} label={""} cursor={Gdk.Cursor.new_from_name("pointer", null)} onClicked={() => {
-                    bindsSet(getKeybinds());
-
-                    nbBindsSet(0);
-                    Object.keys(binds.get()).forEach(key => {
-                        nbBindsSet(nbBinds.get() + binds.get()[key].length + 1);
-                    });
-
-                    nbLinesSet(Math.ceil(nbBinds.get() / Math.min(Math.ceil(Math.sqrt(nbBinds.get())), 4)));
-                }} />
-            </box>
+            <entry
+                class={"search"}
+                hexpand
+                onNotifyText={(self) => {
+                    searchSet(self.text);
+                }}
+                $={(self) => {
+                    searchValueReset.subscribe(() => {
+                        if (searchValueReset.get()) {
+                            self.text = "";
+                            searchValueResetSet(false);
+                        }
+                    })
+                }}
+            />
             <scrolledwindow
                 class={"list"}
                 minContentHeight={Math.min(nbLines.get() * 40 - 20, 800)}
