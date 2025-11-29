@@ -21,7 +21,7 @@ export default function Wallpapers() {
         name={"Wallpapers"}
         exclusivity={Astal.Exclusivity.NORMAL}
         layer={Astal.Layer.OVERLAY}
-        keymode={Astal.Keymode.ON_DEMAND}
+        keymode={Astal.Keymode.EXCLUSIVE}
         application={App}
         visible={false}
         onNotifyVisible={(self) => {
