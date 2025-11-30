@@ -14,7 +14,7 @@
     "explorer.confirmDelete": false,
     "workbench.colorCustomizations": {},
     "[css]": {
-        "editor.defaultFormatter": "aeschli.vscode-css-formatter"
+        "editor.defaultFormatter": "vscode.css-language-features"
     },
     "notebook.cellToolbarLocation": {
         "default": "right",

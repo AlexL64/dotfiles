@@ -255,9 +255,9 @@ function save(monitor: Monitor, temporary: boolean) {
     let config = "";
 
     if (monitor.name.includes("eDP")) {
-        config = `${name}, ${mode}, auto, ${scale}, mirror, ${mirror}, cm, ${colorManagementPreset}, sdrbrightness, ${sdrBrightness}, sdrsaturation, ${sdrSaturation}`;
+        config = `${name}, ${mode}, auto, ${scale}, mirror, ${mirror}, bitdepth, auto, cm, ${colorManagementPreset}, sdrbrightness, ${sdrBrightness}, sdrsaturation, ${sdrSaturation}`;
     } else {
-        config = `desc:${description}, ${mode}, auto, ${scale}, mirror, ${mirror}, cm, ${colorManagementPreset}, sdrbrightness, ${sdrBrightness}, sdrsaturation, ${sdrSaturation}`;
+        config = `desc:${description}, ${mode}, auto, ${scale}, mirror, ${mirror}, bitdepth, auto, cm, ${colorManagementPreset}, sdrbrightness, ${sdrBrightness}, sdrsaturation, ${sdrSaturation}`;
     }
 
     if (temporary) {
