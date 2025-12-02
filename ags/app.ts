@@ -3,7 +3,7 @@ import style from "./style.scss";
 import { monitorFile } from "ags/file";
 import { exec } from "ags/process";
 import { createBinding } from "ags";
-import Bars from "./widget/bar/Bar";
+import Bars from "./widget/bar/Bars";
 import AppLauncher from "./widget/AppLauncher";
 import Clipboard from "./widget/Clipboard";
 import Toast from "./widget/Toast";
