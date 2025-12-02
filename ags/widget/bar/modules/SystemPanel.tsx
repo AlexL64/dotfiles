@@ -2,19 +2,33 @@ import { createBinding, With } from "ags";
 import App from "ags/gtk4/app"
 import Bluetooth from "gi://AstalBluetooth?version=0.1";
 import Network from "gi://AstalNetwork?version=0.1";
+import Notifyd from "gi://AstalNotifd?version=0.1"
 import { Gdk, Gtk } from "ags/gtk4";
 import Mullvad from "../../../services/Mullvad";
 
-const bluetooth = Bluetooth.get_default();
-const network = Network.get_default();
-
 export default function SystemPanel() {
 
+    const notifyd = Notifyd.get_default();
+    const bluetooth = Bluetooth.get_default();
+    const network = Network.get_default();
     const mullvad = Mullvad.get_default();
 
+    const dontDisturb = createBinding(notifyd, "dontDisturb");
+    const notifications = createBinding(notifyd, "notifications");
     const status = createBinding(mullvad, "status");
 
     return <box class={"system_panel"}>
+        <button class={"notifications_bell"} visible={notifications.as((n) => n.length > 0)}>
+            <Gtk.GestureClick
+                propagationPhase={Gtk.PropagationPhase.CAPTURE}
+                button={Gdk.BUTTON_SECONDARY}
+                onPressed={() => {
+                    notifyd.set_dont_disturb(!notifyd.dontDisturb);
+                }}
+            />
+            <label class={dontDisturb.as((d) => d ? "dont_disturb" : "")} label={"󱅫"} />
+        </button>
+        <box class={"separator"} visible={notifications.as((n) => n.length > 0)} />
         <button
             class={"network"}
             cursor={Gdk.Cursor.new_from_name("pointer", null)}

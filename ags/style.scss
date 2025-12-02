@@ -324,6 +324,24 @@ switch {
             min-width: 0px;
             border-radius: 12px;
 
+            &.notifications_bell {
+                padding: 0px;
+                min-width: 36px;
+
+                label {
+                    padding: 0px;
+                    margin-right: 2px;
+
+                    &.dont_disturb {
+                        color: #f38ba8;
+                    }
+                }
+
+                &:hover {
+                    background-color: #cdd6f433;
+                }
+            }
+
             &.network {
                 padding: 0px;
                 min-width: 36px;
@@ -1680,7 +1698,7 @@ box.brightness {
         .image {
             margin: 0px 6px;
 
-            .desktopentry{
+            .desktopentry {
                 margin-left: -16px;
                 margin-bottom: 2px;
             }
@@ -1694,7 +1712,7 @@ box.brightness {
             margin-top: 6px;
         }
 
-        .actions{
+        .actions {
 
             button {
                 background-color: #45475a;
@@ -1713,8 +1731,16 @@ box.brightness {
             border-radius: 6px;
             padding: 0px 4px;
 
-            &:hover{
+            &:hover {
                 background-color: #f38ba8cc;
+            }
+        }
+
+        &.urgent {
+            border: 2px solid #f38ba8;
+
+            .summary {
+                color: #f38ba8;
             }
         }
     }

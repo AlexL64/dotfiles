@@ -4,7 +4,6 @@ import Notifd from "gi://AstalNotifd?version=0.1"
 import Pango from "gi://Pango?version=1.0";
 import { createBinding, createState, For } from "ags";
 import Hyprland from "gi://AstalHyprland?version=0.1";
-import cairo from "cairo";
 
 export default function Notifications() {
 
@@ -12,9 +11,10 @@ export default function Notifications() {
     const hyprland = Hyprland.get_default();
 
 
+    const dontDisturb = createBinding(notifyd, "dontDisturb");
     const notifications = createBinding(notifyd, "notifications");
 
-    const [processedNotifications, processedNotificationsSet] = createState(processNotifications(notifyd.notifications));
+    const [processedNotifications, processedNotificationsSet] = createState(processNotifications(notifyd.notifications, notifyd));
 
     return <window
         name={"Notifications"}
@@ -29,8 +29,12 @@ export default function Notifications() {
         defaultWidth={-1}
         visible={processedNotifications.as((n) => n.length > 0)}
         $={(self) => {
+            dontDisturb.subscribe(() => {
+                processedNotificationsSet(processNotifications(notifyd.notifications, notifyd));
+            })
+
             notifications.subscribe(() => {
-                processedNotificationsSet(processNotifications(notifyd.notifications));
+                processedNotificationsSet(processNotifications(notifyd.notifications, notifyd));
             })
         }}>
         <box
@@ -40,11 +44,13 @@ export default function Notifications() {
             valign={Gtk.Align.END}>
             <For each={processedNotifications}>
                 {(notification) => {
-                    return <box class={"notification"} spacing={10} $={() => {
+                    return <box class={"notification"} spacing={10} $={(self) => {
                         if (notification.urgency != Notifd.Urgency.CRITICAL) {
                             setTimeout(() => {
-                                processedNotificationsSet(processNotifications(notifyd.notifications));
+                                processedNotificationsSet(processNotifications(notifyd.notifications, notifyd));
                             }, 10000);
+                        } else {
+                            self.add_css_class("urgent");
                         }
                     }}>
                         <Gtk.GestureClick
@@ -138,11 +144,13 @@ export default function Notifications() {
     </window >
 }
 
-function processNotifications(notifications: Notifd.Notification[]): Notifd.Notification[] {
+function processNotifications(notifications: Notifd.Notification[], notifyd: Notifd.Notifd): Notifd.Notification[] {
 
     for (let i = notifications.length - 1; i >= 0; i--) {
-        if (Math.floor(Date.now() / 1000) - notifications[i].time >= 10) {
-            notifications.splice(i, 1);
+        if (notifications[i].urgency != Notifd.Urgency.CRITICAL) {
+            if (notifyd.dontDisturb || Math.floor(Date.now() / 1000) - notifications[i].time >= 10) {
+                notifications.splice(i, 1);
+            }
         }
     }
 
