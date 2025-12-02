@@ -247,34 +247,6 @@ switch {
         }
     }
 
-    .notifications {
-        background-color: #313244;
-        border-radius: 12px;
-
-        button {
-            border-radius: 12px;
-            padding-left: 12px;
-            padding-right: 8px;
-
-            &:hover {
-                background-color: #74c7ec33;
-            }
-
-            .icon {
-                color: #74c7ec;
-            }
-
-            .number {
-                color: #f38ba8;
-                font-size: x-small;
-                font-weight: 900;
-                min-height: 0px;
-                margin-top: -10px;
-            }
-        }
-
-    }
-
     .sysinfos {
         background-color: #313244;
         border-radius: 12px;
@@ -1688,6 +1660,62 @@ box.brightness {
 
         &.selected {
             border: 2px solid #f38ba8
+        }
+    }
+}
+
+.notifications {
+    min-width: 450px;
+
+    .notification {
+        background-color: #313244;
+        padding: 12px;
+        border-radius: 12px;
+        border: 2px solid #cba6f7;
+
+        &:hover {
+            background-color: #292939;
+        }
+
+        .image {
+            margin: 0px 6px;
+
+            .desktopentry{
+                margin-left: -16px;
+                margin-bottom: 2px;
+            }
+        }
+
+        .summary {
+            color: #cba6f7;
+        }
+
+        .body {
+            margin-top: 6px;
+        }
+
+        .actions{
+
+            button {
+                background-color: #45475a;
+                border-radius: 6px;
+                padding: 0px;
+                margin-top: 10px;
+
+                &:hover {
+                    background-color: #cba6f7;
+                }
+            }
+        }
+
+        .delete {
+            background-color: #f38ba8;
+            border-radius: 6px;
+            padding: 0px 4px;
+
+            &:hover{
+                background-color: #f38ba8cc;
+            }
         }
     }
 }

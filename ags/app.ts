@@ -24,6 +24,7 @@ import Memory from "./widget/bar/windows/Memory";
 import Network from "./widget/bar/windows/Network";
 import Monitors from "./widget/Monitor";
 import Wallpapers from "./widget/Wallpapers";
+import Notifications from "./widget/Notifications";
 
 monitorFile(
     "./style.scss",
@@ -70,11 +71,14 @@ App.start({
         Screenshot();
         Monitors();
         Wallpapers();
+
+        // Notifications
+        Notifications();
     },
 })
 
 App.connect("window-toggled", (_, window) => {
-    const exceptions = ["Bar", "Toast", "Clipboard", "Idle", "AppLauncher", "PowerSelector", "Monitors", "Wallpapers"];
+    const exceptions = ["Bar", "Toast", "Clipboard", "Idle", "AppLauncher", "PowerSelector", "Monitors", "Wallpapers", "Notifications"];
 
     if (exceptions.some(e => window.name.includes(e)) && !window.visible) {
         window.hide();

@@ -5,7 +5,6 @@ import Audio from "./modules/Audio";
 import Privacy from "./modules/PrivacyIndicator";
 import Mpris from "./modules/Mpris";
 import Date from "./modules/Date";
-import Notifications from "./modules/Notification";
 import SysInfos from "./modules/SysInfos";
 import SystemPanel from "./modules/SystemPanel";
 import { createBinding, For, onCleanup, This } from "ags";
@@ -44,7 +43,6 @@ export default function Bars() {
                                 <Date />
                             </box>
                             <box $type="end" spacing={10}>
-                                <Notifications />
                                 <SysInfos />
                                 <SystemPanel />
                             </box>
