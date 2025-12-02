@@ -25,7 +25,7 @@ export default function Memory() {
     return <window
         name={"Memory"}
         marginTop={10}
-        marginRight={175}
+        marginRight={214}
         anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT}
         exclusivity={Astal.Exclusivity.NORMAL}
         application={App}

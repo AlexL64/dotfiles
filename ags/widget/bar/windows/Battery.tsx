@@ -17,7 +17,7 @@ export default function Battery() {
     return <window
         name={"Battery"}
         marginTop={10}
-        marginRight={175}
+        marginRight={214}
         anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT}
         exclusivity={Astal.Exclusivity.NORMAL}
         application={App}
