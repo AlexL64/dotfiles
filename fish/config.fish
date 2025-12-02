@@ -9,4 +9,4 @@ alias 'pacman_clear_all'='yay -Qqd | yay -Rsu -'
 alias 'ssh'='kitten ssh'
 alias 'neofetch'='fastfetch'
 
-set PATH $PATH /home/alex/.local/bin
+set PATH $PATH $HOME/.local/bin
