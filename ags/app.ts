@@ -25,6 +25,7 @@ import Network from "./widget/bar/windows/Network";
 import Monitors from "./widget/Monitor";
 import Wallpapers from "./widget/Wallpapers";
 import Notifications from "./widget/Notifications";
+import NotificationsPanel from "./widget/bar/windows/NotificationsPanel";
 
 monitorFile(
     "./style.scss",
@@ -38,8 +39,6 @@ monitorFile(
 App.start({
     css: style,
     main() {
-
-        const monitors = createBinding(App, "monitors");
 
         // Idle
         Idle();
@@ -55,15 +54,13 @@ App.start({
         Storage();
         Brightness();
         Battery();
+        NotificationsPanel();
         Network();
         Bluetooth();
         Tray();
         Power();
 
-        // Toast
-        Toast();
-
-        // Menus
+        // Windows
         Clipboard();
         AppLauncher();
         Keybinds();
@@ -74,6 +71,9 @@ App.start({
 
         // Notifications
         Notifications();
+
+        // Toast
+        Toast();
     },
 })
 

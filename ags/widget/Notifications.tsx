@@ -10,7 +10,6 @@ export default function Notifications() {
     const notifyd = Notifd.get_default();
     const hyprland = Hyprland.get_default();
 
-
     const dontDisturb = createBinding(notifyd, "dontDisturb");
     const notifications = createBinding(notifyd, "notifications");
 
@@ -29,6 +28,14 @@ export default function Notifications() {
         defaultWidth={-1}
         visible={processedNotifications.as((n) => n.length > 0)}
         $={(self) => {
+            const panel = App.get_window("NotificationsPanel");
+
+            if (panel != undefined) {
+                panel.connect("notify::visible", () => {
+                    processedNotificationsSet(processNotifications(notifyd.notifications, notifyd));
+                })
+            }
+
             dontDisturb.subscribe(() => {
                 processedNotificationsSet(processNotifications(notifyd.notifications, notifyd));
             })
@@ -146,13 +153,27 @@ export default function Notifications() {
 
 function processNotifications(notifications: Notifd.Notification[], notifyd: Notifd.Notifd): Notifd.Notification[] {
 
+    const panel = App.get_window("NotificationsPanel");
+
     for (let i = notifications.length - 1; i >= 0; i--) {
-        if (notifications[i].urgency != Notifd.Urgency.CRITICAL) {
-            if (notifyd.dontDisturb || Math.floor(Date.now() / 1000) - notifications[i].time >= 10) {
-                notifications.splice(i, 1);
+        if (panel != undefined && panel.visible) {
+            notifications.splice(i, 1);
+        } else {
+            if (notifications[i].urgency != Notifd.Urgency.CRITICAL) {
+                if (notifyd.dontDisturb || Math.floor(Date.now() / 1000) - notifications[i].time >= 10) {
+                    notifications.splice(i, 1);
+                }
             }
         }
     }
 
-    return notifications.sort((a, b) => a.time - b.time);
+    notifications = notifications.sort((a, b) => a.time - b.time);
+
+    notifications = notifications.sort((a, b) => {
+        if (a.urgency === Notifd.Urgency.CRITICAL && b.urgency !== Notifd.Urgency.CRITICAL) return 1;
+        if (a.urgency !== Notifd.Urgency.CRITICAL && b.urgency === Notifd.Urgency.CRITICAL) return -1;
+        return 0;
+    });
+
+    return notifications;
 }

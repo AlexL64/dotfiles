@@ -21,6 +21,15 @@ export default function SystemPanel() {
         <button class={"notifications_bell"} visible={notifications.as((n) => n.length > 0)}>
             <Gtk.GestureClick
                 propagationPhase={Gtk.PropagationPhase.CAPTURE}
+                button={Gdk.BUTTON_PRIMARY}
+                onPressed={() => {
+                    if (notifyd.notifications.length > 0) {
+                        App.toggle_window("NotificationsPanel");
+                    }
+                }}
+            />
+            <Gtk.GestureClick
+                propagationPhase={Gtk.PropagationPhase.CAPTURE}
                 button={Gdk.BUTTON_SECONDARY}
                 onPressed={() => {
                     notifyd.set_dont_disturb(!notifyd.dontDisturb);
