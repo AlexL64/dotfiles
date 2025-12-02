@@ -23,9 +23,7 @@ export default function SystemPanel() {
                 propagationPhase={Gtk.PropagationPhase.CAPTURE}
                 button={Gdk.BUTTON_PRIMARY}
                 onPressed={() => {
-                    if (notifyd.notifications.length > 0) {
-                        App.toggle_window("NotificationsPanel");
-                    }
+                    App.toggle_window("NotificationsPanel");
                 }}
             />
             <Gtk.GestureClick
