@@ -1197,6 +1197,10 @@ box.bluetooth {
             }
         }
 
+        .count {
+            color: #a6adc8;
+        }
+
         &.urgent {
             border: 2px solid #f38ba8;
 
@@ -1843,6 +1847,10 @@ box.brightness {
             &:hover {
                 background-color: #f38ba8cc;
             }
+        }
+
+        .count {
+            color: #a6adc8;
         }
 
         &.urgent {

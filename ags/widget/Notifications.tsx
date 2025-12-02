@@ -52,7 +52,7 @@ export default function Notifications() {
             <For each={processedNotifications}>
                 {(notification) => {
                     return <box class={"notification"} spacing={10} $={(self) => {
-                        if (notification.urgency != Notifd.Urgency.CRITICAL) {
+                        if (notification.notif.urgency != Notifd.Urgency.CRITICAL) {
                             setTimeout(() => {
                                 processedNotificationsSet(processNotifications(notifyd.notifications, notifyd));
                             }, 10000);
@@ -64,14 +64,16 @@ export default function Notifications() {
                             propagationPhase={Gtk.PropagationPhase.CAPTURE}
                             button={Gdk.BUTTON_SECONDARY}
                             onPressed={() => {
-                                notification.dismiss();
+                                notification.list.forEach((notif) => {
+                                    notif.dismiss();
+                                });
                             }}
                         />
                         <box class={"image"} valign={Gtk.Align.CENTER}>
                             <image
                                 $={(self) => {
-                                    if (notification.image != "") {
-                                        self.file = notification.image;
+                                    if (notification.notif.image != "") {
+                                        self.file = notification.notif.image;
                                     } else {
                                         self.iconName = "bell";
                                     }
@@ -89,8 +91,8 @@ export default function Notifications() {
 
                                     const theme = Gtk.IconTheme.get_for_display(display);
 
-                                    if (theme.has_icon(notification.desktopEntry)) {
-                                        self.set_from_icon_name(notification.desktopEntry);
+                                    if (theme.has_icon(notification.notif.desktopEntry)) {
+                                        self.set_from_icon_name(notification.notif.desktopEntry);
                                     }
                                 }}
                                 valign={Gtk.Align.END} />
@@ -98,33 +100,33 @@ export default function Notifications() {
                         <box orientation={Gtk.Orientation.VERTICAL} hexpand>
                             <label
                                 class={"summary"}
-                                label={notification.summary}
+                                label={notification.notif.summary}
                                 halign={Gtk.Align.START}
                                 maxWidthChars={35}
                                 ellipsize={Pango.EllipsizeMode.END} />
                             <label
                                 class={"body"}
                                 halign={Gtk.Align.START}
-                                label={notification.body}
+                                label={notification.notif.body}
                                 lines={6}
                                 singleLineMode
                                 maxWidthChars={35}
                                 ellipsize={Pango.EllipsizeMode.END}
                                 wrapMode={Gtk.WrapMode.WORD} />
-                            <box class={"actions"} spacing={10} homogeneous visible={notification.actions.length > 0}>
+                            <box class={"actions"} spacing={10} homogeneous visible={notification.notif.actions.length > 0}>
                                 {
-                                    notification.actions.map((action) => {
+                                    notification.notif.actions.map((action) => {
 
                                         return <button
                                             label={action.label}
                                             cursor={Gdk.Cursor.new_from_name("pointer", null)}
                                             onClicked={() => {
 
-                                                notification.invoke(action.id);
+                                                notification.notif.invoke(action.id);
 
                                                 const workspaces = hyprland.workspaces;
                                                 const index = workspaces.findIndex(ws =>
-                                                    ws.clients.some(client => client.class == notification.appName)
+                                                    ws.clients.some(client => client.class == notification.notif.appName)
                                                 );
 
                                                 if (index != -1) {
@@ -134,16 +136,22 @@ export default function Notifications() {
                                     })
                                 }
                             </box>
-                            <box></box>
                         </box>
-                        <button
-                            class={"delete"}
-                            label={""}
-                            valign={Gtk.Align.START}
-                            cursor={Gdk.Cursor.new_from_name("pointer", null)}
-                            onClicked={() => {
-                                notification.dismiss();
-                            }} />
+                        <centerbox orientation={Gtk.Orientation.VERTICAL}>
+                            <button
+                                $type="start"
+                                class={"delete"}
+                                label={""}
+                                halign={Gtk.Align.END}
+                                cursor={Gdk.Cursor.new_from_name("pointer", null)}
+                                onClicked={() => {
+                                    notification.list.forEach((notif) => {
+                                        notif.dismiss();
+                                    });
+                                }} />
+
+                            <label $type="end" class={"count"} visible={notification.list.length > 1} label={`x${notification.list.length}`} />
+                        </centerbox>
                     </box>
                 }}
             </For>
@@ -151,21 +159,9 @@ export default function Notifications() {
     </window >
 }
 
-function processNotifications(notifications: Notifd.Notification[], notifyd: Notifd.Notifd): Notifd.Notification[] {
+function processNotifications(notifications: Notifd.Notification[], notifyd: Notifd.Notifd): { notif: Notifd.Notification, list: Notifd.Notification[] }[] {
 
     const panel = App.get_window("NotificationsPanel");
-
-    for (let i = notifications.length - 1; i >= 0; i--) {
-        if (panel != undefined && panel.visible) {
-            notifications.splice(i, 1);
-        } else {
-            if (notifications[i].urgency != Notifd.Urgency.CRITICAL) {
-                if (notifyd.dontDisturb || Math.floor(Date.now() / 1000) - notifications[i].time >= 10) {
-                    notifications.splice(i, 1);
-                }
-            }
-        }
-    }
 
     notifications = notifications.sort((a, b) => a.time - b.time);
 
@@ -175,5 +171,55 @@ function processNotifications(notifications: Notifd.Notification[], notifyd: Not
         return 0;
     });
 
-    return notifications;
+    const mergedNotifications = mergeNotifications(notifications);
+
+    for (let i = mergedNotifications.length - 1; i >= 0; i--) {
+        if (panel != undefined && panel.visible) {
+            mergedNotifications.splice(i, 1);
+        } else {
+            if (mergedNotifications[i].notif.urgency != Notifd.Urgency.CRITICAL) {
+                if (notifyd.dontDisturb || Math.floor(Date.now() / 1000) - mergedNotifications[i].notif.time >= 10) {
+                    mergedNotifications.splice(i, 1);
+                }
+            }
+        }
+    }
+
+    return mergedNotifications;
+}
+
+function mergeNotifications(notifications: Notifd.Notification[]): { notif: Notifd.Notification, list: Notifd.Notification[] }[] {
+
+    const mergedNotifications: { notif: Notifd.Notification, list: Notifd.Notification[] }[] = []
+
+    const notificationsInfos: { index: number, list: number[], value: string }[] = [];
+
+    notifications.forEach((n, i) => {
+        const value = JSON.stringify({
+            appName: n.appName,
+            appIcon: n.appIcon,
+            summary: n.summary,
+            body: n.body,
+            actions: n.actions,
+            urgency: n.urgency
+        });
+
+        const index = notificationsInfos.findIndex(item => item.value === value);
+
+        if (index == -1) {
+            notificationsInfos.push({ index: i, list: [i], value: value });
+        } else {
+            notificationsInfos[index].index = i;
+            notificationsInfos[index].list.push(i);
+        }
+    })
+
+    notificationsInfos.forEach((infos) => {
+        mergedNotifications.push({
+            notif: notifications[infos.index],
+            list: infos.list.map((index) => notifications[index])
+        });
+    })
+
+    return mergedNotifications;
 }
