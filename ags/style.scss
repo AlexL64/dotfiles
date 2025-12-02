@@ -332,6 +332,10 @@ switch {
                     padding: 0px;
                     margin-right: 2px;
 
+                    &.active {
+                        color: #89b4fa;
+                    }
+
                     &.dont_disturb {
                         color: #f38ba8;
                     }

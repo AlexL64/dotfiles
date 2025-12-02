@@ -18,7 +18,7 @@ export default function SystemPanel() {
     const status = createBinding(mullvad, "status");
 
     return <box class={"system_panel"}>
-        <button class={"notifications_bell"} visible={notifications.as((n) => n.length > 0)}>
+        <button class={"notifications_bell"}>
             <Gtk.GestureClick
                 propagationPhase={Gtk.PropagationPhase.CAPTURE}
                 button={Gdk.BUTTON_PRIMARY}
@@ -35,9 +35,20 @@ export default function SystemPanel() {
                     notifyd.set_dont_disturb(!notifyd.dontDisturb);
                 }}
             />
-            <label class={dontDisturb.as((d) => d ? "dont_disturb" : "")} label={"󱅫"} />
+            <label label={notifications.as((n) => n.length > 0 ? "󱅫" : "󰂚")} $={(self) => {
+                notifications.get().length > 0 ? self.add_css_class("active") : self.remove_css_class("active");
+                dontDisturb.get() ? self.add_css_class("dont_disturb") : self.remove_css_class("dont_disturb");
+
+                notifications.subscribe(() => {
+                    notifications.get().length > 0 ? self.add_css_class("active") : self.remove_css_class("active");
+                })
+
+                dontDisturb.subscribe(() => {
+                    dontDisturb.get() ? self.add_css_class("dont_disturb") : self.remove_css_class("dont_disturb");
+                })
+            }} />
         </button>
-        <box class={"separator"} visible={notifications.as((n) => n.length > 0)} />
+        <box class={"separator"} />
         <button
             class={"network"}
             cursor={Gdk.Cursor.new_from_name("pointer", null)}
