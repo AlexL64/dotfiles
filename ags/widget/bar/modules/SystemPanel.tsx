@@ -18,7 +18,7 @@ export default function SystemPanel() {
     const status = createBinding(mullvad, "status");
 
     return <box class={"system_panel"}>
-        <button class={"notifications_bell"}>
+        <button class={"notifications_bell"} cursor={Gdk.Cursor.new_from_name("pointer", null)}>
             <Gtk.GestureClick
                 propagationPhase={Gtk.PropagationPhase.CAPTURE}
                 button={Gdk.BUTTON_PRIMARY}
