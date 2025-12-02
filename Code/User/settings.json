@@ -22,5 +22,7 @@
     },
     "jupyter.askForKernelRestart": false,
     "diffEditor.maxComputationTime": 0,
-    "git.openRepositoryInParentFolders": "never"
+    "git.openRepositoryInParentFolders": "never",
+    "chat.disableAIFeatures": true,
+    "workbench.settings.showAISearchToggle": false
 }
