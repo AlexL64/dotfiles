@@ -55,7 +55,7 @@ export default function Notifications() {
                         if (notification.notif.urgency != Notifd.Urgency.CRITICAL) {
                             setTimeout(() => {
                                 processedNotificationsSet(processNotifications(notifyd.notifications, notifyd));
-                            }, 10000);
+                            }, (Math.floor(Date.now() / 1000) - notification.notif.time) * 100);
                         } else {
                             self.add_css_class("urgent");
                         }
