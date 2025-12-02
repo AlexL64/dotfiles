@@ -34,7 +34,7 @@ export default function NotificationsPanel() {
                 <button
                     $type="end"
                     class={"clear"}
-                    label={"clear"}
+                    label={"Clear"}
                     cursor={Gdk.Cursor.new_from_name("pointer", null)}
                     onClicked={() => {
                         App.get_window("NotificationsPanel")?.hide();
