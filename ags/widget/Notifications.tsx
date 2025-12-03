@@ -74,25 +74,30 @@ export default function Notifications() {
                                 $={(self) => {
                                     if (notification.notif.image != "") {
                                         self.file = notification.notif.image;
+                                    } else if (notification.notif.appIcon != "") {
+                                        self.set_from_icon_name(notification.notif.appIcon);
+                                    } else if (iconExist(notification.notif.desktopEntry)) {
+                                        self.set_from_icon_name(notification.notif.desktopEntry);
+                                    } else if (iconExist(notification.notif.appName)) {
+                                        self.set_from_icon_name(notification.notif.appName);
                                     } else {
                                         self.iconName = "bell";
                                     }
+
                                 }}
                                 pixelSize={64} />
                             <image
                                 class={"desktopentry"}
                                 pixelSize={16}
                                 $={(self) => {
-                                    const display = Gdk.Display.get_default();
-
-                                    if (!display) {
-                                        return;
-                                    }
-
-                                    const theme = Gtk.IconTheme.get_for_display(display);
-
-                                    if (theme.has_icon(notification.notif.desktopEntry)) {
-                                        self.set_from_icon_name(notification.notif.desktopEntry);
+                                    if (notification.notif.image != "") {
+                                        if (notification.notif.appIcon != "") {
+                                            self.set_from_icon_name(notification.notif.appIcon);
+                                        } else if (iconExist(notification.notif.desktopEntry)) {
+                                            self.set_from_icon_name(notification.notif.desktopEntry);
+                                        } else if (iconExist(notification.notif.appName)) {
+                                            self.set_from_icon_name(notification.notif.appName);
+                                        }
                                     }
                                 }}
                                 valign={Gtk.Align.END} />
@@ -222,4 +227,21 @@ function mergeNotifications(notifications: Notifd.Notification[]): { notif: Noti
     })
 
     return mergedNotifications;
+}
+
+function iconExist(icon: string): boolean {
+
+    const display = Gdk.Display.get_default();
+
+    if (!display) {
+        return false;
+    }
+
+    const theme = Gtk.IconTheme.get_for_display(display);
+
+    if (theme.has_icon(icon)) {
+        return true;
+    }
+
+    return false;
 }
