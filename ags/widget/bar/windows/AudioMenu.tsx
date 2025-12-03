@@ -20,7 +20,11 @@ export default function AudioMenu() {
         anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT}
         exclusivity={Astal.Exclusivity.NORMAL}
         application={App}
-        visible={false}>
+        visible={false}
+        title={selectedMenu}
+        onNotifyTitle={(self) => {
+            selectedMenuSet(self.title);
+        }}>
         <box class={"audioMenu"} orientation={Gtk.Orientation.VERTICAL}>
             <box class={"menu"} homogeneous>
                 <button

@@ -56,7 +56,15 @@ export default function Audio() {
             <Gtk.GestureClick
                 propagationPhase={Gtk.PropagationPhase.CAPTURE}
                 button={Gdk.BUTTON_PRIMARY}
-                onPressed={() => App.toggle_window("AudioMenu")}
+                onPressed={() => {
+                    const window = App.get_window("AudioMenu");
+
+                    if (window != undefined && window.title != "Output Devices") {
+                        window.set_title("Output Devices");
+                    }
+
+                    App.toggle_window("AudioMenu");
+                }}
             />
             <Gtk.GestureClick
                 propagationPhase={Gtk.PropagationPhase.CAPTURE}
@@ -118,7 +126,15 @@ export default function Audio() {
             <Gtk.GestureClick
                 propagationPhase={Gtk.PropagationPhase.CAPTURE}
                 button={Gdk.BUTTON_PRIMARY}
-                onPressed={() => App.toggle_window("AudioMenu")}
+                onPressed={() => {
+                    const window = App.get_window("AudioMenu");
+
+                    if (window != undefined && window.title != "Input Devices") {
+                        window.set_title("Input Devices");
+                    }
+
+                    App.toggle_window("AudioMenu");
+                }}
             />
             <Gtk.GestureClick
                 propagationPhase={Gtk.PropagationPhase.CAPTURE}
