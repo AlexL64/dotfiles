@@ -3,7 +3,6 @@ import { createBinding } from "gnim";
 import App from "ags/gtk4/app"
 import { Gdk, Gtk } from "ags/gtk4";
 import Pango from "gi://Pango?version=1.0";
-import { exec } from "ags/process";
 
 function lengthStr(length: number) {
     const min = Math.floor(length / 60)
@@ -37,7 +36,7 @@ export default function Mpris() {
         <button
             class={"play_pause"}
             cursor={Gdk.Cursor.new_from_name("pointer", null)}
-            onClicked={() => exec(["bash", "-c", `playerctl play-pause`])}>
+            onClicked={() => player.play_pause()}>
             <image iconName={playback_status} />
         </button>
         <button
