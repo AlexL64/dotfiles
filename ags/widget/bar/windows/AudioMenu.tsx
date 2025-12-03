@@ -6,7 +6,11 @@ import { timeout } from "ags/time";
 import { exec } from "ags/process";
 import Pango from "gi://Pango?version=1.0";
 
-const audio = Wp.get_default()!.audio;
+const audio = Wp.get_default().audio;
+
+const speakers = createBinding(audio, "speakers");
+const microphones = createBinding(audio, "microphones");
+const streams = createBinding(audio, "streams");
 
 export default function AudioMenu() {
 
@@ -106,8 +110,8 @@ function renderContent(value: string) {
 function OutputDevicesContent() {
 
     return <box orientation={Gtk.Orientation.VERTICAL} spacing={10}>
-        <For each={createBinding(audio, "speakers")}>
-            {(speaker: Wp.Endpoint) => {
+        <For each={speakers}>
+            {(speaker) => {
                 return <box orientation={Gtk.Orientation.VERTICAL} class={"card"}>
                     <box>
                         <label
@@ -193,8 +197,8 @@ function OutputDevicesContent() {
 
 function InputDevicesContent() {
     return <box orientation={Gtk.Orientation.VERTICAL} spacing={10}>
-        <For each={createBinding(audio, "microphones")}>
-            {(mic: Wp.Endpoint) => {
+        <For each={microphones}>
+            {(mic) => {
                 return <box orientation={Gtk.Orientation.VERTICAL} class={"card"}>
                     <box>
                         <label
@@ -277,8 +281,8 @@ function InputDevicesContent() {
 
 function ApplicationsContent() {
     return <box orientation={Gtk.Orientation.VERTICAL} spacing={10}>
-        <For each={createBinding(audio, "streams")}>
-            {(stream: Wp.Stream) => {
+        <For each={streams}>
+            {(stream) => {
 
                 return <box class={"card"}>
                     <image iconName={createBinding(stream, "icon")} class={"icon"} />
