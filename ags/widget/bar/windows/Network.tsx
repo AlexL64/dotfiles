@@ -38,30 +38,25 @@ export default function Network() {
                     <switch
                         $type="end"
                         cursor={Gdk.Cursor.new_from_name("pointer", null)}
-                        active={status.as((s) => {
-                            if (s.state == "connected" || s.state == "connecting") {
-                                return true;
+                        $={(self) => {
+                            if (mullvad.status.state == "connected" || mullvad.status.state == "connecting") {
+                                self.active = true;
                             }
 
-                            return false;
-                        })}
-                        $={(self) => {
                             self.active ? self.add_css_class("activated") : self.remove_css_class("activated");
 
-                            self.connect("notify::active", () => {
-                                self.active ? self.add_css_class("activated") : self.remove_css_class("activated");
+                            status.subscribe(() => {
+                                if (mullvad.status.state == "connected") {
+                                    self.active = true;
+                                } else if (mullvad.status.state == "disconnected") {
+                                    self.active = false;
+                                }
                             })
                         }}
                         onNotifyActive={(self) => {
-                            if (self.active && (mullvad.status.state == "connected" || mullvad.status.state == "connecting")) {
-                                return;
-                            }
+                            self.active ? self.add_css_class("activated") : self.remove_css_class("activated");
 
-                            if (!self.active && (mullvad.status.state == "disconnected" || mullvad.status.state == "discconnecting")) {
-                                return;
-                            }
-                            
-                            if (mullvad.status.state != "error") {
+                            if (mullvad.status.state != "error" && mullvad.status.state != "discconnecting" && mullvad.status.state != "connecting") {
                                 self.active ? exec(["bash", "-c", `mullvad connect`]) : exec(["bash", "-c", `mullvad disconnect`]);
                             }
                         }}
