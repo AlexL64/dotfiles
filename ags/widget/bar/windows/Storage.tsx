@@ -25,6 +25,8 @@ export default function Storage() {
         anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT}
         exclusivity={Astal.Exclusivity.NORMAL}
         application={App}
+        defaultHeight={-1}
+        defaultWidth={-1}
         visible={false}>
         <box class={"storage"} valign={Gtk.Align.START}>
             <scrolledwindow overlayScrolling={false} vscrollbarPolicy={Gtk.PolicyType.AUTOMATIC} $={(self) => {

@@ -18,6 +18,8 @@ export default function Media() {
         exclusivity={Astal.Exclusivity.NORMAL}
         application={App}
         visible={false}
+        defaultHeight={-1}
+        defaultWidth={-1}
         $={(self) => {
             playerctld.connect("notify::title", () => {
                 if (self.visible && playerctld.title == "") {

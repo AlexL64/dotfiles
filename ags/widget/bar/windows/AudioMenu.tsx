@@ -25,6 +25,8 @@ export default function AudioMenu() {
         exclusivity={Astal.Exclusivity.NORMAL}
         application={App}
         visible={false}
+        defaultHeight={-1}
+        defaultWidth={-1}
         title={selectedMenu}
         onNotifyTitle={(self) => {
             selectedMenuSet(self.title);

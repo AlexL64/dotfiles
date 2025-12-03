@@ -14,6 +14,8 @@ export default function Tray() {
         anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT}
         exclusivity={Astal.Exclusivity.NORMAL}
         application={App}
+        defaultHeight={-1}
+        defaultWidth={-1}
         visible={false}>
         <box class={"tray"} valign={Gtk.Align.START} halign={Gtk.Align.END}>
             <Gtk.Grid columnSpacing={4} rowSpacing={4} $={(self) => {
