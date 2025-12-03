@@ -112,6 +112,11 @@ function OutputDevicesContent() {
     return <box orientation={Gtk.Orientation.VERTICAL} spacing={10}>
         <For each={speakers}>
             {(speaker) => {
+
+                speaker.device.profiles.forEach((profile) => {
+                    print(`${profile.index} | ${profile.description}`);
+                })
+                print("\n");
                 return <box orientation={Gtk.Orientation.VERTICAL} class={"card"}>
                     <box>
                         <label
@@ -137,11 +142,26 @@ function OutputDevicesContent() {
                                 }}>
                                 <Gtk.CheckButton active={createBinding(speaker, "isDefault")} />
                             </button>
-                            <With value={createBinding(speaker, "params_changed")}>
-                                {(paramsChanged) => {
-                                    return profilesMenu(speaker.id, "sinks")
-                                }}
-                            </With>
+                            <menubutton class={"profiles"} label={""} direction={Gtk.ArrowType.NONE} cursor={Gdk.Cursor.new_from_name("pointer", null)}>
+                                <popover halign={Gtk.Align.START}>
+                                    <box orientation={Gtk.Orientation.VERTICAL} spacing={5}>
+                                        {speaker.device.profiles.map((p) => {
+                                            return <box>
+                                                <Gtk.CheckButton
+                                                    active={p.index == speaker.device.activeProfileId}>
+                                                    <Gtk.GestureClick
+                                                        propagationPhase={Gtk.PropagationPhase.CAPTURE}
+                                                        button={Gdk.BUTTON_PRIMARY}
+                                                        onPressed={() => {
+                                                            speaker.device.set_active_profile_id(p.index);
+                                                        }} />
+                                                </Gtk.CheckButton>
+                                                <label label={p.description} />
+                                            </box>
+                                        })}
+                                    </box>
+                                </popover>
+                            </menubutton>
                         </box>
                     </box>
                     <box>
@@ -223,11 +243,26 @@ function InputDevicesContent() {
                                 }}>
                                 <Gtk.CheckButton active={createBinding(mic, "isDefault")} />
                             </button>
-                            <With value={createBinding(mic, "params_changed")}>
-                                {(paramsChanged) => {
-                                    return profilesMenu(mic.id, "sources")
-                                }}
-                            </With>
+                            <menubutton class={"profiles"} label={""} direction={Gtk.ArrowType.NONE} cursor={Gdk.Cursor.new_from_name("pointer", null)}>
+                                <popover halign={Gtk.Align.START}>
+                                    <box orientation={Gtk.Orientation.VERTICAL} spacing={5}>
+                                        {mic.device.profiles.map((p) => {
+                                            return <box>
+                                                <Gtk.CheckButton
+                                                    active={p.index == mic.device.activeProfileId}>
+                                                    <Gtk.GestureClick
+                                                        propagationPhase={Gtk.PropagationPhase.CAPTURE}
+                                                        button={Gdk.BUTTON_PRIMARY}
+                                                        onPressed={() => {
+                                                            mic.device.set_active_profile_id(p.index);
+                                                        }} />
+                                                </Gtk.CheckButton>
+                                                <label label={p.description} />
+                                            </box>
+                                        })}
+                                    </box>
+                                </popover>
+                            </menubutton>
                         </box>
                     </box>
                     <box>
@@ -384,64 +419,4 @@ function calculateHeight() {
     }
 
     return nb > 1 ? 20 + (nb * 82) + ((nb - 1) * 10) : 100;
-}
-
-function profilesMenu(index: number, type: string) {
-
-    const cardObjectId = exec([
-        "sh",
-        "-c",
-        `pactl list ${type} | awk '/object.id = "${index}"/ {print device_id} /device.id =/ {device_id=$3}' | tr -d '"'`,
-    ])
-
-    const profiles = exec([
-        "sh",
-        "-c",
-        `pactl list cards | sed -n '/object.id = "${cardObjectId}"/,/Ports:/ { /Ports:/!p }' | sed '1,/Profiles:/d'`
-    ])
-
-    const cardSerial = exec([
-        "sh",
-        "-c",
-        `pactl list cards | awk -F' = ' '/object.id = "${cardObjectId}"/ {getline; gsub(/"/, "", $2); print $2}'`
-    ])
-
-
-    const profilesLines = profiles.split(/\r?\n/).map(line => line.trimStart());
-
-    let activeProfile = profilesLines.pop();
-    if (activeProfile != undefined) {
-        activeProfile = activeProfile.replace("Active Profile: ", "");
-    }
-
-
-    const profilesList = profilesLines.map(line => {
-        const [name, descriptionTemp] = line.split(": ");
-
-        const description = descriptionTemp.replace(" (sinks", "");
-
-        return { name, description };
-    });
-
-    return <menubutton class={"profiles"} label={""} direction={Gtk.ArrowType.NONE} cursor={Gdk.Cursor.new_from_name("pointer", null)}>
-
-        <popover halign={Gtk.Align.START}>
-            <box orientation={Gtk.Orientation.VERTICAL} spacing={5}>
-                {profilesList.map((p) => {
-                    return <box>
-                        <Gtk.CheckButton
-                            active={p.name == activeProfile}>
-                            <Gtk.GestureClick
-                                propagationPhase={Gtk.PropagationPhase.CAPTURE}
-                                button={Gdk.BUTTON_PRIMARY}
-                                onPressed={() => {
-                                    exec(`pactl set-card-profile ${cardSerial} "${p.name}"`);
-                                }} />
-                        </Gtk.CheckButton>
-                        <label label={p.description} />
-                    </box>
-                })}
-            </box>
-        </popover>
-    </menubutton>
 }
