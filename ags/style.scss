@@ -440,7 +440,7 @@ switch {
                 border-top-left-radius: 12px;
             }
 
-            &.application {
+            &.devices {
                 border-top-right-radius: 12px;
             }
         }
@@ -453,13 +453,14 @@ switch {
 
         .card {
             background-color: #313244;
-            padding: 10px;
+            padding: 10px 20px;
             border-radius: 12px;
+            min-height: 62px;
 
             .icon {
-                font-size: 48px;
                 min-height: 56px;
                 min-width: 56px;
+                margin-right: 10px;
             }
 
             .description {
@@ -468,6 +469,8 @@ switch {
             }
 
             .settings {
+                margin: 0px;
+
                 button {
                     padding: 0px;
 
@@ -506,9 +509,6 @@ switch {
                 label {
                     color: #e8ebf6;
                 }
-
-
-
             }
 
             .bar {

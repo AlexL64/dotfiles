@@ -3,7 +3,6 @@ import Wp from "gi://AstalWp?version=0.1"
 import App from "ags/gtk4/app"
 import { Astal, Gdk, Gtk } from "ags/gtk4";
 import { timeout } from "ags/time";
-import { exec } from "ags/process";
 import Pango from "gi://Pango?version=1.0";
 
 const audio = Wp.get_default().audio;
@@ -11,6 +10,7 @@ const audio = Wp.get_default().audio;
 const speakers = createBinding(audio, "speakers");
 const microphones = createBinding(audio, "microphones");
 const streams = createBinding(audio, "streams");
+const devices = createBinding(audio, "devices");
 
 export default function AudioMenu() {
 
@@ -70,21 +70,34 @@ export default function AudioMenu() {
                         })
                     }}
                 />
+                <button
+                    class={"devices"}
+                    cursor={Gdk.Cursor.new_from_name("pointer", null)}
+                    label={"Devices"}
+                    onClicked={() => selectedMenuSet("Devices")}
+                    $={(self) => {
+                        selectedMenu.get() == "Devices" ? self.add_css_class("toggled") : self.remove_css_class("toggled");
+
+                        selectedMenu.subscribe(() => {
+                            selectedMenu.get() == "Devices" ? self.add_css_class("toggled") : self.remove_css_class("toggled");
+                        })
+                    }}
+                />
             </box>
             <box
                 class={"content"}
                 $={(self) => {
-                    audio.connect("notify::speakers", () => {
+                    speakers.subscribe(() => {
                         self.heightRequest = calculateHeight();
-                    });
+                    })
 
-                    audio.connect("notify::microphones", () => {
+                    microphones.subscribe(() => {
                         self.heightRequest = calculateHeight();
-                    });
+                    })
 
-                    audio.connect("notify::streams", () => {
+                    streams.subscribe(() => {
                         self.heightRequest = calculateHeight();
-                    });
+                    })
                 }}>
                 <With value={selectedMenu}>
                     {(value) => renderContent(value)}
@@ -102,6 +115,8 @@ function renderContent(value: string) {
             return InputDevicesContent();
         case "Applications":
             return ApplicationsContent();
+        case "Devices":
+            return DevicesContent();
         default:
             return OutputDevicesContent();
     }
@@ -112,11 +127,6 @@ function OutputDevicesContent() {
     return <box orientation={Gtk.Orientation.VERTICAL} spacing={10}>
         <For each={speakers}>
             {(speaker) => {
-
-                speaker.device.profiles.forEach((profile) => {
-                    print(`${profile.index} | ${profile.description}`);
-                })
-                print("\n");
                 return <box orientation={Gtk.Orientation.VERTICAL} class={"card"}>
                     <box>
                         <label
@@ -320,7 +330,7 @@ function ApplicationsContent() {
             {(stream) => {
 
                 return <box class={"card"}>
-                    <image iconName={createBinding(stream, "icon")} class={"icon"} />
+                    <image iconName={createBinding(stream, "icon")} class={"icon"} pixelSize={48} />
                     <box orientation={Gtk.Orientation.VERTICAL}>
                         <box>
                             <label
@@ -384,6 +394,77 @@ function ApplicationsContent() {
     </box>;
 }
 
+function DevicesContent() {
+    return <box orientation={Gtk.Orientation.VERTICAL} spacing={10}>
+        <For each={devices}>
+            {(device) => {
+
+                return <box class={"card"}>
+                    <image iconName={"audio-card"} class={"icon"} pixelSize={48} />
+                    <box orientation={Gtk.Orientation.VERTICAL} homogeneous>
+                        <box>
+                            <label
+                                class={"description"}
+                                label={createBinding(device, "description")}
+                                ellipsize={Pango.EllipsizeMode.END}
+                                maxWidthChars={10}
+                                hexpand
+                                xalign={0}
+                                tooltipText={createBinding(device, "description")}
+                            />
+                        </box>
+                        <box>
+                            <label
+                                class={"description"}
+                                label={createBinding(device, "activeProfileId").as((id) => {
+                                    const item = device.profiles.find(item => item.index == id);
+                                    return item?.description ? item?.description : "";
+                                })}
+                                ellipsize={Pango.EllipsizeMode.END}
+                                maxWidthChars={10}
+                                hexpand
+                                xalign={0}
+                                tooltipText={createBinding(device, "activeProfileId").as((id) => {
+                                    const item = device.profiles.find(item => item.index == id);
+                                    return item?.description ? item?.description : "";
+                                })}
+                            />
+                        </box>
+                    </box>
+                    <box class={"settings"} spacing={10}>
+                        <menubutton
+                            class={"profiles"}
+                            valign={Gtk.Align.START}
+                            halign={Gtk.Align.END}
+                            label={""}
+                            direction={Gtk.ArrowType.NONE}
+                            cursor={Gdk.Cursor.new_from_name("pointer", null)}>
+                            <popover halign={Gtk.Align.START}>
+                                <box orientation={Gtk.Orientation.VERTICAL} spacing={5}>
+                                    {device.profiles.map((p) => {
+                                        return <box>
+                                            <Gtk.CheckButton
+                                                active={p.index == device.activeProfileId}>
+                                                <Gtk.GestureClick
+                                                    propagationPhase={Gtk.PropagationPhase.CAPTURE}
+                                                    button={Gdk.BUTTON_PRIMARY}
+                                                    onPressed={() => {
+                                                        device.set_active_profile_id(p.index);
+                                                    }} />
+                                            </Gtk.CheckButton>
+                                            <label label={p.description} />
+                                        </box>
+                                    })}
+                                </box>
+                            </popover>
+                        </menubutton>
+                    </box>
+                </box>
+            }}
+        </For>
+    </box>;
+}
+
 
 function getVolumeIcon(endpoint: Wp.Endpoint | Wp.Stream) {
     if (endpoint.mute) {
@@ -407,16 +488,9 @@ function calculateHeight() {
     const nbSpeakers = audio.speakers.length;
     const nbMics = audio.microphones.length;
     const nbStreams = audio.streams.length;
+    const nbDevices = audio.devices.length;
 
-    var nb = 0;
+    const nb = Math.max(nbSpeakers, nbMics, nbStreams, nbDevices);
 
-    if (nbSpeakers >= nbMics && nbSpeakers >= nbStreams) {
-        nb = nbSpeakers;
-    } else if (nbMics >= nbStreams && nbMics >= nbStreams) {
-        nb = nbMics;
-    } else if (nbStreams >= nbSpeakers && nbStreams >= nbMics) {
-        nb = nbStreams;
-    }
-
-    return nb > 1 ? 20 + (nb * 82) + ((nb - 1) * 10) : 100;
+    return nb > 1 ? 20 + (nb * 82) + ((nb - 1) * 10) : 102;
 }
