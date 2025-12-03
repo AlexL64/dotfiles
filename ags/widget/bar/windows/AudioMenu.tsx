@@ -25,7 +25,7 @@ export default function AudioMenu() {
         onNotifyTitle={(self) => {
             selectedMenuSet(self.title);
         }}>
-        <box class={"audioMenu"} orientation={Gtk.Orientation.VERTICAL}>
+        <box class={"audioMenu"} orientation={Gtk.Orientation.VERTICAL} valign={Gtk.Align.START}>
             <box class={"menu"} homogeneous>
                 <button
                     class={"output"}
