@@ -105,6 +105,7 @@ export default function Notifications() {
                         <box orientation={Gtk.Orientation.VERTICAL} hexpand>
                             <label
                                 class={"summary"}
+                                visible={notification.notif.body != ""}
                                 label={notification.notif.summary}
                                 halign={Gtk.Align.START}
                                 maxWidthChars={35}
@@ -112,12 +113,18 @@ export default function Notifications() {
                             <label
                                 class={"body"}
                                 halign={Gtk.Align.START}
-                                label={notification.notif.body}
                                 lines={6}
                                 singleLineMode
                                 maxWidthChars={35}
                                 ellipsize={Pango.EllipsizeMode.END}
-                                wrapMode={Gtk.WrapMode.WORD} />
+                                wrapMode={Gtk.WrapMode.WORD}
+                                $={(self) => {
+                                    if (notification.notif.body != "") {
+                                        self.label = notification.notif.body;
+                                    } else {
+                                        self.label = notification.notif.summary;
+                                    }
+                                }} />
                             <box class={"actions"} spacing={10} homogeneous visible={notification.notif.actions.length > 0}>
                                 {
                                     notification.notif.actions.map((action) => {
