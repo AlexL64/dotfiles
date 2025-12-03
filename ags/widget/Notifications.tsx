@@ -28,7 +28,7 @@ export default function Notifications() {
         defaultWidth={-1}
         visible={processedNotifications.as((n) => n.length > 0)}
         $={(self) => {
-            const panel = App.get_window("NotificationsPanel");
+            const panel = App.get_window("NotificationPanel");
 
             if (panel != undefined) {
                 panel.connect("notify::visible", () => {
@@ -166,7 +166,7 @@ export default function Notifications() {
 
 function processNotifications(notifications: Notifd.Notification[], notifyd: Notifd.Notifd): { notif: Notifd.Notification, list: Notifd.Notification[] }[] {
 
-    const panel = App.get_window("NotificationsPanel");
+    const panel = App.get_window("NotificationPanel");
 
     notifications = notifications.sort((a, b) => a.time - b.time);
 

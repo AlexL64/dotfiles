@@ -25,7 +25,7 @@ import Network from "./widget/bar/windows/Network";
 import Monitors from "./widget/Monitor";
 import Wallpapers from "./widget/Wallpapers";
 import Notifications from "./widget/Notifications";
-import NotificationsPanel from "./widget/bar/windows/NotificationsPanel";
+import NotificationPanel from "./widget/bar/windows/NotificationPanel";
 
 monitorFile(
     "./style.scss",
@@ -54,7 +54,7 @@ App.start({
         Storage();
         Brightness();
         Battery();
-        NotificationsPanel();
+        NotificationPanel();
         Network();
         Bluetooth();
         Tray();

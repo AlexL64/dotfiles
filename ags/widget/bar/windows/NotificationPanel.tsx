@@ -5,7 +5,7 @@ import Notifd from "gi://AstalNotifd?version=0.1"
 import Hyprland from "gi://AstalHyprland?version=0.1";
 import Pango from "gi://Pango?version=1.0";
 
-export default function NotificationsPanel() {
+export default function NotificationPanel() {
 
     const notifyd = Notifd.get_default();
 
@@ -15,7 +15,7 @@ export default function NotificationsPanel() {
     const [processedNotifications, processedNotificationsSet] = createState(processNotifications(notifyd.notifications));
 
     return <window
-        name={"NotificationsPanel"}
+        name={"NotificationPanel"}
         marginTop={10}
         marginBottom={10}
         marginRight={10}
@@ -37,7 +37,7 @@ export default function NotificationsPanel() {
                     label={"Clear"}
                     cursor={Gdk.Cursor.new_from_name("pointer", null)}
                     onClicked={() => {
-                        App.get_window("NotificationsPanel")?.hide();
+                        App.get_window("NotificationPanel")?.hide();
                         notifyd.notifications.forEach((notification) => {
                             notification.dismiss();
                         })
@@ -127,7 +127,7 @@ export default function NotificationsPanel() {
                                                         );
 
                                                         if (index != -1) {
-                                                            App.get_window("NotificationsPanel")?.hide();
+                                                            App.get_window("NotificationPanel")?.hide();
                                                             hyprland.dispatch("workspace", `${workspaces[index].id}`);
                                                         }
                                                     }} />
