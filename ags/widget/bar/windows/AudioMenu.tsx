@@ -434,32 +434,36 @@ function DevicesContent() {
                         </box>
                     </box>
                     <box class={"settings"} spacing={10}>
-                        <menubutton
-                            class={"profiles"}
-                            valign={Gtk.Align.START}
-                            halign={Gtk.Align.END}
-                            label={""}
-                            direction={Gtk.ArrowType.NONE}
-                            cursor={Gdk.Cursor.new_from_name("pointer", null)}>
-                            <popover halign={Gtk.Align.START}>
-                                <box orientation={Gtk.Orientation.VERTICAL} spacing={5}>
-                                    {device.profiles.map((p) => {
-                                        return <box>
-                                            <Gtk.CheckButton
-                                                active={p.index == device.activeProfileId}>
-                                                <Gtk.GestureClick
-                                                    propagationPhase={Gtk.PropagationPhase.CAPTURE}
-                                                    button={Gdk.BUTTON_PRIMARY}
-                                                    onPressed={() => {
-                                                        device.set_active_profile_id(p.index);
-                                                    }} />
-                                            </Gtk.CheckButton>
-                                            <label label={p.description} />
+                        <With value={createBinding(device, "activeProfileId")}>
+                            {() => {
+                                return <menubutton
+                                    class={"profiles"}
+                                    valign={Gtk.Align.START}
+                                    halign={Gtk.Align.END}
+                                    label={""}
+                                    direction={Gtk.ArrowType.NONE}
+                                    cursor={Gdk.Cursor.new_from_name("pointer", null)}>
+                                    <popover halign={Gtk.Align.START}>
+                                        <box orientation={Gtk.Orientation.VERTICAL} spacing={5}>
+                                            {device.profiles.map((p) => {
+                                                return <box>
+                                                    <Gtk.CheckButton
+                                                        active={p.index == device.activeProfileId}>
+                                                        <Gtk.GestureClick
+                                                            propagationPhase={Gtk.PropagationPhase.CAPTURE}
+                                                            button={Gdk.BUTTON_PRIMARY}
+                                                            onPressed={() => {
+                                                                device.set_active_profile_id(p.index);
+                                                            }} />
+                                                    </Gtk.CheckButton>
+                                                    <label label={p.description} />
+                                                </box>
+                                            })}
                                         </box>
-                                    })}
-                                </box>
-                            </popover>
-                        </menubutton>
+                                    </popover>
+                                </menubutton>
+                            }}
+                        </With>
                     </box>
                 </box>
             }}
