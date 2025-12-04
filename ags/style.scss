@@ -158,6 +158,18 @@ switch {
                 background-color: #89dceb33;
             }
 
+            &.error {
+                color: #f38ba8;
+
+                &:hover {
+                    background-color: #f38ba833;
+                }
+
+                label {
+                    margin-right: 3px;
+                }
+            }
+
             &.muted {
                 color: #f38ba8;
 
