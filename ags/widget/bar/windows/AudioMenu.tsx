@@ -129,99 +129,103 @@ function OutputDevicesContent() {
     return <box orientation={Gtk.Orientation.VERTICAL} spacing={10}>
         <For each={speakers}>
             {(speaker) => {
-                return <box orientation={Gtk.Orientation.VERTICAL} class={"card"}>
-                    <box>
-                        <label
-                            class={"description"}
-                            label={createBinding(speaker, "description")}
-                            ellipsize={Pango.EllipsizeMode.END}
-                            maxWidthChars={20}
-                            hexpand
-                            xalign={0}
-                            tooltipText={createBinding(speaker, "description")}
-                        />
-                        <box class={"settings"} spacing={10}>
+                if (speaker.description != "Dummy Output") {
+                    return <box orientation={Gtk.Orientation.VERTICAL} class={"card"}>
+                        <box>
+                            <label
+                                class={"description"}
+                                label={createBinding(speaker, "description")}
+                                ellipsize={Pango.EllipsizeMode.END}
+                                maxWidthChars={20}
+                                hexpand
+                                xalign={0}
+                                tooltipText={createBinding(speaker, "description")}
+                            />
+                            <box class={"settings"} spacing={10}>
+                                <button
+                                    class={"default"}
+                                    cursor={Gdk.Cursor.new_from_name("pointer", null)}
+                                    onClicked={() => {
+                                        speaker.isDefault = true;
+                                    }}
+                                    $={(self) => {
+                                        speaker.connect("notify::is-default", () => {
+                                            self.add_css_class("default");
+                                        });
+                                    }}>
+                                    <Gtk.CheckButton active={createBinding(speaker, "isDefault")} />
+                                </button>
+                                <menubutton class={"profiles"} label={""} direction={Gtk.ArrowType.NONE} cursor={Gdk.Cursor.new_from_name("pointer", null)}>
+                                    <popover halign={Gtk.Align.START}>
+                                        <box orientation={Gtk.Orientation.VERTICAL} spacing={5}>
+                                            {speaker.device.profiles.map((p) => {
+                                                return <box>
+                                                    <Gtk.CheckButton
+                                                        active={p.index == speaker.device.activeProfileId}>
+                                                        <Gtk.GestureClick
+                                                            propagationPhase={Gtk.PropagationPhase.CAPTURE}
+                                                            button={Gdk.BUTTON_PRIMARY}
+                                                            onPressed={() => {
+                                                                speaker.device.set_active_profile_id(p.index);
+                                                            }} />
+                                                    </Gtk.CheckButton>
+                                                    <label label={p.description} />
+                                                </box>
+                                            })}
+                                        </box>
+                                    </popover>
+                                </menubutton>
+                            </box>
+                        </box>
+                        <box>
                             <button
-                                class={"default"}
+                                class={"toggle"}
                                 cursor={Gdk.Cursor.new_from_name("pointer", null)}
                                 onClicked={() => {
-                                    speaker.isDefault = true;
+                                    speaker.mute = !speaker.mute;
+                                }}>
+                                <label
+                                    label={getVolumeIcon(speaker)}
+                                    $={(self) => {
+                                        speaker.mute ? self.add_css_class("mute") : self.remove_css_class("mute");
+
+                                        speaker.connect("notify::volume", () => {
+                                            self.label = getVolumeIcon(speaker);
+                                        });
+
+                                        speaker.connect("notify::mute", () => {
+                                            self.label = getVolumeIcon(speaker);
+                                            speaker.mute ? self.add_css_class("mute") : self.remove_css_class("mute");
+                                        });
+                                    }}
+                                />
+                            </button>
+                            <slider
+                                class={"bar"}
+                                value={createBinding(speaker, "volume")}
+                                hexpand
+                                onChangeValue={(self) => {
+                                    speaker.volume = self.value;
                                 }}
                                 $={(self) => {
-                                    speaker.connect("notify::is-default", () => {
-                                        self.add_css_class("default");
-                                    });
-                                }}>
-                                <Gtk.CheckButton active={createBinding(speaker, "isDefault")} />
-                            </button>
-                            <menubutton class={"profiles"} label={""} direction={Gtk.ArrowType.NONE} cursor={Gdk.Cursor.new_from_name("pointer", null)}>
-                                <popover halign={Gtk.Align.START}>
-                                    <box orientation={Gtk.Orientation.VERTICAL} spacing={5}>
-                                        {speaker.device.profiles.map((p) => {
-                                            return <box>
-                                                <Gtk.CheckButton
-                                                    active={p.index == speaker.device.activeProfileId}>
-                                                    <Gtk.GestureClick
-                                                        propagationPhase={Gtk.PropagationPhase.CAPTURE}
-                                                        button={Gdk.BUTTON_PRIMARY}
-                                                        onPressed={() => {
-                                                            speaker.device.set_active_profile_id(p.index);
-                                                        }} />
-                                                </Gtk.CheckButton>
-                                                <label label={p.description} />
-                                            </box>
-                                        })}
-                                    </box>
-                                </popover>
-                            </menubutton>
-                        </box>
-                    </box>
-                    <box>
-                        <button
-                            class={"toggle"}
-                            cursor={Gdk.Cursor.new_from_name("pointer", null)}
-                            onClicked={() => {
-                                speaker.mute = !speaker.mute;
-                            }}>
-                            <label
-                                label={getVolumeIcon(speaker)}
-                                $={(self) => {
-                                    speaker.mute ? self.add_css_class("mute") : self.remove_css_class("mute");
+                                    const scroll = new Gtk.EventControllerScroll
+                                    scroll.flags = Gtk.EventControllerScrollFlags.BOTH_AXES | Gtk.EventControllerScrollFlags.KINETIC
 
-                                    speaker.connect("notify::volume", () => {
-                                        self.label = getVolumeIcon(speaker);
-                                    });
+                                    self.add_controller(scroll)
 
-                                    speaker.connect("notify::mute", () => {
-                                        self.label = getVolumeIcon(speaker);
-                                        speaker.mute ? self.add_css_class("mute") : self.remove_css_class("mute");
-                                    });
+                                    scroll.connect("scroll", (_, x, y) => {
+                                        timeout(0, () => {
+                                            self.value = speaker.volume;
+                                        })
+                                    })
                                 }}
                             />
-                        </button>
-                        <slider
-                            class={"bar"}
-                            value={createBinding(speaker, "volume")}
-                            hexpand
-                            onChangeValue={(self) => {
-                                speaker.volume = self.value;
-                            }}
-                            $={(self) => {
-                                const scroll = new Gtk.EventControllerScroll
-                                scroll.flags = Gtk.EventControllerScrollFlags.BOTH_AXES | Gtk.EventControllerScrollFlags.KINETIC
-
-                                self.add_controller(scroll)
-
-                                scroll.connect("scroll", (_, x, y) => {
-                                    timeout(0, () => {
-                                        self.value = speaker.volume;
-                                    })
-                                })
-                            }}
-                        />
-                        <label label={createBinding(speaker, "volume").as((v) => `${Math.round(v * 100)}%`)} />
+                            <label label={createBinding(speaker, "volume").as((v) => `${Math.round(v * 100)}%`)} />
+                        </box>
                     </box>
-                </box>
+                }
+
+                return <box />
             }}
         </For>
     </box>
