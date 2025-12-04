@@ -108,7 +108,6 @@ export default function Audio() {
         <box>
             <With value={mics}>
                 {(mics) => {
-                    print(mics.length);
                     if (mics.length > 0) {
                         const micVolume = createBinding(audio.defaultMicrophone, "volume").as((m) => `${Math.round(m * 100)}%`);
                         const micMuted = createBinding(audio.defaultMicrophone, "mute");
