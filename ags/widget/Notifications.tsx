@@ -175,6 +175,10 @@ function processNotifications(notifications: Notifd.Notification[], notifyd: Not
 
     const panel = App.get_window("NotificationPanel");
 
+    if (panel != undefined && panel.visible) {
+        return [];
+    }
+
     notifications = notifications.sort((a, b) => a.time - b.time);
 
     notifications = notifications.sort((a, b) => {
@@ -186,13 +190,9 @@ function processNotifications(notifications: Notifd.Notification[], notifyd: Not
     const mergedNotifications = mergeNotifications(notifications);
 
     for (let i = mergedNotifications.length - 1; i >= 0; i--) {
-        if (panel != undefined && panel.visible) {
-            mergedNotifications.splice(i, 1);
-        } else {
-            if (mergedNotifications[i].notif.urgency != Notifd.Urgency.CRITICAL) {
-                if (notifyd.dontDisturb || Math.floor(Date.now() / 1000) - mergedNotifications[i].notif.time >= 10) {
-                    mergedNotifications.splice(i, 1);
-                }
+        if (mergedNotifications[i].notif.urgency != Notifd.Urgency.CRITICAL) {
+            if (notifyd.dontDisturb || Math.floor(Date.now() / 1000) - mergedNotifications[i].notif.time >= 10) {
+                mergedNotifications.splice(i, 1);
             }
         }
     }

@@ -23,6 +23,11 @@ export default function NotificationPanel() {
         exclusivity={Astal.Exclusivity.NORMAL}
         application={App}
         visible={false}
+        onNotifyVisible={(self) => {
+            if (self.visible) {
+                processedNotificationsSet(processNotifications(notifyd.notifications));
+            }
+        }}
         $={(self) => {
             notifications.subscribe(() => {
                 processedNotificationsSet(processNotifications(notifyd.notifications));
@@ -168,6 +173,12 @@ export default function NotificationPanel() {
 }
 
 function processNotifications(notifications: Notifd.Notification[]): { notif: Notifd.Notification, list: Notifd.Notification[] }[] {
+
+    const panel = App.get_window("NotificationPanel");
+
+    if (panel != undefined && !panel.visible) {
+        return [];
+    }
 
     notifications = notifications.sort((a, b) => b.time - a.time);
 
