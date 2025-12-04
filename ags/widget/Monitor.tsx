@@ -1,7 +1,7 @@
 import { Astal, Gdk, Gtk } from "ags/gtk4";
 import App from "ags/gtk4/app";
 import Hyprland from "gi://AstalHyprland?version=0.1";
-import { createBinding, createState, For, This, With } from "ags";
+import { createBinding, createState, For } from "ags";
 import { exec } from "ags/process";
 import { monitorFile, readFile, writeFile } from "ags/file";
 
