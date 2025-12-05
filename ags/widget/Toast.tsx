@@ -1,4 +1,4 @@
-import { Astal} from "ags/gtk4";
+import { Astal } from "ags/gtk4";
 import Brightness from "../services/Brightness";
 import Wp from "gi://AstalWp?version=0.1"
 import App from "ags/gtk4/app"
@@ -30,7 +30,7 @@ export default function Toast() {
                 $={(self) => {
 
                     speaker.connect("notify::volume", () => {
-                        self.label = `${Math.round(speaker.volume * 100)} % ${getVolumeIcon(speaker.volume)}`;
+                        self.label = `${Math.round(speaker.volume * 100)} % ${getVolumeIcon(speaker.mute ? 0 : speaker.volume)}`;
                         showToast();
                     });
 
@@ -64,7 +64,7 @@ function getVolumeIcon(volume: number) {
         65: " ",
         33: "",
         1: "",
-        0: "",
+        0: "",
     }
 
     const icon = [65, 33, 1, 0].find(threshold => threshold <= volume * 100) as keyof typeof icons;

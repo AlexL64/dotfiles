@@ -209,7 +209,7 @@ function getIcon(endpoint: WirePlumber.Endpoint) {
             65: " ",
             33: "",
             1: "",
-            0: "",
+            0: "",
         }
 
         const node_name = exec(['bash', '-c', `wpctl inspect ${endpoint.id} | grep "node.name" | awk -F '"' '{print $2}'`]);

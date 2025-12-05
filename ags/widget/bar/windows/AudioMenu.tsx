@@ -485,7 +485,7 @@ function getVolumeIcon(endpoint: Wp.Endpoint | Wp.Stream) {
             65: " ",
             33: "",
             1: "",
-            0: "",
+            0: "",
         }
 
         const icon = [65, 33, 1, 0].find(threshold => threshold <= endpoint.volume * 100) as keyof typeof icons;
