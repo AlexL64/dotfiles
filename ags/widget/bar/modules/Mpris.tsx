@@ -1,8 +1,9 @@
 import AstalMpris from "gi://AstalMpris?version=0.1";
-import { createBinding } from "gnim";
+import { createBinding, With } from "gnim";
 import App from "ags/gtk4/app"
 import { Gdk, Gtk } from "ags/gtk4";
 import Pango from "gi://Pango?version=1.0";
+import { exec } from "ags/process";
 
 function lengthStr(length: number) {
     const min = Math.floor(length / 60)
@@ -36,7 +37,7 @@ export default function Mpris() {
         <button
             class={"play_pause"}
             cursor={Gdk.Cursor.new_from_name("pointer", null)}
-            onClicked={() => player.play_pause()}>
+            onClicked={() => exec(["playerctl", "play-pause"])}>
             <image iconName={playback_status} />
         </button>
         <button
@@ -75,8 +76,7 @@ export default function Mpris() {
                         createBinding(player, "length").subscribe(() => {
                             player.length == -1 ? self.visible = false : self.visible = true;
                         })
-                    }}
-                >
+                    }}>
                     <label label={createBinding(player, "position").as((p) => lengthStr(p))} />
                     <label label={" / "} />
                     <label label={createBinding(player, "length").as((l) => lengthStr(l))} />
