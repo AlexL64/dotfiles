@@ -49,7 +49,7 @@ export default function Media() {
                         <box
                             class={"image"}
                             css={createBinding(player, "coverArt").as((c) => {
-                                if (c == null) {
+                                if (c == null || c == "") {
                                     const home = exec(["bash", "-c", "echo $HOME"]);
                                     return `background-image: url('file://${home}/.config/ags/widget/bar/assets/images/music.png');`;
                                 } else {
