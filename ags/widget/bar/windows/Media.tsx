@@ -3,6 +3,7 @@ import AstalMpris from "gi://AstalMpris?version=0.1"
 import App from "ags/gtk4/app"
 import { createBinding, For } from "ags";
 import Pango from "gi://Pango?version=1.0";
+import { exec } from "ags/process";
 
 export default function Media() {
 
@@ -49,7 +50,8 @@ export default function Media() {
                             class={"image"}
                             css={createBinding(player, "coverArt").as((c) => {
                                 if (c == null) {
-                                    return `background-image: url('file://./widget/bar/assets/images/music.png');`;
+                                    const home = exec(["bash", "-c", "echo $HOME"]);
+                                    return `background-image: url('file://${home}/.config/ags/widget/bar/assets/images/music.png');`;
                                 } else {
                                     return `background-image: url('file://${c}');`;
                                 }
