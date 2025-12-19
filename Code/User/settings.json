@@ -24,5 +24,14 @@
     "diffEditor.maxComputationTime": 0,
     "git.openRepositoryInParentFolders": "never",
     "chat.disableAIFeatures": true,
-    "workbench.settings.showAISearchToggle": false
+    "workbench.settings.showAISearchToggle": false,
+    "qt-core.additionalQtPaths": [
+        {
+            "name": "Qt-5.15.18-linux-g++_from_PATH",
+            "path": "/usr/bin/qmake"
+        }
+    ],
+    "qt-qml.qmlls.useQmlImportPathEnvVar": true,
+    "qt-qml.doNotAskForQmllsDownload": true,
+    "qt-qml.qmlls.customExePath": "/usr/bin/qmlls6"
 }
