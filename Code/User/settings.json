@@ -33,5 +33,9 @@
     ],
     "qt-qml.qmlls.useQmlImportPathEnvVar": true,
     "qt-qml.doNotAskForQmllsDownload": true,
-    "qt-qml.qmlls.customExePath": "/usr/bin/qmlls6"
+    "qt-qml.qmlls.customExePath": "/usr/bin/qmlls6",
+    "[qml]": {
+        "editor.defaultFormatter": "theqtcompany.qt-qml"
+    },
+    "qmlFormat.command": "/usr/lib/qt6/bin/qmlformat"
 }

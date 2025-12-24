@@ -8,6 +8,8 @@
 !kitty
 !mpv
 !mpv/**
+!quickshell
+!quickshell/**
 !qt5ct
 !qt6ct
 !*-flags.conf
