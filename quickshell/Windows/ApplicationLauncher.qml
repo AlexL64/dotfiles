@@ -20,11 +20,19 @@ PanelWindow { // qmllint disable uncreatable-type
         right: true
     }
 
-    IpcHandler {
-		target: "applicationLauncher"
+    onVisibleChanged: {
+        search.text = "";
+        apps.selected = 0;
+        apps.page = 0;
+    }
 
-		function toggle(): void { applicationLauncher.visible = !applicationLauncher.visible; }
-	}
+    IpcHandler {
+        target: "applicationLauncher"
+
+        function toggle(): void {
+            applicationLauncher.visible = !applicationLauncher.visible;
+        }
+    }
 
     Rectangle {
         border.color: "#cba6f7"
@@ -91,8 +99,8 @@ PanelWindow { // qmllint disable uncreatable-type
                             }
                         }
                     } else if (event.key == Qt.Key_Return) {
-                        applicationLauncher.visible = false;
                         Quickshell.execDetached(apps.pageElements[apps.selected].command);
+                        applicationLauncher.visible = false;
                     }
                 }
 
