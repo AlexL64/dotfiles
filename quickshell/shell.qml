@@ -6,4 +6,5 @@ Scope {
     id: root
 
     ApplicationLauncher {}
+    PowerSelector {}
 }
