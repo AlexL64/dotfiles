@@ -6,7 +6,9 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
-PanelWindow { // qmllint disable uncreatable-type
+// qmllint disable uncreatable-type
+// qmllint disable unresolved-type
+PanelWindow {
     id: applicationLauncher
     visible: false
     aboveWindows: true
@@ -24,6 +26,26 @@ PanelWindow { // qmllint disable uncreatable-type
         search.text = "";
         apps.selected = 0;
         apps.page = 0;
+    }
+
+    FileView {
+        path: Qt.resolvedUrl("../Storage/applicationLauncher.json")
+        watchChanges: true
+        onFileChanged: reload()
+        onAdapterUpdated: writeAdapter()
+        preload: true
+        onLoadFailed: function (error) {
+            if (error == 2) {
+                print(`Creating file: ${path}`);
+                Quickshell.execDetached(["touch", path.replace('file://', '')]);
+                reload();
+            }
+        }
+
+        JsonAdapter {
+            id: jsonAdapter
+            property list<var> launchCount
+        }
     }
 
     IpcHandler {
@@ -99,6 +121,17 @@ PanelWindow { // qmllint disable uncreatable-type
                             }
                         }
                     } else if (event.key == Qt.Key_Return) {
+                        // qmllint disable unqualified
+                        const index = jsonAdapter.launchCount.findIndex(a => a.id === apps.pageElements[apps.selected].id);
+                        if (index != -1) {
+                            jsonAdapter.launchCount[index].count += 1;
+                        } else {
+                            jsonAdapter.launchCount.push({
+                                "id": apps.pageElements[apps.selected].id,
+                                "count": 1
+                            });
+                        }
+
                         Quickshell.execDetached(apps.pageElements[apps.selected].command);
                         applicationLauncher.visible = false;
                     }
@@ -119,12 +152,34 @@ PanelWindow { // qmllint disable uncreatable-type
                 spacing: 6
                 Layout.fillHeight: false
 
-                function processApps(apps, search) {
-                    var result = [...apps].sort((a, b) => a.name.localeCompare(b.name, undefined, {
-                            sensitivity: "base"
-                        }));
+                function processApps(apps, launchCount) {
+                    var result = [];
 
-                    return result.filter(item => !item.noDisplay);
+                    apps.forEach(app => {
+                        const index = launchCount.findIndex(a => a.id === app.id);
+
+                        if (index != -1) {
+                            result.push({
+                                "app": app,
+                                "count": launchCount[index].count
+                            });
+                        } else {
+                            result.push({
+                                "app": app,
+                                "count": 0
+                            });
+                        }
+                    });
+
+                    result.sort((a, b) => {
+                        if (b.count !== a.count) {
+                            return b.count - a.count;
+                        }
+
+                        return a.app.id.localeCompare(b.app.id);
+                    });
+
+                    return result.map(item => item.app);
                 }
 
                 function searchApps(list, search) {
@@ -159,7 +214,7 @@ PanelWindow { // qmllint disable uncreatable-type
                     }
                 }
 
-                property var list: processApps(DesktopEntries.applications.values)
+                property var list: processApps(DesktopEntries.applications.values, jsonAdapter.launchCount)
                 property var searchResult: searchApps(list, search.text)
                 property int page: 0
                 property int selected: 0
@@ -198,6 +253,16 @@ PanelWindow { // qmllint disable uncreatable-type
                             }
 
                             onDoubleClicked: {
+                                const index = jsonAdapter.launchCount.findIndex(a => a.id === apps.pageElements[apps.selected].id);
+                                if (index != -1) {
+                                    jsonAdapter.launchCount[index].count += 1;
+                                } else {
+                                    jsonAdapter.launchCount.push({
+                                        "id": apps.pageElements[apps.selected].id,
+                                        "count": 1
+                                    });
+                                }
+
                                 applicationLauncher.visible = false;
                                 Quickshell.execDetached(delegateItem.command);
                             }
