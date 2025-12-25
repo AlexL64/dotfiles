@@ -33,6 +33,8 @@ PanelWindow { //qmllint disable uncreatable-type
         onAdapterUpdated: writeAdapter()
         preload: true
         onLoadFailed: function (error) {
+
+            // Create file if it doesn't exist
             if (error == 2) {
                 print(`Creating file: ${path}`);
                 Quickshell.execDetached(["touch", path.replace('file://', '')]);
@@ -119,6 +121,7 @@ PanelWindow { //qmllint disable uncreatable-type
                             }
                         }
                     } else if (event.key == Qt.Key_Return) {
+                        // Update the app launch count
                         const index = jsonAdapter.launchCount.findIndex(a => a.id === apps.pageElements[apps.selected].id); // qmllint disable unqualified
                         if (index != -1) {
                             jsonAdapter.launchCount[index].count += 1;// qmllint disable unqualified
@@ -153,6 +156,7 @@ PanelWindow { //qmllint disable uncreatable-type
                 function processApps(apps, launchCount) {
                     var result = [];
 
+                    // Generate an array containing the app and it's launch count
                     apps.forEach(app => {
                         const index = launchCount.findIndex(a => a.id === app.id);
 
@@ -169,6 +173,7 @@ PanelWindow { //qmllint disable uncreatable-type
                         }
                     });
 
+                    // Sort apps by launch count and then alphabetically
                     result.sort((a, b) => {
                         if (b.count !== a.count) {
                             return b.count - a.count;
@@ -184,12 +189,14 @@ PanelWindow { //qmllint disable uncreatable-type
                     var result = [];
 
                     if (search != "") {
+                        // Includes apps whose name or keywords containg the search
                         list.forEach(app => {
                             if (app.name.toLowerCase().includes(search.toLowerCase()) || app.keywords.some(keyword => keyword.toLowerCase().includes(search.toLowerCase()))) {
                                 result.push(app);
                             }
                         });
 
+                        // Includes apps whose description contain the search
                         list.forEach(app => {
                             if (app.comment.toLowerCase().includes(search.toLowerCase())) {
                                 if (!result.includes(app)) {
@@ -198,6 +205,7 @@ PanelWindow { //qmllint disable uncreatable-type
                             }
                         });
 
+                        // Includes apps whose categories contain the search
                         list.forEach(app => {
                             if (app.categories.some(categorie => categorie.toLowerCase().includes(search.toLowerCase()))) {
                                 if (!result.includes(app)) {
@@ -251,6 +259,7 @@ PanelWindow { //qmllint disable uncreatable-type
                             }
 
                             onDoubleClicked: {
+                                // Update the app launch count
                                 const index = jsonAdapter.launchCount.findIndex(a => a.id === apps.pageElements[apps.selected].id);
                                 if (index != -1) {
                                     jsonAdapter.launchCount[index].count += 1;
@@ -408,7 +417,7 @@ PanelWindow { //qmllint disable uncreatable-type
                     }
 
                     Text {
-                        text: Math.ceil(apps.searchResult.length / 8)
+                        text: Math.max(Math.ceil(apps.searchResult.length / 8), 1)
                         color: "#cdd6f4"
                         font.family: "JetBrainsMono Nerd Font"
                         font.pixelSize: 14
