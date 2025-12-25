@@ -6,9 +6,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
-// qmllint disable uncreatable-type
-// qmllint disable unresolved-type
-PanelWindow {
+PanelWindow { //qmllint disable uncreatable-type
     id: applicationLauncher
     visible: false
     aboveWindows: true
@@ -42,7 +40,7 @@ PanelWindow {
             }
         }
 
-        JsonAdapter {
+        JsonAdapter { // qmllint disable unresolved-type
             id: jsonAdapter
             property list<var> launchCount
         }
@@ -121,12 +119,12 @@ PanelWindow {
                             }
                         }
                     } else if (event.key == Qt.Key_Return) {
-                        // qmllint disable unqualified
-                        const index = jsonAdapter.launchCount.findIndex(a => a.id === apps.pageElements[apps.selected].id);
+                        const index = jsonAdapter.launchCount.findIndex(a => a.id === apps.pageElements[apps.selected].id); // qmllint disable unqualified
                         if (index != -1) {
-                            jsonAdapter.launchCount[index].count += 1;
+                            jsonAdapter.launchCount[index].count += 1;// qmllint disable unqualified
                         } else {
-                            jsonAdapter.launchCount.push({
+                            jsonAdapter.launchCount.push // qmllint disable unqualified
+                            ({
                                 "id": apps.pageElements[apps.selected].id,
                                 "count": 1
                             });
