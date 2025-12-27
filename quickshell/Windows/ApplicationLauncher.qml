@@ -133,7 +133,7 @@ PanelWindow { //qmllint disable uncreatable-type
                             });
                         }
 
-                        Quickshell.execDetached(apps.pageElements[apps.selected].command);
+                        apps.pageElements[apps.selected].execute();
                         applicationLauncher.visible = false;
                     }
                 }
@@ -233,10 +233,7 @@ PanelWindow { //qmllint disable uncreatable-type
                         id: delegateItem
 
                         required property int index
-                        required property string icon
-                        required property string name
-                        required property string comment
-                        required property list<string> command
+                        required property var modelData
 
                         border.color: "#f38ba8"
                         border.width: (index == apps.selected) ? 2 : 0
@@ -271,7 +268,7 @@ PanelWindow { //qmllint disable uncreatable-type
                                 }
 
                                 applicationLauncher.visible = false;
-                                Quickshell.execDetached(delegateItem.command);
+                                delegateItem.modelData.execute();
                             }
                         }
 
@@ -282,7 +279,7 @@ PanelWindow { //qmllint disable uncreatable-type
                             RowLayout {
                                 anchors.fill: parent
                                 IconImage {
-                                    source: Quickshell.iconPath(delegateItem.name.toLowerCase(), delegateItem.icon)
+                                    source: Quickshell.iconPath(delegateItem.modelData.name.toLowerCase(), delegateItem.modelData.icon)
                                     implicitSize: 54
                                     Layout.rightMargin: 10
                                 }
@@ -294,7 +291,7 @@ PanelWindow { //qmllint disable uncreatable-type
 
                                     Text {
                                         color: "#cdd6f4"
-                                        text: delegateItem.name
+                                        text: delegateItem.modelData.name
                                         font.family: "JetBrainsMono Nerd Font"
                                         font.pixelSize: 14
                                         font.bold: true
@@ -304,7 +301,7 @@ PanelWindow { //qmllint disable uncreatable-type
 
                                     Text {
                                         color: "#6c7086"
-                                        text: delegateItem.comment
+                                        text: delegateItem.modelData.comment
                                         font.family: "JetBrainsMono Nerd Font"
                                         font.pixelSize: 12
                                         font.bold: true
