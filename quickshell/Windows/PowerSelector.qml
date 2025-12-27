@@ -108,14 +108,11 @@ PanelWindow { //qmllint disable uncreatable-type
                     id: delegateItem
 
                     required property int index
-                    required property string icon
-                    required property string mainColor
-                    required property string backgroundColor
-                    required property string command
+                    required property var modelData
 
-                    color: powerSelector.selected == index ? backgroundColor : "#313244"
+                    color: powerSelector.selected == index ? modelData.backgroundColor : "#313244"
                     radius: 12
-                    border.color: powerSelector.selected == index ? mainColor : "#6c7086"
+                    border.color: powerSelector.selected == index ? modelData.mainColor : "#6c7086"
                     border.width: 2
                     implicitHeight: 228
                     implicitWidth: 228
@@ -134,14 +131,14 @@ PanelWindow { //qmllint disable uncreatable-type
                         }
 
                         onDoubleClicked: {
-                            Quickshell.execDetached(["bash", "-c", delegateItem.command]);
+                            Quickshell.execDetached(["bash", "-c", delegateItem.modelData.command]);
                             powerSelector.visible = false;
                         }
                     }
 
                     Text {
-                        text: delegateItem.icon
-                        color: delegateItem.mainColor
+                        text: delegateItem.modelData.icon
+                        color: delegateItem.modelData.mainColor
                         font.pixelSize: 96
                         anchors.centerIn: parent
                         scale: powerSelector.selected == delegateItem.index ? 1.1 : 1
