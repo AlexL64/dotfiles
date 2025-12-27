@@ -7,4 +7,5 @@ Scope {
 
     ApplicationLauncher {}
     PowerSelector {}
+    Wallpapers {}
 }
