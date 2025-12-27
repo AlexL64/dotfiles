@@ -1,6 +1,6 @@
 import QtQuick
 import Quickshell
-import "Windows"
+import qs.Windows
 
 Scope {
     id: root
@@ -8,4 +8,5 @@ Scope {
     ApplicationLauncher {}
     PowerSelector {}
     Wallpapers {}
+    Clipboard{}
 }
