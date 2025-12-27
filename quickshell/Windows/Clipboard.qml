@@ -167,6 +167,7 @@ PanelWindow { //qmllint disable uncreatable-type
 
                         onClicked: {
                             ClipboardService.clear();
+                            clipboard.visible = false;
                         }
                     }
                 }
