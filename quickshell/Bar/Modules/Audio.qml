@@ -1,10 +1,9 @@
-import Quickshell.Widgets
 import Quickshell.Services.Pipewire
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 
-ClippingRectangle {
+Rectangle {
     id: audio
 
     Layout.fillHeight: true

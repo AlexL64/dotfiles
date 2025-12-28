@@ -1,10 +1,9 @@
-import Quickshell.Widgets
 import Quickshell.Hyprland
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 
-ClippingRectangle {
+Rectangle {
     id: workspaces
 
     property int startNumber: 1
