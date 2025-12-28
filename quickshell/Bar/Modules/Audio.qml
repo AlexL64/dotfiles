@@ -6,7 +6,7 @@ import QtQuick.Controls
 
 ClippingRectangle {
     id: audio
-    
+
     Layout.fillHeight: true
     radius: 12
     color: "#313244"
@@ -24,8 +24,6 @@ ClippingRectangle {
         Button {
             id: sinkButton
             Layout.fillHeight: true
-            Layout.leftMargin: 7
-            Layout.rightMargin: 5
 
             property string color: getColor(Pipewire.defaultAudioSink)
 
@@ -39,6 +37,8 @@ ClippingRectangle {
 
             contentItem: Row {
                 spacing: 6
+                leftPadding: 7
+                rightPadding: 5
 
                 Text {
                     text: getVolume(Pipewire.defaultAudioSink)
@@ -122,8 +122,6 @@ ClippingRectangle {
         Button {
             id: sourceButton
             Layout.fillHeight: true
-            Layout.leftMargin: 8
-            Layout.rightMargin: 8
 
             property string color: getColor(Pipewire.defaultAudioSource)
 
@@ -137,6 +135,8 @@ ClippingRectangle {
 
             contentItem: Row {
                 spacing: 6
+                leftPadding: 8
+                rightPadding: 8
 
                 Text {
                     text: getVolume(Pipewire.defaultAudioSource)
