@@ -1,9 +1,8 @@
 import Quickshell.Io
-import Quickshell.Widgets
 import QtQuick
 import QtQuick.Layouts
 
-ClippingRectangle {
+Rectangle {
     id: dateTime
 
     Layout.fillHeight: true
