@@ -38,7 +38,7 @@ ClippingRectangle {
                     color: textColor(delegateItem.modelData, Hyprland.workspaces, Hyprland.focusedWorkspace)
 
                     function textColor(id, workspaces, focusedWorkspace) {
-                        if (focusedWorkspace.id == id) {
+                        if (focusedWorkspace != null && focusedWorkspace.id == id) {
                             if (focusedWorkspace.toplevels.values.length > 0) {
                                 return "#313244";
                             } else {
@@ -58,7 +58,7 @@ ClippingRectangle {
                     color: backgroundColor(delegateItem.modelData, Hyprland.workspaces, Hyprland.focusedWorkspace)
 
                     function backgroundColor(id, workspaces, focusedWorkspace) {
-                        if (focusedWorkspace.id == id) {
+                        if (focusedWorkspace != null && focusedWorkspace.id == id) {
                             return "#cba6f7";
                         } else if (workspaces.values.some(item => item.id == id && item.urgent)) {
                             return "#f38ba8";
