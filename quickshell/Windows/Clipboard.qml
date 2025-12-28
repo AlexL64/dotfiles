@@ -126,7 +126,7 @@ PanelWindow { //qmllint disable uncreatable-type
                                 clipboard.selected -= 1;
                             }
                         } else if (event.key == Qt.Key_Return) {
-                            ClipboardService.setId(clipboard.searchResult[clipboard.selected].id);
+                            ClipboardService.setId(clipboard.pageElements[clipboard.selected].id);
                             clipboard.visible = false;
                         }
                     }
