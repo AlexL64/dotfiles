@@ -42,12 +42,7 @@ PanelWindow { // qmllint disable uncreatable-type
         anchors.horizontalCenter: parent.horizontalCenter
         spacing: 10
 
-        Rectangle {
-            Layout.fillHeight: true
-            implicitWidth: 200
-            color: "red"
-            radius: 12
-        }
+        TimeDate {}
     }
 
     RowLayout {
