@@ -80,6 +80,7 @@ PanelWindow { //qmllint disable uncreatable-type
                 placeholderText: qsTr("Search")
                 font.family: "JetBrainsMono Nerd Font"
                 font.pixelSize: 14
+                font.bold: true
 
                 background: Rectangle {
                     border.color: "#cba6f7"
