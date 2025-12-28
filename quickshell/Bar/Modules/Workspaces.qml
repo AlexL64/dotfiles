@@ -38,7 +38,6 @@ ClippingRectangle {
                     color: textColor(delegateItem.modelData, Hyprland.workspaces, Hyprland.focusedWorkspace)
 
                     function textColor(id, workspaces, focusedWorkspace) {
-
                         if (focusedWorkspace.id == id) {
                             if (focusedWorkspace.toplevels.values.length > 0) {
                                 return "#313244";
@@ -66,6 +65,16 @@ ClippingRectangle {
                         }
 
                         return "#313244";
+                    }
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    hoverEnabled: true
+
+                    onClicked: {
+                        Hyprland.dispatch(`workspace ${delegateItem.modelData}`);
                     }
                 }
             }
