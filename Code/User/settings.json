@@ -4,7 +4,7 @@
     "terminal.integrated.defaultProfile.linux": "fish",
     "editor.largeFileOptimizations": false,
     "terminal.integrated.fontFamily": "Hack nerd Font",
-    "editor.fontFamily": "JetBrainsMono Nerd Font",
+    "editor.fontFamily": "'JetBrainsMono Nerd Font', 'Font Awesome 7 Free Solid'",
     "editor.fontLigatures": true,
     "security.workspace.trust.untrustedFiles": "open",
     "explorer.confirmDragAndDrop": false,

@@ -33,6 +33,8 @@ PanelWindow { // qmllint disable uncreatable-type
         Workspaces {
             startNumber: 1
         }
+
+        Audio {}
     }
 
     RowLayout {

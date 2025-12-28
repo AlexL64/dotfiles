@@ -6,7 +6,7 @@ import qs.Windows
 Scope {
     id: root
 
-    // Bar {}
+    Bar {}
 
     ApplicationLauncher {}
     PowerSelector {}
