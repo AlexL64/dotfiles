@@ -21,6 +21,8 @@ Rectangle {
             radius: 2
         }
 
+        Memory {}
+
         Rectangle {
             implicitHeight: 20
             implicitWidth: 2
