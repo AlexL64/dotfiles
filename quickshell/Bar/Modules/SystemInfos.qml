@@ -14,6 +14,8 @@ Rectangle {
         height: parent.height
         spacing: 0
 
+        Processor {}
+
         Rectangle {
             implicitHeight: 20
             implicitWidth: 2
