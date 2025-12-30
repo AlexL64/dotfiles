@@ -14,6 +14,8 @@ Button {
             id: content
             anchors.centerIn: parent
             spacing: 6
+            leftPadding: 3
+            rightPadding: 3
 
             Text {
                 id: storageValue
