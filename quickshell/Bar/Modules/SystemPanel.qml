@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
-import qs.Bar.Modules.SystemPanel.Modules
+import qs.Bar.Modules.SystemPanel
 
 Rectangle {
     id: systemPanel
