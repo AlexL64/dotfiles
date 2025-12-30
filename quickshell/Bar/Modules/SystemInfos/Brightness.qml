@@ -24,14 +24,6 @@ Button {
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
                 anchors.verticalCenter: parent.verticalCenter
-
-                function test(screens) {
-                    print(screens);
-
-                    screens.brightness = 0.5;
-
-                    return "";
-                }
             }
 
             Text {
