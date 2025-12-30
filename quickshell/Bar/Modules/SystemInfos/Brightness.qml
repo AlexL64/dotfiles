@@ -1,4 +1,3 @@
-import Quickshell
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
@@ -70,7 +69,7 @@ Button {
 
     onHoveredChanged: {
         if (hovered) {
-            backgroundRectangle.color = "#33cdd6f4";
+            backgroundRectangle.color = "#33f9e2af";
         } else {
             backgroundRectangle.color = "#313244";
         }
