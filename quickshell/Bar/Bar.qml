@@ -2,7 +2,6 @@ import Quickshell
 import QtQuick
 import QtQuick.Layouts
 import qs.Bar.Modules
-import qs.Bar.Modules.SystemPanel
 
 PanelWindow { // qmllint disable uncreatable-type
     id: bar
@@ -51,6 +50,7 @@ PanelWindow { // qmllint disable uncreatable-type
         anchors.right: parent.right
         spacing: 10
 
+        SystemInfos {}
         SystemPanel {}
     }
 }
