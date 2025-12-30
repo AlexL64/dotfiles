@@ -28,12 +28,7 @@ Rectangle {
             radius: 2
         }
 
-        Rectangle {
-            implicitWidth: 36
-            Layout.fillHeight: true
-            radius: 12
-            color: "#313244"
-        }
+        Network {}
 
         Rectangle {
             implicitHeight: 20
