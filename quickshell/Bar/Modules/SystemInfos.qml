@@ -28,6 +28,8 @@ Rectangle {
             radius: 2
         }
 
+        Storage {}
+
         Rectangle {
             implicitHeight: 20
             implicitWidth: 2
