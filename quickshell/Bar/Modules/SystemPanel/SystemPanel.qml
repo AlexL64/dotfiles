@@ -14,12 +14,7 @@ Rectangle {
         height: parent.height
         spacing: 0
 
-        Rectangle {
-            implicitWidth: 36
-            Layout.fillHeight: true
-            radius: 12
-            color: "#313244"
-        }
+        Notifications {}
 
         Rectangle {
             implicitHeight: 20
