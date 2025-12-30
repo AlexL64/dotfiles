@@ -1,5 +1,3 @@
-import Quickshell
-import Quickshell.Widgets
 import Quickshell.Bluetooth
 import QtQuick
 import QtQuick.Layouts
