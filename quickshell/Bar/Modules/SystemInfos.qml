@@ -35,6 +35,8 @@ Rectangle {
             radius: 2
         }
 
+        Brightness {}
+
         Rectangle {
             implicitHeight: 20
             implicitWidth: 2
