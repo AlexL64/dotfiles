@@ -60,18 +60,19 @@ Button {
                     } else if (state == UPowerDeviceState.Unknown) {
                         return "\ue1a6";
                     } else {
+                        battery = 90;
                         const icons = {
-                            100: "\ue1a4",
-                            90: "\uebd2",
-                            75: "\uebd4",
-                            60: "\uebe2",
-                            50: "\uebdd",
-                            40: "\uebe0",
-                            35: "\uebd9",
-                            20: "\uebdc"
+                            90: "\ue1a4",
+                            75: "\uebd2",
+                            60: "\uebd4",
+                            50: "\uebe2",
+                            40: "\uebdd",
+                            30: "\uebe0",
+                            20: "\uebd9",
+                            0: "\uebdc"
                         };
 
-                        return icons[[20, 35, 40, 50, 60, 75, 90, 100].filter(thresh => thresh <= battery).pop()];
+                        return icons[[90, 75, 60, 50, 40, 30, 20, 0].find(threshold => threshold <= battery)];
                     }
                 }
             }
