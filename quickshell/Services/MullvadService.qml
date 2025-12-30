@@ -38,12 +38,6 @@ Singleton {
                 updateInfosProcess.running = true;
             }
         }
-        stderr: StdioCollector {
-            waitForEnd: true
-            onTextChanged: {
-                print(text);
-            }
-        }
     }
 
     Process {
