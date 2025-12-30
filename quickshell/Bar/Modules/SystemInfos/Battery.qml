@@ -16,7 +16,7 @@ Button {
         case UPowerDeviceState.Discharging:
             return "#fab387";
         case UPowerDeviceState.PendingCharge:
-            return "#89b4fa";
+            return "#cba6f7";
         case UPowerDeviceState.Unknown:
             return "#f38ba8";
         default:
