@@ -35,9 +35,9 @@ PanelWindow { //qmllint disable uncreatable-type
         }
     }
 
-    function getSelected(current, list, running) {
+    function getSelected(current, list) {
         const index = list.indexOf(current);
-        return index == -1 || running ? 0 : index;
+        return index == -1 ? 0 : index;
     }
 
     function sliceList(list, selected) {
@@ -62,7 +62,7 @@ PanelWindow { //qmllint disable uncreatable-type
 
     property string current
     property list<string> list
-    property int selected: getSelected(current, list, currentProcess.running || listProcess.running)
+    property int selected: getSelected(current, list)
     property list<string> slicedList: sliceList(list, selected)
 
     Process {
@@ -71,7 +71,13 @@ PanelWindow { //qmllint disable uncreatable-type
         command: ["bash", "-c", "echo $HOME/Wallpaper/$(basename $(swww query | grep -oP '(?<=image: ).*'))"]
         stdout: StdioCollector {
             onStreamFinished: {
-                wallpapers.current = text.trim();
+                const current = text.trim();
+
+                if (wallpapers.current != current) {
+                    wallpapers.current = current;
+                } else {
+                    wallpapers.selected = wallpapers.getSelected(wallpapers.current, wallpapers.list);
+                }
             }
         }
     }
@@ -82,7 +88,21 @@ PanelWindow { //qmllint disable uncreatable-type
         command: ["bash", "-c", 'find $HOME/Wallpaper/ -maxdepth 1 -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg"']
         stdout: StdioCollector {
             onStreamFinished: {
-                wallpapers.list = text.split("\n").filter(line => line.trim() != "");
+                var list = text.split("\n").filter(line => line.trim() != "");
+
+                if (list.length < 1) {
+                    list.push("../Assets/no_wallpaper.png");
+                }
+
+                while (list.length < 5) {
+                    list = list.concat(list);
+                }
+
+                if (wallpapers.list != list) {
+                    wallpapers.list = list;
+                } else {
+                    wallpapers.selected = wallpapers.getSelected(wallpapers.current, wallpapers.list);
+                }
             }
         }
     }
