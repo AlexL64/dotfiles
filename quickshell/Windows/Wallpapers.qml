@@ -91,7 +91,7 @@ PanelWindow { //qmllint disable uncreatable-type
                 var list = text.split("\n").filter(line => line.trim() != "");
 
                 if (list.length < 1) {
-                    list.push("../Assets/no_wallpaper.png");
+                    list.push("../Assets/Images/no_wallpaper.png");
                 }
 
                 while (list.length < 5) {
