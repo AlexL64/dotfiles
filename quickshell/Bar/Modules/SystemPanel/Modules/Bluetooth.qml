@@ -1,3 +1,5 @@
+import Quickshell
+import Quickshell.Widgets
 import Quickshell.Bluetooth
 import QtQuick
 import QtQuick.Layouts
@@ -9,25 +11,24 @@ Button {
     implicitWidth: 36
 
     contentItem: Item {
-        Image {
-            width: 24
-            height: 24
+        IconImage {
+            implicitSize: 24
             source: getIcon(Bluetooth.defaultAdapter) // qmllint disable unresolved-type
-            fillMode: Image.PreserveAspectFit
             anchors.centerIn: parent
-            cache: true
 
             function getIcon(adapter) {
+                var icon = "";
+
                 if (adapter == null || adapter.state == BluetoothAdapterState.Disabled || adapter.state == BluetoothAdapterState.Blocked || adapter.state == BluetoothAdapterState.Disabling) {
-                    return "/usr/share/icons/Papirus/24x24/panel/bluetooth-disabled.svg";
+                    icon = "/usr/share/icons/Papirus/24x24/panel/bluetooth-disabled.svg";
                 } else if (adapter.state == BluetoothAdapterState.Enabled || adapter.state == BluetoothAdapterState.Enabling) {
                     if (adapter.devices.values.some(item => item.connected)) {
-                        return "/usr/share/icons/Papirus/24x24/panel/bluetooth-paired.svg";
+                        icon = "/usr/share/icons/Papirus/24x24/panel/bluetooth-paired.svg";
                     }
-                    return "/usr/share/icons/Papirus/24x24/panel/bluetooth-active.svg";
+                    icon = "/usr/share/icons/Papirus/24x24/panel/bluetooth-active.svg";
                 }
 
-                return "";
+                return Quickshell.iconPath(icon);
             }
         }
     }
