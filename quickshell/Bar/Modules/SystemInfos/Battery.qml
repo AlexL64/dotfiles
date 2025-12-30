@@ -51,7 +51,6 @@ Button {
                 anchors.verticalCenter: parent.verticalCenter
 
                 function getIcon(state, battery) {
-                    print(state);
                     if (state == UPowerDeviceState.Charging) {
                         return "\ue1a3";
                     } else if (state == UPowerDeviceState.FullyCharged) {
