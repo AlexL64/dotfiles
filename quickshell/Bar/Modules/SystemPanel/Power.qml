@@ -8,9 +8,10 @@ Button {
     implicitWidth: 36
 
     contentItem: Text {
-        text: ""
-        font.family: "Font Awesome 7 Free Solid"
-        font.pixelSize: 14
+        text: "\ue8ac"
+        font.family: "Material Icons"
+        font.pixelSize: 18
+        font.bold:true
         color: "#f38ba8"
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
