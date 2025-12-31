@@ -1,4 +1,5 @@
 import Quickshell
+import Quickshell.Io
 import QtQuick
 import QtQuick.Layouts
 import qs.Bar.Modules
@@ -23,6 +24,14 @@ PanelWindow { // qmllint disable uncreatable-type
         top: true
         left: true
         right: true
+    }
+
+    IpcHandler {
+        target: "bar"
+
+        function toggle(): void {
+            bar.visible = !bar.visible;
+        }
     }
 
     RowLayout {
