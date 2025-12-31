@@ -140,6 +140,7 @@ PanelWindow { //qmllint disable uncreatable-type
                         text: delegateItem.modelData.icon
                         color: delegateItem.modelData.mainColor
                         font.pixelSize: 96
+                        font.family: "Font Awesome 7 Free"
                         anchors.centerIn: parent
                         scale: powerSelector.selected == delegateItem.index ? 1.1 : 1
                     }

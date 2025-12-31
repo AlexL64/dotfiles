@@ -143,6 +143,9 @@ PanelWindow { //qmllint disable uncreatable-type
                     contentItem: Text {
                         text: "Clear"
                         color: "#313244"
+                        font.family: "JetBrainsMono Nerd Font"
+                        font.pixelSize: 14
+                        font.bold: true
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                     }
@@ -239,6 +242,8 @@ PanelWindow { //qmllint disable uncreatable-type
                             contentItem: Text {
                                 text: ""
                                 color: "#313244"
+                                font.family: "Font Awesome 7 Free"
+                                font.pixelSize: 16
                                 horizontalAlignment: Text.AlignHCenter
                                 verticalAlignment: Text.AlignVCenter
                             }
