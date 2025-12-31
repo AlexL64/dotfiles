@@ -1,12 +1,10 @@
 pragma ComponentBehavior: Bound
 import Quickshell
-import Quickshell.Io
 import QtQuick
 import QtQuick.Layouts
 
 PanelWindow { //qmllint disable uncreatable-type
     id: powerSelector
-    visible: false
     aboveWindows: true
     color: "transparent"
     exclusionMode: ExclusionMode.Ignore
@@ -21,14 +19,6 @@ PanelWindow { //qmllint disable uncreatable-type
 
     onVisibleChanged: {
         selected = 0;
-    }
-
-    IpcHandler {
-        target: "powerSelector"
-
-        function toggle(): void {
-            powerSelector.visible = !powerSelector.visible;
-        }
     }
 
     property int selected: 0
@@ -78,7 +68,7 @@ PanelWindow { //qmllint disable uncreatable-type
 
         Keys.onPressed: event => {
             if (event.key == Qt.Key_Escape) {
-                powerSelector.visible = false;
+                Quickshell.execDetached(["qs", "ipc", "call", "powerSelector", "hide"]);
             } else if (event.key == Qt.Key_Right) {
                 if (powerSelector.selected < powerSelector.options.length - 1) {
                     powerSelector.selected += 1;
@@ -93,7 +83,7 @@ PanelWindow { //qmllint disable uncreatable-type
                 }
             } else if (event.key == Qt.Key_Return) {
                 Quickshell.execDetached(["bash", "-c", powerSelector.options[powerSelector.selected].command]);
-                powerSelector.visible = false;
+                Quickshell.execDetached(["qs", "ipc", "call", "powerSelector", "hide"]);
             }
         }
 
@@ -139,7 +129,7 @@ PanelWindow { //qmllint disable uncreatable-type
 
                             onDoubleClicked: {
                                 Quickshell.execDetached(["bash", "-c", delegateItem.modelData.command]);
-                                powerSelector.visible = false;
+                                Quickshell.execDetached(["qs", "ipc", "call", "powerSelector", "hide"]);
                             }
                         }
 

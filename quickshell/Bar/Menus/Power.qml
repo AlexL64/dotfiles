@@ -1,13 +1,11 @@
 pragma ComponentBehavior: Bound
 import Quickshell
-import Quickshell.Io
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 
 PanelWindow { //qmllint disable uncreatable-type
     id: power
-    visible: false
     aboveWindows: true
     color: "transparent"
     exclusionMode: ExclusionMode.Auto
@@ -24,14 +22,6 @@ PanelWindow { //qmllint disable uncreatable-type
     anchors {
         top: true
         right: true
-    }
-
-    IpcHandler {
-        target: "power"
-
-        function toggle(): void {
-            power.visible = !power.visible;
-        }
     }
 
     property list<var> options: [
@@ -142,8 +132,8 @@ PanelWindow { //qmllint disable uncreatable-type
                         }
 
                         onClicked: {
-                            power.visible = false;
                             Quickshell.execDetached(["bash", "-c", delegateItem.modelData.command]);
+                            Quickshell.execDetached(["qs", "ipc", "call", "power", "hide"]);
                         }
                     }
                 }

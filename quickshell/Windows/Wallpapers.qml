@@ -7,7 +7,6 @@ import QtQuick.Layouts
 
 PanelWindow { //qmllint disable uncreatable-type
     id: wallpapers
-    visible: false
     aboveWindows: true
     color: "transparent"
     exclusionMode: ExclusionMode.Ignore
@@ -24,14 +23,6 @@ PanelWindow { //qmllint disable uncreatable-type
         if (visible) {
             currentProcess.running = true;
             listProcess.running = true;
-        }
-    }
-
-    IpcHandler {
-        target: "wallpapers"
-
-        function toggle(): void {
-            wallpapers.visible = !wallpapers.visible;
         }
     }
 
@@ -119,7 +110,7 @@ PanelWindow { //qmllint disable uncreatable-type
 
         Keys.onPressed: event => {
             if (event.key == Qt.Key_Escape) {
-                wallpapers.visible = false;
+                Quickshell.execDetached(["qs", "ipc", "call", "wallpapers", "hide"]);
             } else if (event.key == Qt.Key_Right) {
                 if (wallpapers.selected < wallpapers.list.length - 1) {
                     wallpapers.selected += 1;
@@ -134,8 +125,7 @@ PanelWindow { //qmllint disable uncreatable-type
                 }
             } else if (event.key == Qt.Key_Return) {
                 wallpapers.setWallpaper(wallpapers.list[wallpapers.selected]);
-
-                wallpapers.visible = false;
+                Quickshell.execDetached(["qs", "ipc", "call", "wallpapers", "hide"]);
             }
         }
 

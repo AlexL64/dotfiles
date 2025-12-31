@@ -8,7 +8,6 @@ import QtQuick.Layouts
 
 PanelWindow { //qmllint disable uncreatable-type
     id: applicationLauncher
-    visible: false
     aboveWindows: true
     color: "transparent"
     exclusionMode: ExclusionMode.Ignore
@@ -45,14 +44,6 @@ PanelWindow { //qmllint disable uncreatable-type
         JsonAdapter { // qmllint disable unresolved-type
             id: jsonAdapter
             property list<var> launchCount
-        }
-    }
-
-    IpcHandler {
-        target: "applicationLauncher"
-
-        function toggle(): void {
-            applicationLauncher.visible = !applicationLauncher.visible;
         }
     }
 
@@ -96,7 +87,7 @@ PanelWindow { //qmllint disable uncreatable-type
 
                 Keys.onPressed: event => {
                     if (event.key == Qt.Key_Escape) {
-                        applicationLauncher.visible = false;
+                        Quickshell.execDetached(["qs", "ipc", "call", "applicationLauncher", "hide"]);
                     } else if (event.key == Qt.Key_Up) {
                         if (apps.selected > 0) {
                             apps.selected -= 1;
@@ -135,7 +126,7 @@ PanelWindow { //qmllint disable uncreatable-type
                         }
 
                         apps.pageElements[apps.selected].execute();
-                        applicationLauncher.visible = false;
+                        Quickshell.execDetached(["qs", "ipc", "call", "applicationLauncher", "hide"]);
                     }
                 }
 
@@ -268,7 +259,7 @@ PanelWindow { //qmllint disable uncreatable-type
                                     });
                                 }
 
-                                applicationLauncher.visible = false;
+                                Quickshell.execDetached(["qs", "ipc", "call", "applicationLauncher", "hide"]);
                                 delegateItem.modelData.execute();
                             }
                         }

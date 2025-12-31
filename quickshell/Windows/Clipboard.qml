@@ -1,6 +1,5 @@
 pragma ComponentBehavior: Bound
 import Quickshell
-import Quickshell.Io
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
@@ -8,7 +7,6 @@ import qs.Services
 
 PanelWindow { //qmllint disable uncreatable-type
     id: clipboard
-    visible: false
     aboveWindows: true
     color: "transparent"
     exclusionMode: ExclusionMode.Ignore
@@ -25,14 +23,6 @@ PanelWindow { //qmllint disable uncreatable-type
         search.text = "";
         selected = 0;
         page = 0;
-    }
-
-    IpcHandler {
-        target: "clipboard"
-
-        function toggle(): void {
-            clipboard.visible = !clipboard.visible;
-        }
     }
 
     function searchClibboard(list, search) {
@@ -90,7 +80,7 @@ PanelWindow { //qmllint disable uncreatable-type
 
                     Keys.onPressed: event => {
                         if (event.key == Qt.Key_Escape) {
-                            clipboard.visible = false;
+                            Quickshell.execDetached(["qs", "ipc", "call", "clipboard", "hide"]);
                         } else if (event.key == Qt.Key_Up) {
                             if (clipboard.selected > 0) {
                                 clipboard.selected -= 1;
@@ -127,7 +117,7 @@ PanelWindow { //qmllint disable uncreatable-type
                             }
                         } else if (event.key == Qt.Key_Return) {
                             ClipboardService.setId(clipboard.pageElements[clipboard.selected].id);
-                            clipboard.visible = false;
+                            Quickshell.execDetached(["qs", "ipc", "call", "clipboard", "hide"]);
                         }
                     }
 
@@ -171,7 +161,7 @@ PanelWindow { //qmllint disable uncreatable-type
 
                         onClicked: {
                             ClipboardService.clear();
-                            clipboard.visible = false;
+                            Quickshell.execDetached(["qs", "ipc", "call", "clipboard", "hide"]);
                         }
                     }
                 }
@@ -230,7 +220,7 @@ PanelWindow { //qmllint disable uncreatable-type
 
                                 onDoubleClicked: {
                                     ClipboardService.setId(delegateItem.modelData.id);
-                                    clipboard.visible = false;
+                                    Quickshell.execDetached(["qs", "ipc", "call", "clipboard", "hide"]);
                                 }
                             }
                         }
