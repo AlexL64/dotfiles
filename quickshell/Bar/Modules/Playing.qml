@@ -29,7 +29,7 @@ Rectangle {
 
     Loader {
         id: content
-        active: playing.player != null && playing.player.trackTitle != ""
+        active: playing.player != null && playing.player.canControl && playing.player.trackTitle != ""
         sourceComponent: Row {
             Button {
                 implicitHeight: 36
