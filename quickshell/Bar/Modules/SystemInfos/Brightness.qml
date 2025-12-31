@@ -14,8 +14,8 @@ Button {
             id: content
             anchors.centerIn: parent
             spacing: 6
-            leftPadding: 3
-            rightPadding: 3
+            leftPadding: 4
+            rightPadding: 4
 
             Text {
                 text: `${BrightnessService.actualValue}%`

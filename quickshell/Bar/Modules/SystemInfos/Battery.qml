@@ -29,8 +29,8 @@ Button {
             id: content
             anchors.centerIn: parent
             spacing: 2
-            leftPadding: 3
-            rightPadding: 3
+            leftPadding: 4
+            rightPadding: 4
 
             Text {
                 text: `${UPower.displayDevice.percentage * 100}%`
