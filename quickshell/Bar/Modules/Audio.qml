@@ -88,11 +88,24 @@ Rectangle {
             }
 
             background: Rectangle {
-                color: "#313244"
+                color: getColor(sinkButtonMouseArea.containsMouse, Pipewire.defaultAudioSink)
                 radius: 12
+
+                function getColor(containsMouse, sink) {
+                    if (containsMouse) {
+                        if (sink == null || sink.description == "Dummy Output" || sink.audio.muted || isNaN(sink.audio.volume)) {
+                            return "#33f38ba8";
+                        } else {
+                            return "#3389dceb";
+                        }
+                    } else {
+                        return "#313244";
+                    }
+                }
             }
 
             MouseArea {
+                id: sinkButtonMouseArea
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor
                 hoverEnabled: true
@@ -175,11 +188,24 @@ Rectangle {
             }
 
             background: Rectangle {
-                color: "#313244"
+                color: getColor(sourceButtonMouseArea.containsMouse, Pipewire.defaultAudioSource)
                 radius: 12
+
+                function getColor(containsMouse, source) {
+                    if (containsMouse) {
+                        if (source == null || source.description == "Dummy Output" || source.audio.muted || isNaN(source.audio.volume)) {
+                            return "#33f38ba8";
+                        } else {
+                            return "#3389dceb";
+                        }
+                    } else {
+                        return "#313244";
+                    }
+                }
             }
 
             MouseArea {
+                id: sourceButtonMouseArea
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor
                 hoverEnabled: true
