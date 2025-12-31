@@ -37,30 +37,43 @@ Rectangle {
                     color: textColor(delegateItem.modelData, Hyprland.workspaces, Hyprland.focusedWorkspace)
 
                     function textColor(id, workspaces, focusedWorkspace) {
-                        if (focusedWorkspace != null && focusedWorkspace.id == id) {
-                            if (focusedWorkspace.toplevels.values.length > 0) {
-                                return "#313244";
-                            } else {
-                                return "#cdd6f4";
-                            }
-                        } else if (workspaces.values.some(item => item.id == id)) {
-                            return "#cba6f7";
+                        const workspace = workspaces.values.find(item => item.id == id);
+                        const isFocused = focusedWorkspace && focusedWorkspace.id == id;
+                        const isUrgent = workspace && workspace.urgent;
+                        const hasClients = focusedWorkspace && focusedWorkspace.toplevels.values.length > 0;
+
+                        if (isFocused) {
+                            return hasClients ? "#313244" : "#cdd6f4";
                         }
 
-                        return "#cdd6f4";
+                        if (isUrgent) {
+                            return "#313244";
+                        }
+
+                        return workspace ? "#cba6f7" : "#cdd6f4";
                     }
                 }
 
                 background: Rectangle {
                     property var workspacesTest: Hyprland.workspaces
                     radius: 12
-                    color: backgroundColor(delegateItem.modelData, Hyprland.workspaces, Hyprland.focusedWorkspace)
+                    color: backgroundColor(delegateItem.modelData, Hyprland.workspaces, Hyprland.focusedWorkspace, mouseArea.containsMouse)
 
-                    function backgroundColor(id, workspaces, focusedWorkspace) {
-                        if (focusedWorkspace != null && focusedWorkspace.id == id) {
-                            return "#cba6f7";
-                        } else if (workspaces.values.some(item => item.id == id && item.urgent)) {
-                            return "#f38ba8";
+                    function backgroundColor(id, workspaces, focusedWorkspace, containsMouse) {
+                        const workspace = workspaces.values.find(item => item.id == id);
+                        const isFocused = focusedWorkspace && focusedWorkspace.id == id;
+                        const isUrgent = workspace && workspace.urgent;
+
+                        if (isFocused) {
+                            return containsMouse ? "#cccba6f7" : "#cba6f7";
+                        }
+
+                        if (isUrgent) {
+                            return containsMouse ? "#ccf38ba8" : "#f38ba8";
+                        }
+
+                        if (containsMouse) {
+                            return workspace ? "#33cba6f7" : "#33cdd6f4";
                         }
 
                         return "#313244";
@@ -68,6 +81,7 @@ Rectangle {
                 }
 
                 MouseArea {
+                    id: mouseArea
                     anchors.fill: parent
                     cursorShape: Qt.PointingHandCursor
                     hoverEnabled: true
