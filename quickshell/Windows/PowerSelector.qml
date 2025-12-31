@@ -110,39 +110,47 @@ PanelWindow { //qmllint disable uncreatable-type
                     required property int index
                     required property var modelData
 
-                    color: powerSelector.selected == index ? modelData.backgroundColor : "#313244"
-                    radius: 12
-                    border.color: powerSelector.selected == index ? modelData.mainColor : "#6c7086"
-                    border.width: 2
                     implicitHeight: 228
                     implicitWidth: 228
+                    radius: 12
+                    color: "#313244"
 
-                    MouseArea {
-                        anchors.fill: parent
-                        cursorShape: Qt.PointingHandCursor
-                        hoverEnabled: true
+                    Rectangle {
 
-                        onEntered: {
-                            delegateItem.scale = 1.01;
+                        color: powerSelector.selected == delegateItem.index ? delegateItem.modelData.backgroundColor : "#313244"
+                        radius: 12
+                        border.color: powerSelector.selected == delegateItem.index ? delegateItem.modelData.mainColor : "#6c7086"
+                        border.width: 2
+                        implicitHeight: 228
+                        implicitWidth: 228
+
+                        MouseArea {
+                            anchors.fill: parent
+                            cursorShape: Qt.PointingHandCursor
+                            hoverEnabled: true
+
+                            onEntered: {
+                                delegateItem.scale = 1.01;
+                            }
+
+                            onExited: {
+                                delegateItem.scale = 1;
+                            }
+
+                            onDoubleClicked: {
+                                Quickshell.execDetached(["bash", "-c", delegateItem.modelData.command]);
+                                powerSelector.visible = false;
+                            }
                         }
 
-                        onExited: {
-                            delegateItem.scale = 1;
+                        Text {
+                            text: delegateItem.modelData.icon
+                            color: delegateItem.modelData.mainColor
+                            font.pixelSize: 96
+                            font.family: "Font Awesome 7 Free"
+                            anchors.centerIn: parent
+                            scale: powerSelector.selected == delegateItem.index ? 1.1 : 1
                         }
-
-                        onDoubleClicked: {
-                            Quickshell.execDetached(["bash", "-c", delegateItem.modelData.command]);
-                            powerSelector.visible = false;
-                        }
-                    }
-
-                    Text {
-                        text: delegateItem.modelData.icon
-                        color: delegateItem.modelData.mainColor
-                        font.pixelSize: 96
-                        font.family: "Font Awesome 7 Free"
-                        anchors.centerIn: parent
-                        scale: powerSelector.selected == delegateItem.index ? 1.1 : 1
                     }
                 }
             }
