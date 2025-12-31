@@ -42,6 +42,7 @@ PanelWindow { // qmllint disable uncreatable-type
         anchors.horizontalCenter: parent.horizontalCenter
         spacing: 10
 
+        Playing {}
         TimeDate {}
     }
 
