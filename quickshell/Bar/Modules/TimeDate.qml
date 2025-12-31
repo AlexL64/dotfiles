@@ -1,41 +1,71 @@
 import Quickshell.Io
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Controls
 
 Rectangle {
     id: dateTime
 
     Layout.fillHeight: true
     radius: 12
+    implicitWidth: 240
     color: "#313244"
-    implicitWidth: content.width
 
-    Text {
-        id: content
+    Button {
         anchors.centerIn: parent
-        font.family: "JetBrainsMono Nerd Font"
-        font.pixelSize: 14
-        font.bold: true
-        color: "#cba6f7"
-        leftPadding: 15
-        rightPadding: 15
+        implicitWidth: 240
+        implicitHeight: 36
 
-        Process {
-            id: dateProcess
+        contentItem: Text {
+            id: content
+            color: "#cba6f7"
+            font.family: "JetBrainsMono Nerd Font"
+            font.pixelSize: 14
+            font.bold: true
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
 
-            command: ["date", "+%A, %d. %b  %H:%M"]
-            running: true
+            Process {
+                id: dateProcess
 
-            stdout: StdioCollector {
-                onStreamFinished: content.text = text
+                command: ["date", "+%A, %d. %b  %H:%M"]
+                running: true
+
+                stdout: StdioCollector {
+                    onStreamFinished: content.text = text
+                }
+            }
+
+            Timer {
+                interval: 1000
+                running: true
+                repeat: true
+                onTriggered: dateProcess.running = true
             }
         }
 
-        Timer {
-            interval: 1000
-            running: true
-            repeat: true
-            onTriggered: dateProcess.running = true
+        background: Rectangle {
+            id: backgroundRectangle
+            color: "#313244"
+            radius: 12
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            cursorShape: Qt.PointingHandCursor
+            hoverEnabled: true
+
+            onEntered: {
+                backgroundRectangle.color = "#33cba6f7";
+            }
+
+            onExited: {
+                backgroundRectangle.color = "#313244";
+            }
+
+            onClicked: {
+                print("click");
+            }
         }
     }
 }
