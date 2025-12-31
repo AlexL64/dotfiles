@@ -1,3 +1,4 @@
+import Quickshell
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
@@ -11,7 +12,7 @@ Button {
         text: "\ue8ac"
         font.family: "Material Icons"
         font.pixelSize: 18
-        font.bold:true
+        font.bold: true
         color: "#f38ba8"
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
@@ -37,7 +38,7 @@ Button {
         hoverEnabled: true
 
         onClicked: {
-            print("Clicked");
+            Quickshell.execDetached(["qs", "ipc", "call", "power", "toggle"]);
         }
     }
 }
