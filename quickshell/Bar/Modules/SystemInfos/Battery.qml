@@ -82,20 +82,31 @@ Button {
     }
 
     background: Rectangle {
-        id: backgroundRectangle
-        color: "#313244"
+        color: getColor(mouseArea.containsMouse, UPower.displayDevice.state)
         radius: 12
-    }
 
-    onHoveredChanged: {
-        if (hovered) {
-            backgroundRectangle.color = "#33cdd6f4";
-        } else {
-            backgroundRectangle.color = "#313244";
+        function getColor(containsMouse, state) {
+            if (containsMouse) {
+                switch (state) {
+                case UPowerDeviceState.Charging:
+                    return "#33a6e3a1";
+                case UPowerDeviceState.Discharging:
+                    return "#33fab387";
+                case UPowerDeviceState.PendingCharge:
+                    return "#33cba6f7";
+                case UPowerDeviceState.Unknown:
+                    return "#33f38ba8";
+                default:
+                    return "#33cdd6f4";
+                }
+            } else {
+                return "#313244";
+            }
         }
     }
 
     MouseArea {
+        id: mouseArea
         anchors.fill: parent
         cursorShape: Qt.PointingHandCursor
         hoverEnabled: true
