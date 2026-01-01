@@ -13,6 +13,7 @@ Scope {
 
     property bool powerVisible: false
     property bool trayVisible: false
+    property bool bluetoothVisible: false
 
     property bool applicationLauncherVisible: false
     property bool powerSelectorVisible: false
@@ -30,6 +31,9 @@ Scope {
     }
     Tray {
         visible: root.trayVisible
+    }
+    Bluetooth {
+        visible: root.bluetoothVisible
     }
 
     // Windows
@@ -75,6 +79,18 @@ Scope {
 
         function hide(): void {
             root.trayVisible = false;
+        }
+    }
+
+    IpcHandler {
+        target: "bluetooth"
+
+        function toggle(): void {
+            root.bluetoothVisible = !root.bluetoothVisible;
+        }
+
+        function hide(): void {
+            root.bluetoothVisible = false;
         }
     }
 

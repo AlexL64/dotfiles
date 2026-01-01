@@ -53,7 +53,7 @@ Button {
         hoverEnabled: true
 
         onClicked: {
-            print("Clicked");
+            Quickshell.execDetached(["qs", "ipc", "call", "bluetooth", "toggle"]);
         }
     }
 }
