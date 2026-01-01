@@ -233,6 +233,7 @@ PanelWindow { //qmllint disable uncreatable-type
                             IconImage {
                                 source: Quickshell.iconPath(delegateItem.modelData.icon, "bluetooth")
                                 implicitSize: 32
+                                anchors.verticalCenter:parent.verticalCenter
                             }
 
                             Column {
