@@ -24,8 +24,9 @@ Button {
                 } else if (adapter.state == BluetoothAdapterState.Enabled || adapter.state == BluetoothAdapterState.Enabling) {
                     if (adapter.devices.values.some(item => item.connected)) {
                         icon = "/usr/share/icons/Papirus/24x24/panel/bluetooth-paired.svg";
+                    } else {
+                        icon = "/usr/share/icons/Papirus/24x24/panel/bluetooth-active.svg";
                     }
-                    icon = "/usr/share/icons/Papirus/24x24/panel/bluetooth-active.svg";
                 }
 
                 return Quickshell.iconPath(icon);
