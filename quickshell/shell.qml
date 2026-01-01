@@ -1,3 +1,4 @@
+//@ pragma UseQApplication
 import Quickshell
 import Quickshell.Io
 import QtQuick
@@ -11,6 +12,7 @@ Scope {
     property bool barVisible: true
 
     property bool powerVisible: false
+    property bool trayVisible: false
 
     property bool applicationLauncherVisible: false
     property bool powerSelectorVisible: false
@@ -25,6 +27,9 @@ Scope {
     // Bar Menus
     Power {
         visible: root.powerVisible
+    }
+    Tray {
+        visible: root.trayVisible
     }
 
     // Windows
@@ -58,6 +63,18 @@ Scope {
 
         function hide(): void {
             root.powerVisible = false;
+        }
+    }
+
+    IpcHandler {
+        target: "tray"
+
+        function toggle(): void {
+            root.trayVisible = !root.trayVisible;
+        }
+
+        function hide(): void {
+            root.trayVisible = false;
         }
     }
 

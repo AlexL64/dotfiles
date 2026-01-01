@@ -1,3 +1,4 @@
+import Quickshell
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
@@ -36,7 +37,7 @@ Button {
         hoverEnabled: true
 
         onClicked: {
-            print("Clicked");
+            Quickshell.execDetached(["qs", "ipc", "call", "tray", "toggle"]);
         }
     }
 }
