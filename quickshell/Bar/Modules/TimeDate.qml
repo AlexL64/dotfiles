@@ -8,12 +8,12 @@ Rectangle {
 
     Layout.fillHeight: true
     radius: 12
-    implicitWidth: 240
+    implicitWidth: content.contentWidth + 24
     color: "#313244"
 
     Button {
         anchors.centerIn: parent
-        implicitWidth: 240
+        implicitWidth: content.contentWidth + 24
         implicitHeight: 36
 
         contentItem: Text {
