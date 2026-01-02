@@ -260,6 +260,8 @@ PanelWindow { //qmllint disable uncreatable-type
                                     font.family: "JetBrainsMono Nerd Font"
                                     font.pixelSize: 14
                                     font.bold: true
+                                    width: 200
+                                    elide: Text.ElideRight
                                 }
 
                                 Text {
