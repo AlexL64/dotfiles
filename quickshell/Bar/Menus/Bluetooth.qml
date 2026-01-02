@@ -108,57 +108,60 @@ PanelWindow { //qmllint disable uncreatable-type
                         Layout.rightMargin: 12
                         spacing: 20
 
-                        Button {
-                            anchors.verticalCenter: parent.verticalCenter
-                            width: 32
-                            height: 32
+                        Loader {
+                            active: Bluetooth.defaultAdapter.enabled // qmllint disable unresolved-type
+                            sourceComponent: Button {
+                                anchors.verticalCenter: parent.verticalCenter
+                                width: 32
+                                height: 32
 
-                            contentItem: Text {
-                                id: discoverButtonText
-                                text: Bluetooth.defaultAdapter.discovering ? "" : "" // qmllint disable unresolved-type
-                                color: "#cdd6f4"
-                                font.family: "Font Awesome 7 Free Solid"
-                                font.pixelSize: 16
-                                horizontalAlignment: Text.AlignHCenter
-                                verticalAlignment: Text.AlignVCenter
+                                contentItem: Text {
+                                    id: discoverButtonText
+                                    text: Bluetooth.defaultAdapter.discovering ? "" : "" // qmllint disable unresolved-type
+                                    color: "#cdd6f4"
+                                    font.family: "Font Awesome 7 Free Solid"
+                                    font.pixelSize: 16
+                                    horizontalAlignment: Text.AlignHCenter
+                                    verticalAlignment: Text.AlignVCenter
 
-                                NumberAnimation {
-                                    target: discoverButtonText
-                                    property: "rotation"
-                                    from: 0
-                                    to: 360
-                                    duration: 2000
-                                    loops: Animation.Infinite
-                                    running: Bluetooth.defaultAdapter.discovering // qmllint disable unresolved-type
-                                    onRunningChanged: {
-                                        if (!running) {
-                                            discoverButtonText.rotation = 0;
+                                    NumberAnimation {
+                                        target: discoverButtonText
+                                        property: "rotation"
+                                        from: 0
+                                        to: 360
+                                        duration: 2000
+                                        loops: Animation.Infinite
+                                        running: Bluetooth.defaultAdapter.discovering // qmllint disable unresolved-type
+                                        onRunningChanged: {
+                                            if (!running) {
+                                                discoverButtonText.rotation = 0;
+                                            }
                                         }
                                     }
                                 }
-                            }
 
-                            background: Rectangle {
-                                id: discoverRectangleBackground
-                                color: "#45475a"
-                                radius: 6
-                            }
-
-                            MouseArea {
-                                anchors.fill: parent
-                                cursorShape: Qt.PointingHandCursor
-                                hoverEnabled: true
-
-                                onEntered: {
-                                    discoverRectangleBackground.color = "#cc45475a";
+                                background: Rectangle {
+                                    id: discoverRectangleBackground
+                                    color: "#45475a"
+                                    radius: 6
                                 }
 
-                                onExited: {
-                                    discoverRectangleBackground.color = "#45475a";
-                                }
+                                MouseArea {
+                                    anchors.fill: parent
+                                    cursorShape: Qt.PointingHandCursor
+                                    hoverEnabled: true
 
-                                onClicked: {
-                                    Bluetooth.defaultAdapter.discovering = !Bluetooth.defaultAdapter.discovering; // qmllint disable unresolved-type
+                                    onEntered: {
+                                        discoverRectangleBackground.color = "#cc45475a";
+                                    }
+
+                                    onExited: {
+                                        discoverRectangleBackground.color = "#45475a";
+                                    }
+
+                                    onClicked: {
+                                        Bluetooth.defaultAdapter.discovering = !Bluetooth.defaultAdapter.discovering; // qmllint disable unresolved-type
+                                    }
                                 }
                             }
                         }
