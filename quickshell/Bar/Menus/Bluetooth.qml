@@ -51,7 +51,7 @@ PanelWindow { //qmllint disable uncreatable-type
 
         ColumnLayout {
             id: content
-            width: 400
+            width: 450
             anchors.centerIn: parent
             spacing: 10
 
@@ -260,7 +260,7 @@ PanelWindow { //qmllint disable uncreatable-type
                                     font.family: "JetBrainsMono Nerd Font"
                                     font.pixelSize: 14
                                     font.bold: true
-                                    width: 200
+                                    width: 220
                                     elide: Text.ElideRight
                                 }
 
