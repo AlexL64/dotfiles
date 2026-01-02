@@ -114,12 +114,28 @@ PanelWindow { //qmllint disable uncreatable-type
                             height: 32
 
                             contentItem: Text {
-                                text: Bluetooth.defaultAdapter.discovering ? "" : "" // qmllint disable unresolved-type
+                                id: discoverButtonText
+                                text: Bluetooth.defaultAdapter.discovering ? "" : "" // qmllint disable unresolved-type
                                 color: "#cdd6f4"
                                 font.family: "Font Awesome 7 Free Solid"
                                 font.pixelSize: 16
                                 horizontalAlignment: Text.AlignHCenter
                                 verticalAlignment: Text.AlignVCenter
+
+                                NumberAnimation {
+                                    target: discoverButtonText
+                                    property: "rotation"
+                                    from: 0
+                                    to: 360
+                                    duration: 2000
+                                    loops: Animation.Infinite
+                                    running: Bluetooth.defaultAdapter.discovering // qmllint disable unresolved-type
+                                    onRunningChanged: {
+                                        if (!running) {
+                                            discoverButtonText.rotation = 0;
+                                        }
+                                    }
+                                }
                             }
 
                             background: Rectangle {
@@ -233,7 +249,7 @@ PanelWindow { //qmllint disable uncreatable-type
                             IconImage {
                                 source: Quickshell.iconPath(delegateItem.modelData.icon, "bluetooth")
                                 implicitSize: 32
-                                anchors.verticalCenter:parent.verticalCenter
+                                anchors.verticalCenter: parent.verticalCenter
                             }
 
                             Column {
@@ -310,26 +326,50 @@ PanelWindow { //qmllint disable uncreatable-type
                                     width: 96
 
                                     contentItem: Text {
-                                        text: getText(delegateItem.modelData.paired, delegateItem.modelData.connected, delegateItem.modelData.pairing)
+                                        id: connectButton
+                                        text: getText(delegateItem.modelData.paired, delegateItem.modelData.connected, delegateItem.modelData.pairing, delegateItem.modelData.state) // qmllint disable unresolved-type
                                         color: "#313244"
-                                        font.family: "JetBrainsMono Nerd Font"
+                                        font.family: getFont(delegateItem.modelData.pairing, delegateItem.modelData.state) // qmllint disable unresolved-type
                                         font.pixelSize: 14
                                         font.bold: true
                                         horizontalAlignment: Text.AlignHCenter
                                         verticalAlignment: Text.AlignVCenter
 
-                                        function getText(paired, connected, pairing) {
-                                            if (paired) {
-                                                if (connected) {
-                                                    return "Disconnect";
-                                                } else {
-                                                    return "Connect";
-                                                }
+                                        function getText(paired, connected, pairing, state) {
+                                            if (pairing || state == BluetoothDeviceState.Connecting || state == BluetoothDeviceState.Disconnecting) {
+                                                return "";
                                             } else {
-                                                if (pairing) {
-                                                    return "Pairing";
+                                                if (paired) {
+                                                    if (connected) {
+                                                        return "Disconnect";
+                                                    } else {
+                                                        return "Connect";
+                                                    }
                                                 } else {
                                                     return "Pair";
+                                                }
+                                            }
+                                        }
+
+                                        function getFont(pairing, state) {
+                                            if (pairing || state == BluetoothDeviceState.Connecting || state == BluetoothDeviceState.Disconnecting) {
+                                                return "Font Awesome 7 Free Solid";
+                                            } else {
+                                                return "JetBrainsMono Nerd Font";
+                                            }
+                                        }
+
+                                        NumberAnimation {
+                                            target: connectButton
+                                            property: "rotation"
+                                            from: 0
+                                            to: 360
+                                            duration: 2000
+                                            loops: Animation.Infinite
+                                            running: delegateItem.modelData.pairing || delegateItem.modelData.state == BluetoothDeviceState.Connecting || delegateItem.modelData.state == BluetoothDeviceState.Disconnecting // qmllint disable unresolved-type
+                                            onRunningChanged: {
+                                                if (!running) {
+                                                    connectButton.rotation = 0;
                                                 }
                                             }
                                         }
