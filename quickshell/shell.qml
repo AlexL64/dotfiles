@@ -47,6 +47,24 @@ Scope {
         }
     }
 
+    function hideWindows(exception = "") {
+        if (exception != "applicationLauncher") {
+            root.applicationLauncherVisible = false;
+        }
+
+        if (exception != "powerSelector") {
+            root.powerSelectorVisible = false;
+        }
+
+        if (exception != "wallpapers") {
+            root.wallpapersVisible = false;
+        }
+
+        if (exception != "clipboard") {
+            root.clipboardVisible = false;
+        }
+    }
+
     // Bar
     Bar {
         visible: root.barVisible
@@ -198,6 +216,10 @@ Scope {
 
         function toggle(): void {
             root.applicationLauncherVisible = !root.applicationLauncherVisible;
+
+            if (root.applicationLauncherVisible) {
+                root.hideWindows("applicationLauncher");
+            }
         }
 
         function hide(): void {
@@ -210,6 +232,10 @@ Scope {
 
         function toggle(): void {
             root.powerSelectorVisible = !root.powerSelectorVisible;
+
+            if (root.powerSelectorVisible) {
+                root.hideWindows("powerSelector");
+            }
         }
 
         function hide(): void {
@@ -222,6 +248,10 @@ Scope {
 
         function toggle(): void {
             root.wallpapersVisible = !root.wallpapersVisible;
+
+            if (root.wallpapersVisible) {
+                root.hideWindows("wallpapers");
+            }
         }
 
         function hide(): void {
@@ -234,6 +264,10 @@ Scope {
 
         function toggle(): void {
             root.clipboardVisible = !root.clipboardVisible;
+
+            if (root.clipboardVisible) {
+                root.hideWindows("clipboard");
+            }
         }
 
         function hide(): void {
