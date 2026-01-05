@@ -14,6 +14,8 @@ Scope {
     property bool powerVisible: false
     property bool trayVisible: false
     property bool bluetoothVisible: false
+    property bool audioVisible: false
+    property int audioMenu: 0
 
     property bool applicationLauncherVisible: false
     property bool powerSelectorVisible: false
@@ -34,6 +36,10 @@ Scope {
     }
     Bluetooth {
         visible: root.bluetoothVisible
+    }
+    Audio {
+        visible: root.audioVisible
+        selected: root.audioMenu
     }
 
     // Windows
@@ -91,6 +97,34 @@ Scope {
 
         function hide(): void {
             root.bluetoothVisible = false;
+        }
+    }
+
+    IpcHandler {
+        target: "audio"
+
+        function toggle(): void {
+            root.audioVisible = !root.audioVisible;
+        }
+
+        function hide(): void {
+            root.audioVisible = false;
+        }
+
+        function setMenuSinks() {
+            root.audioMenu = 0;
+        }
+
+        function setMenuSources() {
+            root.audioMenu = 1;
+        }
+
+        function setMenuApps() {
+            root.audioMenu = 2;
+        }
+
+        function setMenuDevices() {
+            root.audioMenu = 3;
         }
     }
 

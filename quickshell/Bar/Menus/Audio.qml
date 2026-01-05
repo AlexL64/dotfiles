@@ -1,0 +1,244 @@
+pragma ComponentBehavior: Bound
+import Quickshell
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
+import qs.Bar.Menus.Audio
+
+PanelWindow { //qmllint disable uncreatable-type
+    id: audio
+    aboveWindows: true
+    color: "transparent"
+    exclusionMode: ExclusionMode.Auto
+    implicitWidth: content.width
+    implicitHeight: content.height
+
+    // qmllint disable unresolved-type unqualified missing-property
+    margins {
+        top: 10
+        left: 344
+    }
+    // qmllint enable unresolved-type unqualified missing-property
+
+    anchors {
+        top: true
+        left: true
+    }
+
+    required property int selected
+
+    Component {
+        id: sinks
+        Sinks {}
+    }
+
+    Component {
+        id: sources
+        Sources {}
+    }
+
+    Component {
+        id: apps
+        Apps {}
+    }
+
+    Component {
+        id: devices
+        Devices {
+            window: audio
+        }
+    }
+
+    Rectangle {
+        color: "#1e1e2e"
+        width: content.width
+        height: content.height
+        radius: 12
+        border.width: 2
+        border.color: "#cba6f7"
+
+        ColumnLayout {
+            id: content
+            spacing: 0
+
+            RowLayout {
+                Layout.alignment: Qt.AlignHCenter
+                Layout.margins: 2
+                Layout.bottomMargin: 0
+                spacing: 0
+                Button {
+                    implicitHeight: 36
+                    implicitWidth: 120
+                    contentItem: Text {
+                        text: "Output"
+                        color: audio.selected == 0 ? "#cba6f7" : "#cdd6f4"
+                        font.pixelSize: 14
+                        font.family: "JetBrainsMono Nerd Font"
+                        font.bold: true
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                    }
+
+                    background: Rectangle {
+                        color: getColor(sinksButtonMouseArea.containsMouse, audio.selected == 0)
+                        topLeftRadius: 12
+
+                        function getColor(containsMouse, selected) {
+                            if (containsMouse || selected) {
+                                return "#45475a";
+                            }
+
+                            return "#313244";
+                        }
+                    }
+
+                    MouseArea {
+                        id: sinksButtonMouseArea
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        hoverEnabled: true
+
+                        onClicked: {
+                            Quickshell.execDetached(["qs", "ipc", "call", "audio", "setMenuSinks"]);
+                        }
+                    }
+                }
+
+                Button {
+                    implicitHeight: 36
+                    implicitWidth: 120
+                    contentItem: Text {
+                        text: "Input"
+                        color: audio.selected == 1 ? "#cba6f7" : "#cdd6f4"
+                        font.pixelSize: 14
+                        font.family: "JetBrainsMono Nerd Font"
+                        font.bold: true
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                    }
+
+                    background: Rectangle {
+                        color: getColor(sourcesButtonMouseArea.containsMouse, audio.selected == 1)
+
+                        function getColor(containsMouse, selected) {
+                            if (containsMouse || selected) {
+                                return "#45475a";
+                            }
+
+                            return "#313244";
+                        }
+                    }
+
+                    MouseArea {
+                        id: sourcesButtonMouseArea
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        hoverEnabled: true
+
+                        onClicked: {
+                            Quickshell.execDetached(["qs", "ipc", "call", "audio", "setMenuSources"]);
+                        }
+                    }
+                }
+
+                Button {
+                    implicitHeight: 36
+                    implicitWidth: 120
+                    contentItem: Text {
+                        text: "Apps"
+                        color: audio.selected == 2 ? "#cba6f7" : "#cdd6f4"
+                        font.pixelSize: 14
+                        font.family: "JetBrainsMono Nerd Font"
+                        font.bold: true
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                    }
+
+                    background: Rectangle {
+                        color: getColor(appsButtonMouseArea.containsMouse, audio.selected == 2)
+
+                        function getColor(containsMouse, selected) {
+                            if (containsMouse || selected) {
+                                return "#45475a";
+                            }
+
+                            return "#313244";
+                        }
+                    }
+
+                    MouseArea {
+                        id: appsButtonMouseArea
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        hoverEnabled: true
+
+                        onClicked: {
+                            Quickshell.execDetached(["qs", "ipc", "call", "audio", "setMenuApps"]);
+                        }
+                    }
+                }
+
+                Button {
+                    implicitHeight: 36
+                    implicitWidth: 120
+                    contentItem: Text {
+                        text: "Devices"
+                        color: audio.selected == 3 ? "#cba6f7" : "#cdd6f4"
+                        font.pixelSize: 14
+                        font.family: "JetBrainsMono Nerd Font"
+                        font.bold: true
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                    }
+
+                    background: Rectangle {
+                        color: getColor(devicesButtonMouseArea.containsMouse, audio.selected == 3)
+                        topRightRadius: 12
+
+                        function getColor(containsMouse, selected) {
+                            if (containsMouse || selected) {
+                                return "#45475a";
+                            }
+
+                            return "#313244";
+                        }
+                    }
+
+                    MouseArea {
+                        id: devicesButtonMouseArea
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        hoverEnabled: true
+
+                        onClicked: {
+                            Quickshell.execDetached(["qs", "ipc", "call", "audio", "setMenuDevices"]);
+                        }
+                    }
+                }
+            }
+
+            ScrollView {
+                Layout.margins: 12
+                Layout.fillWidth: true
+                Layout.preferredHeight: 300
+
+                Loader {
+                    width: parent.width
+
+                    sourceComponent: {
+                        switch (audio.selected) {
+                        case 0:
+                            return sinks;
+                        case 1:
+                            return sources;
+                        case 2:
+                            return apps;
+                        case 3:
+                            return devices;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

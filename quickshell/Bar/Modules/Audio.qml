@@ -1,3 +1,4 @@
+import Quickshell
 import Quickshell.Services.Pipewire
 import QtQuick
 import QtQuick.Layouts
@@ -114,7 +115,8 @@ Rectangle {
                 onClicked: function (mouse) {
                     switch (mouse.button) {
                     case Qt.LeftButton:
-                        print("Left");
+                        Quickshell.execDetached(["qs", "ipc", "call", "audio", "setMenuSinks"]);
+                        Quickshell.execDetached(["qs", "ipc", "call", "audio", "toggle"]);
                         break;
                     case Qt.RightButton:
                         Pipewire.defaultAudioSink.audio.muted = !Pipewire.defaultAudioSink.audio.muted;
@@ -214,7 +216,8 @@ Rectangle {
                 onClicked: function (mouse) {
                     switch (mouse.button) {
                     case Qt.LeftButton:
-                        print("Left");
+                        Quickshell.execDetached(["qs", "ipc", "call", "audio", "setMenuSources"]);
+                        Quickshell.execDetached(["qs", "ipc", "call", "audio", "toggle"]);
                         break;
                     case Qt.RightButton:
                         Pipewire.defaultAudioSource.audio.muted = !Pipewire.defaultAudioSource.audio.muted;
