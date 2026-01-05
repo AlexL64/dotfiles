@@ -12,7 +12,6 @@ Rectangle {
     color: "#313244"
 
     Button {
-        anchors.centerIn: parent
         implicitWidth: content.contentWidth + 24
         implicitHeight: 36
 
