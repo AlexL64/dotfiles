@@ -237,9 +237,8 @@ ColumnLayout {
                                             }
 
                                             onClicked: {
-                                                print(`pactl set-card-profile ${delegateItem.modelData.id} ${popupDelegateItem.modelData}`);
-                                                Quickshell.execDetached(["bash", "-c", `pactl set-card-profile ${delegateItem.modelData.id} '${popupDelegateItem.modelData}'`]);
                                                 settingsPopup.visible = false;
+                                                Quickshell.execDetached(["bash", "-c", `pactl set-card-profile ${delegateItem.modelData.id} '${popupDelegateItem.modelData}'`]);
                                             }
                                         }
                                     }
