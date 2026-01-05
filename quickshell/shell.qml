@@ -25,6 +25,28 @@ Scope {
 
     property bool idleInhibitorVisible: false
 
+    function hideMenus(exception = "") {
+        if (exception != "power") {
+            root.powerVisible = false;
+        }
+
+        if (exception != "tray") {
+            root.trayVisible = false;
+        }
+
+        if (exception != "battery") {
+            root.batteryVisible = false;
+        }
+
+        if (exception != "bluetooth") {
+            root.bluetoothVisible = false;
+        }
+
+        if (exception != "audio") {
+            root.audioVisible = false;
+        }
+    }
+
     // Bar
     Bar {
         visible: root.barVisible
@@ -82,6 +104,10 @@ Scope {
 
         function toggle(): void {
             root.powerVisible = !root.powerVisible;
+
+            if (root.powerVisible) {
+                root.hideMenus("power");
+            }
         }
 
         function hide(): void {
@@ -94,6 +120,10 @@ Scope {
 
         function toggle(): void {
             root.trayVisible = !root.trayVisible;
+
+            if (root.trayVisible) {
+                root.hideMenus("tray");
+            }
         }
 
         function hide(): void {
@@ -106,6 +136,10 @@ Scope {
 
         function toggle(): void {
             root.bluetoothVisible = !root.bluetoothVisible;
+
+            if (root.bluetoothVisible) {
+                root.hideMenus("bluetooth");
+            }
         }
 
         function hide(): void {
@@ -117,6 +151,10 @@ Scope {
 
         function toggle(): void {
             root.batteryVisible = !root.batteryVisible;
+
+            if (root.batteryVisible) {
+                root.hideMenus("battery");
+            }
         }
 
         function hide(): void {
@@ -128,6 +166,10 @@ Scope {
 
         function toggle(): void {
             root.audioVisible = !root.audioVisible;
+
+            if (root.audioVisible) {
+                root.hideMenus("audio");
+            }
         }
 
         function hide(): void {
