@@ -1,3 +1,4 @@
+import Quickshell
 import Quickshell.Services.UPower
 import QtQuick
 import QtQuick.Layouts
@@ -6,6 +7,8 @@ import QtQuick.Controls
 Button {
     id: battery
     Layout.fillHeight: true
+
+    required property bool idleInhibitorVisible
 
     function getColor(state) {
         switch (state) {
@@ -52,6 +55,16 @@ Button {
                 verticalAlignment: Text.AlignVCenter
                 anchors.verticalCenter: parent.verticalCenter
 
+                Text {
+                    text: ""
+                    font.family: "Font Awesome 7 Free Solid"
+                    font.pixelSize: 8
+                    color: "#f38ba8"
+                    x: 10
+                    y: -2
+                    visible: battery.idleInhibitorVisible
+                }
+
                 function getIcon(state, battery) {
                     if (state == UPowerDeviceState.Charging) {
                         return "\ue1a3";
@@ -62,7 +75,6 @@ Button {
                     } else if (state == UPowerDeviceState.Unknown) {
                         return "\ue1a6";
                     } else {
-                        battery = 90;
                         const icons = {
                             90: "\ue1a4",
                             75: "\uebd2",
@@ -112,7 +124,7 @@ Button {
         hoverEnabled: true
 
         onClicked: {
-            print("Clicked");
+            Quickshell.execDetached(["qs", "ipc", "call", "battery", "toggle"]);
         }
     }
 }

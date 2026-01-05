@@ -13,6 +13,7 @@ Scope {
 
     property bool powerVisible: false
     property bool trayVisible: false
+    property bool batteryVisible: true
     property bool bluetoothVisible: false
     property bool audioVisible: false
     property int audioMenu: 0
@@ -22,9 +23,12 @@ Scope {
     property bool wallpapersVisible: false
     property bool clipboardVisible: false
 
+    property bool idleInhibitorVisible: false
+
     // Bar
     Bar {
         visible: root.barVisible
+        idleInhibitorVisible: root.idleInhibitorVisible
     }
 
     // Bar Menus
@@ -36,6 +40,10 @@ Scope {
     }
     Bluetooth {
         visible: root.bluetoothVisible
+    }
+    Battery {
+        visible: root.batteryVisible
+        idleInhibitorVisible: root.idleInhibitorVisible
     }
     Audio {
         visible: root.audioVisible
@@ -54,6 +62,11 @@ Scope {
     }
     Clipboard {
         visible: root.clipboardVisible
+    }
+
+    // IdleInhibitor
+    IdleInhibitor {
+        visible: root.idleInhibitorVisible
     }
 
     IpcHandler {
@@ -99,7 +112,17 @@ Scope {
             root.bluetoothVisible = false;
         }
     }
+    IpcHandler {
+        target: "battery"
 
+        function toggle(): void {
+            root.batteryVisible = !root.batteryVisible;
+        }
+
+        function hide(): void {
+            root.batteryVisible = false;
+        }
+    }
     IpcHandler {
         target: "audio"
 
@@ -173,6 +196,14 @@ Scope {
 
         function hide(): void {
             root.clipboardVisible = false;
+        }
+    }
+
+    IpcHandler {
+        target: "idleInhibitor"
+
+        function toggle(): void {
+            root.idleInhibitorVisible = !root.idleInhibitorVisible;
         }
     }
 }

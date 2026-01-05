@@ -10,6 +10,8 @@ PanelWindow { // qmllint disable uncreatable-type
     exclusionMode: ExclusionMode.Auto
     implicitHeight: 36
 
+    required property bool idleInhibitorVisible
+
     // qmllint disable unresolved-type unqualified missing-property
     margins {
         top: 10
@@ -50,7 +52,9 @@ PanelWindow { // qmllint disable uncreatable-type
         anchors.right: parent.right
         spacing: 10
 
-        SystemInfos {}
+        SystemInfos {
+            idleInhibitorVisible: bar.idleInhibitorVisible
+        }
         SystemPanel {}
     }
 }

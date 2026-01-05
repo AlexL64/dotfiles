@@ -9,6 +9,8 @@ Rectangle {
     color: "#313244"
     implicitWidth: content.width
 
+    required property bool idleInhibitorVisible
+
     RowLayout {
         id: content
         height: parent.height
@@ -50,6 +52,8 @@ Rectangle {
             radius: 2
         }
 
-        Battery {}
+        Battery {
+            idleInhibitorVisible: systemPanel.idleInhibitorVisible
+        }
     }
 }
