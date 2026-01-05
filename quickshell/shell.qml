@@ -13,7 +13,7 @@ Scope {
 
     property bool powerVisible: false
     property bool trayVisible: false
-    property bool batteryVisible: true
+    property bool batteryVisible: false
     property bool bluetoothVisible: false
     property bool audioVisible: false
     property int audioMenu: 0
