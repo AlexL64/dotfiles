@@ -1,6 +1,5 @@
 pragma ComponentBehavior: Bound
 import Quickshell
-import Quickshell.Io
 import Quickshell.Services.UPower
 import QtQuick
 import QtQuick.Layouts
@@ -14,6 +13,7 @@ PanelWindow { //qmllint disable uncreatable-type
     exclusionMode: ExclusionMode.Auto
     implicitWidth: content.width + 24
     implicitHeight: content.height + 24
+
 
     // qmllint disable unresolved-type unqualified missing-property
     margins {
