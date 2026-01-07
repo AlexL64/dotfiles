@@ -113,6 +113,8 @@ PanelWindow { //qmllint disable uncreatable-type
                             }
                         }
                     } else if (event.key == Qt.Key_Return) {
+                        apps.pageElements[apps.selected].execute();
+
                         // Update the app launch count
                         const index = jsonAdapter.launchCount.findIndex(a => a.id === apps.pageElements[apps.selected].id); // qmllint disable unqualified
                         if (index != -1) {
@@ -125,7 +127,6 @@ PanelWindow { //qmllint disable uncreatable-type
                             });
                         }
 
-                        apps.pageElements[apps.selected].execute();
                         Quickshell.execDetached(["qs", "ipc", "call", "applicationLauncher", "hide"]);
                     }
                 }
@@ -248,6 +249,8 @@ PanelWindow { //qmllint disable uncreatable-type
                             }
 
                             onDoubleClicked: {
+                                delegateItem.modelData.execute();
+
                                 // Update the app launch count
                                 const index = jsonAdapter.launchCount.findIndex(a => a.id === apps.pageElements[apps.selected].id);
                                 if (index != -1) {
@@ -260,7 +263,6 @@ PanelWindow { //qmllint disable uncreatable-type
                                 }
 
                                 Quickshell.execDetached(["qs", "ipc", "call", "applicationLauncher", "hide"]);
-                                delegateItem.modelData.execute();
                             }
                         }
 
