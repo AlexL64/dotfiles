@@ -53,7 +53,7 @@ ColumnLayout {
 
                         Text {
                             id: titleText
-                            text: delegateItem.modelData.name
+                            text: delegateItem.modelData.description
                             font.family: "JetBrainsMono Nerd Font"
                             font.pixelSize: 14
                             color: "#cba6f7"
