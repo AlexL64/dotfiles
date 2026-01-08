@@ -4,9 +4,11 @@ import Quickshell.Io
 import Quickshell.Widgets
 import QtQuick
 import QtQuick.Layouts
+import qs.Services
 
 PanelWindow { //qmllint disable uncreatable-type
     id: wallpapers
+    visible: PanelStateService.wallpapersVisible
     aboveWindows: true
     color: "transparent"
     exclusionMode: ExclusionMode.Ignore

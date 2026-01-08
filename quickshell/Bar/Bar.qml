@@ -2,15 +2,15 @@ import Quickshell
 import QtQuick
 import QtQuick.Layouts
 import qs.Bar.Modules
+import qs.Services
 
 PanelWindow { // qmllint disable uncreatable-type
     id: bar
+    visible: PanelStateService.barVisible
     aboveWindows: true
     color: "transparent"
     exclusionMode: ExclusionMode.Auto
     implicitHeight: 36
-
-    required property bool idleInhibitorVisible
 
     // qmllint disable unresolved-type unqualified missing-property
     margins {
@@ -52,9 +52,7 @@ PanelWindow { // qmllint disable uncreatable-type
         anchors.right: parent.right
         spacing: 10
 
-        SystemInfos {
-            idleInhibitorVisible: bar.idleInhibitorVisible
-        }
+        SystemInfos {}
         SystemPanel {}
     }
 }

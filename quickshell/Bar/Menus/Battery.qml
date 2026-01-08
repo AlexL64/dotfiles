@@ -8,12 +8,12 @@ import qs.Services
 
 PanelWindow { //qmllint disable uncreatable-type
     id: battery
+    visible: PanelStateService.batteryVisible
     aboveWindows: true
     color: "transparent"
     exclusionMode: ExclusionMode.Auto
     implicitWidth: content.width + 24
     implicitHeight: content.height + 24
-
 
     // qmllint disable unresolved-type unqualified missing-property
     margins {
@@ -26,8 +26,6 @@ PanelWindow { //qmllint disable uncreatable-type
         top: true
         right: true
     }
-
-    required property bool idleInhibitorVisible
 
     Rectangle {
         color: "#1e1e2e"
@@ -62,7 +60,7 @@ PanelWindow { //qmllint disable uncreatable-type
                             implicitWidth: 56
 
                             contentItem: Text {
-                                text: battery.idleInhibitorVisible ? "\ueb76" : "\uef44"
+                                text: PanelStateService.idleInhibitorVisible ? "\ueb76" : "\uef44"
                                 color: "#cdd6f4"
                                 font.family: "Material Icons"
                                 font.bold: true
@@ -72,7 +70,7 @@ PanelWindow { //qmllint disable uncreatable-type
                             }
 
                             background: Rectangle {
-                                color: getColor(battery.idleInhibitorVisible, idleInhibitorButtonMouseArea.containsMouse)
+                                color: getColor(PanelStateService.idleInhibitorVisible, idleInhibitorButtonMouseArea.containsMouse)
                                 radius: 6
                                 border.width: 1
                                 border.color: "#cba6f7"

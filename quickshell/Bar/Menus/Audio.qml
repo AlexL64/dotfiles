@@ -4,9 +4,11 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 import qs.Bar.Menus.Audio
+import qs.Services
 
 PanelWindow { //qmllint disable uncreatable-type
     id: audio
+    visible: PanelStateService.audioVisible
     aboveWindows: true
     color: "transparent"
     exclusionMode: ExclusionMode.Auto
@@ -24,8 +26,6 @@ PanelWindow { //qmllint disable uncreatable-type
         top: true
         left: true
     }
-
-    required property int selected
 
     Component {
         id: sinks
@@ -71,7 +71,7 @@ PanelWindow { //qmllint disable uncreatable-type
                     implicitWidth: 120
                     contentItem: Text {
                         text: "Output"
-                        color: audio.selected == 0 ? "#cba6f7" : "#cdd6f4"
+                        color: PanelStateService.audioMenu == 0 ? "#cba6f7" : "#cdd6f4"
                         font.pixelSize: 14
                         font.family: "JetBrainsMono Nerd Font"
                         font.bold: true
@@ -80,7 +80,7 @@ PanelWindow { //qmllint disable uncreatable-type
                     }
 
                     background: Rectangle {
-                        color: getColor(sinksButtonMouseArea.containsMouse, audio.selected == 0)
+                        color: getColor(sinksButtonMouseArea.containsMouse, PanelStateService.audioMenu == 0)
                         topLeftRadius: 12
 
                         function getColor(containsMouse, selected) {
@@ -109,7 +109,7 @@ PanelWindow { //qmllint disable uncreatable-type
                     implicitWidth: 120
                     contentItem: Text {
                         text: "Input"
-                        color: audio.selected == 1 ? "#cba6f7" : "#cdd6f4"
+                        color: PanelStateService.audioMenu == 1 ? "#cba6f7" : "#cdd6f4"
                         font.pixelSize: 14
                         font.family: "JetBrainsMono Nerd Font"
                         font.bold: true
@@ -118,7 +118,7 @@ PanelWindow { //qmllint disable uncreatable-type
                     }
 
                     background: Rectangle {
-                        color: getColor(sourcesButtonMouseArea.containsMouse, audio.selected == 1)
+                        color: getColor(sourcesButtonMouseArea.containsMouse, PanelStateService.audioMenu == 1)
 
                         function getColor(containsMouse, selected) {
                             if (containsMouse || selected) {
@@ -146,7 +146,7 @@ PanelWindow { //qmllint disable uncreatable-type
                     implicitWidth: 120
                     contentItem: Text {
                         text: "Apps"
-                        color: audio.selected == 2 ? "#cba6f7" : "#cdd6f4"
+                        color: PanelStateService.audioMenu == 2 ? "#cba6f7" : "#cdd6f4"
                         font.pixelSize: 14
                         font.family: "JetBrainsMono Nerd Font"
                         font.bold: true
@@ -155,7 +155,7 @@ PanelWindow { //qmllint disable uncreatable-type
                     }
 
                     background: Rectangle {
-                        color: getColor(appsButtonMouseArea.containsMouse, audio.selected == 2)
+                        color: getColor(appsButtonMouseArea.containsMouse, PanelStateService.audioMenu == 2)
 
                         function getColor(containsMouse, selected) {
                             if (containsMouse || selected) {
@@ -183,7 +183,7 @@ PanelWindow { //qmllint disable uncreatable-type
                     implicitWidth: 120
                     contentItem: Text {
                         text: "Devices"
-                        color: audio.selected == 3 ? "#cba6f7" : "#cdd6f4"
+                        color: PanelStateService.audioMenu == 3 ? "#cba6f7" : "#cdd6f4"
                         font.pixelSize: 14
                         font.family: "JetBrainsMono Nerd Font"
                         font.bold: true
@@ -192,7 +192,7 @@ PanelWindow { //qmllint disable uncreatable-type
                     }
 
                     background: Rectangle {
-                        color: getColor(devicesButtonMouseArea.containsMouse, audio.selected == 3)
+                        color: getColor(devicesButtonMouseArea.containsMouse, PanelStateService.audioMenu == 3)
                         topRightRadius: 12
 
                         function getColor(containsMouse, selected) {
@@ -226,7 +226,7 @@ PanelWindow { //qmllint disable uncreatable-type
                     width: parent.width
 
                     sourceComponent: {
-                        switch (audio.selected) {
+                        switch (PanelStateService.audioMenu) {
                         case 0:
                             return sinks;
                         case 1:

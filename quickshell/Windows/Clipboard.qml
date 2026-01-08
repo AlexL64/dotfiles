@@ -7,6 +7,7 @@ import qs.Services
 
 PanelWindow { //qmllint disable uncreatable-type
     id: clipboard
+    visible: PanelStateService.clipboardVisible
     aboveWindows: true
     color: "transparent"
     exclusionMode: ExclusionMode.Ignore

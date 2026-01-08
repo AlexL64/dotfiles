@@ -5,9 +5,11 @@ import Quickshell.Bluetooth
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import qs.Services
 
 PanelWindow { //qmllint disable uncreatable-type
     id: bluetooth
+    visible: PanelStateService.bluetoothVisible
     aboveWindows: true
     color: "transparent"
     exclusionMode: ExclusionMode.Auto

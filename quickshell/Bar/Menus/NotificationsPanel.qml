@@ -9,7 +9,8 @@ import QtQuick.Controls
 import qs.Services
 
 PanelWindow { //qmllint disable uncreatable-type
-    id: tray
+    id: notificationsPanel
+    visible: PanelStateService.notificationsPanelVisible
     aboveWindows: true
     color: "transparent"
     exclusionMode: ExclusionMode.Normal

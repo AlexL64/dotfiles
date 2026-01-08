@@ -5,9 +5,11 @@ import Quickshell.Services.SystemTray
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import qs.Services
 
 PanelWindow { //qmllint disable uncreatable-type
     id: tray
+    visible: PanelStateService.trayVisible
     aboveWindows: true
     color: "transparent"
     exclusionMode: ExclusionMode.Auto

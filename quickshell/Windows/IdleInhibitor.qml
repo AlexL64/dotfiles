@@ -1,10 +1,11 @@
 import Quickshell
 import Quickshell.Wayland
 import QtQuick
+import qs.Services
 
 PanelWindow { // qmllint disable uncreatable-type
     id: idleInhibitor
-
+    visible: PanelStateService.idleInhibitorVisible
     exclusionMode: ExclusionMode.Ignore
     focusable: false
     implicitHeight: 0

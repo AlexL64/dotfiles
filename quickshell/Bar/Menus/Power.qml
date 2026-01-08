@@ -3,9 +3,11 @@ import Quickshell
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import qs.Services
 
 PanelWindow { //qmllint disable uncreatable-type
     id: power
+    visible: PanelStateService.powerVisible
     aboveWindows: true
     color: "transparent"
     exclusionMode: ExclusionMode.Auto

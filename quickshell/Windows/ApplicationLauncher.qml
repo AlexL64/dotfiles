@@ -5,9 +5,11 @@ import Quickshell.Io
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import qs.Services
 
 PanelWindow { //qmllint disable uncreatable-type
     id: applicationLauncher
+    visible: PanelStateService.applicationLauncherVisible
     aboveWindows: true
     color: "transparent"
     exclusionMode: ExclusionMode.Ignore

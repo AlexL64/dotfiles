@@ -2,9 +2,11 @@ pragma ComponentBehavior: Bound
 import Quickshell
 import QtQuick
 import QtQuick.Layouts
+import qs.Services
 
 PanelWindow { //qmllint disable uncreatable-type
     id: powerSelector
+    visible: PanelStateService.powerSelectorVisible
     aboveWindows: true
     color: "transparent"
     exclusionMode: ExclusionMode.Ignore

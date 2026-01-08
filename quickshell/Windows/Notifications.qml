@@ -10,6 +10,7 @@ import qs.Services
 
 PanelWindow { //qmllint disable uncreatable-type
     id: notifications
+    visible: !PanelStateService.notificationsPanelVisible
     aboveWindows: true
     color: "transparent"
     exclusionMode: ExclusionMode.Ignore

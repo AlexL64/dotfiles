@@ -3,12 +3,11 @@ import Quickshell.Services.UPower
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import qs.Services
 
 Button {
     id: battery
     Layout.fillHeight: true
-
-    required property bool idleInhibitorVisible
 
     function getColor(state) {
         switch (state) {
@@ -62,7 +61,7 @@ Button {
                     color: "#f38ba8"
                     x: 10
                     y: -2
-                    visible: battery.idleInhibitorVisible
+                    visible: PanelStateService.idleInhibitorVisible
                 }
 
                 function getIcon(state, battery) {
