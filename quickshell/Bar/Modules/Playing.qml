@@ -27,6 +27,12 @@ Rectangle {
         return null;
     }
 
+    Behavior on implicitWidth {
+        NumberAnimation {
+            duration: 50
+        }
+    }
+
     Loader {
         id: content
         active: playing.player != null && playing.player.canControl && playing.player.trackTitle != ""
