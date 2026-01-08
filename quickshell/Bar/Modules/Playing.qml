@@ -87,7 +87,7 @@ Rectangle {
                 leftPadding: 12
                 rightPadding: 12
 
-                contentItem: Row {
+                contentItem: RowLayout {
                     height: 36
                     spacing: 10
 
@@ -95,7 +95,7 @@ Rectangle {
                         Flickable {
                             id: titleScroll
                             Layout.minimumWidth: Math.min(Math.max(titleText.width, 100), 200)
-                            Layout.topMargin: -3
+                            Layout.topMargin: playing.player.trackArtist != "" ? -3 : 0
                             implicitHeight: titleText.height
                             contentWidth: titleText.width
                             flickableDirection: Flickable.HorizontalFlick
@@ -110,11 +110,12 @@ Rectangle {
                                 font.pixelSize: 12
                                 color: "#cdd6f4"
                                 font.bold: true
+                                anchors.verticalCenter: parent.verticalCenter
                             }
 
                             Timer {
                                 id: titleScrollTimer
-                                interval: 25
+                                interval: 10
                                 running: (titleScroll.contentX <= titleScroll.contentWidth - titleScroll.width && titleScroll.direction) || (titleScroll.contentX > 0 && !titleScroll.direction)
                                 repeat: true
                                 onTriggered: {
@@ -139,6 +140,7 @@ Rectangle {
                             contentWidth: artistText.width
                             flickableDirection: Flickable.HorizontalFlick
                             clip: true
+                            visible: artistText.text != ""
 
                             property bool direction: false
 
@@ -154,7 +156,7 @@ Rectangle {
 
                             Timer {
                                 id: artistScrollTimer
-                                interval: 25
+                                interval: 10
                                 running: (artistScroll.contentX <= artistScroll.contentWidth - artistScroll.width && artistScroll.direction) || (artistScroll.contentX > 0 && !artistScroll.direction)
                                 repeat: true
                                 onTriggered: {
@@ -172,10 +174,10 @@ Rectangle {
                         }
                     }
 
-                    Row {
+                    RowLayout {
                         id: time
-                        anchors.verticalCenter: parent.verticalCenter
                         spacing: 3
+                        Layout.alignment: Qt.AlignHCenter
 
                         function formatTime(seconds) {
                             seconds = Math.trunc(seconds);
@@ -197,13 +199,13 @@ Rectangle {
 
                             return timeParts.join(':');
                         }
+
                         Text {
                             text: time.formatTime(playing.player.position)
                             font.family: "JetBrainsMono Nerd Font"
                             font.pixelSize: 12
                             color: "#cdd6f4"
                             font.bold: true
-                            Layout.topMargin: -3
 
                             Timer {
                                 running: playing.player.playbackState == MprisPlaybackState.Playing
@@ -219,7 +221,6 @@ Rectangle {
                             font.pixelSize: 12
                             color: "#cdd6f4"
                             font.bold: true
-                            Layout.topMargin: -3
                         }
 
                         Text {
@@ -228,7 +229,6 @@ Rectangle {
                             font.pixelSize: 12
                             color: "#cdd6f4"
                             font.bold: true
-                            Layout.topMargin: -3
                         }
                     }
                 }
