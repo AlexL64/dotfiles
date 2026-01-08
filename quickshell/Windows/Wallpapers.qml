@@ -2,6 +2,7 @@ pragma ComponentBehavior: Bound
 import Quickshell
 import Quickshell.Io
 import Quickshell.Widgets
+import Quickshell.Wayland
 import QtQuick
 import QtQuick.Layouts
 import qs.Services
@@ -13,13 +14,9 @@ PanelWindow { //qmllint disable uncreatable-type
     color: "transparent"
     exclusionMode: ExclusionMode.Ignore
     focusable: true
-
-    anchors {
-        top: true
-        bottom: true
-        left: true
-        right: true
-    }
+    implicitHeight: content.height + 20
+    implicitWidth: content.width + 20
+    WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive
 
     onVisibleChanged: {
         if (visible) {

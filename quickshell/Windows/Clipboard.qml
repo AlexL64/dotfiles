@@ -1,5 +1,6 @@
 pragma ComponentBehavior: Bound
 import Quickshell
+import Quickshell.Wayland
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
@@ -12,13 +13,9 @@ PanelWindow { //qmllint disable uncreatable-type
     color: "transparent"
     exclusionMode: ExclusionMode.Ignore
     focusable: true
-
-    anchors {
-        top: true
-        bottom: true
-        left: true
-        right: true
-    }
+    implicitHeight: content.height
+    implicitWidth: 700
+    WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive
 
     onVisibleChanged: {
         search.text = "";
@@ -49,7 +46,7 @@ PanelWindow { //qmllint disable uncreatable-type
         border.width: 2
         color: "#1e1e2e"
         height: content.height
-        width: 700
+        width: parent.width
         radius: 12
         anchors.centerIn: parent
 
