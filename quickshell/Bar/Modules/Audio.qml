@@ -1,4 +1,5 @@
 import Quickshell
+import Quickshell.Bluetooth
 import Quickshell.Services.Pipewire
 import QtQuick
 import QtQuick.Layouts
@@ -82,7 +83,13 @@ Rectangle {
                             const volume = Math.round(sink.audio.volume * 100);
                             const icon = [65, 33, 1, 0].find(threshold => threshold <= volume);
 
-                            return icons[icon];
+                            const isBluetooth = Bluetooth.devices.values.some(d => d.deviceName == sink.description); // qmllint disable unresolved-type
+
+                            if (isBluetooth) {
+                                return `${icons[icon]} `;
+                            } else {
+                                return icons[icon];
+                            }
                         }
                     }
                 }
