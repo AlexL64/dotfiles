@@ -203,6 +203,7 @@ PanelWindow { //qmllint disable uncreatable-type
                             RowLayout {
                                 spacing: 10
                                 uniformCellSizes: true
+                                visible: delegateItem.modelData.actions.filter(action => action.identifier != "default").length > 0 // qmllint disable unresolved-type
 
                                 Repeater {
                                     model: delegateItem.modelData.actions.filter(action => action.identifier != "default") // qmllint disable unresolved-type
