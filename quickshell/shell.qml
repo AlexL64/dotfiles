@@ -15,6 +15,7 @@ Scope {
     property bool trayVisible: false
     property bool batteryVisible: false
     property bool bluetoothVisible: false
+    property bool notificationsPanelVisible: true
     property bool audioVisible: false
     property int audioMenu: 0
 
@@ -40,6 +41,10 @@ Scope {
 
         if (exception != "bluetooth") {
             root.bluetoothVisible = false;
+        }
+
+        if (exception != "notificationsPanel") {
+            root.notificationsPanelVisible = false;
         }
 
         if (exception != "audio") {
@@ -81,6 +86,9 @@ Scope {
     Bluetooth {
         visible: root.bluetoothVisible
     }
+    NotificationsPanel {
+        visible: root.notificationsPanelVisible
+    }
     Battery {
         visible: root.batteryVisible
         idleInhibitorVisible: root.idleInhibitorVisible
@@ -103,6 +111,7 @@ Scope {
     Clipboard {
         visible: root.clipboardVisible
     }
+    Notifications {}
 
     // IdleInhibitor
     IdleInhibitor {
@@ -164,6 +173,23 @@ Scope {
             root.bluetoothVisible = false;
         }
     }
+
+    IpcHandler {
+        target: "notificationsPanel"
+
+        function toggle(): void {
+            root.notificationsPanelVisible = !root.notificationsPanelVisible;
+
+            if (root.notificationsPanelVisible) {
+                root.hideMenus("notificationsPanel");
+            }
+        }
+
+        function hide(): void {
+            root.notificationsPanelVisible = false;
+        }
+    }
+
     IpcHandler {
         target: "battery"
 
