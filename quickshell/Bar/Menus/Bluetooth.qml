@@ -328,6 +328,13 @@ PanelWindow { //qmllint disable uncreatable-type
                             Loader {
                                 active: Bluetooth.defaultAdapter.state == BluetoothAdapterState.Enabled // qmllint disable unresolved-type
                                 width: active ? 96 : 0
+
+                                Behavior on width {
+                                    NumberAnimation {
+                                        duration: 50
+                                    }
+                                }
+
                                 sourceComponent: Button {
                                     height: 32
                                     width: 96
