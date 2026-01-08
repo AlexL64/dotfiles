@@ -114,7 +114,7 @@ Rectangle {
                                 text: playing.player.trackTitle
                                 font.family: "JetBrainsMono Nerd Font"
                                 font.pixelSize: 12
-                                color: "#cdd6f4"
+                                color: playing.player.trackArtist != "" ? "#cdd6f4" : "#cba6f7"
                                 font.bold: true
                                 anchors.verticalCenter: parent.verticalCenter
                             }
