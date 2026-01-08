@@ -28,6 +28,12 @@ Rectangle {
 
             property string color: getColor(Pipewire.defaultAudioSink)
 
+            Behavior on implicitWidth {
+                NumberAnimation {
+                    duration: 50
+                }
+            }
+
             function getColor(sink) {
                 if (sink == null || sink.description == "Dummy Output" || sink.audio.muted || isNaN(sink.audio.volume)) {
                     return "#f38ba8";
@@ -151,6 +157,12 @@ Rectangle {
                     return "#f38ba8";
                 } else {
                     return "#89dceb";
+                }
+            }
+
+            Behavior on implicitWidth {
+                NumberAnimation {
+                    duration: 50
                 }
             }
 
