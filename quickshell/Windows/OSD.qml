@@ -73,20 +73,24 @@ PanelWindow { // qmllint disable uncreatable-type
     }
 
     onValueChanged: {
-        if (osdTimer.running) {
-            osdTimer.restart();
-        } else {
-            osd.visible = true;
-            osdTimer.start();
+        if (elapsedTimer.elapsed() > 0.1) {
+            if (osdTimer.running) {
+                osdTimer.restart();
+            } else {
+                osd.visible = true;
+                osdTimer.start();
+            }
         }
     }
 
     onIconChanged: {
-        if (osdTimer.running) {
-            osdTimer.restart();
-        } else {
-            osd.visible = true;
-            osdTimer.start();
+        if (elapsedTimer.elapsed() > 0.1) {
+            if (osdTimer.running) {
+                osdTimer.restart();
+            } else {
+                osd.visible = true;
+                osdTimer.start();
+            }
         }
     }
 
@@ -154,6 +158,10 @@ PanelWindow { // qmllint disable uncreatable-type
         running: false
         repeat: false
         onTriggered: osd.visible = false
+    }
+
+    ElapsedTimer {
+        id: elapsedTimer
     }
 
     Rectangle {
