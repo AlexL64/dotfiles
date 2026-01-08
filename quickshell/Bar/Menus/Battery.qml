@@ -433,7 +433,7 @@ PanelWindow { //qmllint disable uncreatable-type
             }
 
             Repeater {
-                model: UPower.devices.values.filter(d => d.state != UPowerDeviceState.Unknown && !d.isLaptopBattery)
+                model: UPower.devices.values.filter(d => d.isPresent && !d.isLaptopBattery)
                 delegate: Rectangle {
                     id: delegateItem
 
