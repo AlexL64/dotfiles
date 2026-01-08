@@ -73,7 +73,7 @@ PanelWindow { // qmllint disable uncreatable-type
     }
 
     onValueChanged: {
-        if (elapsedTimer.elapsed() > 0.1) {
+        if (elapsedTimer.elapsed() > 1) {
             if (osdTimer.running) {
                 osdTimer.restart();
             } else {
@@ -84,7 +84,7 @@ PanelWindow { // qmllint disable uncreatable-type
     }
 
     onIconChanged: {
-        if (elapsedTimer.elapsed() > 0.1) {
+        if (elapsedTimer.elapsed() > 1) {
             if (osdTimer.running) {
                 osdTimer.restart();
             } else {
