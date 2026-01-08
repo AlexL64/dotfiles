@@ -46,4 +46,5 @@ Scope {
     // Others
     IdleInhibitor {}
     Notifications {}
+    OSD {}
 }
