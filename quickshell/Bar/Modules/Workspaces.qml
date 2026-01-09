@@ -34,39 +34,28 @@ Rectangle {
                     font.family: "JetBrainsMono Nerd Font"
                     font.pixelSize: 14
                     font.bold: true
-                    color: textColor(delegateItem.modelData, Hyprland.workspaces, Hyprland.focusedWorkspace)
+                    color: textColor(delegateItem.modelData, Hyprland.workspaces)
 
-                    function textColor(id, workspaces, focusedWorkspace) {
+                    function textColor(id, workspaces) {
                         const workspace = workspaces.values.find(item => item.id == id);
-                        const isFocused = focusedWorkspace && focusedWorkspace.id == id;
                         const isUrgent = workspace && workspace.urgent;
-                        const hasClients = focusedWorkspace && focusedWorkspace.toplevels.values.length > 0;
-
-                        if (isFocused) {
-                            return hasClients ? "#313244" : "#cdd6f4";
-                        }
+                        const hasClients = workspace && workspace.toplevels.values.length > 0;
 
                         if (isUrgent) {
                             return "#313244";
                         }
 
-                        return workspace ? "#cba6f7" : "#cdd6f4";
+                        return hasClients ? "#cba6f7" : "#cdd6f4";
                     }
                 }
 
                 background: Rectangle {
-                    property var workspacesTest: Hyprland.workspaces
                     radius: 12
-                    color: backgroundColor(delegateItem.modelData, Hyprland.workspaces, Hyprland.focusedWorkspace, mouseArea.containsMouse)
+                    color: backgroundColor(delegateItem.modelData, Hyprland.workspaces, mouseArea.containsMouse)
 
-                    function backgroundColor(id, workspaces, focusedWorkspace, containsMouse) {
+                    function backgroundColor(id, workspaces, containsMouse) {
                         const workspace = workspaces.values.find(item => item.id == id);
-                        const isFocused = focusedWorkspace && focusedWorkspace.id == id;
                         const isUrgent = workspace && workspace.urgent;
-
-                        if (isFocused) {
-                            return containsMouse ? "#cccba6f7" : "#cba6f7";
-                        }
 
                         if (isUrgent) {
                             return containsMouse ? "#ccf38ba8" : "#f38ba8";
@@ -91,6 +80,61 @@ Rectangle {
                     }
                 }
             }
+        }
+    }
+
+    Button {
+        implicitHeight: 36
+        implicitWidth: 36
+        x: getX(Hyprland.focusedWorkspace.id, workspaces.startNumber)
+        visible: getVisible(Hyprland.focusedWorkspace.id, workspaces.startNumber)
+
+        function getX(id, startNumber) {
+            const position = id - startNumber;
+
+            if (position < 0) {
+                return 0;
+            } else {
+                var x = position * 36;
+
+                if (x > 288) {
+                    return 288;
+                } else {
+                    return x;
+                }
+            }
+        }
+
+        function getVisible(id, startNumber) {
+            const position = id - startNumber;
+
+            if (position < 0 || id > workspaces.startNumber + 8) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        Behavior on x {
+            NumberAnimation {
+                duration: 100
+                easing.type: Easing.InOutQuad
+            }
+        }
+
+        contentItem: Text {
+            text: Hyprland.focusedWorkspace.id
+            color: Hyprland.focusedWorkspace.toplevels.values.length > 0 ? "#313244" : "#cdd6f4"
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            font.family: "JetBrainsMono Nerd Font"
+            font.pixelSize: 14
+            font.bold: true
+        }
+
+        background: Rectangle {
+            radius: 12
+            color: "#cba6f7"
         }
     }
 }
