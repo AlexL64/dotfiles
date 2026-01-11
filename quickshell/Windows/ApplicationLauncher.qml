@@ -226,7 +226,7 @@ PanelWindow { //qmllint disable uncreatable-type
                         id: delegateItem
 
                         required property int index
-                        required property var modelData
+                        required property DesktopEntry modelData
 
                         border.color: "#f38ba8"
                         border.width: (index == apps.selected) ? 2 : 0
@@ -273,7 +273,7 @@ PanelWindow { //qmllint disable uncreatable-type
                             RowLayout {
                                 anchors.fill: parent
                                 IconImage {
-                                    source: Quickshell.iconPath(delegateItem.modelData.name.toLowerCase(), delegateItem.modelData.icon)
+                                    source: Quickshell.iconPath(delegateItem.modelData.icon, "image-missing")
                                     implicitSize: 54
                                     Layout.rightMargin: 10
                                 }
