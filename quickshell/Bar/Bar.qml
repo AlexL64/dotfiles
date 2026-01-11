@@ -1,4 +1,5 @@
 import Quickshell
+import Quickshell.Wayland
 import QtQuick
 import QtQuick.Layouts
 import qs.Bar.Modules
@@ -11,6 +12,7 @@ PanelWindow { // qmllint disable uncreatable-type
     color: "transparent"
     exclusionMode: ExclusionMode.Auto
     implicitHeight: 36
+    WlrLayershell.namespace: "bar"
 
     // qmllint disable unresolved-type unqualified missing-property
     margins {
