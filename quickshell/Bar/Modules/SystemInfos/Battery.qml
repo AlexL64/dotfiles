@@ -35,7 +35,7 @@ Button {
             rightPadding: 4
 
             Text {
-                text: `${UPower.displayDevice.percentage * 100}%`
+                text: `${Math.round(UPower.displayDevice.percentage * 100)}%`
                 font.family: "JetBrainsMono Nerd Font"
                 font.pixelSize: 14
                 color: battery.getColor(UPower.displayDevice.state)
