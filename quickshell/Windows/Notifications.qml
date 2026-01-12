@@ -101,32 +101,38 @@ PanelWindow { //qmllint disable uncreatable-type
                                 spacing: 10
 
                                 IconImage {
-                                    source: getIcon(delegateItem.modelData.appIcon, delegateItem.modelData.image)
+                                    source: getIcon(delegateItem.modelData.appIcon, delegateItem.modelData.image, delegateItem.modelData.appName.toLocaleLowerCase())
                                     implicitSize: 64
 
-                                    function getIcon(appIcon, image) {
+                                    function getIcon(appIcon, image, appName) {
                                         if (image != "") {
                                             return image;
-                                        } else if (appIcon != "") {
-                                            return Quickshell.iconPath(appIcon, "bell");
+                                        } else if (appIcon != "" && Quickshell.iconPath(appIcon, true)) {
+                                            return Quickshell.iconPath(appIcon);
+                                        } else if (Quickshell.iconPath(appName, true)) {
+                                            return Quickshell.iconPath(appName);
                                         } else {
                                             return Quickshell.iconPath("bell");
                                         }
                                     }
 
                                     IconImage {
-                                        source: getIcon(delegateItem.modelData.appIcon, delegateItem.modelData.image)
+                                        source: getIcon(delegateItem.modelData.appIcon, delegateItem.modelData.image, delegateItem.modelData.appName.toLocaleLowerCase())
                                         implicitSize: 24
                                         anchors.right: parent.right
                                         anchors.bottom: parent.bottom
                                         anchors.rightMargin: -5
 
-                                        function getIcon(appIcon, image) {
-                                            if (image != "" && appIcon != "") {
-                                                return Quickshell.iconPath(appIcon, "bell");
-                                            } else {
-                                                return "";
+                                        function getIcon(appIcon, image, appName) {
+                                            if (image != "") {
+                                                if (appIcon != "" && Quickshell.iconPath(appIcon, true)) {
+                                                    return Quickshell.iconPath(appIcon);
+                                                } else if (Quickshell.iconPath(appName, true)) {
+                                                    return Quickshell.iconPath(appName);
+                                                }
                                             }
+
+                                            return "";
                                         }
                                     }
                                 }
