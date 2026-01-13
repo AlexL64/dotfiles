@@ -152,6 +152,18 @@ PanelWindow { //qmllint disable uncreatable-type
                     easing.type: Easing.InOutQuad
                 }
             }
+
+            Behavior on color {
+                ColorAnimation {
+                    duration: 50
+                }
+            }
+
+            Behavior on border.color {
+                ColorAnimation {
+                    duration: 50
+                }
+            }
         }
     }
 }
