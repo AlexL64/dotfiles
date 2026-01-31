@@ -14,6 +14,7 @@ PanelWindow { // qmllint disable uncreatable-type
     implicitHeight: content.height + 12
     implicitWidth: content.width + 12
     WlrLayershell.layer: WlrLayer.Overlay
+    WlrLayershell.namespace: "slideRight"
 
     anchors {
         right: true
