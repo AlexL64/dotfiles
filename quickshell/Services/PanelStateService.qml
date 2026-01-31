@@ -23,6 +23,7 @@ Singleton {
     property bool powerSelectorVisible: false
     property bool wallpapersVisible: false
     property bool clipboardVisible: false
+    property bool screenshotVisible: false
 
     // Other properties
     property bool idleInhibitorVisible: false
@@ -68,6 +69,10 @@ Singleton {
 
         if (exception != "clipboard") {
             root.clipboardVisible = false;
+        }
+
+        if (exception != "screenshot") {
+            root.screenshotVisible = false;
         }
     }
 
@@ -256,6 +261,22 @@ Singleton {
 
         function hide(): void {
             root.clipboardVisible = false;
+        }
+    }
+
+    IpcHandler {
+        target: "screenshot"
+
+        function toggle(): void {
+            root.screenshotVisible = !root.screenshotVisible;
+
+            if (root.screenshotVisible) {
+                root.hideWindows("screenshot");
+            }
+        }
+
+        function hide(): void {
+            root.screenshotVisible = false;
         }
     }
 

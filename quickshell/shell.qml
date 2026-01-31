@@ -42,6 +42,7 @@ Scope {
     PowerSelector {}
     Wallpapers {}
     Clipboard {}
+    Screenshot {}
 
     // Others
     IdleInhibitor {}
