@@ -78,7 +78,7 @@ PanelWindow { //qmllint disable uncreatable-type
 
                     Keys.onPressed: event => {
                         if (event.key == Qt.Key_Escape) {
-                            Quickshell.execDetached(["qs", "ipc", "call", "clipboard", "hide"]);
+                            PanelStateService.clipboardVisible = false;
                         } else if (event.key == Qt.Key_Up) {
                             if (clipboard.selected > 0) {
                                 clipboard.selected -= 1;
@@ -115,7 +115,7 @@ PanelWindow { //qmllint disable uncreatable-type
                             }
                         } else if (event.key == Qt.Key_Return) {
                             ClipboardService.setId(clipboard.pageElements[clipboard.selected].id);
-                            Quickshell.execDetached(["qs", "ipc", "call", "clipboard", "hide"]);
+                            PanelStateService.clipboardVisible = false;
                         }
                     }
 
@@ -159,7 +159,7 @@ PanelWindow { //qmllint disable uncreatable-type
 
                         onClicked: {
                             ClipboardService.clear();
-                            Quickshell.execDetached(["qs", "ipc", "call", "clipboard", "hide"]);
+                            PanelStateService.clipboardVisible = false;
                         }
                     }
                 }
@@ -218,7 +218,7 @@ PanelWindow { //qmllint disable uncreatable-type
 
                                 onDoubleClicked: {
                                     ClipboardService.setId(delegateItem.modelData.id);
-                                    Quickshell.execDetached(["qs", "ipc", "call", "clipboard", "hide"]);
+                                    PanelStateService.clipboardVisible = false;
                                 }
                             }
                         }

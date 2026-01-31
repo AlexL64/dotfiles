@@ -135,7 +135,7 @@ PanelWindow { //qmllint disable uncreatable-type
 
                         onClicked: {
                             Quickshell.execDetached(["bash", "-c", delegateItem.modelData.command]);
-                            Quickshell.execDetached(["qs", "ipc", "call", "power", "hide"]);
+                            PanelStateService.powerVisible = false;
                         }
                     }
                 }

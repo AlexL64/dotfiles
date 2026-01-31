@@ -98,7 +98,7 @@ PanelWindow { //qmllint disable uncreatable-type
 
                         onClicked: {
                             NotificationsService.dismissAll();
-                            Quickshell.execDetached(["qs", "ipc", "call", "notificationsPanel", "hide"]);
+                            PanelStateService.notificationsPanelVisible = false
                         }
                     }
                 }
@@ -152,7 +152,7 @@ PanelWindow { //qmllint disable uncreatable-type
                                             const index = ToplevelManager.toplevels.values.findIndex(item => item.appId == delegateItem.modelData.appName);
 
                                             if (index != -1) {
-                                                Quickshell.execDetached(["qs", "ipc", "call", "notificationsPanel", "hide"]);
+                                                PanelStateService.notificationsPanelVisible = false
                                                 ToplevelManager.toplevels.values[index].activate();
                                             }
                                         }
@@ -323,7 +323,7 @@ PanelWindow { //qmllint disable uncreatable-type
                                                         const index = ToplevelManager.toplevels.values.findIndex(item => item.appId == delegateItem.modelData.appName);
 
                                                         if (index != -1) {
-                                                            Quickshell.execDetached(["qs", "ipc", "call", "notificationsPanel", "hide"]);
+                                                            PanelStateService.notificationsPanelVisible = false
                                                             ToplevelManager.toplevels.values[index].activate();
                                                         }
                                                     }

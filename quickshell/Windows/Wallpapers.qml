@@ -109,7 +109,7 @@ PanelWindow { //qmllint disable uncreatable-type
 
         Keys.onPressed: event => {
             if (event.key == Qt.Key_Escape) {
-                Quickshell.execDetached(["qs", "ipc", "call", "wallpapers", "hide"]);
+                PanelStateService.wallpapersVisible = false;
             } else if (event.key == Qt.Key_Right) {
                 if (wallpapers.selected < wallpapers.list.length - 1) {
                     wallpapers.selected += 1;
@@ -124,7 +124,7 @@ PanelWindow { //qmllint disable uncreatable-type
                 }
             } else if (event.key == Qt.Key_Return) {
                 wallpapers.setWallpaper(wallpapers.list[wallpapers.selected]);
-                Quickshell.execDetached(["qs", "ipc", "call", "wallpapers", "hide"]);
+                PanelStateService.wallpapersVisible = false;
             }
         }
 

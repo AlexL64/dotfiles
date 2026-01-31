@@ -91,7 +91,7 @@ PanelWindow { //qmllint disable uncreatable-type
                                 hoverEnabled: true
 
                                 onClicked: {
-                                    Quickshell.execDetached(["qs", "ipc", "call", "idleInhibitor", "toggle"]);
+                                    PanelStateService.idleInhibitorVisible = !PanelStateService.idleInhibitorVisible;
                                 }
                             }
                         }

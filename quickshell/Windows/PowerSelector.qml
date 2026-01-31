@@ -67,7 +67,7 @@ PanelWindow { //qmllint disable uncreatable-type
 
         Keys.onPressed: event => {
             if (event.key == Qt.Key_Escape) {
-                Quickshell.execDetached(["qs", "ipc", "call", "powerSelector", "hide"]);
+                PanelStateService.powerSelectorVisible = false;
             } else if (event.key == Qt.Key_Right) {
                 if (powerSelector.selected < powerSelector.options.length - 1) {
                     powerSelector.selected += 1;
@@ -82,7 +82,7 @@ PanelWindow { //qmllint disable uncreatable-type
                 }
             } else if (event.key == Qt.Key_Return) {
                 Quickshell.execDetached(["bash", "-c", powerSelector.options[powerSelector.selected].command]);
-                Quickshell.execDetached(["qs", "ipc", "call", "powerSelector", "hide"]);
+                PanelStateService.powerSelectorVisible = false;
             }
         }
 
@@ -121,7 +121,7 @@ PanelWindow { //qmllint disable uncreatable-type
 
                         onDoubleClicked: {
                             Quickshell.execDetached(["bash", "-c", delegateItem.modelData.command]);
-                            Quickshell.execDetached(["qs", "ipc", "call", "powerSelector", "hide"]);
+                            PanelStateService.powerSelectorVisible = false;
                         }
                     }
 

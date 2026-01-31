@@ -87,7 +87,7 @@ PanelWindow { //qmllint disable uncreatable-type
 
                 Keys.onPressed: event => {
                     if (event.key == Qt.Key_Escape) {
-                        Quickshell.execDetached(["qs", "ipc", "call", "applicationLauncher", "hide"]);
+                        PanelStateService.applicationLauncherVisible = false;
                     } else if (event.key == Qt.Key_Up) {
                         if (apps.selected > 0) {
                             apps.selected -= 1;
@@ -127,7 +127,7 @@ PanelWindow { //qmllint disable uncreatable-type
                             });
                         }
 
-                        Quickshell.execDetached(["qs", "ipc", "call", "applicationLauncher", "hide"]);
+                        PanelStateService.applicationLauncherVisible = false;
                     }
                 }
 
@@ -262,7 +262,7 @@ PanelWindow { //qmllint disable uncreatable-type
                                     });
                                 }
 
-                                Quickshell.execDetached(["qs", "ipc", "call", "applicationLauncher", "hide"]);
+                                PanelStateService.applicationLauncherVisible = false;
                             }
                         }
 

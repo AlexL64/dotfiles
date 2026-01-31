@@ -99,7 +99,7 @@ PanelWindow { //qmllint disable uncreatable-type
                         hoverEnabled: true
 
                         onClicked: {
-                            Quickshell.execDetached(["qs", "ipc", "call", "audio", "setMenuSinks"]);
+                            PanelStateService.audioMenu = "sinks";
                         }
                     }
                 }
@@ -136,7 +136,7 @@ PanelWindow { //qmllint disable uncreatable-type
                         hoverEnabled: true
 
                         onClicked: {
-                            Quickshell.execDetached(["qs", "ipc", "call", "audio", "setMenuSources"]);
+                            PanelStateService.audioMenu = "sources";
                         }
                     }
                 }
@@ -173,7 +173,7 @@ PanelWindow { //qmllint disable uncreatable-type
                         hoverEnabled: true
 
                         onClicked: {
-                            Quickshell.execDetached(["qs", "ipc", "call", "audio", "setMenuApps"]);
+                            PanelStateService.audioMenu = "apps";
                         }
                     }
                 }
@@ -211,7 +211,7 @@ PanelWindow { //qmllint disable uncreatable-type
                         hoverEnabled: true
 
                         onClicked: {
-                            Quickshell.execDetached(["qs", "ipc", "call", "audio", "setMenuDevices"]);
+                            PanelStateService.audioMenu = "devices";
                         }
                     }
                 }
