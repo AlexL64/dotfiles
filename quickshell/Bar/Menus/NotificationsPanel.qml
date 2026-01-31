@@ -173,7 +173,7 @@ PanelWindow { //qmllint disable uncreatable-type
                                             implicitSize: 64
 
                                             function getIcon(appIcon, image, appName) {
-                                                if (image != "") {
+                                                if (image != "" && Quickshell.iconPath(image, true)) {
                                                     return image;
                                                 } else if (appIcon != "" && Quickshell.iconPath(appIcon, true)) {
                                                     return Quickshell.iconPath(appIcon);
@@ -192,7 +192,7 @@ PanelWindow { //qmllint disable uncreatable-type
                                                 anchors.rightMargin: -5
 
                                                 function getIcon(appIcon, image, appName) {
-                                                    if (image != "") {
+                                                    if (image != "" && Quickshell.iconPath(appIcon, true)) {
                                                         if (appIcon != "" && Quickshell.iconPath(appIcon, true)) {
                                                             return Quickshell.iconPath(appIcon);
                                                         } else if (Quickshell.iconPath(appName, true)) {
