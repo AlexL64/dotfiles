@@ -122,9 +122,9 @@ PanelWindow { // qmllint disable uncreatable-type
 
     function getSourceIcon(volume, muted) {
         if (muted) {
-            return "";
+            return "";
         } else if (!isNaN(volume)) {
-            return "󰍭";
+            return "";
         } else {
             return "";
         }
