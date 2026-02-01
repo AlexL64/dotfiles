@@ -76,13 +76,16 @@ Singleton {
         }
     }
 
-
     // Bar ipc handlers
     IpcHandler {
         target: "bar"
 
         function toggle(): void {
             root.barVisible = !root.barVisible;
+
+            if (!root.barVisible) {
+                root.hideMenus();
+            }
         }
     }
 
