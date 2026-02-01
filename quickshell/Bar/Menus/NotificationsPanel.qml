@@ -98,7 +98,7 @@ PanelWindow { //qmllint disable uncreatable-type
 
                         onClicked: {
                             NotificationsService.dismissAll();
-                            PanelStateService.notificationsPanelVisible = false
+                            PanelStateService.notificationsPanelVisible = false;
                         }
                     }
                 }
@@ -152,7 +152,7 @@ PanelWindow { //qmllint disable uncreatable-type
                                             const index = ToplevelManager.toplevels.values.findIndex(item => item.appId == delegateItem.modelData.appName);
 
                                             if (index != -1) {
-                                                PanelStateService.notificationsPanelVisible = false
+                                                PanelStateService.notificationsPanelVisible = false;
                                                 ToplevelManager.toplevels.values[index].activate();
                                             }
                                         }
@@ -173,9 +173,9 @@ PanelWindow { //qmllint disable uncreatable-type
                                             implicitSize: 64
 
                                             function getIcon(appIcon, image, appName) {
-                                                if (image != "" && Quickshell.iconPath(image, true)) {
+                                                if (image != "") {
                                                     return image;
-                                                } else if (appIcon != "" && Quickshell.iconPath(appIcon, true)) {
+                                                } else if (appIcon != "" && Quickshell.iconPath(appIcon, true) != "") {
                                                     return Quickshell.iconPath(appIcon);
                                                 } else if (Quickshell.iconPath(appName, true)) {
                                                     return Quickshell.iconPath(appName);
@@ -192,7 +192,7 @@ PanelWindow { //qmllint disable uncreatable-type
                                                 anchors.rightMargin: -5
 
                                                 function getIcon(appIcon, image, appName) {
-                                                    if (image != "" && Quickshell.iconPath(appIcon, true)) {
+                                                    if (image != "") {
                                                         if (appIcon != "" && Quickshell.iconPath(appIcon, true)) {
                                                             return Quickshell.iconPath(appIcon);
                                                         } else if (Quickshell.iconPath(appName, true)) {
@@ -323,7 +323,7 @@ PanelWindow { //qmllint disable uncreatable-type
                                                         const index = ToplevelManager.toplevels.values.findIndex(item => item.appId == delegateItem.modelData.appName);
 
                                                         if (index != -1) {
-                                                            PanelStateService.notificationsPanelVisible = false
+                                                            PanelStateService.notificationsPanelVisible = false;
                                                             ToplevelManager.toplevels.values[index].activate();
                                                         }
                                                     }
