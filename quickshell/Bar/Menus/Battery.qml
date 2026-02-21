@@ -211,13 +211,13 @@ PanelWindow { //qmllint disable uncreatable-type
                                         case UPowerDeviceState.Discharging:
                                             return "Discharging";
                                         case UPowerDeviceState.FullyCharged:
-                                            return "FullyCharged";
+                                            return "Fully Charged";
                                         case UPowerDeviceState.Empty:
                                             return "Empty";
                                         case UPowerDeviceState.PendingCharge:
-                                            return "PendingCharge";
+                                            return "Pending Charge";
                                         case UPowerDeviceState.PendingDischarge:
-                                            return "PendingDischarge";
+                                            return "Pending Discharge";
                                         default:
                                             return "Unknown";
                                         }
