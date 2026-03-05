@@ -37,5 +37,9 @@
     "[qml]": {
         "editor.defaultFormatter": "theqtcompany.qt-qml"
     },
-    "qmlFormat.command": "/usr/lib/qt6/bin/qmlformat"
+    "qmlFormat.command": "/usr/lib/qt6/bin/qmlformat",
+    "workbench.editorAssociations": {
+        "{git,gitlens,chat-editing-snapshot-text-model,copilot,git-graph,git-graph-3}:/**/*.qrc": "default",
+        "*.qrc": "qt-core.qrcEditor"
+    }
 }
