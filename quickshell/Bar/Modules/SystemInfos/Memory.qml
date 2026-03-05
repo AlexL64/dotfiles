@@ -50,7 +50,7 @@ Button {
 
             Text {
                 text: ""
-                font.family: "Font Awesome 7 Free"
+                font.family: "Font Awesome 7 Free Solid"
                 font.pixelSize: 14
                 color: "#fab387"
                 font.bold: true
