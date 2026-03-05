@@ -39,19 +39,19 @@ PanelWindow { //qmllint disable uncreatable-type
             "icon": "",
             "mainColor": "#fab387",
             "backgroundColor": "#11fab387",
-            "command": "hyprctl dispatch exit"
+            "command": "hyprshutdown -t 'Logging out...' -p"
         },
         {
             "icon": "",
             "mainColor": "#a6e3a1",
             "backgroundColor": "#11a6e3a1",
-            "command": "reboot"
+            "command": "hyprshutdown -t 'Rebooting...' -p 'reboot'"
         },
         {
             "icon": "",
             "mainColor": "#f38ba8",
             "backgroundColor": "#11a6e3a1",
-            "command": "shutdown now"
+            "command": "hyprshutdown -t 'Shutting down...' -p 'shutdown now'"
         }
     ]
 
