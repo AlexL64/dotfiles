@@ -13,7 +13,13 @@ ColumnLayout {
     }
 
     Repeater {
-        model: Pipewire.nodes.values.filter(n => !n.isSink && !n.isStream && n.audio != null).sort((a, b) => a.description.localeCompare(b.description))
+        model: Pipewire.nodes.values.filter(n => !n.isSink && !n.isStream && n.audio != null).sort((a, b) => {
+            if (a === Pipewire.defaultAudioSource)
+                return -1;
+            if (b === Pipewire.defaultAudioSource)
+                return 1;
+            return a.description.localeCompare(b.description);
+        })
         delegate: Loader {
             id: delegateItem
 
