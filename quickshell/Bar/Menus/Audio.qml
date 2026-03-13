@@ -99,7 +99,7 @@ PanelWindow { //qmllint disable uncreatable-type
                         hoverEnabled: true
 
                         onClicked: {
-                            PanelStateService.audioMenu = "sinks";
+                            PanelStateService.audioMenu = 0;
                         }
                     }
                 }
@@ -136,7 +136,7 @@ PanelWindow { //qmllint disable uncreatable-type
                         hoverEnabled: true
 
                         onClicked: {
-                            PanelStateService.audioMenu = "sources";
+                            PanelStateService.audioMenu = 1;
                         }
                     }
                 }
@@ -173,7 +173,7 @@ PanelWindow { //qmllint disable uncreatable-type
                         hoverEnabled: true
 
                         onClicked: {
-                            PanelStateService.audioMenu = "apps";
+                            PanelStateService.audioMenu = 2;
                         }
                     }
                 }
@@ -211,7 +211,7 @@ PanelWindow { //qmllint disable uncreatable-type
                         hoverEnabled: true
 
                         onClicked: {
-                            PanelStateService.audioMenu = "devices";
+                            PanelStateService.audioMenu = 3;
                         }
                     }
                 }
