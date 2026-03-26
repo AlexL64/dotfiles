@@ -47,7 +47,7 @@ PanelWindow { //qmllint disable uncreatable-type
         const selectedType = types[Math.floor(Math.random() * types.length)];
         const selectedPosition = positions[Math.floor(Math.random() * positions.length)];
 
-        Quickshell.execDetached(["swww", "img", path, "--transition-type", selectedType, "--transition-pos", selectedPosition]);
+        Quickshell.execDetached(["awww", "img", path, "--transition-type", selectedType, "--transition-pos", selectedPosition]);
     }
 
     property string current
@@ -58,7 +58,7 @@ PanelWindow { //qmllint disable uncreatable-type
     Process {
         id: currentProcess
         running: true
-        command: ["bash", "-c", "echo $HOME/Wallpaper/$(basename $(swww query | grep -oP '(?<=image: ).*'))"]
+        command: ["bash", "-c", "echo $HOME/Wallpaper/$(basename $(awww query | grep -oP '(?<=image: ).*'))"]
         stdout: StdioCollector {
             onStreamFinished: {
                 const current = text.trim();
