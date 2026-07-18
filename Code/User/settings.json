@@ -41,5 +41,14 @@
     "workbench.editorAssociations": {
         "{git,gitlens,chat-editing-snapshot-text-model,copilot,git-graph,git-graph-3}:/**/*.qrc": "default",
         "*.qrc": "qt-core.qrcEditor"
+    },
+    "Lua.workspace.library": [
+        "/usr/share/hypr/stubs"
+    ],
+    "[lua]": {
+        "editor.defaultFormatter": "sumneko.lua"
+    },
+    "Lua.format.defaultConfig": {
+        "max_line_length": "160"
     }
 }
