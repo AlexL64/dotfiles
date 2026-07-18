@@ -111,8 +111,8 @@ hl.bind("SUPER + P", hl.dsp.exec_cmd("qs ipc call applicationLauncher toggle"), 
 -- hl.bind("SUPER + twosuperior", hl.dsp.exec_cmd("ags toggle Keybinds"), { description = "Tools | SUPER+² | This window" })
 
 -- Move/resize windows with mainMod + LMB/RMB and dragging
-hl.bind("SUPER + mouse:272", hl.dsp.window.resize())
-hl.bind("SUPER + mouse:273", hl.dsp.window.drag())
+hl.bind("SUPER + mouse:272", hl.dsp.window.drag())
+hl.bind("SUPER + mouse:273", hl.dsp.window.resize())
 
 -- Brightness control
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl s 5%- --device=intel_backlight"))
