@@ -14,7 +14,7 @@ hl.bind("SUPER + C", hl.dsp.window.close(), { description = "Window Management |
 hl.bind("SUPER + SHIFT + C", hl.dsp.window.kill(), { description = "Window Management | SUPER+SHIFT+C | Kill active window" })
 hl.bind("SUPER + SPACE", hl.dsp.window.float({ action = "toggle" }), { description = "Window Management | SUPER+SPACE | Toggle window floating" })
 hl.bind("SUPER + F", hl.dsp.window.fullscreen_state({ internal = 2, client = 0, action = "toggle" }),
-{ description = "Window Management | SUPER+F | Maximized fullscreen window " })
+    { description = "Window Management | SUPER+F | Maximized fullscreen window " })
 hl.bind("SUPER + SHIFT + F", hl.dsp.window.fullscreen({ mode = "fullscreen" }), { description = "Window Management | SUPER+F | Full screen window" })
 hl.bind("SUPER + M", hl.dsp.window.fullscreen({ mode = "maximized" }), { description = "Window Management | SUPER+M | Maximize window" })
 hl.bind("SUPER + K", hl.dsp.window.pseudo(), { description = "Window Management | SUPER+K | Toggle window pseudo mode" })
@@ -33,10 +33,14 @@ hl.bind("SUPER + SHIFT + UP", hl.dsp.window.swap({ direction = "u" }), { descrip
 hl.bind("SUPER + SHIFT + DOWN", hl.dsp.window.swap({ direction = "d" }), { description = "Move Window | SUPER+SHIFT+DOWN | Move window down" })
 
 -- Resize Window
-hl.bind("CTRL + LEFT", hl.dsp.window.resize({ x = -25, y = 0 }), { description = "Resize Window | CTRL+LEFT | Decrease window horizontal size" })
-hl.bind("CTRL + RIGHT", hl.dsp.window.resize({ x = 25, y = 0 }), { description = "Resize Window | CTRL+RIGHT | Icrease window horizontal size" })
-hl.bind("CTRL + UP", hl.dsp.window.resize({ x = 0, y = -25 }), { description = "Resize Window | CTRL+UP | Icrease window horizontal size" })
-hl.bind("CTRL + DOWN", hl.dsp.window.resize({ x = 0, y = 25 }), { description = "Resize Window | CTRL+DOWN | Decrease window horizontal size" })
+hl.bind("CTRL + LEFT", hl.dsp.window.resize({ x = -25, y = 0, relative = true }),
+    { repeating = true, description = "Resize Window | CTRL+LEFT | Decrease window horizontal size" })
+hl.bind("CTRL + RIGHT", hl.dsp.window.resize({ x = 25, y = 0, relative = true }),
+    { repeating = true, description = "Resize Window | CTRL+RIGHT | Icrease window horizontal size" })
+hl.bind("CTRL + UP", hl.dsp.window.resize({ x = 0, y = -25, relative = true }),
+    { repeating = true, description = "Resize Window | CTRL+UP | Icrease window horizontal size" })
+hl.bind("CTRL + DOWN", hl.dsp.window.resize({ x = 0, y = 25, relative = true }),
+    { repeating = true, description = "Resize Window | CTRL+DOWN | Decrease window horizontal size" })
 
 -- Workspaces
 hl.bind("SUPER + S", hl.dsp.workspace.toggle_special("special"), { description = "Workspace | SUPER+S | Open special workspace" })
