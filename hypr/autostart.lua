@@ -15,7 +15,7 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("udiskie")
     hl.exec_cmd("awww-daemon")
     hl.exec_cmd("quickshell")
-    hl.exec_cmd("easyeffects --hide-window --service-mode")
+    hl.exec_cmd("sleep 1 && easyeffects --hide-window --service-mode")
 
     -- Very hacky way to fix issue with playerctl returning "No player is being controlled by playerctld"
     -- instead of just removing the mpris player when it is not attached to a player which break
