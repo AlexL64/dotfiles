@@ -13,7 +13,8 @@ hl.bind("SUPER + E", hl.dsp.exec_cmd("thunar"), { description = "Program | SUPER
 hl.bind("SUPER + C", hl.dsp.window.close(), { description = "Window Management | SUPER+C | Close active window" })
 hl.bind("SUPER + SHIFT + C", hl.dsp.window.kill(), { description = "Window Management | SUPER+SHIFT+C | Kill active window" })
 hl.bind("SUPER + SPACE", hl.dsp.window.float({ action = "toggle" }), { description = "Window Management | SUPER+SPACE | Toggle window floating" })
-hl.bind("SUPER + F", hl.dsp.window.fullscreen_state({ internal = 2, client = 0, action = "toggle" }),{ description = "Window Management | SUPER+F | Maximized fullscreen window " })
+hl.bind("SUPER + F", hl.dsp.window.fullscreen_state({ internal = 2, client = 0, action = "toggle" }),
+{ description = "Window Management | SUPER+F | Maximized fullscreen window " })
 hl.bind("SUPER + SHIFT + F", hl.dsp.window.fullscreen({ mode = "fullscreen" }), { description = "Window Management | SUPER+F | Full screen window" })
 hl.bind("SUPER + M", hl.dsp.window.fullscreen({ mode = "maximized" }), { description = "Window Management | SUPER+M | Maximize window" })
 hl.bind("SUPER + K", hl.dsp.window.pseudo(), { description = "Window Management | SUPER+K | Toggle window pseudo mode" })
@@ -39,7 +40,7 @@ hl.bind("CTRL + DOWN", hl.dsp.window.resize({ x = 0, y = 25 }), { description = 
 
 -- Workspaces
 hl.bind("SUPER + S", hl.dsp.workspace.toggle_special("special"), { description = "Workspace | SUPER+S | Open special workspace" })
--- hl.bind("SUPER + TAB", ..., { description = "Workspace | SUPER+TAB | Toggle hyprexpo" })
+hl.bind("SUPER + TAB", function() hl.plugin.hyprexpo.expo("toggle") end, { description = "Workspace | SUPER+TAB | Toggle hyprexpo" })
 
 -- Switch Workspace
 hl.bind("SUPER + mouse_down", smw.cycle_workspaces("prev"), { description = "Switch Workspace | SUPER+MOUSE_DOWN | Swicth workspace down" })
