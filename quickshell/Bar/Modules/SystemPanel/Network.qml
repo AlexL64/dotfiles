@@ -4,39 +4,61 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 import qs.Services
+import Quickshell.Networking
 
 Button {
     id: network
     Layout.fillHeight: true
     implicitWidth: 36
 
+    property var wifiDevice: getWifiDevice(Networking.devices.values)
+    property var wiredDevice: getWiredDevice(Networking.devices.values)
+
+    function getWifiDevice(devices) {
+        const index = devices.findIndex(device => device.type === DeviceType.Wifi);
+
+        if (index != -1) {
+            return devices[index];
+        }
+    }
+
+    function getWiredDevice(devices) {
+        const index = devices.findIndex(device => device.type === DeviceType.Wired);
+
+        if (index != -1) {
+            return devices[index];
+        }
+    }
+
     contentItem: Item {
         IconImage {
-            source: getIcon(NetworkService.ethernet, NetworkService.wifi, NetworkService.networkStrength)
+            source: getIcon(network.wifiDevice, network.wiredDevice)
             implicitSize: 24
             anchors.centerIn: parent
 
-            function getIcon(ethernet, wifi, strength) {
-                var icon = "";
-
-                if (ethernet) {
-                    icon = "/usr/share/icons/Papirus/24x24/panel/network-wired.svg";
-                } else if (wifi) {
-                    const icons = {
-                        100: "network-wireless-100",
-                        80: "network-wireless-80",
-                        60: "network-wireless-60",
-                        40: "network-wireless-40",
-                        20: "network-wireless-20",
-                        0: "network-wireless-0"
-                    };
-
-                    icon = icons[[0, 20, 40, 60, 80, 100].find(threshold => threshold >= strength)];
+            function getIcon(wifiDevice, wiredDevice) {
+                if (wiredDevice != null && wiredDevice.connected) {
+                    return Quickshell.iconPath("/usr/share/icons/Papirus/24x24/panel/network-wired.svg");
                 } else {
-                    icon = "network-wired-offline";
+                    const connectedNetworkIndex = wifiDevice.networks.values.findIndex(network => network.connected);
+
+                    if (wifiDevice != null && wifiDevice.connected && connectedNetworkIndex != -1) {
+                        const icons = {
+                            100: "network-wireless-100",
+                            80: "network-wireless-80",
+                            60: "network-wireless-60",
+                            40: "network-wireless-40",
+                            20: "network-wireless-20",
+                            0: "network-wireless-0"
+                        };
+
+                        const icon = icons[[0, 20, 40, 60, 80, 100].find(threshold => threshold >= wifiDevice.networks.values[connectedNetworkIndex].signalStrength * 100)];
+
+                        return Quickshell.iconPath(icon);
+                    }
                 }
 
-                return Quickshell.iconPath(icon);
+                return Quickshell.iconPath("network-wired-offline");
             }
 
             Text {
