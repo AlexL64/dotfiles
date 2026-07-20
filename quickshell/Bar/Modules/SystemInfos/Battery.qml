@@ -57,11 +57,13 @@ Button {
                 Text {
                     text: ""
                     font.family: "Font Awesome 7 Free Solid"
-                    font.pixelSize: 8
+                    font.pixelSize: 7
                     color: "#f38ba8"
                     x: 10
-                    y: -2
+                    y: -1
                     visible: PanelStateService.idleInhibitorVisible
+                    style: Text.Outline
+                    styleColor: "#6c7086"
                 }
 
                 function getIcon(state, battery) {
