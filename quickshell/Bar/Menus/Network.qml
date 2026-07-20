@@ -56,13 +56,14 @@ PanelWindow { //qmllint disable uncreatable-type
 
                     RowLayout {
                         Layout.preferredHeight: 64
+                        spacing: 8
 
                         Text {
                             text: MullvadService.state == "connected" ? "" : ""
                             font.family: MullvadService.state == "connected" ? "Font Awesome 7 Free" : "Font Awesome 7 Free Solid"
                             font.pixelSize: 36
                             color: getColor(MullvadService.state)
-                            Layout.rightMargin: MullvadService.state == "connected" ? 8 : 5
+                            Layout.rightMargin: MullvadService.state == "connected" ? 3 : 0
                             Layout.leftMargin: MullvadService.state == "connected" ? 0 : -8
 
                             function getColor(state) {
@@ -184,6 +185,44 @@ PanelWindow { //qmllint disable uncreatable-type
 
                         Rectangle {
                             Layout.fillWidth: true
+                        }
+
+                        Button {
+                            implicitHeight: 32
+                            implicitWidth: 32
+
+                            contentItem: Text {
+                                text: ""
+                                color: "#cdd6f4"
+                                font.family: "Font Awesome 7 Free Solid"
+                                font.pixelSize: 16
+                                horizontalAlignment: Text.AlignHCenter
+                                verticalAlignment: Text.AlignVCenter
+                            }
+
+                            background: Rectangle {
+                                id: discoverRectangleBackground
+                                color: "#45475a"
+                                radius: 6
+                            }
+
+                            MouseArea {
+                                anchors.fill: parent
+                                cursorShape: Qt.PointingHandCursor
+                                hoverEnabled: true
+
+                                onEntered: {
+                                    discoverRectangleBackground.color = "#cc45475a";
+                                }
+
+                                onExited: {
+                                    discoverRectangleBackground.color = "#45475a";
+                                }
+
+                                onClicked: {
+                                    MullvadService.reconnect();
+                                }
+                            }
                         }
 
                         Switch {
