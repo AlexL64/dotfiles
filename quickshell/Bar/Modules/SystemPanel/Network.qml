@@ -71,6 +71,8 @@ Button {
                 anchors.right: parent.right
                 anchors.rightMargin: MullvadService.state == "connected" ? 1 : -1
                 anchors.bottomMargin: MullvadService.state == "connected" ? 3 : 4
+                style: Text.Outline
+                styleColor: "#6c7086"
 
                 function getColor(state) {
                     if (state == "connected") {
