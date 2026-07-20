@@ -4,6 +4,7 @@ import Quickshell.Widgets
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import Quickshell.Networking
 import qs.Services
 
 PanelWindow { //qmllint disable uncreatable-type
@@ -27,6 +28,9 @@ PanelWindow { //qmllint disable uncreatable-type
         right: true
     }
 
+    property var connectedWiredDevices: Networking.devices.values.filter(device => device.type === DeviceType.Wired)
+    property var connectedWifiDevices: Networking.devices.values.filter(device => device.type === DeviceType.Wifi)
+
     Rectangle {
         color: "#1e1e2e"
         width: content.width + 24
@@ -39,7 +43,6 @@ PanelWindow { //qmllint disable uncreatable-type
             id: content
             width: 450
             anchors.centerIn: parent
-            spacing: 10
 
             Rectangle {
                 color: "#313244"
@@ -55,7 +58,7 @@ PanelWindow { //qmllint disable uncreatable-type
                     anchors.rightMargin: 16
 
                     RowLayout {
-                        Layout.preferredHeight: 64
+                        Layout.minimumHeight: 64
                         spacing: 8
 
                         Text {
@@ -64,7 +67,7 @@ PanelWindow { //qmllint disable uncreatable-type
                             font.pixelSize: 36
                             color: getColor(MullvadService.state)
                             Layout.rightMargin: MullvadService.state == "connected" ? 3 : 0
-                            Layout.leftMargin: MullvadService.state == "connected" ? 0 : -8
+                            Layout.leftMargin: MullvadService.state == "connected" ? 3 : -5
 
                             function getColor(state) {
                                 if (state == "connected") {
@@ -274,6 +277,200 @@ PanelWindow { //qmllint disable uncreatable-type
                                     case "disconnected":
                                         MullvadService.connect();
                                         break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    Repeater {
+                        model: network.connectedWiredDevices
+                        delegate: ColumnLayout {
+                            id: delegateWiredDevicesItem
+
+                            spacing: 3
+
+                            required property WiredDevice modelData
+
+                            Rectangle {
+                                color: "#6c7086"
+                                implicitHeight: 2
+                                radius: 2
+                                Layout.fillWidth: true
+                            }
+
+                            RowLayout {
+                                Layout.minimumHeight: 48
+                                spacing: 8
+
+                                IconImage {
+                                    source: delegateWiredDevicesItem.modelData.hasLink ? Quickshell.iconPath("/usr/share/icons/Papirus/24x24/panel/network-wired.svg") : Quickshell.iconPath("network-wired-offline")
+                                    implicitSize: 36
+                                }
+
+                                ColumnLayout {
+                                    spacing: 3
+                                    Text {
+                                        text: delegateWiredDevicesItem.modelData.name
+                                        color: "#cdd6f4"
+                                        font.family: "JetBrainsMono Nerd Font"
+                                        font.pixelSize: 15
+                                        font.bold: true
+                                    }
+
+                                    Text {
+                                        text: delegateWiredDevicesItem.modelData.linkSpeed + " Mb/s"
+                                        color: "#bac2de"
+                                        font.family: "JetBrainsMono Nerd Font"
+                                        font.pixelSize: 13
+                                        font.bold: true
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    Repeater {
+                        model: network.connectedWifiDevices
+                        delegate: ColumnLayout {
+                            id: delegateWifiDeviceItem
+
+                            required property WifiDevice modelData
+
+                            property var connectedWifiNetworks: modelData.networks.values.filter(network => network.connected)
+
+                            Repeater {
+                                model: delegateWifiDeviceItem.connectedWifiNetworks
+                                delegate: ColumnLayout {
+                                    id: delegateWifiNetworkItem
+                                    spacing: 10
+                                    Layout.fillWidth: true
+
+                                    required property Network modelData
+
+                                    Rectangle {
+                                        color: "#6c7086"
+                                        implicitHeight: 2
+                                        radius: 2
+                                        Layout.fillWidth: true
+                                    }
+
+                                    RowLayout {
+                                        IconImage {
+                                            source: getIcon(delegateWifiNetworkItem.modelData)
+                                            implicitSize: 36
+
+                                            function getIcon(wifiNetwork) {
+                                                const icons = {
+                                                    100: "network-wireless-100",
+                                                    80: "network-wireless-80",
+                                                    60: "network-wireless-60",
+                                                    40: "network-wireless-40",
+                                                    20: "network-wireless-20",
+                                                    0: "network-wireless-0"
+                                                };
+
+                                                const icon = icons[[0, 20, 40, 60, 80, 100].find(threshold => threshold >= wifiNetwork.signalStrength * 100)];
+
+                                                return Quickshell.iconPath(icon);
+                                            }
+                                        }
+
+                                        Text {
+                                            text: delegateWifiNetworkItem.modelData.name
+                                            color: "#cdd6f4"
+                                            font.family: "JetBrainsMono Nerd Font"
+                                            font.pixelSize: 15
+                                            font.bold: true
+                                            Layout.fillWidth: true
+                                        }
+
+                                        Button {
+                                            implicitHeight: 32
+                                            implicitWidth: 96
+
+                                            contentItem: Text {
+                                                id: connectButton
+                                                text: getText(delegateWifiNetworkItem.modelData.state, delegateWifiNetworkItem.modelData.stateChanging) // qmllint disable unresolved-type
+                                                color: "#313244"
+                                                font.family: getFont(delegateWifiNetworkItem.modelData.state, delegateWifiNetworkItem.modelData.stateChanging) // qmllint disable unresolved-type
+                                                font.pixelSize: 14
+                                                font.bold: true
+                                                horizontalAlignment: Text.AlignHCenter
+                                                verticalAlignment: Text.AlignVCenter
+
+                                                function getText(state, stateChanging) {
+                                                    if (state == ConnectionState.Connecting || state == ConnectionState.Disconnecting || stateChanging) {
+                                                        return "";
+                                                    } else if (state == ConnectionState.Connected) {
+                                                        return "Disconnect";
+                                                    } else if (state == ConnectionState.Disconnected) {
+                                                        return "Disconnect";
+                                                    }
+
+                                                    return "";
+                                                }
+
+                                                function getFont(state, stateChanging) {
+                                                    if (state == ConnectionState.Connecting || state == ConnectionState.Disconnecting || stateChanging) {
+                                                        return "Font Awesome 7 Free Solid";
+                                                    } else if (state == ConnectionState.Connected) {
+                                                        return "JetBrainsMono Nerd Font";
+                                                    } else if (state == ConnectionState.Disconnected) {
+                                                        return "JetBrainsMono Nerd Font";
+                                                    }
+
+                                                    return "Font Awesome 7 Free Solid";
+                                                }
+
+                                                NumberAnimation {
+                                                    target: connectButton
+                                                    property: "rotation"
+                                                    from: 0
+                                                    to: 360
+                                                    duration: 2000
+                                                    loops: Animation.Infinite
+                                                    running: delegateWifiNetworkItem.modelData.state == ConnectionState.Connecting || delegateWifiNetworkItem.modelData.state == ConnectionState.Disconnecting || delegateWifiNetworkItem.modelData.stateChanging // qmllint disable unresolved-type
+                                                    onRunningChanged: {
+                                                        if (!running) {
+                                                            connectButton.rotation = 0;
+                                                        }
+                                                    }
+                                                }
+                                            }
+
+                                            background: Rectangle {
+                                                color: getColor(delegateWifiNetworkItem.modelData.state, delegateWifiNetworkItem.modelData.stateChanging, connectButtonMouseArea.containsMouse) // qmllint disable unresolved-type
+                                                radius: 6
+
+                                                function getColor(state, stateChanging, containsMouse) {
+                                                    if (state == ConnectionState.Connecting || state == ConnectionState.Disconnecting || stateChanging) {
+                                                        return containsMouse ? "#ccfab387" : "#fab387";
+                                                    } else if (state == ConnectionState.Connected) {
+                                                        return containsMouse ? "#ccf38ba8" : "#f38ba8";
+                                                    } else if (state == ConnectionState.Disconnected) {
+                                                        return containsMouse ? "#cca6e3a1" : "#a6e3a1";
+                                                    }
+
+                                                    return "#f38ba8";
+                                                }
+                                            }
+
+                                            MouseArea {
+                                                id: connectButtonMouseArea
+                                                anchors.fill: parent
+                                                cursorShape: Qt.PointingHandCursor
+                                                hoverEnabled: true
+
+                                                onClicked: {
+                                                    if (delegateWifiNetworkItem.modelData.state == ConnectionState.Disconnected) { // qmllint disable unresolved-type
+                                                        delegateWifiNetworkItem.modelData.connect();
+                                                    } else if (delegateWifiNetworkItem.modelData.state == ConnectionState.Connected) { // qmllint disable unresolved-type
+                                                        delegateWifiNetworkItem.modelData.disconnect();
+                                                    }
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }
