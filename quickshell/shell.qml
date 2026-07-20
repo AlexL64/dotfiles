@@ -33,6 +33,7 @@ Scope {
     Power {}
     Tray {}
     Bluetooth {}
+    Network{}
     NotificationsPanel {}
     Battery {}
     Audio {}

@@ -13,6 +13,7 @@ Singleton {
     property bool powerVisible: false
     property bool trayVisible: false
     property bool batteryVisible: false
+    property bool networkVisible: true
     property bool bluetoothVisible: false
     property bool notificationsPanelVisible: false
     property bool audioVisible: false
@@ -39,6 +40,10 @@ Singleton {
 
         if (exception != "battery") {
             root.batteryVisible = false;
+        }
+
+        if (exception != "network") {
+            root.networkVisible = false;
         }
 
         if (exception != "bluetooth") {
@@ -151,6 +156,22 @@ Singleton {
 
         function hide(): void {
             root.notificationsPanelVisible = false;
+        }
+    }
+
+    IpcHandler {
+        target: "network"
+
+        function toggle(): void {
+            root.networkVisible = !root.networkVisible;
+
+            if (root.networkVisible) {
+                root.hideMenus("network");
+            }
+        }
+
+        function hide(): void {
+            root.networkVisible = false;
         }
     }
 

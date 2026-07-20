@@ -65,7 +65,7 @@ Button {
                 text: MullvadService.state == "connected" ? "" : ""
                 font.family: MullvadService.state == "connected" ? "Font Awesome 7 Free" : "Font Awesome 7 Free Solid"
                 font.pixelSize: 10
-                Layout.alignment: Qt.AlignBottom | Qt.AlignBottom
+                Layout.alignment: Qt.AlignBottom
                 color: getColor(MullvadService.state)
                 anchors.bottom: parent.bottom
                 anchors.right: parent.right
@@ -105,7 +105,7 @@ Button {
         hoverEnabled: true
 
         onClicked: {
-            print("Clicked");
+            Quickshell.execDetached(["qs", "ipc", "call", "network", "toggle"]);
         }
     }
 }
