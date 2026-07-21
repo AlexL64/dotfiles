@@ -51,54 +51,95 @@ PanelWindow { //qmllint disable uncreatable-type
                 color: "#313244"
                 radius: 12
 
-                Text {
-                    text: "Notifications"
-                    font.family: "JetBrainsMono Nerd Font"
-                    font.pixelSize: 16
-                    color: "#cdd6f4"
-                    font.bold: true
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.left: parent.left
-                    anchors.leftMargin: 10
-                }
+                RowLayout {
+                    spacing: 8
+                    anchors.fill: parent
+                    anchors.margins: 12
 
-                Button {
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.right: parent.right
-                    anchors.rightMargin: 10
-
-                    contentItem: Text {
-                        text: "Clear"
+                    Text {
+                        text: "Notifications"
                         font.family: "JetBrainsMono Nerd Font"
-                        font.pixelSize: 14
+                        font.pixelSize: 16
                         color: "#cdd6f4"
                         font.bold: true
-                        anchors.leftMargin: 10
-                        padding: 3
+                        Layout.fillWidth: true
                     }
 
-                    background: Rectangle {
-                        id: clearButtonBackground
-                        color: "#f38ba8"
-                        radius: 6
+                    Button {
+                        contentItem: Text {
+                            text: getIcon(NotificationsService.dnd, NotificationsService.mergedNotifications.length)
+                            font.family: "Material Icons"
+                            font.pixelSize: 22
+                            color: "#cdd6f4"
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+                            padding: 1
+
+                            function getIcon(dnd, length) {
+                                if (dnd) {
+                                    return "\ue7f8";
+                                } else {
+                                    return "\ue7f4";
+                                }
+                            }
+                        }
+
+                        background: Rectangle {
+                            color: getColor(NotificationsService.dnd, dndButtonBackgroundMouseArea.containsMouse)
+                            radius: 6
+
+                            function getColor(dnd, containsMouse) {
+                                if (dnd) {
+                                    return containsMouse ? "#ccf38ba8" : "#f38ba8";
+                                } else {
+                                    return containsMouse ? "#cc89b4fa" : "#89b4fa";
+                                }
+                            }
+                        }
+
+                        MouseArea {
+                            id: dndButtonBackgroundMouseArea
+                            anchors.fill: parent
+                            cursorShape: Qt.PointingHandCursor
+                            hoverEnabled: true
+
+                            onClicked: NotificationsService.dnd = !NotificationsService.dnd
+                        }
                     }
 
-                    MouseArea {
-                        anchors.fill: parent
-                        cursorShape: Qt.PointingHandCursor
-                        hoverEnabled: true
-
-                        onEntered: {
-                            clearButtonBackground.color = "#ccf38ba8";
+                    Button {
+                        contentItem: Text {
+                            text: "Clear"
+                            font.family: "JetBrainsMono Nerd Font"
+                            font.pixelSize: 14
+                            color: "#cdd6f4"
+                            font.bold: true
+                            padding: 3
                         }
 
-                        onExited: {
-                            clearButtonBackground.color = "#f38ba8";
+                        background: Rectangle {
+                            id: clearButtonBackground
+                            color: "#f38ba8"
+                            radius: 6
                         }
 
-                        onClicked: {
-                            NotificationsService.dismissAll();
-                            PanelStateService.notificationsPanelVisible = false;
+                        MouseArea {
+                            anchors.fill: parent
+                            cursorShape: Qt.PointingHandCursor
+                            hoverEnabled: true
+
+                            onEntered: {
+                                clearButtonBackground.color = "#ccf38ba8";
+                            }
+
+                            onExited: {
+                                clearButtonBackground.color = "#f38ba8";
+                            }
+
+                            onClicked: {
+                                NotificationsService.dismissAll();
+                                PanelStateService.notificationsPanelVisible = false;
+                            }
                         }
                     }
                 }
