@@ -576,7 +576,7 @@ PanelWindow { //qmllint disable uncreatable-type
                                                     font.pixelSize: 15
                                                     font.bold: true
                                                     elide: Text.ElideRight
-                                                    width: 230
+                                                    width: Math.min(implicitWidth, 230)
                                                 }
 
                                                 Text {
@@ -803,6 +803,7 @@ PanelWindow { //qmllint disable uncreatable-type
 
                                             ColumnLayout {
                                                 spacing: 3
+
                                                 Row {
                                                     Layout.fillWidth: true
                                                     spacing: 8
@@ -813,7 +814,7 @@ PanelWindow { //qmllint disable uncreatable-type
                                                         font.pixelSize: 15
                                                         font.bold: true
                                                         elide: Text.ElideRight
-                                                        width: 230
+                                                        width: Math.min(implicitWidth, 230)
                                                     }
 
                                                     Text {
