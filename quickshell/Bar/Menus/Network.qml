@@ -328,6 +328,8 @@ PanelWindow { //qmllint disable uncreatable-type
                                         font.family: "JetBrainsMono Nerd Font"
                                         font.pixelSize: 15
                                         font.bold: true
+                                        elide: Text.ElideRight
+                                        Layout.preferredWidth: 230
                                     }
 
                                     Text {
@@ -418,6 +420,8 @@ PanelWindow { //qmllint disable uncreatable-type
                                                     font.family: "JetBrainsMono Nerd Font"
                                                     font.pixelSize: 15
                                                     font.bold: true
+                                                    elide: Text.ElideRight
+                                                    width: 230
                                                 }
 
                                                 Text {
@@ -653,6 +657,8 @@ PanelWindow { //qmllint disable uncreatable-type
                                                         font.family: "JetBrainsMono Nerd Font"
                                                         font.pixelSize: 15
                                                         font.bold: true
+                                                        elide: Text.ElideRight
+                                                        width: 230
                                                     }
 
                                                     Text {
