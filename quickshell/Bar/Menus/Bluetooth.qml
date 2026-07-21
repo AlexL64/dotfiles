@@ -74,32 +74,61 @@ PanelWindow { //qmllint disable uncreatable-type
 
                         Text {
                             text: ""
-                            color: "#cdd6f4"
+                            color: "#89b4fa"
                             font.family: "Font Awesome 7 Free Solid"
                             font.pixelSize: 20
                         }
 
-                        Text {
-                            text: `Bluetooth ${getState(Bluetooth.defaultAdapter.state)}` // qmllint disable unresolved-type
-                            color: "#cdd6f4"
-                            font.family: "JetBrainsMono Nerd Font"
-                            font.pixelSize: 15
-                            font.bold: true
+                        Row {
+                            spacing: 8
 
-                            function getState(state) {
-                                switch (state) {
-                                case BluetoothAdapterState.Enabled:
-                                    return "Enabled";
-                                case BluetoothAdapterState.Disabled:
-                                    return "Disabled";
-                                case BluetoothAdapterState.Enabling:
-                                    return "Enabling";
-                                case BluetoothAdapterState.Disabling:
-                                    return "Disabling";
-                                case BluetoothAdapterState.Blocked:
-                                    return "Disabled";
-                                default:
-                                    return "Unknown";
+                            Text {
+                                text: "Bluetooth:"
+                                color: "#cdd6f4"
+                                font.family: "JetBrainsMono Nerd Font"
+                                font.pixelSize: 15
+                                font.bold: true
+                            }
+
+                            Text {
+                                text: getState(Bluetooth.defaultAdapter.state) // qmllint disable unresolved-type
+                                color: getColor(Bluetooth.defaultAdapter.state) // qmllint disable unresolved-type
+                                font.family: "JetBrainsMono Nerd Font"
+                                font.pixelSize: 15
+                                font.bold: true
+
+                                function getState(state) {
+                                    switch (state) {
+                                    case BluetoothAdapterState.Enabled:
+                                        return "Enabled";
+                                    case BluetoothAdapterState.Disabled:
+                                        return "Disabled";
+                                    case BluetoothAdapterState.Enabling:
+                                        return "Enabling";
+                                    case BluetoothAdapterState.Disabling:
+                                        return "Disabling";
+                                    case BluetoothAdapterState.Blocked:
+                                        return "Disabled";
+                                    default:
+                                        return "Unknown";
+                                    }
+                                }
+
+                                function getColor(state) {
+                                    switch (state) {
+                                    case BluetoothAdapterState.Enabled:
+                                        return "#a6e3a1";
+                                    case BluetoothAdapterState.Disabled:
+                                        return "#f38ba8";
+                                    case BluetoothAdapterState.Enabling:
+                                        return "#fab387";
+                                    case BluetoothAdapterState.Disabling:
+                                        return "#fab387";
+                                    case BluetoothAdapterState.Blocked:
+                                        return "#f38ba8";
+                                    default:
+                                        return "#cdd6f4";
+                                    }
                                 }
                             }
                         }
