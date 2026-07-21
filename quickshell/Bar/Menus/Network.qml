@@ -568,7 +568,7 @@ PanelWindow { //qmllint disable uncreatable-type
                     id: availableWifiNetworks
                     width: parent.width
                     spacing: 8
-                    
+
                     Repeater {
                         id: test
                         model: network.wifiDevices
@@ -581,7 +581,13 @@ PanelWindow { //qmllint disable uncreatable-type
                             property var availableWifiNetworks: modelData.networks.values.filter(network => !network.connected)
 
                             Repeater {
-                                model: delegateAvailableWifiDeviceItem.availableWifiNetworks
+                                model: delegateAvailableWifiDeviceItem.availableWifiNetworks.sort((a, b) => {
+                                    if (a.known !== b.known) {
+                                        return Number(b.known) - Number(a.known);
+                                    }
+
+                                    return b.signalStrength - a.signalStrength;
+                                })
                                 delegate: Rectangle {
                                     id: delegateAvailableWifiNetworkItem
                                     color: "#313244"
