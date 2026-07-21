@@ -76,7 +76,7 @@ Rectangle {
                     hoverEnabled: true
 
                     onClicked: {
-                        Hyprland.dispatch(`workspace ${delegateItem.modelData}`);
+                        Hyprland.dispatch(`hl.dsp.focus({ workspace = "${delegateItem.modelData}" })`);
                     }
                 }
             }
