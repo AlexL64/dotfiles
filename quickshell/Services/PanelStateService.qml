@@ -13,7 +13,7 @@ Singleton {
     property bool powerVisible: false
     property bool trayVisible: false
     property bool batteryVisible: false
-    property bool networkVisible: true
+    property bool networkVisible: false
     property bool bluetoothVisible: false
     property bool notificationsPanelVisible: false
     property bool audioVisible: false
