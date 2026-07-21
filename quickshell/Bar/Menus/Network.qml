@@ -399,6 +399,7 @@ PanelWindow { //qmllint disable uncreatable-type
                         }
 
                         Switch {
+                            visible: MullvadService.state != "error"
                             id: toggleMullvad
                             implicitWidth: background.width
 
