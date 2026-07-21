@@ -735,6 +735,7 @@ PanelWindow { //qmllint disable uncreatable-type
                         delegate: ColumnLayout {
                             id: delegateAvailableWifiDeviceItem
                             spacing: 8
+                            visible: Networking.wifiEnabled
 
                             required property WifiDevice modelData
 
