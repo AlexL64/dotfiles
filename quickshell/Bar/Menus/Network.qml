@@ -360,6 +360,7 @@ PanelWindow { //qmllint disable uncreatable-type
                         }
 
                         Button {
+                            visible: MullvadService.state == "connected"
                             implicitHeight: 32
                             implicitWidth: 32
 
