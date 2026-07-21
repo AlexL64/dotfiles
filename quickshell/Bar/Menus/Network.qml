@@ -57,6 +57,161 @@ PanelWindow { //qmllint disable uncreatable-type
             anchors.centerIn: parent
             spacing: 8
 
+            RowLayout {
+                spacing: 8
+
+                Rectangle {
+                    Layout.fillWidth: true
+                    implicitHeight: 48
+                    color: "#313244"
+                    radius: 12
+
+                    RowLayout {
+                        anchors.fill: parent
+                        anchors.leftMargin: 12
+                        anchors.rightMargin: 12
+
+                        Text {
+                            text: "Wifi:"
+                            color: "#cdd6f4"
+                            font.family: "JetBrainsMono Nerd Font"
+                            font.pixelSize: 15
+                            font.bold: true
+                        }
+
+                        Text {
+                            text: Networking.wifiEnabled ? "Enabled" : "Disabled"
+                            color: Networking.wifiEnabled ? "#a6e3a1" : "#f38ba8"
+                            font.family: "JetBrainsMono Nerd Font"
+                            font.pixelSize: 15
+                            font.bold: true
+                            Layout.fillWidth: true
+                        }
+
+                        Switch {
+                            id: toggleWifi
+                            implicitWidth: background.width
+
+                            checked: Networking.wifiEnabled
+
+                            indicator: Rectangle {
+                                width: 18
+                                height: 18
+                                color: "white"
+                                radius: 9
+                                anchors.verticalCenter: parent.verticalCenter
+                                x: toggleWifi.checked ? parent.width - width - 3 : 3
+
+                                Behavior on x {
+                                    NumberAnimation {
+                                        duration: 75
+                                    }
+                                }
+                            }
+
+                            background: Rectangle {
+                                width: 48
+                                height: 24
+                                radius: 15
+                                color: toggleWifi.checked ? "#cba6f7" : "#9399b2"
+                                anchors.verticalCenter: parent.verticalCenter
+
+                                Behavior on color {
+                                    ColorAnimation {
+                                        duration: 75
+                                        easing.type: Easing.InOutQuad
+                                    }
+                                }
+                            }
+
+                            MouseArea {
+                                anchors.fill: parent
+                                cursorShape: Qt.PointingHandCursor
+                                hoverEnabled: true
+
+                                onClicked: {
+                                    Networking.wifiEnabled = !Networking.wifiEnabled;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                Button {
+                    Layout.fillHeight: true
+                    implicitWidth: 56
+                    contentItem: Text {
+                        text: "\ue0da"
+                        color: "#cdd6f4"
+                        font.family: "Material Icons"
+                        font.pixelSize: 24
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                    }
+
+                    background: Rectangle {
+                        id: mullvadRectangleBackground
+                        color: "#313244"
+                        radius: 12
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        hoverEnabled: true
+
+                        onEntered: {
+                            mullvadRectangleBackground.color = "#cc313244";
+                        }
+
+                        onExited: {
+                            mullvadRectangleBackground.color = "#313244";
+                        }
+
+                        onClicked: {
+                            Quickshell.execDetached("mullvad-vpn");
+                        }
+                    }
+                }
+
+                Button {
+                    Layout.fillHeight: true
+                    implicitWidth: 56
+                    contentItem: Text {
+                        text: ""
+                        color: "#cdd6f4"
+                        font.family: "Font Awesome 7 Free Solid"
+                        font.pixelSize: 20
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                    }
+
+                    background: Rectangle {
+                        id: advancedRectangleBackground
+                        color: "#313244"
+                        radius: 12
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        hoverEnabled: true
+
+                        onEntered: {
+                            advancedRectangleBackground.color = "#cc313244";
+                        }
+
+                        onExited: {
+                            advancedRectangleBackground.color = "#313244";
+                        }
+
+                        onClicked: {
+                            Quickshell.execDetached("nm-connection-editor");
+                        }
+                    }
+                }
+            }
+
             Rectangle {
                 color: "#313244"
                 implicitHeight: children[0].height + 24
