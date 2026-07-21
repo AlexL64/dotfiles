@@ -440,27 +440,27 @@ PanelWindow { //qmllint disable uncreatable-type
                                                 function getText(security) {
                                                     switch (security) {
                                                     case WifiSecurityType.StaticWep:
-                                                        return "Static WEP";
+                                                        return "WEP (Static)";
                                                     case WifiSecurityType.Sae:
-                                                        return "SAE";
+                                                        return "WPA3-Personal";
                                                     case WifiSecurityType.Wpa2Psk:
-                                                        return "WPA2-PSK";
+                                                        return "WPA2-Personal";
                                                     case WifiSecurityType.WpaEap:
-                                                        return "WPA-EAP";
+                                                        return "WPA-Enterprise";
                                                     case WifiSecurityType.Open:
                                                         return "Open";
                                                     case WifiSecurityType.DynamicWep:
-                                                        return "Dynamic WEP";
+                                                        return "WEP (Dynamic)";
                                                     case WifiSecurityType.Leap:
                                                         return "LEAP";
                                                     case WifiSecurityType.Wpa3SuiteB192:
                                                         return "WPA3-Enterprise";
                                                     case WifiSecurityType.WpaPsk:
-                                                        return "WPA-PSK";
+                                                        return "WPA-Personal";
                                                     case WifiSecurityType.Wpa2Eap:
-                                                        return "WPA2-EAP";
+                                                        return "WPA2-Enterprise";
                                                     case WifiSecurityType.Owe:
-                                                        return "OWE";
+                                                        return "Enhanced Open";
                                                     default:
                                                         return "";
                                                     }
@@ -674,27 +674,27 @@ PanelWindow { //qmllint disable uncreatable-type
                                                     function getText(security) {
                                                         switch (security) {
                                                         case WifiSecurityType.StaticWep:
-                                                            return "Static WEP";
+                                                            return "WEP (Static)";
                                                         case WifiSecurityType.Sae:
-                                                            return "SAE";
+                                                            return "WPA3-Personal";
                                                         case WifiSecurityType.Wpa2Psk:
-                                                            return "WPA2-PSK";
+                                                            return "WPA2-Personal";
                                                         case WifiSecurityType.WpaEap:
-                                                            return "WPA-EAP";
+                                                            return "WPA-Enterprise";
                                                         case WifiSecurityType.Open:
                                                             return "Open";
                                                         case WifiSecurityType.DynamicWep:
-                                                            return "Dynamic WEP";
+                                                            return "WEP (Dynamic)";
                                                         case WifiSecurityType.Leap:
                                                             return "LEAP";
                                                         case WifiSecurityType.Wpa3SuiteB192:
                                                             return "WPA3-Enterprise";
                                                         case WifiSecurityType.WpaPsk:
-                                                            return "WPA-PSK";
+                                                            return "WPA-Personal";
                                                         case WifiSecurityType.Wpa2Eap:
-                                                            return "WPA2-EAP";
+                                                            return "WPA2-Enterprise";
                                                         case WifiSecurityType.Owe:
-                                                            return "OWE";
+                                                            return "Enhanced Open";
                                                         default:
                                                             return "";
                                                         }
