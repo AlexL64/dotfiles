@@ -28,8 +28,20 @@ PanelWindow { //qmllint disable uncreatable-type
         right: true
     }
 
-    property var connectedWiredDevices: Networking.devices.values.filter(device => device.type === DeviceType.Wired)
-    property var connectedWifiDevices: Networking.devices.values.filter(device => device.type === DeviceType.Wifi)
+    onVisibleChanged: {
+        if (visible) {
+            wifiDevices.forEach(wifiDevice => {
+                wifiDevice.scannerEnabled = true;
+            });
+        } else {
+            wifiDevices.forEach(wifiDevice => {
+                wifiDevice.scannerEnabled = false;
+            });
+        }
+    }
+
+    property var wiredDevices: Networking.devices.values.filter(device => device.type === DeviceType.Wired)
+    property var wifiDevices: Networking.devices.values.filter(device => device.type === DeviceType.Wifi)
 
     Rectangle {
         color: "#1e1e2e"
@@ -43,6 +55,7 @@ PanelWindow { //qmllint disable uncreatable-type
             id: content
             width: 450
             anchors.centerIn: parent
+            spacing: 8
 
             Rectangle {
                 color: "#313244"
@@ -56,10 +69,11 @@ PanelWindow { //qmllint disable uncreatable-type
                     anchors.right: parent.right
                     anchors.leftMargin: 16
                     anchors.rightMargin: 16
+                    Layout.preferredHeight: 0
 
                     RowLayout {
-                        Layout.minimumHeight: 64
                         spacing: 8
+                        Layout.minimumHeight: 58
 
                         Text {
                             text: MullvadService.state == "connected" ? "" : ""
@@ -284,11 +298,10 @@ PanelWindow { //qmllint disable uncreatable-type
                     }
 
                     Repeater {
-                        model: network.connectedWiredDevices
+                        model: network.wiredDevices
                         delegate: ColumnLayout {
-                            id: delegateWiredDevicesItem
-
-                            spacing: 3
+                            id: delegateConnectedWiredDevicesItem
+                            spacing: 8
 
                             required property WiredDevice modelData
 
@@ -300,18 +313,17 @@ PanelWindow { //qmllint disable uncreatable-type
                             }
 
                             RowLayout {
-                                Layout.minimumHeight: 48
                                 spacing: 8
 
                                 IconImage {
-                                    source: delegateWiredDevicesItem.modelData.hasLink ? Quickshell.iconPath("/usr/share/icons/Papirus/24x24/panel/network-wired.svg") : Quickshell.iconPath("network-wired-offline")
+                                    source: delegateConnectedWiredDevicesItem.modelData.hasLink ? Quickshell.iconPath("/usr/share/icons/Papirus/24x24/panel/network-wired.svg") : Quickshell.iconPath("network-wired-offline")
                                     implicitSize: 36
                                 }
 
                                 ColumnLayout {
                                     spacing: 3
                                     Text {
-                                        text: delegateWiredDevicesItem.modelData.name
+                                        text: delegateConnectedWiredDevicesItem.modelData.name
                                         color: "#cdd6f4"
                                         font.family: "JetBrainsMono Nerd Font"
                                         font.pixelSize: 15
@@ -319,7 +331,7 @@ PanelWindow { //qmllint disable uncreatable-type
                                     }
 
                                     Text {
-                                        text: delegateWiredDevicesItem.modelData.linkSpeed + " Mb/s"
+                                        text: delegateConnectedWiredDevicesItem.modelData.linkSpeed + " Mb/s"
                                         color: "#bac2de"
                                         font.family: "JetBrainsMono Nerd Font"
                                         font.pixelSize: 13
@@ -331,22 +343,24 @@ PanelWindow { //qmllint disable uncreatable-type
                     }
 
                     Repeater {
-                        model: network.connectedWifiDevices
+                        model: network.wifiDevices
+
                         delegate: ColumnLayout {
-                            id: delegateWifiDeviceItem
+                            id: delegateConnectedWifiDeviceItem
+                            visible: connectedWifiNetworks.length > 0
 
                             required property WifiDevice modelData
 
                             property var connectedWifiNetworks: modelData.networks.values.filter(network => network.connected)
 
                             Repeater {
-                                model: delegateWifiDeviceItem.connectedWifiNetworks
+                                model: delegateConnectedWifiDeviceItem.connectedWifiNetworks
                                 delegate: ColumnLayout {
-                                    id: delegateWifiNetworkItem
-                                    spacing: 10
+                                    id: delegateConnectedWifiNetworkItem
+                                    spacing: 8
                                     Layout.fillWidth: true
 
-                                    required property Network modelData
+                                    required property WifiNetwork modelData
 
                                     Rectangle {
                                         color: "#6c7086"
@@ -356,8 +370,10 @@ PanelWindow { //qmllint disable uncreatable-type
                                     }
 
                                     RowLayout {
+                                        spacing: 8
+
                                         IconImage {
-                                            source: getIcon(delegateWifiNetworkItem.modelData)
+                                            source: getIcon(delegateConnectedWifiNetworkItem.modelData)
                                             implicitSize: 36
 
                                             function getIcon(wifiNetwork) {
@@ -374,15 +390,82 @@ PanelWindow { //qmllint disable uncreatable-type
 
                                                 return Quickshell.iconPath(icon);
                                             }
+
+                                            Text {
+                                                visible: delegateConnectedWifiNetworkItem.modelData.security != "None" && delegateConnectedWifiNetworkItem.modelData.security != "Unknown" // qmllint disable unresolved-type
+                                                text: ""
+                                                font.family: "Font Awesome 7 Free"
+                                                font.pixelSize: 12
+                                                color: "#fab387"
+                                                anchors.bottom: parent.bottom
+                                                anchors.right: parent.right
+                                                anchors.rightMargin: 5
+                                                anchors.bottomMargin: 6
+                                                style: Text.Outline
+                                                styleColor: "#6c7086"
+                                            }
                                         }
 
-                                        Text {
-                                            text: delegateWifiNetworkItem.modelData.name
-                                            color: "#cdd6f4"
-                                            font.family: "JetBrainsMono Nerd Font"
-                                            font.pixelSize: 15
-                                            font.bold: true
-                                            Layout.fillWidth: true
+                                        ColumnLayout {
+                                            spacing: 3
+
+                                            Row {
+                                                Layout.fillWidth: true
+                                                spacing: 8
+                                                Text {
+                                                    text: delegateConnectedWifiNetworkItem.modelData.name
+                                                    color: "#cdd6f4"
+                                                    font.family: "JetBrainsMono Nerd Font"
+                                                    font.pixelSize: 15
+                                                    font.bold: true
+                                                }
+
+                                                Text {
+                                                    visible: delegateConnectedWifiNetworkItem.modelData.known
+                                                    text: ""
+                                                    font.family: "Font Awesome 7 Free Solid"
+                                                    font.pixelSize: 13
+                                                    color: "#a6e3a1"
+                                                    anchors.verticalCenter: parent.verticalCenter
+                                                }
+                                            }
+
+                                            Text {
+                                                text: getText(delegateConnectedWifiNetworkItem.modelData.security) // qmllint disable unresolved-type
+                                                color: "#bac2de"
+                                                font.family: "JetBrainsMono Nerd Font"
+                                                font.pixelSize: 13
+                                                font.bold: true
+
+                                                function getText(security) {
+                                                    switch (security) {
+                                                    case WifiSecurityType.StaticWep:
+                                                        return "Static WEP";
+                                                    case WifiSecurityType.Sae:
+                                                        return "SAE";
+                                                    case WifiSecurityType.Wpa2Psk:
+                                                        return "WPA2-PSK";
+                                                    case WifiSecurityType.WpaEap:
+                                                        return "WPA-EAP";
+                                                    case WifiSecurityType.Open:
+                                                        return "Open";
+                                                    case WifiSecurityType.DynamicWep:
+                                                        return "Dynamic WEP";
+                                                    case WifiSecurityType.Leap:
+                                                        return "LEAP";
+                                                    case WifiSecurityType.Wpa3SuiteB192:
+                                                        return "WPA3-Enterprise";
+                                                    case WifiSecurityType.WpaPsk:
+                                                        return "WPA-PSK";
+                                                    case WifiSecurityType.Wpa2Eap:
+                                                        return "WPA2-EAP";
+                                                    case WifiSecurityType.Owe:
+                                                        return "OWE";
+                                                    default:
+                                                        return "";
+                                                    }
+                                                }
+                                            }
                                         }
 
                                         Button {
@@ -390,10 +473,10 @@ PanelWindow { //qmllint disable uncreatable-type
                                             implicitWidth: 96
 
                                             contentItem: Text {
-                                                id: connectButton
-                                                text: getText(delegateWifiNetworkItem.modelData.state, delegateWifiNetworkItem.modelData.stateChanging) // qmllint disable unresolved-type
+                                                id: disconnectButton
+                                                text: getText(delegateConnectedWifiNetworkItem.modelData.state, delegateConnectedWifiNetworkItem.modelData.stateChanging) // qmllint disable unresolved-type
                                                 color: "#313244"
-                                                font.family: getFont(delegateWifiNetworkItem.modelData.state, delegateWifiNetworkItem.modelData.stateChanging) // qmllint disable unresolved-type
+                                                font.family: getFont(delegateConnectedWifiNetworkItem.modelData.state, delegateConnectedWifiNetworkItem.modelData.stateChanging) // qmllint disable unresolved-type
                                                 font.pixelSize: 14
                                                 font.bold: true
                                                 horizontalAlignment: Text.AlignHCenter
@@ -405,7 +488,7 @@ PanelWindow { //qmllint disable uncreatable-type
                                                     } else if (state == ConnectionState.Connected) {
                                                         return "Disconnect";
                                                     } else if (state == ConnectionState.Disconnected) {
-                                                        return "Disconnect";
+                                                        return "Connect";
                                                     }
 
                                                     return "";
@@ -424,23 +507,23 @@ PanelWindow { //qmllint disable uncreatable-type
                                                 }
 
                                                 NumberAnimation {
-                                                    target: connectButton
+                                                    target: disconnectButton
                                                     property: "rotation"
                                                     from: 0
                                                     to: 360
                                                     duration: 2000
                                                     loops: Animation.Infinite
-                                                    running: delegateWifiNetworkItem.modelData.state == ConnectionState.Connecting || delegateWifiNetworkItem.modelData.state == ConnectionState.Disconnecting || delegateWifiNetworkItem.modelData.stateChanging // qmllint disable unresolved-type
+                                                    running: delegateConnectedWifiNetworkItem.modelData.state == ConnectionState.Connecting || delegateConnectedWifiNetworkItem.modelData.state == ConnectionState.Disconnecting || delegateConnectedWifiNetworkItem.modelData.stateChanging // qmllint disable unresolved-type
                                                     onRunningChanged: {
                                                         if (!running) {
-                                                            connectButton.rotation = 0;
+                                                            disconnectButton.rotation = 0;
                                                         }
                                                     }
                                                 }
                                             }
 
                                             background: Rectangle {
-                                                color: getColor(delegateWifiNetworkItem.modelData.state, delegateWifiNetworkItem.modelData.stateChanging, connectButtonMouseArea.containsMouse) // qmllint disable unresolved-type
+                                                color: getColor(delegateConnectedWifiNetworkItem.modelData.state, delegateConnectedWifiNetworkItem.modelData.stateChanging, disconnectButtonMouseArea.containsMouse) // qmllint disable unresolved-type
                                                 radius: 6
 
                                                 function getColor(state, stateChanging, containsMouse) {
@@ -457,16 +540,243 @@ PanelWindow { //qmllint disable uncreatable-type
                                             }
 
                                             MouseArea {
-                                                id: connectButtonMouseArea
+                                                id: disconnectButtonMouseArea
                                                 anchors.fill: parent
                                                 cursorShape: Qt.PointingHandCursor
                                                 hoverEnabled: true
 
                                                 onClicked: {
-                                                    if (delegateWifiNetworkItem.modelData.state == ConnectionState.Disconnected) { // qmllint disable unresolved-type
-                                                        delegateWifiNetworkItem.modelData.connect();
-                                                    } else if (delegateWifiNetworkItem.modelData.state == ConnectionState.Connected) { // qmllint disable unresolved-type
-                                                        delegateWifiNetworkItem.modelData.disconnect();
+                                                    if (delegateConnectedWifiNetworkItem.modelData.state == ConnectionState.Connected) { // qmllint disable unresolved-type
+                                                        delegateConnectedWifiNetworkItem.modelData.disconnect();
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            ScrollView {
+                Layout.fillWidth: true
+                Layout.preferredHeight: availableWifiNetworks.height > 300 ? 300 : availableWifiNetworks.height
+
+                ColumnLayout {
+                    id: availableWifiNetworks
+                    width: parent.width
+                    spacing: 8
+                    
+                    Repeater {
+                        id: test
+                        model: network.wifiDevices
+                        delegate: ColumnLayout {
+                            id: delegateAvailableWifiDeviceItem
+                            spacing: 8
+
+                            required property WifiDevice modelData
+
+                            property var availableWifiNetworks: modelData.networks.values.filter(network => !network.connected)
+
+                            Repeater {
+                                model: delegateAvailableWifiDeviceItem.availableWifiNetworks
+                                delegate: Rectangle {
+                                    id: delegateAvailableWifiNetworkItem
+                                    color: "#313244"
+                                    implicitHeight: children[0].height + 8
+                                    radius: 12
+                                    Layout.fillWidth: true
+
+                                    required property WifiNetwork modelData
+
+                                    ColumnLayout {
+                                        anchors.verticalCenter: parent.verticalCenter
+                                        anchors.left: parent.left
+                                        anchors.right: parent.right
+                                        anchors.leftMargin: 16
+                                        anchors.rightMargin: 16
+
+                                        RowLayout {
+                                            spacing: 8
+
+                                            IconImage {
+                                                source: getIcon(delegateAvailableWifiNetworkItem.modelData)
+                                                implicitSize: 36
+
+                                                function getIcon(wifiNetwork) {
+                                                    const icons = {
+                                                        100: "network-wireless-100",
+                                                        80: "network-wireless-80",
+                                                        60: "network-wireless-60",
+                                                        40: "network-wireless-40",
+                                                        20: "network-wireless-20",
+                                                        0: "network-wireless-0"
+                                                    };
+
+                                                    const icon = icons[[0, 20, 40, 60, 80, 100].find(threshold => threshold >= wifiNetwork.signalStrength * 100)];
+
+                                                    return Quickshell.iconPath(icon);
+                                                }
+
+                                                Text {
+                                                    visible: delegateAvailableWifiNetworkItem.modelData.security != "None" && delegateAvailableWifiNetworkItem.modelData.security != "Unknown" // qmllint disable unresolved-type
+                                                    text: ""
+                                                    font.family: "Font Awesome 7 Free"
+                                                    font.pixelSize: 12
+                                                    color: "#fab387"
+                                                    anchors.bottom: parent.bottom
+                                                    anchors.right: parent.right
+                                                    anchors.rightMargin: 5
+                                                    anchors.bottomMargin: 6
+                                                    style: Text.Outline
+                                                    styleColor: "#6c7086"
+                                                }
+                                            }
+
+                                            ColumnLayout {
+                                                spacing: 3
+                                                Row {
+                                                    Layout.fillWidth: true
+                                                    spacing: 8
+                                                    Text {
+                                                        text: delegateAvailableWifiNetworkItem.modelData.name
+                                                        color: "#cdd6f4"
+                                                        font.family: "JetBrainsMono Nerd Font"
+                                                        font.pixelSize: 15
+                                                        font.bold: true
+                                                    }
+
+                                                    Text {
+                                                        visible: delegateAvailableWifiNetworkItem.modelData.known
+                                                        text: ""
+                                                        font.family: "Font Awesome 7 Free Solid"
+                                                        font.pixelSize: 13
+                                                        color: "#a6e3a1"
+                                                        anchors.verticalCenter: parent.verticalCenter
+                                                    }
+                                                }
+
+                                                Text {
+                                                    text: getText(delegateAvailableWifiNetworkItem.modelData.security) // qmllint disable unresolved-type
+                                                    color: "#bac2de"
+                                                    font.family: "JetBrainsMono Nerd Font"
+                                                    font.pixelSize: 13
+                                                    font.bold: true
+
+                                                    function getText(security) {
+                                                        switch (security) {
+                                                        case WifiSecurityType.StaticWep:
+                                                            return "Static WEP";
+                                                        case WifiSecurityType.Sae:
+                                                            return "SAE";
+                                                        case WifiSecurityType.Wpa2Psk:
+                                                            return "WPA2-PSK";
+                                                        case WifiSecurityType.WpaEap:
+                                                            return "WPA-EAP";
+                                                        case WifiSecurityType.Open:
+                                                            return "Open";
+                                                        case WifiSecurityType.DynamicWep:
+                                                            return "Dynamic WEP";
+                                                        case WifiSecurityType.Leap:
+                                                            return "LEAP";
+                                                        case WifiSecurityType.Wpa3SuiteB192:
+                                                            return "WPA3-Enterprise";
+                                                        case WifiSecurityType.WpaPsk:
+                                                            return "WPA-PSK";
+                                                        case WifiSecurityType.Wpa2Eap:
+                                                            return "WPA2-EAP";
+                                                        case WifiSecurityType.Owe:
+                                                            return "OWE";
+                                                        default:
+                                                            return "";
+                                                        }
+                                                    }
+                                                }
+                                            }
+
+                                            Button {
+                                                implicitHeight: 32
+                                                implicitWidth: 96
+
+                                                contentItem: Text {
+                                                    id: connectButton
+                                                    text: getText(delegateAvailableWifiNetworkItem.modelData.state, delegateAvailableWifiNetworkItem.modelData.stateChanging) // qmllint disable unresolved-type
+                                                    color: "#313244"
+                                                    font.family: getFont(delegateAvailableWifiNetworkItem.modelData.state, delegateAvailableWifiNetworkItem.modelData.stateChanging) // qmllint disable unresolved-type
+                                                    font.pixelSize: 14
+                                                    font.bold: true
+                                                    horizontalAlignment: Text.AlignHCenter
+                                                    verticalAlignment: Text.AlignVCenter
+
+                                                    function getText(state, stateChanging) {
+                                                        if (state == ConnectionState.Connecting || state == ConnectionState.Disconnecting || stateChanging) {
+                                                            return "";
+                                                        } else if (state == ConnectionState.Connected) {
+                                                            return "Disconnect";
+                                                        } else if (state == ConnectionState.Disconnected) {
+                                                            return "Connect";
+                                                        }
+
+                                                        return "";
+                                                    }
+
+                                                    function getFont(state, stateChanging) {
+                                                        if (state == ConnectionState.Connecting || state == ConnectionState.Disconnecting || stateChanging) {
+                                                            return "Font Awesome 7 Free Solid";
+                                                        } else if (state == ConnectionState.Connected) {
+                                                            return "JetBrainsMono Nerd Font";
+                                                        } else if (state == ConnectionState.Disconnected) {
+                                                            return "JetBrainsMono Nerd Font";
+                                                        }
+
+                                                        return "Font Awesome 7 Free Solid";
+                                                    }
+
+                                                    NumberAnimation {
+                                                        target: connectButton
+                                                        property: "rotation"
+                                                        from: 0
+                                                        to: 360
+                                                        duration: 2000
+                                                        loops: Animation.Infinite
+                                                        running: delegateAvailableWifiNetworkItem.modelData.state == ConnectionState.Connecting || delegateAvailableWifiNetworkItem.modelData.state == ConnectionState.Disconnecting || delegateAvailableWifiNetworkItem.modelData.stateChanging // qmllint disable unresolved-type
+                                                        onRunningChanged: {
+                                                            if (!running) {
+                                                                connectButton.rotation = 0;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+
+                                                background: Rectangle {
+                                                    color: getColor(delegateAvailableWifiNetworkItem.modelData.state, delegateAvailableWifiNetworkItem.modelData.stateChanging, connectButtonMouseArea.containsMouse) // qmllint disable unresolved-type
+                                                    radius: 6
+
+                                                    function getColor(state, stateChanging, containsMouse) {
+                                                        if (state == ConnectionState.Connecting || state == ConnectionState.Disconnecting || stateChanging) {
+                                                            return containsMouse ? "#ccfab387" : "#fab387";
+                                                        } else if (state == ConnectionState.Connected) {
+                                                            return containsMouse ? "#ccf38ba8" : "#f38ba8";
+                                                        } else if (state == ConnectionState.Disconnected) {
+                                                            return containsMouse ? "#cca6e3a1" : "#a6e3a1";
+                                                        }
+
+                                                        return "#f38ba8";
+                                                    }
+                                                }
+
+                                                MouseArea {
+                                                    id: connectButtonMouseArea
+                                                    anchors.fill: parent
+                                                    cursorShape: Qt.PointingHandCursor
+                                                    hoverEnabled: true
+
+                                                    onClicked: {
+                                                        if (delegateAvailableWifiNetworkItem.modelData.state == ConnectionState.Disconnected) { // qmllint disable unresolved-type
+                                                            delegateAvailableWifiNetworkItem.modelData.connect();
+                                                        }
                                                     }
                                                 }
                                             }
