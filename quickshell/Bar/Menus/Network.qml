@@ -561,6 +561,7 @@ PanelWindow { //qmllint disable uncreatable-type
             }
 
             ScrollView {
+                visible: availableWifiNetworks.height > 0
                 Layout.fillWidth: true
                 Layout.preferredHeight: availableWifiNetworks.height > 300 ? 300 : availableWifiNetworks.height
 
