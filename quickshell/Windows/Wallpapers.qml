@@ -58,10 +58,10 @@ PanelWindow { //qmllint disable uncreatable-type
     Process {
         id: currentProcess
         running: true
-        command: ["bash", "-c", "echo $HOME/Wallpaper/$(basename $(awww query | grep -oP '(?<=image: ).*'))"]
+        command: ["bash", "-c", "awww query --json"]
         stdout: StdioCollector {
             onStreamFinished: {
-                const current = text.trim();
+                const current = JSON.parse(text)[""][0].displaying.image;
 
                 if (wallpapers.current != current) {
                     wallpapers.current = current;
