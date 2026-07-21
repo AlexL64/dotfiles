@@ -492,6 +492,8 @@ PanelWindow { //qmllint disable uncreatable-type
                                     font.pixelSize: 14
                                     color: "#cdd6f4"
                                     font.bold: true
+                                    elide: Text.ElideRight
+                                    Layout.maximumWidth: 180
                                 }
 
                                 Item {
