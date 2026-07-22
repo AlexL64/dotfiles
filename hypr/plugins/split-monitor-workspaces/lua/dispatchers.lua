@@ -27,7 +27,6 @@ function dispatchers.do_workspace(workspace_str)
 
 	if globals.cfg.link_monitors then
 		--- Gnome-style: switch all monitors to their corresponding workspace.
-        local saved_cursor_pos = hl.get_cursor_pos()
 		for _, monitor in ipairs(hl.get_monitors()) do
 			---@type string
 			local target_workspace = helpers.get_workspace_from_monitor(monitor, workspace_str)
@@ -35,18 +34,20 @@ function dispatchers.do_workspace(workspace_str)
 			if hl.get_workspace(target_workspace) == nil then
 				hl.dispatch(hl.dsp.focus({ workspace = target_workspace }))
 			end
-			--- move it to the correct monitor if it's not already there
-			hl.dispatch(hl.dsp.workspace.move({ workspace = target_workspace, monitor = monitor.name, follow = true }))
-			--- ensure the workspace is now focused for this monitor
-			hl.dispatch(hl.dsp.focus({ workspace = target_workspace }))
-		end
+			if monitor.active_workspace and monitor.active_workspace.name == target_workspace then
+				--- already on the correct workspace, no need to switch
+				goto continue
+			end
+			if monitor.id == current_monitor.id then
+				--- for the current monitor, just focus the workspace
+				hl.dispatch(hl.dsp.focus({ workspace = target_workspace }))
+				goto continue
+			end
+			--- for other monitors, set the monitor's active workspace to the target without focusig it
+			monitor:set_workspace({ workspace = target_workspace })
 
-		--- now focus the original monitor's workspace again to ensure focus doesn't jump monitors
-		--- TODO: upstream Hyprland should support changing workspaces on a monitor without focusing it using lua (like the C++ plugin did)
-		hl.dispatch(hl.dsp.focus({ workspace = helpers.get_workspace_from_monitor(current_monitor, workspace_str) }))
-        if saved_cursor_pos then
-            hl.dispatch(hl.dsp.cursor.move({ x = saved_cursor_pos.x, y = saved_cursor_pos.y }))
-        end
+			::continue::
+		end
 	else
 		---@type string
 		local resolved = helpers.get_workspace_from_monitor(current_monitor, workspace_str)
@@ -119,20 +120,16 @@ function dispatchers.do_cycle_workspaces(value, no_wrap)
 		-- Focus the target workspace. If link_monitors is enabled, also move it to the correct monitor and follow it to ensure all monitors switch together.
 		---@type string
 		local target = ws_list[idx]
-		hl.dispatch(hl.dsp.focus({ workspace = target }))
+		-- hl.dispatch(hl.dsp.focus({ workspace = target }))
+		-- If the monitor being cycled is the current monitor, focus the workspace normally.
+		-- Otherwise use set_workspace to avoid stealing focus from the current monitor.
+		if monitor.id == current_monitor.id then
+			hl.dispatch(hl.dsp.focus({ workspace = target }))
+		else
+			monitor:set_workspace({ workspace = target })
+		end
 
 		::continue::
-	end
-
-	if globals.cfg.link_monitors then
-		-- TODO: Hyprland needs a way to change workspaces on other monitors through lua without focusing them (like the C++ plugin did)
-		-- After cycling, ensure the original monitor's workspace is focused again to prevent focus from
-		-- jumping to another monitor.
-		if not current_monitor then
-			error("[split-monitor-workspaces] No current monitor? Cannot switch workspace.")
-			return
-		end
-		hl.dispatch(hl.dsp.focus({ workspace = helpers.get_workspace_from_monitor(current_monitor, value) }))
 	end
 end
 
