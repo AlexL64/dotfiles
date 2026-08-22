@@ -3,7 +3,7 @@ hl.bind("SUPER + L", hl.dsp.exec_cmd("hyprlock"), { description = "General | SUP
 hl.bind("SUPER + B", hl.dsp.exec_cmd("qs ipc call bar toggle"), { description = "General | SUPER+B | Toggle bar" })
 hl.bind("SUPER + backspace", hl.dsp.exec_cmd("qs ipc call powerSelector toggle"), { description = "General | SUPER+BACKSPACE | Power menu" })
 hl.bind("SUPER + SHIFT + S", hl.dsp.exec_cmd("qs ipc call screenshot toggle"), { description = "General | SUPER+SHIFT+S | Screenshot" })
-hl.bind("code:107", hl.dsp.exec_cmd("qs ipc call screenshot toggle"), { description = "General | PrtSc | Screenshot" })
+hl.bind("Print", hl.dsp.exec_cmd("qs ipc call screenshot toggle"), { description = "General | PrtSc | Screenshot" })
 
 -- Programs
 hl.bind("SUPER + Q", hl.dsp.exec_cmd("kitty"), { description = "Program | SUPER+Q | Terminal" })
