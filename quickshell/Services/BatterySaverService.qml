@@ -17,9 +17,9 @@ Singleton {
 
     function toggle() {
         if (root.enabled) {
-            Quickshell.execDetached(["sudo", "lenopow", "-d"]);
+            Quickshell.execDetached(["sudo", "conservation-mode", "0"]);
         } else {
-            Quickshell.execDetached(["sudo", "lenopow", "-e"]);
+            Quickshell.execDetached(["sudo", "conservation-mode", "1"]);
         }
     }
 
