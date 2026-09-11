@@ -10,3 +10,4 @@ alias 'ssh'='kitten ssh'
 alias 'neofetch'='fastfetch'
 
 set PATH $PATH $HOME/.local/bin
+set -gx PATH $PATH (cat $HOME/.Garmin/ConnectIQ/current-sdk.cfg)/bin
