@@ -58,7 +58,7 @@ hl.config({
     },
 
     debug = {
-        error_position = -1
+        error_position = 1
     }
 })
 
